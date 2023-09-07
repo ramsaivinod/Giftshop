@@ -37,27 +37,14 @@ const SideBar = () => {
 
     <Box
       display={isNavOpen ? "block" : "none"}
-     // backgroundColor="rgba(0, 0, 0, 0.4)"
-      position="fixed"
-      zIndex={10}
-      width="30%"
-      height="30%"
-      left="0"
-      top="0"
-      overflow="auto"
+     
+      className="sidebarmenu"
     >
  
-      <Box
-        position="fixed"
-        right="0"
-        bottom="0"
-        width="max(400px, 30%)"
-        height="100%"
-        backgroundColor="white"
-      >
-        <Box padding="30px" overflow="auto" height="100%" >
+     
+        <Box   overflow="auto" height="100%" padding="20px">
       
-            <IconButton onClick={() => dispatch(setIsNavOpen({}))} >
+            <IconButton onClick={() => dispatch(setIsNavOpen({}))} style={{position:"absolute",right:0, color:"#fff"}} >
             <CancelIcon/>
             </IconButton>
         <Tabs
@@ -70,17 +57,16 @@ const SideBar = () => {
             scrollButtons="auto"
             TabIndicatorProps={{
               sx: {
-                //display: breakPoint ? "block" : "none",
-                background: "orange",
+              display:"none"
               },
             }}
             sx={{
-              m: "25px",
+            
               //display: breakPoint2 ? "none" : "block",
               "& .MuiTabs-flexContainer": {
                 flexWrap: "wrap",
                 "& .MuiTab-root.Mui-selected": {
-                  color: "rgb(247 127 16)",
+                  color: "#fff",
                 },
               },
             }}
@@ -138,7 +124,7 @@ const SideBar = () => {
             />
           </Tabs>
           </Box>
-      </Box>
+    
     </Box>
 
 

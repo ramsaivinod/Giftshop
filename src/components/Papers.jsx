@@ -99,7 +99,7 @@ const Papers = () => {
         }}
           sx={{
             backgroundColor: "#374450",
-            padding: "10px",
+            padding: "20px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -119,7 +119,7 @@ const Papers = () => {
           </IconButton>
 
           <Typography
-            sx={{ color: "white", fontWeight: "bold", fontSize: "18px" }}
+            sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}
           >
             10% OFF on your next purchase
           </Typography>
