@@ -1,0 +1,85 @@
+.main {
+  background-color: yellow;
+  display: none;
+}
+
+.icon {
+  border-radius: 0%;
+  background: red;
+  width: 101px;
+  height: 119px;
+  /* display: flex; */
+  /* align-items: center; */
+  /* text-align: center; */
+  border-radius: 62%;
+}
+
+.icon-container {
+  background-image: url("../logo/giftcard.png");
+  background-size: cover;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+}
+
+.image-container {
+  position: relative;
+  transition: background-color 0.3s ease;
+  /* width: 300px;
+    height: 300px; */
+}
+
+.image {
+  transition: filter 0.1s ease;
+}
+.image-container:hover {
+  background-color: #f24e1e; /* New background color on hover */
+}
+
+.image-container:hover .image {
+  filter: brightness(0) invert(1);
+}
+
+
+
+.banner_box {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0px;
+}
+
+.banner_icon {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.banner_img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.banner_text {
+  margin: 10px 0px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.banner_icon:hover {
+  text-decoration: underline;
+}
+
+.banner_img:hover {
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 3px 3px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+
+@media screen and (max-width:400px) {
+  .banner_box{
+    display: none;
+  }
+}

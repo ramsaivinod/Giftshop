@@ -1,0 +1,42 @@
+.carousel-root {
+  /* width: 1001px;
+  height: 551px; */
+  position: relative;
+  overflow: hidden;
+  /*  margin: auto; */
+}
+
+.carousel.carousel-slider .control-arrow:hover {
+  background: transparent;
+}
+
+@media screen and (min-width: 400px) {
+  .carousel .slider-wrapper {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .carousel .slider-wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .MuiButtonBase-root-MuiIconButton-root button {
+    left: 302px;
+  }
+  .css-bl9i2w-MuiButtonBase-root-MuiIconButton-root {
+    right: 302px;
+  }
+  .carousel-root {
+    width: 1001px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    /*  margin: auto; */
+  }
+  .carousel .slider-wrapper {
+    width: 40%;
+  }
+}
