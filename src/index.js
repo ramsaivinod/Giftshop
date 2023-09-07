@@ -10,7 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "./theme";
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore({
   reducer: {

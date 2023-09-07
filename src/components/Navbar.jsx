@@ -73,6 +73,9 @@ import FrameComponent from "./FrameComponent"
 import { fetchDataFromApi } from "../utils/api"
 import _ from "lodash"
 import "../styles/Item2.css"
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -80,7 +83,7 @@ const FlexBox = styled(Box)`
   align-items: flex-start;
 `
 
-function Navbar() {
+function Navbars() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null)
@@ -196,9 +199,9 @@ function Navbar() {
       headers.append(
         "Authorization",
         "Basic " +
-          btoa(
-            "ce9a3ad16708f3eb4795659e809971c4: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"
-          )
+        btoa(
+          "ce9a3ad16708f3eb4795659e809971c4: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"
+        )
       )
       //https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products
       // "http://localhost:5000/products.json?limit=250",
@@ -511,7 +514,7 @@ function Navbar() {
   return (
     // <Slider {...settings}>
     <Fragment>
-      <Box width="100%" margin="2px auto">
+      <Box >
         <Box
           display={isFilterOpen ? "block" : "none"}
           // backgroundColor="rgba(0, 0, 0, 0.4)"
@@ -577,462 +580,36 @@ function Navbar() {
             </Box>
           </Box>
         </Box>
-
-        <Box
-          display="flex"
-          //alignItems="center"
-          justifyContent="center"
-          width="100%"
-          height="90px"
-          //backgroundColor="rgba(255, 255, 255, 0.95)"
-          color="black"
-          position="fixed"
-          top="0"
-          left="0"
-          zIndex="99"
-          backgroundColor="rgba(255, 255, 255, 1)"
-        >
-          <Box position="fixed" marginBottom={"2em"} width="100%">
-            <Papers />
-          </Box>
-
-          <Box
-            //width="90vw"
-            //margin="auto"
-            width="100%"
-            margin={"25px 0px"}
-            height="73%"
-            display="flex"
-            backgroundColor="#ff6d31"
-            justifyContent="space-between"
-            alignItems="center"
-            overflow={"hidden"}
-            textAlign={"center"}
-            position="relative"
-            // paddingTop="2em"
-            // display={breakPoint ? "block":"none"}
-          >
-            <img
+        <Box className="offersavailable">
+          <Papers />
+        </Box>
+        <Navbar expand="lg" className="navbox">
+          <div className="navbars">
+            <Navbar.Brand href="#home"> <img
               src={Jklog}
               alt="not found"
               style={{ width: "10rem", height: "100%", cursor: "pointer" }}
               onClick={() => change()}
-            />
+            /></Navbar.Brand>
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="#home" className="nav-item">HOME</Nav.Link>
+                <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Swamiji Kirtans</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="BOOKS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">English Books</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">BalMukund Books</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">English Lectures</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Videos</NavDropdown.Item>
+                </NavDropdown>
 
-            <Box display={"flex"} justifyContent={"space-evenly"} width="100%">
-              <Tabs
-                textColor="primary"
-                indicatorColor="green"
-                value={sortOrder}
-                onChange={handleChange}
-                centered
-                scrollButtons="auto"
-                TabIndicatorProps={{
-                  sx: {
-                    display: breakPoint ? "block" : "none",
-                    background: "orange",
-                  },
-                }}
-                sx={{
-                  m: "25px",
-                  display: breakPoint2 ? "none" : "block",
-                  "& .MuiTabs-flexContainer": {
-                    flexWrap: "wrap",
-                    "& .MuiTab-root.Mui-selected": {
-                      color: "rgb(247 127 16)",
-                    },
-                  },
-                }}
-              >
-                <Tab
-                  label="Home"
-                  value="All Products"
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    fontFamily: "HeuristicaRegular",
-                    margin: "0 14px",
-                    padding: "0",
-                    color: "#FFFFFF",
-                    textTransform: "uppercase",
-                    verticalAlign: "top",
-                    lineHeight: "49px",
-                    // right: "140px",
-                  }}
-                />
-
-                {/* 
-              <Tab
-                label={
-                  <>
-                    Kirtans{" "}
-                    <IconButton size="small" onClick={handleClick}>
-                      <ArrowDropDownIcon
-                        sx={{ marginTop: "-2em", marginLeft: "80px" }}
-                      />
-                    </IconButton>
-                  </>
-                }
-                value="Swamiji Kirtans"
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  padding: "0px",
-                  marginTop: "10px",
-                }}
-              /> */}
-
-                <Tab
-                  label="Kirtans"
-                  value="SwamijiKirtans"
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    fontFamily: "HeuristicaRegular",
-                    margin: "0 14px",
-                    padding: "0",
-                    color: "#FFFFFF",
-                    textTransform: "uppercase",
-                    verticalAlign: "top",
-                    lineHeight: "49px",
-                    // right: "140px",
-                  }}
-                />
-
-                <FormControl sx={{ right: "16px", display: "" }}>
-                  {/* <InputLabel id="dropdown-label-1" sx={{ display: "none" }}>
-                    Kirtans
-                  </InputLabel> */}
-
-                  <Select
-                    value={val}
-                    labelId="dropdown-label-1"
-                    id="dropdown-1"
-                    variant="standard"
-                    className="sel"
-                    onChange={handleDropdownChange}
-                    onClose={handleClose}
-                    sx={{
-                      width: "20px",
-                      marginTop: "10px",
-                      "&:before": {
-                        borderBottom: "0px",
-                      },
-                      "&:after": {
-                        borderBottom: "0px",
-                      },
-                    }}
-                    MenuProps={{
-                      style: {
-                        marginTop: "10px",
-                      },
-                      MenuListProps: {
-                        style: {
-                          paddingTop: "0",
-                          paddingBottom: "0",
-                          background: "rgba(255, 255, 255, 1)",
-                          height: "7em",
-                        },
-                      },
-                      PaperProps: {
-                        style: {
-                          // maxHeight: "200px",
-                          width: "auto",
-                        },
-                      },
-                      getContentAnchorEl: null,
-                      anchorOrigin: {
-                        vertical: "bottom",
-                        horizontal: "right",
-                      },
-                    }}
-                  >
-                    <MenuItem
-                      value={"SwamijiKirtans"}
-                      sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                    >
-                      Swamiji Kirtans
-                    </MenuItem>
-                    {/* <MenuItem
-                    value={"Bal Mukund Books"}
-                    sx={{ fontWeight: "bolder", fontSize: "1em" }}
-                  >
-                    BalMukund Books
-                  </MenuItem> */}
-                  </Select>
-                </FormControl>
-
-                <Tab
-                  label="Books"
-                  value="englishbooks"
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    fontFamily: "HeuristicaRegular",
-                    margin: "0 14px",
-                    padding: "0",
-                    color: "#FFFFFF",
-                    textTransform: "uppercase",
-                    verticalAlign: "top",
-                    lineHeight: "49px",
-                    // right: "140px",
-                  }}
-                />
-
-                <FormControl sx={{ right: "16px", display: "" }}>
-                  {/* <InputLabel
-                    id="dropdown-label-1"
-                    //style={{ fontWeight: "bolder", fontSize: "1rem" }}
-                    sx={{ display: "none" }}
-                  >
-                    Books
-                  </InputLabel> */}
-                  <Select
-                    value={val}
-                    labelId="dropdown-label-1"
-                    variant="standard"
-                    id="dropdown-1"
-                    onChange={handleDropdownChange}
-                    // MenuProps={{ MenuListProps: { onBlur: handleBlur} }}
-                    onClose={handleClose}
-                    sx={{
-                      width: "20px",
-                      marginTop: "10px",
-                      "&:before": {
-                        borderBottom: "0px",
-                      },
-                      "&:after": {
-                        borderBottom: "0px",
-                      },
-                    }}
-                    MenuProps={{
-                      sx: {
-                        marginTop: "10px",
-                        "MuiInputBase-root-MuiInput-root-MuiSelect-root:before":
-                          {
-                            borderBottom: "0px",
-                          },
-                      },
-                      MenuListProps: {
-                        style: {
-                          paddingTop: "0",
-                          paddingBottom: "0",
-                          background: "rgba(255, 255, 255, 1)",
-                          height: "auto",
-                          width: "auto",
-                        },
-                      },
-                      PaperProps: {
-                        style: {
-                          //maxHeight: "200px",
-                          width: "auto",
-                          // marginRight:"100px",
-                        },
-                      },
-                      getContentAnchorEl: null,
-                      anchorOrigin: {
-                        vertical: "bottom",
-                        horizontal: "right",
-                      },
-                    }}
-                  >
-                    <MenuItem
-                      value={"englishbooks"}
-                      sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                    >
-                      English Books
-                    </MenuItem>
-                    <MenuItem
-                      value={"BalMukundBooks"}
-                      sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                    >
-                      BalMukund Books
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-
-                <Tab
-                  label="BAL MUKUND BOOKS"
-                  value="BalMukundBooks"
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "bold",
-                    display: "none",
-                  }}
-                />
-                <Tab
-                  label="Audios"
-                  value="EnglishLectures"
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    fontFamily: "HeuristicaRegular",
-                    margin: "0 14px",
-                    padding: "0",
-                    color: "#FFFFFF",
-                    textTransform: "uppercase",
-                    verticalAlign: "top",
-                    lineHeight: "49px",
-                    //right: "16em",
-                  }}
-                />
-
-                <FormControl sx={{ right: "16px", display: "" }}>
-                  {/* <InputLabel id="dropdown-label-1" sx={{ display: "none" }}>
-                    Kirtans
-                  </InputLabel> */}
-
-                  <Select
-                    value={val}
-                    labelId="dropdown-label-1"
-                    id="dropdown-1"
-                    variant="standard"
-                    onChange={handleDropdownChange}
-                    onClose={handleClose}
-                    sx={{
-                      width: "20px",
-                      marginTop: "10px",
-                      "&:before": {
-                        borderBottom: "0px",
-                      },
-                      "&:after": {
-                        borderBottom: "0px",
-                      },
-                    }}
-                    MenuProps={{
-                      style: {
-                        marginTop: "10px",
-                      },
-                      MenuListProps: {
-                        style: {
-                          paddingTop: "0",
-                          paddingBottom: "0",
-                          background: "rgba(255, 255, 255, 1)",
-                          height: "10em",
-                        },
-                      },
-                      PaperProps: {
-                        style: {
-                          // maxHeight: "200px",
-                          width: "auto",
-                        },
-                      },
-                      //getContentAnchorEl: null,
-                      anchorOrigin: {
-                        vertical: "bottom",
-                        horizontal: "left",
-                      },
-                    }}
-                  >
-                    <MenuItem
-                      value={"EnglishLectures"}
-                      sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                    >
-                      English Lectures
-                    </MenuItem>
-                    {/* <MenuItem
-                    value={"Bal Mukund Books"}
-                    sx={{ fontWeight: "bolder", fontSize: "1em" }}
-                  >
-                    BalMukund Books
-                  </MenuItem> */}
-                  </Select>
-                </FormControl>
-
-                <Tab
-                  label="Videos"
-                  value="Videos"
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    fontFamily: "HeuristicaRegular",
-                    margin: "0 14px",
-                    padding: "0",
-                    color: "#FFFFFF",
-                    textTransform: "uppercase",
-                    verticalAlign: "top",
-                    lineHeight: "49px",
-                    //right: "16em",
-                  }}
-                />
-                <FormControl sx={{ right: "16px", display: "" }}>
-                  {/* <InputLabel id="dropdown-label-1" sx={{ display: "none" }}>
-                    Kirtans
-                  </InputLabel> */}
-
-                  <Select
-                    value={val}
-                    labelId="dropdown-label-1"
-                    id="dropdown-1"
-                    variant="standard"
-                    onChange={handleDropdownChange}
-                    onClose={handleClose}
-                    sx={{
-                      width: "20px",
-                      marginTop: "10px",
-                      "&:before": {
-                        borderBottom: "0px",
-                      },
-                      "&:after": {
-                        borderBottom: "0px",
-                      },
-                    }}
-                    MenuProps={{
-                      style: {
-                        marginTop: "10px",
-                      },
-                      MenuListProps: {
-                        style: {
-                          paddingTop: "0",
-                          paddingBottom: "0",
-                          background: "rgba(255, 255, 255, 1)",
-                          height: "10em",
-                        },
-                      },
-                      PaperProps: {
-                        style: {
-                          // maxHeight: "200px",
-                          width: "auto",
-                        },
-                      },
-                      //getContentAnchorEl: null,
-                      anchorOrigin: {
-                        vertical: "bottom",
-                        horizontal: "left",
-                      },
-                    }}
-                  >
-                    <MenuItem
-                      value={"Videos"}
-                      sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                    >
-                      Videos
-                    </MenuItem>
-                    {/* <MenuItem
-                    value={"Bal Mukund Books"}
-                    sx={{ fontWeight: "bolder", fontSize: "1em" }}
-                  >
-                    BalMukund Books
-                  </MenuItem> */}
-                  </Select>
-                </FormControl>
-                {/* <Tab
-              label="BEST SELLERS"
-              value="Best Sellers"
-              style={{
-                fontSize: "1rem",
-              }}
-            /> */}
-              </Tabs>
-            </Box>
-
-            <div className="nav-btn">
-              <label htmlFor="nav-check">
-                <span></span>
-                <span></span>
-                <span></span>
-              </label>
-            </div>
+              </Nav>
+            </Navbar.Collapse>
             <Box
               //columnGap="20px",
               display="flex"
@@ -1074,9 +651,7 @@ function Navbar() {
                 )}
               </IconButton>
 
-              {/* <IconButton sx={{ color: "black" }}>
-              <PersonOutline />
-            </IconButton> */}
+
               <Badge
                 badgeContent={cart.length}
                 color="secondary"
@@ -1098,166 +673,172 @@ function Navbar() {
                   <ShoppingBagOutlined />
                 </IconButton>
               </Badge>
-              <IconButton
-                sx={{ color: "#F24E1E", display: breakPoint3 ? "none" : "" }}
+               <IconButton
+                aria-controls="basic-navbar-nav"
                 onClick={() => dispatch(setIsNavOpen({}))}
+                sx={{ color: "#FFFFFF" }}
+                className="menub"
               >
                 <MenuOutlined />
-              </IconButton>
+              </IconButton> 
+
             </Box>
-          </Box>
-        </Box>
 
-        <div className="main-section">
-          <div className="main-carousel">{<MainCarousel />}</div>
-          <div className="side-images">
-            <img src={books} alt="image-1" />
-            <img src={coupons} alt="image-1" />
+           
           </div>
-        </div>
 
-        {<Banner />}
-        {/*  <FrameComponent />*/}
+        </Navbar>
+        <div className="container boxess"  >
+          <div className="main-section">
+            <div className="main-carousel">{<MainCarousel />}</div>
+            <div className="side-images">
+              <img src={books} alt="image-1" />
+              <img src={coupons} alt="image-1" />
+            </div>
+          </div>
 
-        {/* <RectangleBanner /> */}
-        {<Handpicked />}
+          {<Banner />}
+          {/*  <FrameComponent />*/}
 
-        {value === "All" ? (
-          <Fragment>
-            {/* <SnackbarProvider /> */}
-            <Typography
-              //fontFamily={"Labrada"}
-              //fontFamily={"'Lora'"}
-              fontFamily={"Montagu Slab"}
-              variant={breakPoint ? "h2" : "h1"}
-              textAlign="left"
-              padding="10px"
+          {/* <RectangleBanner /> */}
+          {<Handpicked />}
+
+          {value === "All" ? (
+            <Fragment>
+              {/* <SnackbarProvider /> */}
+              <Typography
+                //fontFamily={"Labrada"}
+                //fontFamily={"'Lora'"}
+                fontFamily={"Montagu Slab"}
+                variant={breakPoint ? "h2" : "h1"}
+                textAlign="left"
+                padding="10px"
               // color="#ff6d31"
-            >
-              <h2 className="trending"> TRENDING </h2>
-            </Typography>
-            <Slider {...settings}>
-              {/**Jyoti working on Trending */}
-              {newArrivalsItems.map((item) => (
-                <Item2 item={item} key={`${item.title}-${item.id}`} />
-              ))}
-            </Slider>{" "}
-            {/* <Benefits />*/}
-            <Typography
-              //fontFamily={"Labrada"}
-              fontFamily={"Lora"}
-              // mt="3px"
-              variant={breakPoint ? "h2" : "h1"}
-              textAlign="left"
-              padding="11px"
-              // color="#ff6d31"
-            >
-              <h2 className="bestsellers">BEST SELLERS</h2>
-            </Typography>
-            {SwamijiKirtans?.length > 3 ? (
-              <Slider {...settings}>
-                {SwamijiKirtans.map((item) => (
-                  <Fragment>
-                    <Item2 item={item} key={`${item.title}-${item.id}`} />
-                  </Fragment>
-                ))}
-              </Slider>
-            ) : (
-              <Box
-                margin="20px auto"
-                display="grid"
-                // gridTemplateColumns={breakPoint ? "repeat(auto-fill, 300px)" : "repeat(auto-fill, 200px)"}
-                gridTemplateColumns={"repeat(auto-fill, 250px)"}
-                justifyContent="space-around"
-                rowGap="100px"
-                columnGap="3.33%"
               >
-                {bestSellersItems.map((item) => (
-                  <Fragment>
-                    <Item2 item={item} key={`${item.title}-${item.id}`} />
-                  </Fragment>
+                <h2 className="trending"> TRENDING </h2>
+              </Typography>
+              <Slider {...settings}>
+                {/**Jyoti working on Trending */}
+                {newArrivalsItems.map((item) => (
+                  <Item2 item={item} key={`${item.title}-${item.id}`} />
                 ))}
-              </Box>
-            )}
-          </Fragment>
-        ) : (
-          ""
-        )}
+              </Slider>{" "}
+              {/* <Benefits />*/}
+              <Typography
+                //fontFamily={"Labrada"}
+                fontFamily={"Lora"}
+                // mt="3px"
+                variant={breakPoint ? "h2" : "h1"}
+                textAlign="left"
+                padding="11px"
+              // color="#ff6d31"
+              >
+                <h2 className="bestsellers">BEST SELLERS</h2>
+              </Typography>
+              {SwamijiKirtans?.length > 3 ? (
+                <Slider {...settings}>
+                  {SwamijiKirtans.map((item) => (
+                    <Fragment>
+                      <Item2 item={item} key={`${item.title}-${item.id}`} />
+                    </Fragment>
+                  ))}
+                </Slider>
+              ) : (
+                <Box
+                  margin="20px auto"
+                  display="grid"
+                  // gridTemplateColumns={breakPoint ? "repeat(auto-fill, 300px)" : "repeat(auto-fill, 200px)"}
+                  gridTemplateColumns={"repeat(auto-fill, 250px)"}
+                  justifyContent="space-around"
+                  rowGap="100px"
+                  columnGap="3.33%"
+                >
+                  {bestSellersItems.map((item) => (
+                    <Fragment>
+                      <Item2 item={item} key={`${item.title}-${item.id}`} />
+                    </Fragment>
+                  ))}
+                </Box>
+              )}
+            </Fragment>
+          ) : (
+            ""
+          )}
 
-        {value === "All" ? (
-          <Typography
-            fontSize="40px"
-            textAlign="center"
-            color="#ff6d31"
-            padding="50px "
-            fontFamily="HeuristicaRegular"
+          {value === "All" ? (
+            <Typography
+              fontSize="40px"
+              textAlign="center"
+              color="#ff6d31"
+              padding="50px "
+              fontFamily="HeuristicaRegular"
             //color="#ff6d31"
-          >
-            <b>{category} </b>
-          </Typography>
-        ) : (
-          <Typography
-            variant="h1"
-            textAlign="center"
-            padding="50px "
-            marginTop="38px"
-            fontFamily="HeuristicaRegular"
-            //color="#ff6d31"
-          >
-            <b>{value}</b>
-          </Typography>
-        )}
-
-        {/* <Button variant="outlined" sx={{marginLeft:"2em",marginTop:"0em"}} onClick={clear}> Clear Filter</Button> */}
-
-        <Box
-          display={breakPoint2 && value === "All" ? "flex" : "none"}
-          alignContent={"flex-end"}
-          sx={{
-            height: "32px",
-            padding: "8px",
-            borderRadius: "8px",
-            background: "#ffdd93",
-          }}
-        >
-          <Button onClick={() => dispatch(setIsFilterOpen({}))}>
-            <TuneIcon
-              sx={{ cursor: "pointer", width: "40%" }}
-              fontSize="large"
-            />
-            <Typography variant="h3" fontWeight="bold">
-              {" "}
-              Filters
+            >
+              <b>{category} </b>
             </Typography>
-          </Button>
-        </Box>
-        {/* <Button onClick={() => dispatch(setIsFilterOpen({}))}> Filter</Button> */}
+          ) : (
+            <Typography
+              variant="h1"
+              textAlign="center"
+              padding="50px "
+              marginTop="38px"
+              fontFamily="HeuristicaRegular"
+            //color="#ff6d31"
+            >
+              <b>{value}</b>
+            </Typography>
+          )}
 
-        <Box display="flex">
+          {/* <Button variant="outlined" sx={{marginLeft:"2em",marginTop:"0em"}} onClick={clear}> Clear Filter</Button> */}
+
           <Box
-            className="filter-sidebar"
+            display={breakPoint2 && value === "All" ? "flex" : "none"}
+            alignContent={"flex-end"}
             sx={{
-              width: "300px",
-              border: "1px solid #ccc",
-              display: breakPoint2 ? "none" : "",
-              marginLeft: "2em",
-              padding: "1em",
-              height: "fit-content",
+              height: "32px",
+              padding: "8px",
+              borderRadius: "8px",
+              background: "#ffdd93",
             }}
           >
-            <PriceFilter onPriceChange={handlePriceFilter} />
-            <div>
-              <SortRadioButtons
-                onChange={handleSortOrderChange}
-                value={sortOrder}
+            <Button onClick={() => dispatch(setIsFilterOpen({}))}>
+              <TuneIcon
+                sx={{ cursor: "pointer", width: "40%" }}
+                fontSize="large"
               />
-              <CategoriesButton
-                onChange={handleCategoriesChange}
-                value={sortOrder}
-              />
+              <Typography variant="h3" fontWeight="bold">
+                {" "}
+                Filters
+              </Typography>
+            </Button>
+          </Box>
+          {/* <Button onClick={() => dispatch(setIsFilterOpen({}))}> Filter</Button> */}
 
-              {/* render the sorted list */}
-              {/* <Box
+          <Box display="flex">
+            <Box
+              className="filter-sidebar"
+              sx={{
+                width: "300px",
+                border: "1px solid #ccc",
+                display: breakPoint2 ? "none" : "",
+                marginLeft: "2em",
+                padding: "1em",
+                height: "fit-content",
+              }}
+            >
+              <PriceFilter onPriceChange={handlePriceFilter} />
+              <div>
+                <SortRadioButtons
+                  onChange={handleSortOrderChange}
+                  value={sortOrder}
+                />
+                <CategoriesButton
+                  onChange={handleCategoriesChange}
+                  value={sortOrder}
+                />
+
+                {/* render the sorted list */}
+                {/* <Box
                   display="flex"
                   marginRight="0rem"
                   flexDirection={"column"}
@@ -1278,104 +859,106 @@ function Navbar() {
                     </Button>
                   ))}
                 </Box> */}
-              <Button
-                onClick={() => clearFilter()}
-                variant="contained"
-                // color="primary"
-                sx={{
-                  marginLeft: "0em",
-                  fontWeight: "bold",
-                  fontSize: "1em",
-                  padding: "1em",
-                  marginBottom: breakPoint2 ? "3em" : "1em",
-                  fontFamily: "Rubik",
-                  background: "#ff6d2f",
-                }}
-              >
-                <strong> Clear Filter</strong>
-              </Button>
-            </div>
-          </Box>
+                <Button
+                  onClick={() => clearFilter()}
+                  variant="contained"
+                  // color="primary"
+                  sx={{
+                    marginLeft: "0em",
+                    fontWeight: "bold",
+                    fontSize: "1em",
+                    padding: "1em",
+                    marginBottom: breakPoint2 ? "3em" : "1em",
+                    fontFamily: "Rubik",
+                    background: "#ff6d2f",
+                  }}
+                >
+                  <strong> Clear Filter</strong>
+                </Button>
+              </div>
+            </Box>
 
-          <Box
-            width={breakPoint2 ? "100%" : "70%"}
-            margin="20px auto"
-            display="grid"
-            gridTemplateColumns={
-              breakPoint
-                ? "repeat(auto-fill, 125px)"
-                : "repeat(auto-fill, 200px)"
-            }
-            justifyContent="space-around"
-            rowGap="80px"
-            columnGap="3.33%"
-          >
-            {value === "All" &&
-              (hide
-                ? view
-                  ? item
+            <Box
+              width={breakPoint2 ? "100%" : "70%"}
+              margin="20px auto"
+              display="grid"
+              gridTemplateColumns={
+                breakPoint
+                  ? "repeat(auto-fill, 125px)"
+                  : "repeat(auto-fill, 200px)"
+              }
+              justifyContent="space-around"
+              rowGap="80px"
+              columnGap="3.33%"
+            >
+              {value === "All" &&
+                (hide
+                  ? view
+                    ? item
                       .slice(0, 10)
                       .map((item) => (
                         <Item item={item} key={`${item.title}-${item.id}`} />
                       ))
-                  : item
+                    : item
                       .slice(11, item.length)
                       .map((item) => (
                         <Item item={item} key={`${item.title}-${item.id}`} />
                       ))
-                : item.map((item) => (
+                  : item.map((item) => (
                     <Item item={item} key={`${item.title}-${item.id}`} />
                   )))}
-            {value === "Trending" &&
-              newArrivalsItems.map((item) => (
-                <Item item={item} key={`${item.title}-${item.id}`} />
-              ))}
-            {value === "Best Sellers" &&
-              bestSellersItems.map((item) => (
-                <Item item={item} key={`${item.title}-${item.id}`} />
-              ))}
-            {value === "English Books" &&
-              englishbooks.map((item) => (
-                <Item item={item} key={`${item.title}-${item.id}`} />
-              ))}
+              {value === "Trending" &&
+                newArrivalsItems.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "Best Sellers" &&
+                bestSellersItems.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "English Books" &&
+                englishbooks.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
 
-            {value === "Bal Mukund Books" &&
-              BalMukundBooks.map((item) => (
-                <Item item={item} key={`${item.title}-${item.id}`} />
-              ))}
-            {value === "English Lectures" &&
-              EnglishLectures.map((item) => (
-                <Item item={item} key={`${item.title}-${item.id}`} />
-              ))}
+              {value === "Bal Mukund Books" &&
+                BalMukundBooks.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "English Lectures" &&
+                EnglishLectures.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
 
-            {value === "Swamiji Kirtans" &&
-              SwamijiKirtans.map((item) => (
-                <Item item={item} key={`${item.title}-${item.id}`} />
-              ))}
-            {value === "Videos" &&
-              Videos.map((item) => (
-                <Item item={item} key={`${item.title}-${item.id}`} />
-              ))}
+              {value === "Swamiji Kirtans" &&
+                SwamijiKirtans.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "Videos" &&
+                Videos.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+            </Box>
           </Box>
-        </Box>
-        <Button
-          sx={{
-            display: hide && value === "All" ? "" : "none",
-            fontWeight: "bold",
-            fontSize: "1rem",
-            background: "#ff6d31",
-          }}
-          onClick={() => setView(!view)}
-          variant={"contained"}
-        >
-          SHOW {view ? "ALL" : "LESS"}{" "}
-          {view ? (
-            <KeyboardDoubleArrowDownIcon />
-          ) : (
-            <KeyboardDoubleArrowUpIcon />
-          )}
-        </Button>
+          <Button
+            sx={{
+              display: hide && value === "All" ? "" : "none",
+              fontWeight: "bold",
+              fontSize: "1rem",
+              background: "#ff6d31",
+            }}
+            onClick={() => setView(!view)}
+            variant={"contained"}
+          >
+            SHOW {view ? "ALL" : "LESS"}{" "}
+            {view ? (
+              <KeyboardDoubleArrowDownIcon />
+            ) : (
+              <KeyboardDoubleArrowUpIcon />
+            )}
+          </Button>
+        </div>
       </Box>
+
       <Box
         display="flex"
         justifyContent={"flex-end"}
@@ -1395,4 +978,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default Navbars

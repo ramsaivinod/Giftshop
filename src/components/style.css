@@ -3,45 +3,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@600&family=Lora:ital,wght@1,600&family=Rubik&display=swap');
 
-.main-section{
+.main-section {
     display: flex;
     /* justify-content: space-evenly; */
     margin-top: -22px;
 }
 
-.main-carousel{
+.main-carousel {
     width: 70%;
 }
 
-.side-images{
-    width:30%;
+.side-images {
+    width: 30%;
     display: flex;
     flex-direction: column;
     /* height: 63vh;
     width: 63vh; */
     justify-content: center;
-   /* width: 60vh; */
+    /* width: 60vh; */
     gap: 10px;
     overflow: hidden;
     margin-top: 4px;
 }
-@media  screen and (max-width:400px) {
-    .side-images{
+
+@media screen and (max-width:400px) {
+    .side-images {
         height: 0vh;
     }
 }
 
-.side-images img{
-height:35%;
-/* height: 38.5%; */
-object-fit: contain;
+.side-images img {
+    height: 35%;
+    /* height: 38.5%; */
+    object-fit: contain;
 
 }
 
 @media (max-width:1400px) {
-    .side-images img{
+    .side-images img {
         height: 35%;
         object-fit: contain;
     }
-  
+
+}
+
+
+@media (max-width:992px) {
+    .main-carousel {
+        width: 100%;
+    }
+
+    .side-images {
+        display: none;
+    }
 }
