@@ -64,6 +64,7 @@ function App() {
             autoHideDuration={1000}
           />
 
+
           <Routes>
             <Route path="/" element={<Navbar />} />
             <Route path="item/:itemId" element={<ItemDetails />} />
