@@ -418,7 +418,7 @@ const Item = ({ item }) => {
             .replace(/^./, (str) => str.toUpperCase())}
         </Typography> */}
         <Typography fontSize="20px" fontFamily={"QuickSand"} height={"4.1rem"} overflow={"hidden"}>
-          {title} 
+         {title}
         </Typography>
         <Typography fontWeight="bold" fontSize="16px" color={"green"} marginBottom={".51rem"}>
           ${variants[0].price}
