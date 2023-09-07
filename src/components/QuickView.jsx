@@ -69,21 +69,21 @@ const QuickView = () => {
                   height="auto"
                   style={{ marginTop: "4em" }}
                   src={item.image?.src}
-                  //style={{ objectFit: "contain" }}
+                //style={{ objectFit: "contain" }}
                 />
 
                 <Typography
-                 m="20px 0 5px 0"
+                  m="20px 0 5px 0"
                   alignItems="flex-end"
                   fontSize={breakPoint ? "12px" : "24px"}
                   fontFamily={"Rubik"}
 
                 >
-                  PRICE - <b style={{color:"green"}}>${item?.variants[0].price}</b>
+                  PRICE - <b style={{ color: "green" }}>${item?.variants[0].price}</b>
                 </Typography>
-              
 
-                
+
+
               </Box>
 
               {/* ACTIONS */}
@@ -105,13 +105,13 @@ const QuickView = () => {
 
                   <Typography
                     style={{
-                      fontFamily:"Rubik",
-                      paddingLeft:"20px"
+                      fontFamily: "Rubik",
+                      paddingLeft: "20px"
                     }}
-                    sx={{ mt: breakPoint ? "5px" : "20px" ,padding:"3px"}}
+                    sx={{ mt: breakPoint ? "5px" : "20px", padding: "3px" }}
                     fontSize={breakPoint ? "12px" : "16px"}
                     textAlign={"left"}
-                    
+
                     dangerouslySetInnerHTML={{
                       __html: item.body_html,
                     }}
@@ -119,13 +119,13 @@ const QuickView = () => {
                     {/* {item?.attributes?.longDescription} */}
                   </Typography>
                 </Box>
-           
+
                 <Box
                   display="flex"
                   alignItems="center"
                   minHeight={breakPoint ? "15px" : "50px"}
                 >
-                      
+
                   <Box
                     display="flex"
                     alignItems="center"
@@ -149,7 +149,7 @@ const QuickView = () => {
                     sx={{
                       backgroundColor: "#cf4520",
                       color: "white",
-                      fontFamily:"Rubik",
+                      fontFamily: "Rubik",
                       borderRadius: 0,
                       minWidth: breakPoint ? "150px" : "100px",
                       padding: "10px 10px",
@@ -166,9 +166,9 @@ const QuickView = () => {
                   </Button>
                 </Box>
                 <Typography fontSize={breakPoint ? "12px" : "16px"} fontFamily={"Rubik"}
-               >
-                    TAGS: <strong> {item.tags}</strong>
-                  </Typography>
+                >
+                  TAGS: <strong> {item.tags}</strong>
+                </Typography>
                 <Box>
                   {/* <Box m="20px 0 5px 0" display="flex">
                   <FavoriteBorderOutlinedIcon />
