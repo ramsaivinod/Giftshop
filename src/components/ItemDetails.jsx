@@ -30,8 +30,10 @@ import RelatedProducts from "./RelatedProducts";
 import SideBar from "./SideBar";
 import "./ItemDetails.css";
 import ReactMagnifier from "@sandeepv68/react-magnifier";
-
+import "./Navbar.css"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { SearchOutlined } from "@mui/icons-material"
+import CancelIcon from "@mui/icons-material/Cancel"
 import {
   PersonOutline,
   ShoppingBagOutlined,
@@ -50,6 +52,9 @@ import Zoom from "react-img-hover-zoom";
 import MyImage from "./MyImage";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const colors = {
   orange: "#FFBA5A",
@@ -79,6 +84,8 @@ const ItemDetails = () => {
   const value = useSelector((state) => state.cart.value);
   const isNavOpen = useSelector((state) => state.cart.isNavOpen);
   const [val, setVal] = useState("");
+  const [show, setShow] = useState(false)
+  const [search, setSearchField] = useState("")
 
   const handleChange = (event, newValue) => {
     dispatch(setValue(newValue));
@@ -226,9 +233,9 @@ const ItemDetails = () => {
         headers.append(
           "Authorization",
           "Basic " +
-            btoa(
-              "ce9a3ad16708f3eb4795659e809971c4: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"
-            )
+          btoa(
+            "ce9a3ad16708f3eb4795659e809971c4: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"
+          )
         );
         //"https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products",
         //"http://localhost:5000/products.json?limit=250",
@@ -266,6 +273,7 @@ const ItemDetails = () => {
       thumbnail: updateditem.image?.src,
     },
   ];
+
   return (
     <>
       {loading ? (
@@ -273,33 +281,14 @@ const ItemDetails = () => {
       ) : (
         <>
           {updateditem.map((updateditem, index) => (
-            <Box width="100%" m="80px auto" key={updateditem.id}>
-              <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                //flexWrap="wrap"
-                width="100%"
-                height="80px"
-                // backgroundColor="rgba(255, 255, 255, 0.95)"
-                backgroundColor="rgba(255, 255, 255, 1)"
-                color="black"
-                position="fixed"
-                top="0"
-                left="0"
-                zIndex="1"
-              >
-                <Box
-                  width="80%"
-                  margin="auto"
-                  height="100%"
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <img
+            <Box width="100%" m="80px auto" key={updateditem.id} className="">
+
+              <Navbar expand="lg" className="navbox" style={{ top: 0 }}>
+                <div className="navbars">
+                  <Navbar.Brand href="#home"> <img
                     src={Jklog}
-                    alt="not found"
+                    alt="logo"
+
                     style={{
                       width: "10rem",
                       height: "100%",
@@ -309,402 +298,62 @@ const ItemDetails = () => {
                       navigate(`/`);
                       window.scrollTo(0, 0);
                     }}
-                  />
+                  /></Navbar.Brand>
+                  <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                      <Nav.Link href="#home" className="nav-item">HOME</Nav.Link>
+                      <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Swamiji Kirtans</NavDropdown.Item>
+                      </NavDropdown>
+                      <NavDropdown title="BOOKS" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">English Books</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">BalMukund Books</NavDropdown.Item>
+                      </NavDropdown>
+                      <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">English Lectures</NavDropdown.Item>
+                      </NavDropdown>
+                      <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Videos</NavDropdown.Item>
+                      </NavDropdown>
+
+                    </Nav>
+                  </Navbar.Collapse>
                   <Box
-                    display={"flex"}
-                    justifyContent={"space-evenly"}
-                    width="100%"
-                  >
-                    <Tabs
-                      textColor="primary"
-                      indicatorColor="green"
-                      value={value}
-                      onChange={handleChange}
-                      centered
-                      scrollButtons="auto"
-                      TabIndicatorProps={{
-                        sx: {
-                          display: breakPoint ? "block" : "none",
-                          //background: "orange",
-                        },
-                      }}
-                      sx={{
-                        m: "25px",
-                        display: breakPoint2 ? "none" : "block",
-                        "& .MuiTabs-flexContainer": {
-                          flexWrap: "wrap",
-                          "& .MuiTab-root.Mui-selected": {
-                            color: "rgb(247 127 16)",
-                          },
-                        },
-                      }}
-                    >
-                      <Tab
-                        label="All"
-                        value="All"
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                        }}
-                      />
-
-                      {/* 
-              <Tab
-                label={
-                  <>
-                    Kirtans{" "}
-                    <IconButton size="small" onClick={handleClick}>
-                      <ArrowDropDownIcon
-                        sx={{ marginTop: "-2em", marginLeft: "80px" }}
-                      />
-                    </IconButton>
-                  </>
-                }
-                value="Swamiji Kirtans"
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  padding: "0px",
-                  marginTop: "10px",
-                }}
-              /> */}
-
-                      <Tab
-                        label="Kirtans"
-                        value="Swamiji Kirtans"
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          display: "",
-                          // right: "30px",
-                        }}
-                      />
-
-                      <FormControl sx={{ right: "16px", display: "" }}>
-                        <InputLabel
-                          id="dropdown-label-1"
-                          sx={{ display: "none" }}
-                        >
-                          Kirtans
-                        </InputLabel>
-
-                        <Select
-                          value={val}
-                          labelId="dropdown-label-1"
-                          id="dropdown-1"
-                          variant="standard"
-                          onChange={handleDropdownChange}
-                          onClose={handleClose}
-                          sx={{
-                            width: "20px",
-                            marginBottom: "14px",
-                            "&:before": {
-                              borderBottom: "0px",
-                            },
-                            "&:after": {
-                              borderBottom: "0px",
-                            },
-                          }}
-                          MenuProps={{
-                            style: {
-                              marginTop: "10px",
-                            },
-                            MenuListProps: {
-                              style: {
-                                paddingTop: "0",
-                                paddingBottom: "0",
-                                background: "rgba(255, 255, 255, 1)",
-                                height: "auto",
-                              },
-                            },
-                            PaperProps: {
-                              style: {
-                                // maxHeight: "200px",
-                                width: "auto",
-                              },
-                            },
-                            getContentAnchorEl: null,
-                            anchorOrigin: {
-                              vertical: "bottom",
-                              horizontal: "left",
-                            },
-                          }}
-                        >
-                          <MenuItem
-                            value={"Swamiji Kirtans"}
-                            sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                          >
-                            Swamiji Kirtans
-                          </MenuItem>
-                          {/* <MenuItem
-                    value={"Bal Mukund Books"}
-                    sx={{ fontWeight: "bolder", fontSize: "1em" }}
-                  >
-                    BalMukund Books
-                  </MenuItem> */}
-                        </Select>
-                      </FormControl>
-
-                      <Tab
-                        label="Books"
-                        value="English Books"
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          display: "",
-                          // right: "140px",
-                        }}
-                      />
-
-                      <FormControl sx={{ right: "16px", display: "" }}>
-                        <InputLabel
-                          id="dropdown-label-1"
-                          //style={{ fontWeight: "bolder", fontSize: "1rem" }}
-                          sx={{ display: "none" }}
-                        >
-                          Books
-                        </InputLabel>
-                        <Select
-                          value={val}
-                          labelId="dropdown-label-1"
-                          variant="standard"
-                          id="dropdown-1"
-                          onChange={handleDropdownChange}
-                          // MenuProps={{ MenuListProps: { onBlur: handleBlur} }}
-                          onClose={handleClose}
-                          sx={{
-                            width: "20px",
-                            marginBottom: "10px",
-                            "&:before": {
-                              borderBottom: "0px",
-                            },
-                            "&:after": {
-                              borderBottom: "0px",
-                            },
-                          }}
-                          MenuProps={{
-                            style: {
-                              marginTop: "10px",
-                            },
-                            MenuListProps: {
-                              style: {
-                                paddingTop: "0",
-                                paddingBottom: "0",
-                                background: "rgba(255, 255, 255, 1)",
-                                height: "auto",
-                                width: "auto",
-                              },
-                            },
-                            PaperProps: {
-                              style: {
-                                //maxHeight: "200px",
-                                width: "auto",
-                                // marginRight:"100px",
-                              },
-                            },
-                            getContentAnchorEl: null,
-                            anchorOrigin: {
-                              vertical: "bottom",
-                              horizontal: "right",
-                            },
-                          }}
-                        >
-                          <MenuItem
-                            value={"English Books"}
-                            sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                          >
-                            English Books
-                          </MenuItem>
-                          <MenuItem
-                            value={"Bal Mukund Books"}
-                            sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                          >
-                            BalMukund Books
-                          </MenuItem>
-                        </Select>
-                      </FormControl>
-
-                      <Tab
-                        label="BAL MUKUND BOOKS"
-                        value="Bal Mukund Books"
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          display: "none",
-                        }}
-                      />
-                      <Tab
-                        label="Audios"
-                        value="English Lectures"
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          //right: "16em",
-                        }}
-                      />
-
-                      <FormControl sx={{ right: "16px", display: "" }}>
-                        <InputLabel
-                          id="dropdown-label-1"
-                          sx={{ display: "none" }}
-                        >
-                          Kirtans
-                        </InputLabel>
-
-                        <Select
-                          value={val}
-                          labelId="dropdown-label-1"
-                          id="dropdown-1"
-                          variant="standard"
-                          onChange={handleDropdownChange}
-                          onClose={handleClose}
-                          sx={{
-                            width: "20px",
-                            marginTop: "10px",
-                            "&:before": {
-                              borderBottom: "0px",
-                            },
-                            "&:after": {
-                              borderBottom: "0px",
-                            },
-                          }}
-                          MenuProps={{
-                            style: {
-                              marginTop: "10px",
-                            },
-                            MenuListProps: {
-                              style: {
-                                paddingTop: "0",
-                                paddingBottom: "0",
-                                background: "rgba(255, 255, 255, 1)",
-                                height: "auto",
-                              },
-                            },
-                            PaperProps: {
-                              style: {
-                                // maxHeight: "200px",
-                                width: "auto",
-                              },
-                            },
-                            //getContentAnchorEl: null,
-                            anchorOrigin: {
-                              vertical: "bottom",
-                              horizontal: "left",
-                            },
-                          }}
-                        >
-                          <MenuItem
-                            value={"English Lectures"}
-                            sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                          >
-                            English Lectures
-                          </MenuItem>
-                          {/* <MenuItem
-                    value={"Bal Mukund Books"}
-                    sx={{ fontWeight: "bolder", fontSize: "1em" }}
-                  >
-                    BalMukund Books
-                  </MenuItem> */}
-                        </Select>
-                      </FormControl>
-                      <Tab
-                        label="Videos"
-                        value="Videos"
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          //right: "16em",
-                        }}
-                      />
-                      <FormControl sx={{ right: "16px", display: "" }}>
-                        {/* <InputLabel id="dropdown-label-1" sx={{ display: "none" }}>
-                    Kirtans
-                  </InputLabel> */}
-
-                        <Select
-                          value={val}
-                          labelId="dropdown-label-1"
-                          id="dropdown-1"
-                          variant="standard"
-                          onChange={handleDropdownChange}
-                          onClose={handleClose}
-                          sx={{
-                            width: "20px",
-                            marginTop: "16px",
-                            "&:before": {
-                              borderBottom: "0px",
-                            },
-                            "&:after": {
-                              borderBottom: "0px",
-                            },
-                          }}
-                          MenuProps={{
-                            style: {
-                              marginTop: "10px",
-                            },
-                            MenuListProps: {
-                              style: {
-                                paddingTop: "0",
-                                paddingBottom: "0",
-                                background: "rgba(255, 255, 255, 1)",
-                                height: "10em",
-                              },
-                            },
-                            PaperProps: {
-                              style: {
-                                // maxHeight: "200px",
-                                width: "auto",
-                              },
-                            },
-                            //getContentAnchorEl: null,
-                            anchorOrigin: {
-                              vertical: "bottom",
-                              horizontal: "left",
-                            },
-                          }}
-                        >
-                          <MenuItem
-                            value={"Videos"}
-                            sx={{ fontWeight: "bolder", fontSize: "20px" }}
-                          >
-                            Videos
-                          </MenuItem>
-                          {/* <MenuItem
-                    value={"Bal Mukund Books"}
-                    sx={{ fontWeight: "bolder", fontSize: "1em" }}
-                  >
-                    BalMukund Books
-                  </MenuItem> */}
-                        </Select>
-                      </FormControl>
-                      {/* <Tab
-              label="Trending"
-              value="Trending"
-              style={{
-                fontSize: "large",
-              }}
-            /> */}
-
-                      {/* <Tab
-              label="BEST SELLERS"
-              value="Best Sellers"
-              style={{
-                fontSize: "1rem",
-              }}
-            /> */}
-                    </Tabs>
-                  </Box>
-
-                  <Box
+                    //columnGap="20px",
                     display="flex"
                     justifyContent="space-between"
-                    columnGap="20px"
-                    //flexWrap="wrap"
+                    columnGap="0px"
                     zIndex="2"
                   >
-                    {/* <IconButton sx={{ color: "black" }}>
-                      <PersonOutline />
-                    </IconButton> */}
+                    <div className="Search">
+                      <input
+                        placeholder="Search for Products..."
+                        type="text"
+                        value={search}
+                      />
+
+                      <IconButton  >
+
+                        <SearchOutlined
+                          fontSize="medium"
+                          sx={{ color: " #ff6d31;" }}
+
+                        />
+
+                      </IconButton>
+                    </div>
+                    <IconButton className="Searchmb">
+
+                      <SearchOutlined
+                        fontSize="medium"
+                        sx={{ color: "#fff" }}
+                        onClick={() => setShow(!show)}
+
+                      />
+
+
+                    </IconButton>
+
                     <Badge
                       badgeContent={cart.length}
                       color="secondary"
@@ -721,21 +370,27 @@ const ItemDetails = () => {
                     >
                       <IconButton
                         onClick={() => dispatch(setIsCartOpen({}))}
-                        sx={{ color: "black" }}
+                        sx={{ color: "#FFFFFF" }}
                       >
                         <ShoppingBagOutlined />
                       </IconButton>
                     </Badge>
-                    {/* <IconButton
-                sx={{ color: "black", display: breakPoint2 ? "" : "none" }}
-                onClick={() => dispatch(setIsNavOpen({}))}
-              >
-                <MenuOutlined />
-              </IconButton> */}
+                    <IconButton
+                      aria-controls="basic-navbar-nav"
+                      onClick={() => dispatch(setIsNavOpen({}))}
+                      sx={{ color: "#FFFFFF" }}
+                      className="menub"
+                    >
+                      <MenuOutlined />
+                    </IconButton>
+
                   </Box>
-                </Box>
-              </Box>
-              <Box display="flex" flexWrap="wrap" columnGap="40px">
+
+
+                </div>
+
+              </Navbar>
+              <div className="container">  <Box display="flex" flexWrap="wrap" columnGap="40px">
                 {/* IMAGES */}
 
                 <Box flex="1 1 40%" mb="40px">
@@ -780,7 +435,7 @@ const ItemDetails = () => {
                   >
                     <Box mt="30px">
                       <Button
-                        onClick={() => {navigate(`/`);dispatch(setValue('All'))}}
+                        onClick={() => { navigate(`/`); dispatch(setValue('All')) }}
                         variant="contained"
                         sx={{ backgroundColor: "#ff6d2f" }}
                       >
@@ -869,7 +524,7 @@ const ItemDetails = () => {
                     <Typography
                       fontSize={!breakPoint ? "12px" : "16px"}
                       fontFamily={"Rubik"}
-                      // style={{ textDecorationLine: "underline" }}
+                    // style={{ textDecorationLine: "underline" }}
                     >
                       TAGS: <strong> {updateditem.tags} </strong>
                     </Typography>
@@ -898,42 +553,63 @@ const ItemDetails = () => {
                 </Box>
               </Box>
 
-              {/* INFORMATION */}
-              <Box m="20px 0">
-                {/* <Tabs value={value} onChange={handleChange}>
+                {/* INFORMATION */}
+                <Box m="20px 0">
+                  {/* <Tabs value={value} onChange={handleChange}>
                   <Tab label="DESCRIPTION" value="description" />
                   <Tab label="REVIEWS" value="reviews" />
                 </Tabs> */}
-              </Box>
+                </Box>
 
-              <Box display="flex" flexWrap="wrap" gap="15px">
-                {/* {value === "description" && (
+                <Box display="flex" flexWrap="wrap" gap="15px">
+                  {/* {value === "description" && (
                   //   <div>{item?.attributes?.longDescription}</div>
                   )} */}
 
-                {/* {value === "reviews" && <div>reviews</div>} */}
-              </Box>
+                  {/* {value === "reviews" && <div>reviews</div>} */}
+                </Box>
 
-              {/* RELATED ITEMS */}
+                {/* RELATED ITEMS */}
 
-              {/*    display="grid"
+                {/*    display="grid"
                 gridTemplateColumns="repeat(auto-fill, 300px)"
                 justifyContent="space-around"
                 rowGap="20px"
                 columnGap="1.33%" */}
-              <Box mt="50px" mr="30px" width="100%">
-                <Typography variant="h2" fontWeight="bold" fontFamily={"Lora"}>
-                  Related Products
-                </Typography>
-                <Slider {...settings}>
-                  {item.slice(15, 28).map((item, i) => (
-                    <RelatedProducts
-                      item={item}
-                      key={`${item.title}-${item.id}`}
-                    />
-                  ))}
-                </Slider>{" "}
-              </Box>
+                <Box mt="50px" mr="30px" width="100%">
+                  <Typography variant="h2" fontWeight="bold" fontFamily={"Lora"}>
+                    Related Products
+                  </Typography>
+                  <Slider {...settings}>
+                    {item.slice(15, 28).map((item, i) => (
+                      <RelatedProducts
+                        item={item}
+                        key={`${item.title}-${item.id}`}
+                      />
+                    ))}
+                  </Slider>{" "}
+                </Box></div>
+              {show && <div className="searchbox">
+                <div className="">  <IconButton  >
+
+                  <SearchOutlined
+                    fontSize="medium"
+                    sx={{ color: " #ff6d31;" }}
+
+                  />
+
+                </IconButton> <input
+                    placeholder="Search for Products..."
+                    type="text"
+                    value={search}
+                  />
+
+
+                  <IconButton onClick={() => setShow(false)} style={{ position: "absolute", right: 0, color: "#ff6d31" }} >
+                    <CancelIcon />
+                  </IconButton></div>
+
+              </div>}
             </Box>
           ))}
         </>
