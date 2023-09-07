@@ -934,23 +934,24 @@ function Navbars() {
                 ))}
             </Box>
           </Box>
-          <Button
-            sx={{
-              display: hide && value === "All" ? "" : "none",
-              fontWeight: "bold",
-              fontSize: "1rem",
-              background: "#ff6d31",
-            }}
-            onClick={() => setView(!view)}
-            variant={"contained"}
-          >
-            SHOW {view ? "ALL" : "LESS"}{" "}
-            {view ? (
-              <KeyboardDoubleArrowDownIcon />
-            ) : (
-              <KeyboardDoubleArrowUpIcon />
-            )}
-          </Button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              sx={{
+                display: hide && value === "All" ? "" : "none",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                background: "#ff6d31",
+              }}
+              onClick={() => setView(!view)}
+              variant={"contained"}
+            >
+              SHOW {view ? "ALL" : "LESS"}{" "}
+              {view ? (
+                <KeyboardDoubleArrowDownIcon />
+              ) : (
+                <KeyboardDoubleArrowUpIcon />
+              )}
+            </Button></div>
         </div>
       </Box>
       {show && <div className="searchbox">
