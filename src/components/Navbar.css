@@ -180,6 +180,30 @@
   display: none !important;
 }
 
+.Search {
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+
+
+}
+
+.Search input {
+  height: 30px;
+  border: #fff;
+  padding: 5px 10px;
+  width: 300px;
+}
+
+.Search input:focus {
+  outline: none;
+  border: none;
+}
+
+.Searchmb {
+  display: none !important;
+}
+
 @media (max-width:992px) {
   .navbox {
     background: #ff6d31;
@@ -248,4 +272,40 @@
   .navbox {
     height: 55px;
   }
+}
+
+
+@media (max-width:700px) {
+  .Search {
+    display: none;
+  }
+
+  .Searchmb {
+    display: block !important;
+  }
+
+  .searchbox {
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 73px;
+    position: fixed;
+    z-index: 99;
+    height: 100%;
+    bottom: 0;
+  }
+
+  .searchbox input {
+    height: 30px;
+    border: #fff;
+    padding: 5px 10px;
+    width: 300px;
+  }
+
+  .searchbox input:focus {
+    outline: none;
+    border: none;
+  }
+
 }

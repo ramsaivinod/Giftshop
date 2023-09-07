@@ -180,3 +180,7 @@ position: absolute;
     margin-top: 50px;
   }
 }
+
+::-webkit-scrollbar {
+  display: none
+}

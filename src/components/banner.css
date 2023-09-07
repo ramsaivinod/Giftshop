@@ -32,8 +32,10 @@
 .image {
   transition: filter 0.1s ease;
 }
+
 .image-container:hover {
-  background-color: #f24e1e; /* New background color on hover */
+  background-color: #f24e1e;
+  /* New background color on hover */
 }
 
 .image-container:hover .image {
@@ -65,7 +67,9 @@
   margin: 10px 0px;
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
 }
+
 .banner_icon:hover {
   text-decoration: underline;
 }
@@ -79,7 +83,7 @@
 
 
 @media screen and (max-width:400px) {
-  .banner_box{
+  .banner_box {
     display: none;
   }
 }

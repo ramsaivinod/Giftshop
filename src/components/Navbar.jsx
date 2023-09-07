@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import Jklog from "../logo/jklogo.png"
+
 import {
   Badge,
   Box,
@@ -617,40 +618,34 @@ function Navbars() {
               columnGap="0px"
               zIndex="2"
             >
-              <IconButton onChange={handleSearchField}>
-                {show ? (
-                  breakPoint ? (
-                    <input
-                      placeholder="Search for Products..."
-                      type="text"
-                      value={search}
-                    />
-                  ) : (
-                    <input
-                      className="i"
-                      placeholder="Search for Products..."
-                      type="text"
-                      value={search}
-                    />
-                  )
-                ) : (
-                  ""
-                )}
+              <div className="Search">
+                <input
+                  placeholder="Search for Products..."
+                  type="text"
+                  value={search} onChange={handleSearchField}
+                />
 
-                {breakPoint ? (
-                  <SearchOutlined
-                    onClick={() => setShow(!show)}
-                    sx={{ color: "#FFFFFF" }}
-                  />
-                ) : (
+                <IconButton  >
+
                   <SearchOutlined
                     fontSize="medium"
-                    sx={{ color: "#FFFFFF" }}
-                    onClick={() => setShow(!show)}
-                  />
-                )}
-              </IconButton>
+                    sx={{ color: " #ff6d31;" }}
 
+                  />
+
+                </IconButton>
+              </div>
+              <IconButton className="Searchmb">
+
+                <SearchOutlined
+                  fontSize="medium"
+                  sx={{ color: "#fff" }}
+                  onClick={() => setShow(!show)}
+
+                />
+
+
+              </IconButton>
 
               <Badge
                 badgeContent={cart.length}
@@ -673,18 +668,18 @@ function Navbars() {
                   <ShoppingBagOutlined />
                 </IconButton>
               </Badge>
-               <IconButton
+              <IconButton
                 aria-controls="basic-navbar-nav"
                 onClick={() => dispatch(setIsNavOpen({}))}
                 sx={{ color: "#FFFFFF" }}
                 className="menub"
               >
                 <MenuOutlined />
-              </IconButton> 
+              </IconButton>
 
             </Box>
 
-           
+
           </div>
 
         </Navbar>
@@ -958,7 +953,27 @@ function Navbars() {
           </Button>
         </div>
       </Box>
+      {show && <div className="searchbox">
+        <div className="">  <IconButton  >
 
+          <SearchOutlined
+            fontSize="medium"
+            sx={{ color: " #ff6d31;" }}
+
+          />
+
+        </IconButton> <input
+            placeholder="Search for Products..."
+            type="text"
+            value={search} onChange={handleSearchField}
+          />
+
+
+          <IconButton onClick={() => setShow(false)} style={{ position: "absolute", right: 0, color: "#ff6d31" }} >
+            <CancelIcon />
+          </IconButton></div>
+
+      </div>}
       <Box
         display="flex"
         justifyContent={"flex-end"}
