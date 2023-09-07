@@ -11,7 +11,7 @@ import {
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -271,7 +271,7 @@ const ItemDetails = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
+        <Fragment>
           {updateditem.map((updateditem, index) => (
             <Box width="100%" m="80px auto" key={updateditem.id}>
               <Box
@@ -936,7 +936,7 @@ const ItemDetails = () => {
               </Box>
             </Box>
           ))}
-        </>
+        </Fragment>
       )}
     </>
   );

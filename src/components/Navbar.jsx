@@ -114,6 +114,7 @@ function Navbars() {
   const [name, setName] = useState("All")
   const [val, setVal] = useState("")
   const [categories, setCategories] = useState([])
+  const [suggestions,setSuggestions] = useState([])
 
   const getCategories = () => {
     fetchDataFromApi("/api/categories").then((res) => {
@@ -318,7 +319,11 @@ function Navbars() {
     const filtered = items.filter((product) =>
       product.title.toLowerCase().includes(search.toLowerCase())
     )
+
+    // const name = filtered.map((i)=> i.title)
+    // setSuggestions(name)
     setItem(filtered)
+
   }, [items, search])
 
   const handleSearchField = (e) => {
@@ -624,6 +629,13 @@ function Navbars() {
                   type="text"
                   value={search} onChange={handleSearchField}
                 />
+                  { /*  {search && suggestions.map((item) => (
+                  <li>{item}</li> 
+                ))} */}
+              
+             
+                { /* */}
+            
 
                 <IconButton  >
 
@@ -635,6 +647,10 @@ function Navbars() {
 
                 </IconButton>
               </div>
+                    
+                    
+                 
+                    
               <IconButton className="Searchmb">
 
                 <SearchOutlined
@@ -678,11 +694,12 @@ function Navbars() {
               </IconButton>
 
             </Box>
-
+         
 
           </div>
-
+      
         </Navbar>
+     
         <div className="container boxess"  >
           <div className="main-section">
             <div className="main-carousel">{<MainCarousel />}</div>
