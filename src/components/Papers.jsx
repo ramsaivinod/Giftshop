@@ -93,10 +93,10 @@ const Papers = () => {
     <div style={styles.container} ref={containerRef}>
       {breakPoint ? (
         <Paper
-        onClick={() => {
-          navigate("/coupon");
-          window.scrollTo(0, 0);
-        }}
+          onClick={() => {
+            navigate("/coupon");
+            window.scrollTo(0, 0);
+          }}
           sx={{
             backgroundColor: "#374450",
             padding: "20px",
@@ -130,12 +130,12 @@ const Papers = () => {
             <ChevronRight />
           </IconButton>
           <Typography
-       
+
             sx={{
               color: "white",
               fontWeight: "bold",
               fontSize: "15px",
-              textDecoration: "underline",
+
               cursor: "pointer",
             }}
           >
@@ -143,7 +143,7 @@ const Papers = () => {
           </Typography>
         </Paper>
       ) : (
-        <Paper sx={styles.paper} elevation={3}      onClick={() => {
+        <Paper sx={styles.paper} elevation={3} onClick={() => {
           navigate("/coupon");
           window.scrollTo(0, 0);
         }}>

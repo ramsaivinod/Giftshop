@@ -87,12 +87,12 @@ box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
 .headings h2:hover {
   opacity: 1;
-  text-decoration: underline;
+/* text-decoration: underline;  */
   cursor: pointer;
-  font-weight: bolder;
+  /* font-weight: bolder; */
 }
 
 .selected {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   font-weight: bolder;
 }
