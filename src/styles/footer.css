@@ -1,0 +1,65 @@
+ 
+.footerbox{
+        width: 81%;
+            margin: 66px auto 0px auto;
+            padding :50px 0;
+}
+.textleft{
+    display: flex;
+    align-items: baseline;
+}
+.txt{
+    color: #ff6d2f;
+        font-size: 24px;
+        line-height: 22px;
+        margin-top: 0;
+}
+
+.desc{
+    color: #FFFFFF;
+        font-size: 15px;
+        line-height: 21px;
+}
+
+.content ul{
+padding-left: 0;
+}
+
+.content ul li a{
+    text-decoration: none;
+
+}
+
+.content ul li a p{
+    line-height: 28px;
+    margin-bottom: auto;
+}
+
+.contact p{
+    line-height: 28px;
+}
+
+.contact svg{
+    margin-right: 15px;
+}
+
+.htxt{
+    font-weight: bold;
+    color:#ff6d2f ;
+    font-size: 19px !important;
+    margin-bottom: 30px;
+}
+
+@media (max-width:992px){
+
+.htxt {
+       
+        margin-bottom: 20px !important;
+        margin-top: 20px !important;
+    }
+        .txt {
+           
+            font-size: 20px;
+           
+        }
+}
