@@ -27,18 +27,19 @@
   font-size: 1em;
   margin-top: 9px;
   font-weight: bolder;
-  background-color: #ff6d31;;
+  /* background-color: #ff6d31;; */
+ 
+    font-family: 'SourceSansProRegular';
+    /* padding: 6px 20px; */
+    background: #ff6d2f;
 }
 
 .trending {
   font-family: "HeuristicaRegular";
   display: flex;
-  /* width: 30%; */
-  /* justify-content: center; */
-  /* text-decoration: underline; */
-  margin-bottom: 10px;
   font-size: 2rem;
-  color:#ff6d31
+  color: #ff6d31;
+  text-transform: capitalize;
 }
 
 button#myBtn {
@@ -54,7 +55,8 @@ button#myBtn {
   margin-top: 20px;
   margin-bottom: 0px;
   font-size: 2rem;
-  color: #ff6d31
+  color: #ff6d31;
+  text-transform: capitalize;
 }
 
 .image-container {
