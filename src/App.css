@@ -164,6 +164,7 @@ margin-top: "2rem"
   height: 370px; */
   padding: 5px;
   border-radius: 5px;
+  background: #fffdfc
 }
 
 /* .product_img{
@@ -185,4 +186,13 @@ position: absolute;
 
 ::-webkit-scrollbar {
   display: none
+}
+
+@media (max-width:992px) {
+/* .image_jk {
+    width:275px;
+  height: 370px;
+    padding: 5px;
+    border-radius: 5px;
+  } */
 }

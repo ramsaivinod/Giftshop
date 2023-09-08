@@ -115,12 +115,12 @@ const Item2 = ({ item }) => {
             top: "20px",
             right: "-40px",
           }}
-          // position="absolute"
-          // bottom="53%"
-          // left="14%" //-43% //-27%
-          // width="0%"
-          // padding="0 100px"
-          // cursor="pointer"
+        // position="absolute"
+        // bottom="53%"
+        // left="14%" //-43% //-27%
+        // width="0%"
+        // padding="0 100px"
+        // cursor="pointer"
         >
           <Box
             display={breakPoint3 ? "none" : "flex"}

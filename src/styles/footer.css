@@ -47,7 +47,7 @@ padding-left: 0;
     font-weight: bold;
     color:#ff6d2f ;
     font-size: 19px !important;
-    margin-bottom: 30px;
+    margin-bottom: 30px !important;
 }
 
 @media (max-width:992px){
