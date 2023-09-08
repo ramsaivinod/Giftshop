@@ -27,18 +27,25 @@
   font-size: 1em;
   margin-top: 9px;
   font-weight: bolder;
-  background-color: #f93800cf;
+  /* background-color: #f93800cf; */
+  border-radius: 0px;
+    line-height: 3;
+    width: 100%;
+    font-size: 1em;
+    margin-top: 9px;
+    font-weight: bolder;
+    color: #FFFFFF;
+    font-family: 'SourceSansProRegular';
+    /* padding: 6px 20px; */
+    background: #ff6d2f;
 }
 
 .trending {
-  font-family: "Quicksand";
+  font-family: 'HeuristicaRegular';
+  text-transform: capitalize;
   display: flex;
-  /* width: 30%; */
-  /* justify-content: center; */
-  /* text-decoration: underline; */
-  margin-bottom: 10px;
   font-size: 2rem;
-  color:#ff6d31
+  color: #ff6d31;
 }
 
 button#myBtn {
@@ -69,15 +76,19 @@ button#myBtn {
 }
 
 .bestsellers {
-    font-family: "Quicksand";
-    display: flex;
     /* width: 30%; */
     /* justify-content: center; */
     /* text-decoration: underline; */
-    margin-top: 20px;
+    /* margin-top: 20px;
     margin-bottom: 0px;
     font-size: 2rem;
-    color:#ff6d31
+    color:#ff6d31; */
+    margin-bottom: 0px;
+    font-family: 'HeuristicaRegular';
+    text-transform: capitalize;
+    display: flex;
+    font-size: 2rem;
+    color: #ff6d31;
   }
 
 .image-container {
