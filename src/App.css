@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.App {
+/* .App {
   text-align: center;
   background-color: "#efb615";
   display: flex;
@@ -13,8 +13,10 @@
   min-height: 100vh;
   max-width: 1440px;
   margin: 0 auto;
+} */
+*{
+   font-family:"HeuristicaRegular" ;
 }
-
 
 .App-logo {
   height: 40vmin;
@@ -39,17 +41,16 @@ margin-top: "2rem"
   position: relative;
 }
 
+.boxess {
+  margin-top: 80px;
+}
+
 @media (max-width:700px) {
   .caraousel-img {
     display: none;
 
   }
 
-  .App {
-
-    padding: 2rem;
-
-  }
 }
 
 
@@ -163,6 +164,7 @@ margin-top: "2rem"
   height: 370px; */
   padding: 5px;
   border-radius: 5px;
+  background: #fffdfc
 }
 
 /* .product_img{
@@ -174,3 +176,23 @@ margin-top: "2rem"
 .gototp{
 position: absolute;
 } */
+
+
+@media (max-width:992px) {
+  .boxess {
+    margin-top: 50px;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none
+}
+
+@media (max-width:992px) {
+/* .image_jk {
+    width:275px;
+  height: 370px;
+    padding: 5px;
+    border-radius: 5px;
+  } */
+}

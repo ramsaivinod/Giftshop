@@ -41,62 +41,36 @@
 }
 
 .trending {
-  font-family: 'HeuristicaRegular';
-  text-transform: capitalize;
+  font-family: "HeuristicaRegular";
   display: flex;
   font-size: 2rem;
   color: #ff6d31;
+  text-transform: capitalize;
 }
 
 button#myBtn {
   padding: 1.3rem;
   margin: 5px 0;
 }
-
-@media  screen and (max-width:400px) {
-  .trending{
-    font-family: "Quicksand";
-    display: flex;
-    width: 65%;
-    text-decoration: underline;
-    margin-bottom: 5px;
-    font-size: 1em;
-    color:#ff6d31
-  }
-  .bestsellers h2{
-    font-family: "Quicksand";
-    display: flex;
-    width: 70%;
-    text-decoration: underline;
-    margin-top: 20px;
-    margin-bottom: 0px;
-    font-size: 1em;
-    color:#ff6d31
-  }
-}
-
 .bestsellers {
-    /* width: 30%; */
-    /* justify-content: center; */
-    /* text-decoration: underline; */
-    /* margin-top: 20px;
-    margin-bottom: 0px;
-    font-size: 2rem;
-    color:#ff6d31; */
-    margin-bottom: 0px;
-    font-family: 'HeuristicaRegular';
-    text-transform: capitalize;
-    display: flex;
-    font-size: 2rem;
-    color: #ff6d31;
-  }
+  font-family: "HeuristicaRegular";
+  display: flex;
+  /* width: 30%; */
+  /* justify-content: center; */
+  /* text-decoration: underline; */
+  margin-top: 20px;
+  margin-bottom: 0px;
+  font-size: 2rem;
+  color: #ff6d31;
+  text-transform: capitalize;
+}
 
 .image-container {
   position: relative;
   display: inline-block;
 }
 
-.list{
+.list {
   background: #FFFFFF;
   display: inline-block;
   text-align: center;
@@ -106,5 +80,17 @@ button#myBtn {
   padding: 0;
 }
 
+@media  screen and (max-width:400px) {
+  .trending, .bestsellers{
+    justify-content: center;
+    
+    font-size:1.2rem; 
+    font-weight: 800;
+    text-decoration: underline;
+  }
+ .trendingitems .slick-next, .trendingitems .slick-prev{
+  display: none !important;
+ }
+} 
 
 

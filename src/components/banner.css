@@ -1,6 +1,6 @@
 .main {
   background-color: yellow;
-  display: none;
+  /* display: none; */
 }
 
 .icon {
@@ -32,8 +32,10 @@
 .image {
   transition: filter 0.1s ease;
 }
+
 .image-container:hover {
-  background-color: #f24e1e; /* New background color on hover */
+  background-color: #f24e1e;
+  /* New background color on hover */
 }
 
 .image-container:hover .image {
@@ -45,18 +47,22 @@
 .banner_box {
   display: flex;
   justify-content: space-between;
-  margin: 50px 0px;
+  /* margin: 50px 0px; */
 }
 
 .banner_icon {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+    display: flex !important;
+      flex-direction: column;
+      gap: 25px;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    
 }
 
 .banner_img {
-  height: 150px;
-  width: 150px;
+  height: 120px;   
+  width: 120px;
   border-radius: 50%;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
@@ -65,18 +71,19 @@
   margin: 10px 0px;
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
 }
 
 .banner_box text {
-    font-family: 'HeuristicaRegular';
-    color: #000000;
-    font-size: 17px;
-    line-height: 20px;
-    margin: 0 0 10px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 500;
+  font-family: 'HeuristicaRegular';
+  color: #000000;
+  font-size: 17px;
+  line-height: 20px;
+  margin: 0 0 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
 }
 
 .banner_icon:hover {
@@ -90,9 +97,40 @@
   cursor: pointer;
 }
 
+.banner_box .slick-slider{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
-@media screen and (max-width:400px) {
-  .banner_box{
-    display: none;
+.banner_box .slick-list{
+  width: 100%;
+}
+
+.banner_box .slick-next, .banner_box .slick-prev{
+  display: none !important;
+}
+@media   (max-width:992px) {
+  .banner_box {
+    margin:30px 0;
   }
+  .bannerimg{
+    height: 70px;
+    width: 70px;
+  }
+    .banner_img {
+      height:auto;
+      width: auto;
+       
+    }
+        .banner_text {
+         
+          font-size: 12px; 
+        }
+                .banner_icon {
+                  
+                  gap: 5px; 
+        
+                }
 }

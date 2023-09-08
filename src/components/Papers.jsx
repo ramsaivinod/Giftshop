@@ -93,13 +93,13 @@ const Papers = () => {
     <div style={styles.container} ref={containerRef}>
       {breakPoint ? (
         <Paper
-        onClick={() => {
-          navigate("/coupon");
-          window.scrollTo(0, 0);
-        }}
+          onClick={() => {
+            navigate("/coupon");
+            window.scrollTo(0, 0);
+          }}
           sx={{
             backgroundColor: "#374450",
-            padding: "10px",
+            padding: "20px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -119,7 +119,7 @@ const Papers = () => {
           </IconButton>
 
           <Typography
-            sx={{ color: "white", fontWeight: "bold", fontSize: "18px" }}
+            sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}
           >
             10% OFF on your next purchase
           </Typography>
@@ -130,12 +130,12 @@ const Papers = () => {
             <ChevronRight />
           </IconButton>
           <Typography
-       
+
             sx={{
               color: "white",
               fontWeight: "bold",
               fontSize: "15px",
-              textDecoration: "underline",
+
               cursor: "pointer",
             }}
           >
@@ -143,7 +143,7 @@ const Papers = () => {
           </Typography>
         </Paper>
       ) : (
-        <Paper sx={styles.paper} elevation={3}      onClick={() => {
+        <Paper sx={styles.paper} elevation={3} onClick={() => {
           navigate("/coupon");
           window.scrollTo(0, 0);
         }}>
