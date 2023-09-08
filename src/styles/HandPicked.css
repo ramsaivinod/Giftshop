@@ -3,7 +3,8 @@
   /* margin-left: 100px; */
 font-size: 2rem;
 justify-content: center;
-color:#ff6d31
+color:#ff6d31;
+margin-top: 30px;
 }
 
 .hp_body {
@@ -31,18 +32,7 @@ color:#ff6d31
 .handpic_image:hover{
 box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
-
-@media screen  and (max-width:1200px){
-  .image_section {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    justify-items: center;
-  }
-
-  .handpic_image {
-      margin: 1rem 0 1rem;
-  }
-}
-
+ 
 /* @media screen  and (max-width: 500px){
   .handpic_image {
     width: 250px;
@@ -55,39 +45,39 @@ box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   }
 
 } */
-@media screen  and (max-width:400px){
-  .main_heading  {
-    display: flex;
-   text-align: left;
-   margin-left: 5px;
-  font-size: 1.4em;
-  color:#ff6d31
-  }
-  .image_section {
-    display: flex;
-    margin-left: 20px;
-    width: 52px;
-    gap: 10px;
-    margin-bottom: 50px;
-  }
+
+.image_section   .slick-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.image_section .slick-list {
+  width: 100%;
+}
+
+.image_section .slick-next,
+.image_section .slick-prev {
+  display: none !important;
 }
 .headings {
   display: flex;
   justify-content: flex-start;
   justify-content: center;
-  gap:30px;
-  margin-bottom: 20px;
+  gap: 30px;
+  margin-bottom: 0px;
 }
 
 .headings h2 {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 10px;
   line-height: 2.2;
 }
 
 .headings h2:hover {
   opacity: 1;
-/* text-decoration: underline;  */
+  /* text-decoration: underline;  */
   cursor: pointer;
   /* font-weight: bolder; */
 }
@@ -96,3 +86,35 @@ box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   /* text-decoration: underline; */
   font-weight: bolder;
 }
+
+@media screen and (max-width:1200px) {
+  .image_section {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-items: center;
+  }
+
+  .handpic_image {
+    margin: 1rem 0 1rem;
+  }
+}
+
+@media screen  and (max-width:400px){
+  .main_heading  {
+    display: flex;
+   text-align: left;
+   margin-left: 5px;
+  font-size: 1.2rem;
+  color:#ff6d31;
+  margin-top:0;
+  margin-bottom: 20px;
+  font-weight: 800;
+  }
+  .image_section {
+    display: flex; 
+    
+  }
+  .handpic_image{
+    height: 240px;
+  }
+}
+ 

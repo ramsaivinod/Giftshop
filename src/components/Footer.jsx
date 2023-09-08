@@ -15,281 +15,261 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import HomeIcon from "@mui/icons-material/Home"
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined"
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone"
-
+import "../styles/footer.css"
 function Footer() {
-  // const {
-  //   palette: { neutral },
-  // } = useTheme();
-
-  //backgroundColor={neutral.light}
-  //background: url('images/checked.png'), #6DB3F2;
 
   return (
     <Box
-      marginTop="70px"
-      padding="40px 0"
+
       backgroundColor="#171381"
       style={{ backgroundImage: `url(${images})` }}
     >
-      <Subscribe />
-      <Box
-        width="80%"
-        display="flex"
-        justifyContent="space-between"
-        flexWrap="wrap"
-        rowGap="30px"
-        columnGap="clamp(20px, 30px, 40px)"
-        padding="30px"
-      >
-        {/* width="clamp(20%, 30%, 40%)" */}
-        <Box>
-          <Box>
-            <Typography
-              variant="h3"
-              fontWeight="bold"
-              mb="30px"
-              color="#ff6d2f"
-            >
-              Programs
-            </Typography>
-            <ul style={{ color: "#ff6d2f" }}>
-              <li>
-                <a
-                  href="https://www.jkyog.org/life-transformation-programs"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Typography mb="30px" color="white" textAlign={"left"}>
-                    {" "}
-                    Life Transformation Program
-                  </Typography>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.jkyog.org/retreats"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Typography mb="30px" color="white" textAlign={"left"}>
-                    {" "}
-                    JKYOG Retreats
-                  </Typography>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.jkyog.org/bal-mukund"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Typography mb="30px" color="white" textAlign={"left"}>
-                    {" "}
-                    Bal-Mukund
-                  </Typography>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.jkyog.org/jkyog-youth-club"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Typography mb="30px" color="white" textAlign={"left"}>
-                    {" "}
-                    JKYog Youth Club
-                  </Typography>
-                </a>
-              </li>
-            </ul>
-          </Box>
-          {/* <Typography
-            variant="h3"
-            fontWeight="bold"
-            mb="30px"
-            // color={shades.secondary[500]}
-            color="#ff6d2f"
-          >
-            JKYOG
-          </Typography>
-          <div style={{ color: "white" }}>
-            JKYog is a part of the worldwide mission envisioned by Jagadguru
-            Kripaluji Shree Maharaj, the 5th authentic 'Jagadguru', spiritual
-            master of the world. Shree Maharajji as he is lovingly referred to
-            by all his devotees, was one of the most endearing divine
-            personalities of the last 90 years who dedicated his entire life for
-            the service of humanity, especially for the spiritual upliftment of
-            the society.
-          </div> */}
-        </Box>
+      <Box className="footerbox" >
+        <Subscribe />
 
-        <Box>
-          <Typography variant="h3" fontWeight="bold" mb="30px" color="#ff6d2f">
-            Our Centers
-          </Typography>
-          <ul style={{ color: "#ff6d2f" }}>
-            <li>
-              <a
-                href="https://www.jkyog.org/centers"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Typography mb="30px" color="white" textAlign={"left"}>
-                  {" "}
-                  USA
-                </Typography>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.jkyog.org/centers"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Typography mb="30px" color="white" textAlign={"left"}>
-                  {" "}
-                  INDIA
-                </Typography>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.jkyog.org/centers"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Typography mb="30px" color="white" textAlign={"left"}>
-                  {" "}
-                  SINGAPORE
-                </Typography>
-              </a>
-            </li>
-          </ul>
-        </Box>
-
-        <Box width="clamp(20%, 25%, 30%)">
-          <Typography variant="h3" fontWeight="bold" mb="30px" color="#ff6d2f">
-            Contact Us
-          </Typography>
-          <Typography mb="30px" color="white">
-            <IconButton>
-              <MailOutlinedIcon style={{ color: "#ff6d2f" }} />
-            </IconButton>
-            Email: secretary@jkyog.org
-          </Typography>
-
-          <Typography mb="30px" sx={{ wordWrap: "break-word" }} color="white">
-            <IconButton>
-              <HomeIcon style={{ color: "#ff6d2f" }} />
-            </IconButton>
-            Plano, Tx 75025 U.S
-          </Typography>
-          <Typography mb="30px" color="white">
-            <IconButton>
-              <LocalPhoneIcon style={{ color: "#ff6d2f" }} />
-            </IconButton>
-            +1 (469) 795-9135
-          </Typography>
-        </Box>
-
-        <Box width="clamp(20%, 25%, 30%)">
-          <Typography variant="h3" fontWeight="bold" mb="30px" color="white">
-            Connect With US
-          </Typography>
-          <Box display={"flex"}>
-            <Box>
-              <IconButton>
-                <a
-                  href="https://www.youtube.com/channel/UCclfz6zVWWOpsQsg3OheI3g"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {" "}
-                  <YouTubeIcon fontSize="large" style={{ color: "#ff6d2f" }} />
-                </a>
-              </IconButton>
-            </Box>
-
-            <IconButton>
-              <a
-                href="https://www.facebook.com/Swami.Mukundananda/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <FacebookIcon fontSize="large" style={{ color: "#ff6d2f" }} />
-              </a>
-            </IconButton>
-
-            <IconButton>
-              <a
-                href="https://twitter.com/Sw_Mukundananda"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <TwitterIcon fontSize="large" style={{ color: "#ff6d2f" }} />
-              </a>
-            </IconButton>
-
-            <IconButton>
-              <a
-                href="https://chat.whatsapp.com/HwyzZcNFJAUIESvu9VwFOU"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <WhatsAppIcon fontSize="large" style={{ color: "#ff6d2f" }} />
-              </a>
-            </IconButton>
-
-            <IconButton>
-              <a
-                href="https://www.linkedin.com/in/swamimukundananda/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <LinkedInIcon fontSize="large" style={{ color: "#ff6d2f" }} />
-              </a>
-            </IconButton>
-
-            <IconButton>
-              <a
-                href="https://www.instagram.com/swami_mukundananda/?hl=en"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <InstagramIcon fontSize="large" style={{ color: "#ff6d2f" }} />
-              </a>
-            </IconButton>
-
-            <IconButton>
-              <a
-                href="https://www.pinterest.com/SwamiMukundananda/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <PinterestIcon fontSize="large" style={{ color: "#ff6d2f" }} />
-              </a>
-            </IconButton>
-
+        <div className="row content" style={{ marginTop: "50px" }}>
+          <div className="col-sm-12 col-md-3">
             <Box>
               <Typography
-                varinat="h4"
-                fontSize="medium"
-                fontWeight={"600"}
-                style={{ backgroundImage: `url(${menu})` }}
+                className="htxt"
               >
-                {" "}
-                5M Followers
+                Programs
+              </Typography>
+              <ul style={{ color: "#ff6d2f" }}>
+                <li>
+                  <a
+                    href="https://www.jkyog.org/life-transformation-programs"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography color="white" textAlign={"left"}>
+                      {" "}
+                      Life Transformation Program
+                    </Typography>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.jkyog.org/retreats"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography color="white" textAlign={"left"}>
+                      {" "}
+                      JKYOG Retreats
+                    </Typography>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.jkyog.org/bal-mukund"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography color="white" textAlign={"left"}>
+                      {" "}
+                      Bal-Mukund
+                    </Typography>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.jkyog.org/jkyog-youth-club"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography color="white" textAlign={"left"}>
+                      {" "}
+                      JKYog Youth Club
+                    </Typography>
+                  </a>
+                </li>
+              </ul>
+            </Box>
+          </div>
+          <div className="col-sm-12 col-md-3">
+            <Box>
+              <Typography className="htxt">
+                Our Centers
+              </Typography>
+              <ul style={{ color: "#ff6d2f" }}>
+                <li>
+                  <a
+                    href="https://www.jkyog.org/centers"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography color="white" textAlign={"left"}>
+                      {" "}
+                      USA
+                    </Typography>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.jkyog.org/centers"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography color="white" textAlign={"left"}>
+                      {" "}
+                      INDIA
+                    </Typography>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.jkyog.org/centers"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography color="white" textAlign={"left"}>
+                      {" "}
+                      SINGAPORE
+                    </Typography>
+                  </a>
+                </li>
+              </ul>
+            </Box>
+          </div>
+          <div className="col-sm-12 col-md-3 contact">
+            <Box  >
+              <Typography className="htxt">
+                Contact Us
+              </Typography>
+              <Typography color="white">
+
+                <MailOutlinedIcon style={{ color: "#ff6d2f" }} />
+
+                Email: secretary@jkyog.org
+              </Typography>
+
+              <Typography sx={{ wordWrap: "break-word" }} color="white">
+
+                <HomeIcon style={{ color: "#ff6d2f" }} />
+
+                Plano, Tx 75025 U.S
+              </Typography>
+              <Typography color="white">
+
+                <LocalPhoneIcon style={{ color: "#ff6d2f" }} />
+
+                +1 (469) 795-9135
               </Typography>
             </Box>
-          </Box>
-        </Box>
+          </div>
+          <div className="col-sm-12 col-md-3">
+            <Box >
+              <Typography className="htxt" color="white">
+                Connect With US
+              </Typography>
+              <Box display={"flex"}>
+                <Box>
+                  <IconButton>
+                    <a
+                      href="https://www.youtube.com/channel/UCclfz6zVWWOpsQsg3OheI3g"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {" "}
+                      <YouTubeIcon fontSize="large" style={{ color: "#ff6d2f" }} />
+                    </a>
+                  </IconButton>
+                </Box>
+
+                <IconButton>
+                  <a
+                    href="https://www.facebook.com/Swami.Mukundananda/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+
+                    <FacebookIcon fontSize="large" style={{ color: "#ff6d2f" }} />
+                  </a>
+                </IconButton>
+
+                <IconButton>
+                  <a
+                    href="https://twitter.com/Sw_Mukundananda"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    <TwitterIcon fontSize="large" style={{ color: "#ff6d2f" }} />
+                  </a>
+                </IconButton>
+
+                <IconButton>
+                  <a
+                    href="https://chat.whatsapp.com/HwyzZcNFJAUIESvu9VwFOU"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    <WhatsAppIcon fontSize="large" style={{ color: "#ff6d2f" }} />
+                  </a>
+                </IconButton>
+
+                <IconButton>
+                  <a
+                    href="https://www.linkedin.com/in/swamimukundananda/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    <LinkedInIcon fontSize="large" style={{ color: "#ff6d2f" }} />
+                  </a>
+                </IconButton>
+
+                <IconButton>
+                  <a
+                    href="https://www.instagram.com/swami_mukundananda/?hl=en"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    <InstagramIcon fontSize="large" style={{ color: "#ff6d2f" }} />
+                  </a>
+                </IconButton>
+
+                <IconButton>
+                  <a
+                    href="https://www.pinterest.com/SwamiMukundananda/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    <PinterestIcon fontSize="large" style={{ color: "#ff6d2f" }} />
+                  </a>
+                </IconButton>
+
+
+              </Box>
+              <Box >
+                <Typography
+                  varinat="h4"
+                  fontSize="medium"
+                  fontWeight={"600"}
+                  style={{ backgroundImage: `url(${menu})`, height: "55px", display: "flex", alignItems: "center", backgroundRepeat: "no-repeat" }}
+                >
+
+                  <span className="ms-4"> 5M Followers</span>
+                </Typography>
+              </Box>
+            </Box>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
       </Box>
+
     </Box>
   )
 }

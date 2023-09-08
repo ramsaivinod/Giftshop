@@ -737,8 +737,8 @@ function Navbars() {
               >
                 <h2 className="trending"> TRENDING </h2>
               </Typography>
-              <Slider {...settings}>
-                {/**Jyoti working on Trending */}
+              <Slider {...settings} className="trendingitems">
+
                 {newArrivalsItems.map((item) => (
                   <Item2 item={item} key={`${item.title}-${item.id}`} />
                 ))}
@@ -756,7 +756,7 @@ function Navbars() {
                 <h2 className="bestsellers">BEST SELLERS</h2>
               </Typography>
               {SwamijiKirtans?.length > 3 ? (
-                <Slider {...settings}>
+                <Slider {...settings} className="trendingitems">
                   {SwamijiKirtans.map((item) => (
                     <Fragment>
                       <Item2 item={item} key={`${item.title}-${item.id}`} />
@@ -959,23 +959,24 @@ function Navbars() {
                 ))}
             </Box>
           </Box>
-          <Button
-            sx={{
-              display: hide && value === "All" ? "" : "none",
-              fontWeight: "bold",
-              fontSize: "1rem",
-              background: "#ff6d31",
-            }}
-            onClick={() => setView(!view)}
-            variant={"contained"}
-          >
-            SHOW {view ? "ALL" : "LESS"}{" "}
-            {view ? (
-              <KeyboardDoubleArrowDownIcon />
-            ) : (
-              <KeyboardDoubleArrowUpIcon />
-            )}
-          </Button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              sx={{
+                display: hide && value === "All" ? "" : "none",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                background: "#ff6d31",
+              }}
+              onClick={() => setView(!view)}
+              variant={"contained"}
+            >
+              SHOW {view ? "ALL" : "LESS"}{" "}
+              {view ? (
+                <KeyboardDoubleArrowDownIcon />
+              ) : (
+                <KeyboardDoubleArrowUpIcon />
+              )}
+            </Button></div>
         </div>
       </Box>
       {show && (

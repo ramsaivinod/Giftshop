@@ -41,399 +41,65 @@ const pics = [
   { i: trophy, c: "Trophy" },
 ]
 
-const settings = {
-  dots: true,
-  infinite: true,
+var settings = {
+  dots: false,
+  infinite: false,
   speed: 500,
   slidesToShow: 6,
-  slidesToScroll: 1,
-}
+  slidesToScroll: 2,
+  initialSlide: 0,
 
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+
+
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+
+      },
+    },
+  ],
+}
 function Banner() {
   const breakPoint = useMediaQuery("(min-width:870px)")
   const navigate = useNavigate()
 
   return (
-    //  {!breakPoint ? (
-    //     <Slider {...settings}>
-    //       <div>
-    //         <Box
-    //           sx={{
-    //             // backgroundColor: "rgba(247,240,222,1)",
-    //             padding: "2rem ",
-    //             paddingRight: "87px",
-    //             height: "10rem",
-    //             width: "100%",
-    //             display: "inline-grid",
-    //             marginTop: "0em",
-    //           }}
-    //         >
-    //           <Grid item xs={12} md={2}>
-    //             <Box
-    //               display="flex"
-    //               flexDirection={"column"}
-    //               alignItems="center"
-    //             >
-    //               <Box
-    //                 className="image-container"
-    //                 display="flex"
-    //                 flexDirection={"column"}
-    //                 alignItems="center"
-    //                 sx={{
-    //                   borderRadius: "100%",
-    //                   height: "110px",
-    //                   width: "110px",
-    //                   background: "#ffded0",
-    //                   // "&:hover": {
-    //                   //   //you want this to be the same as the backgroundColor above
-    //                   //   backgroundColor: "#F24E1E",
 
-    //                   // },
-    //                 }}
-    //               >
-    //                 <Box>
-    //                   {/* <div className="image-container"> */}
-    //                   <img
-    //                     src={trophy}
-    //                     alt="not found"
-    //                     className="image"
-    //                     style={{
-    //                       width: "4rem",
-    //                       cursor: "pointer",
-    //                       // top: "3",
-    //                       marginTop: "25px",
-    //                     }}
-    //                   />
-    //                   {/* </div> */}
-    //                 </Box>
-
-    //                 <Typography marginLeft={1} marginTop={3} variant="h5">
-    //                   BestSellers
-    //                 </Typography>
-    //               </Box>
-    //             </Box>
-    //           </Grid>
-    //         </Box>
-    //       </div>
-    //       <div>
-    //         <Box
-    //           sx={{
-    //             // backgroundColor: "rgba(247,240,222,1)",
-    //             padding: "2rem ",
-    //             paddingRight: "87px",
-    //             height: "10rem",
-    //             width: "100%",
-    //             display: "inline-grid",
-    //             marginTop: "0em",
-    //           }}
-    //         >
-    //           <Grid item xs={12} md={2}>
-    //             <Box
-    //               display="flex"
-    //               flexDirection={"column"}
-    //               alignItems="center"
-    //             >
-    //               <Box
-    //                 className="image-container"
-    //                 display="flex"
-    //                 flexDirection={"column"}
-    //                 alignItems="center"
-    //                 sx={{
-    //                   borderRadius: "100%",
-    //                   height: "110px",
-    //                   width: "110px",
-    //                   background: "#ffded0",
-    //                   // "&:hover": {
-    //                   //   //you want this to be the same as the backgroundColor above
-    //                   //   backgroundColor: "#F24E1E",
-
-    //                   // },
-    //                 }}
-    //               >
-    //                 <Box>
-    //                   {/* <div className="image-container"> */}
-    //                   <img
-    //                     src={audiobooks}
-    //                     alt="not found"
-    //                     className="image"
-    //                     style={{
-    //                       width: "3rem",
-    //                       cursor: "pointer",
-    //                       // top: "3",
-    //                       marginTop: "25px",
-    //                     }}
-    //                   />
-    //                   {/* </div> */}
-    //                 </Box>
-
-    //                 <Typography marginLeft={1} marginTop={3} variant="h5">
-    //                   AudioBooks
-    //                 </Typography>
-    //               </Box>
-    //             </Box>
-    //           </Grid>
-    //         </Box>
-    //       </div>
-    //       <div>
-    //         <Box
-    //           sx={{
-    //             // backgroundColor: "rgba(247,240,222,1)",
-    //             padding: "2rem ",
-    //             paddingRight: "87px",
-    //             height: "10rem",
-    //             width: "100%",
-    //             display: "inline-grid",
-    //             marginTop: "0em",
-    //           }}
-    //         >
-    //           <Grid item xs={12} md={2}>
-    //             <Box
-    //               display="flex"
-    //               flexDirection={"column"}
-    //               alignItems="center"
-    //             >
-    //               <Box
-    //                 className="image-container"
-    //                 display="flex"
-    //                 flexDirection={"column"}
-    //                 alignItems="center"
-    //                 sx={{
-    //                   borderRadius: "100%",
-    //                   height: "110px",
-    //                   width: "110px",
-    //                   background: "#ffded0",
-    //                   // "&:hover": {
-    //                   //   //you want this to be the same as the backgroundColor above
-    //                   //   backgroundColor: "#F24E1E",
-
-    //                   // },
-    //                 }}
-    //               >
-    //                 <Box>
-    //                   {/* <div className="image-container"> */}
-    //                   <img
-    //                     src={giftcard}
-    //                     alt="not found"
-    //                     className="image"
-    //                     style={{
-    //                       width: "4rem",
-    //                       cursor: "pointer",
-    //                       // top: "3",
-    //                       marginTop: "25px",
-    //                     }}
-    //                   />
-    //                   {/* </div> */}
-    //                 </Box>
-
-    //                 <Typography marginLeft={1} marginTop={5} variant="h5">
-    //                   Giftcard
-    //                 </Typography>
-    //               </Box>
-    //             </Box>
-    //           </Grid>
-    //         </Box>
-    //       </div>
-    //       <div>
-    //         <Box
-    //           sx={{
-    //             // backgroundColor: "rgba(247,240,222,1)",
-    //             padding: "2rem ",
-    //             paddingRight: "87px",
-    //             height: "10rem",
-    //             width: "100%",
-    //             display: "inline-grid",
-    //             marginTop: "0em",
-    //           }}
-    //         >
-    //           <Grid item xs={12} md={2}>
-    //             <Box
-    //               display="flex"
-    //               flexDirection={"column"}
-    //               alignItems="center"
-    //             >
-    //               <Box
-    //                 className="image-container"
-    //                 display="flex"
-    //                 flexDirection={"column"}
-    //                 alignItems="center"
-    //                 sx={{
-    //                   borderRadius: "100%",
-    //                   height: "110px",
-    //                   width: "110px",
-    //                   background: "#ffded0",
-    //                   // "&:hover": {
-    //                   //   //you want this to be the same as the backgroundColor above
-    //                   //   backgroundColor: "#F24E1E",
-
-    //                   // },
-    //                 }}
-    //               >
-    //                 <Box>
-    //                   {/* <div className="image-container"> */}
-    //                   <img
-    //                     src={coupons}
-    //                     alt="not found"
-    //                     className="image"
-    //                     onClick={() => {
-    //                       navigate("/coupon");
-    //                       window.scrollTo(0, 0);
-    //                     }}
-    //                     style={{
-    //                       width: "4rem",
-    //                       cursor: "pointer",
-    //                       // top: "3",
-    //                       marginTop: "25px",
-    //                     }}
-    //                   />
-    //                   {/* </div> */}
-    //                 </Box>
-
-    //                 <Typography marginLeft={1} marginTop={5} variant="h5">
-    //                   Coupons
-    //                 </Typography>
-    //               </Box>
-    //             </Box>
-    //           </Grid>
-    //         </Box>
-    //       </div>
-    //       <div>
-    //         <Box
-    //           sx={{
-    //             // backgroundColor: "rgba(247,240,222,1)",
-    //             padding: "2rem ",
-    //             paddingRight: "87px",
-    //             height: "10rem",
-    //             width: "100%",
-    //             display: "inline-grid",
-    //             marginTop: "0em",
-    //           }}
-    //         >
-    //           <Grid item xs={12} md={2}>
-    //             <Box
-    //               display="flex"
-    //               flexDirection={"column"}
-    //               alignItems="center"
-    //             >
-    //               <Box
-    //                 className="image-container"
-    //                 display="flex"
-    //                 flexDirection={"column"}
-    //                 alignItems="center"
-    //                 sx={{
-    //                   borderRadius: "100%",
-    //                   height: "110px",
-    //                   width: "110px",
-    //                   background: "#ffded0",
-    //                   // "&:hover": {
-    //                   //   //you want this to be the same as the backgroundColor above
-    //                   //   backgroundColor: "#F24E1E",
-
-    //                   // },
-    //                 }}
-    //               >
-    //                 <Box>
-    //                   {/* <div className="image-container"> */}
-    //                   <img
-    //                     src={books}
-    //                     alt="not found"
-    //                     className="image"
-    //                     style={{
-    //                       width: "3rem",
-    //                       cursor: "pointer",
-    //                       // top: "3",
-    //                       marginTop: "25px",
-    //                     }}
-    //                   />
-    //                   {/* </div> */}
-    //                 </Box>
-
-    //                 <Typography marginLeft={1} marginTop={5} variant="h5">
-    //                   Books
-    //                 </Typography>
-    //               </Box>
-    //             </Box>
-    //           </Grid>
-    //         </Box>
-    //       </div>
-    //       <div>
-    //         <Box
-    //           sx={{
-    //             // backgroundColor: "rgba(247,240,222,1)",
-    //             padding: "2rem ",
-    //             paddingRight: "87px",
-    //             height: "10rem",
-    //             width: "100%",
-    //             display: "inline-grid",
-    //             marginTop: "0em",
-    //           }}
-    //         >
-    //           <Grid item xs={12} md={2}>
-    //             <Box
-    //               display="flex"
-    //               flexDirection={"column"}
-    //               alignItems="center"
-    //             >
-    //               <Box
-    //                 className="image-container"
-    //                 display="flex"
-    //                 flexDirection={"column"}
-    //                 alignItems="center"
-    //                 sx={{
-    //                   borderRadius: "100%",
-    //                   height: "110px",
-    //                   width: "110px",
-    //                   background: "#ffded0",
-    //                   // "&:hover": {
-    //                   //   //you want this to be the same as the backgroundColor above
-    //                   //   backgroundColor: "#F24E1E",
-
-    //                   // },
-    //                 }}
-    //               >
-    //                 <Box>
-    //                   {/* <div className="image-container"> */}
-    //                   <img
-    //                     src={pen}
-    //                     alt="not found"
-    //                     className="image"
-    //                     style={{
-    //                       width: "3rem",
-    //                       cursor: "pointer",
-    //                       // top: "3",
-    //                       marginTop: "25px",
-    //                     }}
-    //                   />
-    //                   {/* </div> */}
-    //                 </Box>
-    //                 {/*  <Typography marginLeft={1} marginTop={3} variant="h5">
-    //               Signed Edition
-    //               </Typography> */}
-    //                 <p> Signed Editions</p>
-    //               </Box>
-    //             </Box>
-    //           </Grid>
-    //         </Box>
-    //       </div>{" "}
-    //     </Slider>
-    //   ) : (
-
-    //  ""
-    //   )}
 
     <div className="banner_box">
-      {pics.map((p) => {
-        return (
-          <div className="banner_icon">
-            <div>
-              <img src={p.i} alt="banner-image" className="banner_img" />
-            </div>
+      <Slider {...settings} style={{ width: "100%" }}>
+        {pics.map((p) => {
+          return (
+            <div className="banner_icon">
+              <div className="bannerimg">
+                <img src={p.i} alt="banner-image" className="banner_img" />
+              </div>
 
-            <div className="banner_text">
-              <text>{p.c}</text>
+              <div className="banner_text">
+                <text>{p.c}</text>
+              </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </Slider>
     </div>
   )
 }

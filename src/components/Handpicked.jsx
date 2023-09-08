@@ -8,7 +8,9 @@ import pen from "../logo/4.webp"
 import trophy from "../logo/5.webp"
 import audiobooks from "../logo/1.avif"
 import { useState } from "react"
-
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 const Handpicked = () => {
   const [heading, setHeadings] = useState([
     "English Books",
@@ -35,6 +37,42 @@ const Handpicked = () => {
     .filter((item) => item.tags === "BalMukund Books")
     .slice(0, 5)
 
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 2,
+    initialSlide: 0,
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+
+
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+
+        },
+      },
+    ],
+  }
   return (
     <div className="handpicked">
       <div className="hp_body">
@@ -54,21 +92,23 @@ const Handpicked = () => {
         <div className="image_section">
           {currenth == "English Books" ? (
             <Fragment>
-              {englishbooks.map((i) => {
-                return <img src={i.image.src} className="handpic_image" />
-              })}
+              <Slider {...settings} style={{ width: "100%" }}>
+                {englishbooks.map((i) => {
+                  return <img src={i.image.src} className="handpic_image" />
+                })}
+              </Slider>
             </Fragment>
           ) : currenth == "Kirtans" ? (
-            <Fragment>
+            <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
               {newArrivalsItems.map((i) => {
                 return <img src={i.image.src} className="handpic_image" />
-              })}
+              })}</Slider>
             </Fragment>
           ) : currenth == "BestSellers" ? (
-            <Fragment>
+            <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
               {BalMukundBooks.map((i) => {
                 return <img src={i.image.src} className="handpic_image" />
-              })}
+              })}</Slider>
             </Fragment>
           ) : (
             // : currenth == "Audiobooks" ? (
@@ -79,10 +119,10 @@ const Handpicked = () => {
             //   </Fragment>
             // )
 
-            <Fragment>
+            <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
               {SwamijiKirtans.map((i) => {
                 return <img src={i.image.src} className="handpic_image" />
-              })}
+              })}</Slider>
             </Fragment>
           )}
         </div>
