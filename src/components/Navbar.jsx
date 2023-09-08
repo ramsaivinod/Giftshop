@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux"
-import Jklog from "../logo/jklogo.png"
+import { useDispatch, useSelector } from "react-redux";
+import Jklog from "../logo/jklogo.png";
 
 import {
   Badge,
@@ -11,126 +11,126 @@ import {
   Form,
   MenuList,
   List,
-} from "@mui/material"
-import Tabs from "@mui/material/Tabs"
-import Tab from "@mui/material/Tab"
-import Item from "./Item"
-import MainCarousel from "./MainCarousel"
-import MenuItem from "@mui/material/MenuItem"
-import Menu from "@mui/material/Menu"
-import Select from "@mui/material/Select"
-import { makeStyles } from "tss-react/mui"
-import Benefits from "./Benefits"
-import "./style.css"
-import books from "../logo/3.avif"
-import coupons from "../logo/4.avif"
-import giftcard from "../logo/3.webp"
+} from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Item from "./Item";
+import MainCarousel from "./MainCarousel";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import Select from "@mui/material/Select";
+import { makeStyles } from "tss-react/mui";
+import Benefits from "./Benefits";
+import "./style.css";
+import books from "../logo/3.avif";
+import coupons from "../logo/4.avif";
+import giftcard from "../logo/3.webp";
 //import { Image, Typography } from "@mui/material";
-import Handpicked from "./Handpicked"
+import Handpicked from "./Handpicked";
 import {
   PersonOutline,
   ShoppingBagOutlined,
   MenuOutlined,
   WindowSharp,
-} from "@mui/icons-material"
-import Popover from "@mui/material"
-import { SearchOutlined } from "@mui/icons-material"
+} from "@mui/icons-material";
+import Popover from "@mui/material";
+import { SearchOutlined } from "@mui/icons-material";
 //import { useNavigate } from "react-router-dom";
 //import { shades } from "../theme";
-import { FormControl, InputLabel } from "@mui/material"
-import { setIsCartOpen, setIsNavOpen, setIsFilterOpen } from "../state"
-import { useNavigate } from "react-router-dom"
-import { encode as btoa } from "base-64"
-import { setItems, setValue, setPriceFilter, setSortOrder } from "../state"
-import React, { Fragment, useEffect, useState, useRef, useMemo } from "react"
-import useMediaQuery from "@mui/material/useMediaQuery"
+import { FormControl, InputLabel } from "@mui/material";
+import { setIsCartOpen, setIsNavOpen, setIsFilterOpen } from "../state";
+import { useNavigate } from "react-router-dom";
+import { encode as btoa } from "base-64";
+import { setItems, setValue, setPriceFilter, setSortOrder } from "../state";
+import React, { Fragment, useEffect, useState, useRef, useMemo } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 //import axios from "axios";
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import "./Navbar.css"
-import Slider from "react-slick"
-import Slider2 from "react-slick"
-import "../App.css"
-import Item2 from "./Item2"
-import PriceFilter from "./PriceFilter"
-import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp"
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown"
-import styled from "@emotion/styled"
-import SortRadioButtons from "./SortRadioButtons"
-import CategoriesButton from "./CategoriesButton"
-import { SnackbarProvider, enqueueSnackbar } from "notistack"
-import CancelIcon from "@mui/icons-material/Cancel"
-import FilterAltIcon from "@mui/icons-material/FilterAlt"
-import TuneIcon from "@mui/icons-material/Tune"
-import Dropdown from "react-dropdown"
-import "react-dropdown/style.css"
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
-import RectangleBanner from "./RectangleBanner"
-import Banner from "./Banner"
-import Papers from "./Papers"
-import QuickView from "./QuickView"
-import App from "../App.js"
-import FrameComponent from "./FrameComponent"
-import { fetchDataFromApi } from "../utils/api"
-import _ from "lodash"
-import "../styles/Item2.css"
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./Navbar.css";
+import Slider from "react-slick";
+import Slider2 from "react-slick";
+import "../App.css";
+import Item2 from "./Item2";
+import PriceFilter from "./PriceFilter";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import styled from "@emotion/styled";
+import SortRadioButtons from "./SortRadioButtons";
+import CategoriesButton from "./CategoriesButton";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import CancelIcon from "@mui/icons-material/Cancel";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import TuneIcon from "@mui/icons-material/Tune";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import RectangleBanner from "./RectangleBanner";
+import Banner from "./Banner";
+import Papers from "./Papers";
+import QuickView from "./QuickView";
+import App from "../App.js";
+import FrameComponent from "./FrameComponent";
+import { fetchDataFromApi } from "../utils/api";
+import _ from "lodash";
+import "../styles/Item2.css";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const FlexBox = styled(Box)`
   display: flex;
   // justify-content: space-between;
   align-items: flex-start;
-`
+`;
 
 function Navbars() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const [anchorEl, setAnchorEl] = useState(null)
-  const isNavOpen = useSelector((state) => state.cart.isNavOpen)
-  const isFilterOpen = useSelector((state) => state.cart.isFilterOpen)
-  const cart = useSelector((state) => state.cart.cart)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isNavOpen = useSelector((state) => state.cart.isNavOpen);
+  const isFilterOpen = useSelector((state) => state.cart.isFilterOpen);
+  const cart = useSelector((state) => state.cart.cart);
 
-  const items = useSelector((state) => state.cart.items)
-  const value = useSelector((state) => state.cart.value)
-  const sortOrder = useSelector((state) => state.cart.sortOrder)
-  const [item, setItem] = useState([])
-  const breakPoint = useMediaQuery("(max-width:700px)")
-  const breakPoint2 = useMediaQuery("(max-width:1220px)")
-  const breakPoint3 = useMediaQuery("(min-width:1220px)")
-  const [search, setSearchField] = useState("")
-  const [menu, setMenu] = useState(false)
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const [show, setShow] = useState(false)
-  const [view, setView] = useState(true)
-  const [hide, setHide] = useState(true)
-  const [asc, setAsc] = useState([])
-  const [dsc, setDsc] = useState([])
-  const [selectedOption, setSelectedOption] = useState("")
+  const items = useSelector((state) => state.cart.items);
+  const value = useSelector((state) => state.cart.value);
+  const sortOrder = useSelector((state) => state.cart.sortOrder);
+  const [item, setItem] = useState([]);
+  const breakPoint = useMediaQuery("(max-width:700px)");
+  const breakPoint2 = useMediaQuery("(max-width:1220px)");
+  const breakPoint3 = useMediaQuery("(min-width:1220px)");
+  const [search, setSearchField] = useState("");
+  const [menu, setMenu] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [show, setShow] = useState(false);
+  const [view, setView] = useState(true);
+  const [hide, setHide] = useState(true);
+  const [asc, setAsc] = useState([]);
+  const [dsc, setDsc] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
   //const [sortOrder, setSortOrder] = useState("");
-  const [category, setCategory] = useState("All Products")
-  const [collections, setCollections] = useState([])
-  const [name, setName] = useState("All")
-  const [val, setVal] = useState("")
-  const [categories, setCategories] = useState([])
-  const [suggestions,setSuggestions] = useState([])
+  const [category, setCategory] = useState("All Products");
+  const [collections, setCollections] = useState([]);
+  const [name, setName] = useState("All");
+  const [val, setVal] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
 
   const getCategories = () => {
     fetchDataFromApi("/api/categories").then((res) => {
-      console.log(res)
-      setCategories(res.data)
-    })
-  }
+      console.log(res);
+      setCategories(res.data);
+    });
+  };
 
-  const options = ["one", "two", "three"]
-  const defaultOption = options[0]
+  const options = ["one", "two", "three"];
+  const defaultOption = options[0];
 
   const tabOptions = [
     //{ label: "Swamiji Kirtans", value: "Swamiji Kirtans" },
     // { label: 'Option 2', value: 'option2' },
     // { label: 'Option 3', value: 'option3' },
-  ]
+  ];
 
   // const handleClose = () => {
   //   setAnchorEl(null);
@@ -138,42 +138,46 @@ function Navbars() {
   // };
 
   const handleClose = (event) => {
-    setVal(val)
+    setVal(val);
     if (val !== "") {
-      dispatch(setValue(val))
+      dispatch(setValue(val));
     }
-  }
+  };
+
+  const handleSearch = (id) => {
+    console.log(id, "id");
+  };
   const handleDropdownChange = (event) => {
-    window.scrollTo({ top: 2300, behavior: "smooth" })
-    dispatch(setSortOrder(event.target.value))
-    setVal(event.target.value)
+    window.scrollTo({ top: 2300, behavior: "smooth" });
+    dispatch(setSortOrder(event.target.value));
+    setVal(event.target.value);
     if (event.target.value === "All Products" || "") {
-      setItem(items)
-      setCategory("All Products")
-      setHide(true)
+      setItem(items);
+      setCategory("All Products");
+      setHide(true);
     } else if (event.target.value === "SwamijiKirtans") {
-      setItem(SwamijiKirtans)
-      setCategory("Swamiji Kirtans")
-      setHide(false)
+      setItem(SwamijiKirtans);
+      setCategory("Swamiji Kirtans");
+      setHide(false);
     } else if (event.target.value === "EnglishLectures") {
-      setItem(EnglishLectures)
-      setCategory("English Lectures")
-      setHide(false)
+      setItem(EnglishLectures);
+      setCategory("English Lectures");
+      setHide(false);
     } else if (event.target.value === "BalMukundBooks") {
-      setItem(BalMukundBooks)
-      setCategory("Bal Mukund Books")
-      setHide(false)
+      setItem(BalMukundBooks);
+      setCategory("Bal Mukund Books");
+      setHide(false);
     } else if (event.target.value === "englishbooks") {
-      setItem(englishbooks)
-      setCategory("English Books")
-      setHide(false)
+      setItem(englishbooks);
+      setCategory("English Books");
+      setHide(false);
     } else if (event.target.value === "Videos") {
-      setItem(Videos)
-      setCategory("Videos")
-      setHide(false)
+      setItem(Videos);
+      setCategory("Videos");
+      setHide(false);
     }
     // Do something with the selected value
-  }
+  };
 
   // const handleBlur = (event) => {
   //   event.preventDefault();
@@ -186,10 +190,10 @@ function Navbars() {
   //   }
   // };
   const handleClick = (event) => {
-    event.stopPropagation()
-    setAnchorEl(event.currentTarget)
-  }
-  console.log(name, "name")
+    event.stopPropagation();
+    setAnchorEl(event.currentTarget);
+  };
+  console.log(name, "name");
   // const handleOptionChange = (event) => {
   //   setSelectedOption(event.target.value);
   //   dispatch(setValue("All"))
@@ -197,14 +201,14 @@ function Navbars() {
   // };
   async function getItems() {
     try {
-      var headers = new Headers()
+      var headers = new Headers();
       headers.append(
         "Authorization",
         "Basic " +
-        btoa(
-          "ce9a3ad16708f3eb4795659e809971c4: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"
-        )
-      )
+          btoa(
+            "ce9a3ad16708f3eb4795659e809971c4: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"
+          )
+      );
       //https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products
       // "http://localhost:5000/products.json?limit=250",
 
@@ -213,27 +217,27 @@ function Navbars() {
         {
           headers: headers,
         }
-      )
+      );
 
-      const resp = await result.json()
+      const resp = await result.json();
       if (resp) {
-        console.log(resp)
-        setItem(resp?.products)
-        dispatch(setItems(resp?.products))
-        console.log(resp?.products, "res")
-        let arr = resp?.products
-        let arr2 = resp?.products
+        console.log(resp);
+        setItem(resp?.products);
+        dispatch(setItems(resp?.products));
+        console.log(resp?.products, "res");
+        let arr = resp?.products;
+        let arr2 = resp?.products;
         arr = arr
           .slice()
-          .sort((a, b) => a.variants[0].price - b.variants[0].price)
+          .sort((a, b) => a.variants[0].price - b.variants[0].price);
         arr2 = arr2
           .slice()
-          .sort((a, b) => b.variants[0].price - a.variants[0].price)
-        setAsc(arr)
-        setDsc(arr2)
+          .sort((a, b) => b.variants[0].price - a.variants[0].price);
+        setAsc(arr);
+        setDsc(arr2);
       }
     } catch (err) {
-      console.log(err, "this is error")
+      console.log(err, "this is error");
     }
   }
 
@@ -262,40 +266,40 @@ function Navbars() {
   // }
 
   useEffect(() => {
-    getItems()
-    getCategories()
+    getItems();
+    getCategories();
     // getCollections();
-  }, [])
+  }, []);
 
   const handleChange = (event, value) => {
-    dispatch(setSortOrder(value))
-    window.scrollTo({ top: 2300, behavior: "smooth" })
+    dispatch(setSortOrder(value));
+    window.scrollTo({ top: 2300, behavior: "smooth" });
     if (value === "All Products" || "") {
-      setItem(items)
-      setCategory("All Products")
-      setHide(true)
+      setItem(items);
+      setCategory("All Products");
+      setHide(true);
     } else if (value === "SwamijiKirtans") {
-      setItem(SwamijiKirtans)
-      setCategory("Swamiji Kirtans")
-      setHide(false)
+      setItem(SwamijiKirtans);
+      setCategory("Swamiji Kirtans");
+      setHide(false);
     } else if (value === "EnglishLectures") {
-      setItem(EnglishLectures)
-      setCategory("English Lectures")
-      setHide(false)
+      setItem(EnglishLectures);
+      setCategory("English Lectures");
+      setHide(false);
     } else if (value === "BalMukundBooks") {
-      setItem(BalMukundBooks)
-      setCategory("Bal Mukund Books")
-      setHide(false)
+      setItem(BalMukundBooks);
+      setCategory("Bal Mukund Books");
+      setHide(false);
     } else if (value === "englishbooks") {
-      setItem(englishbooks)
-      setCategory("English Books")
-      setHide(false)
+      setItem(englishbooks);
+      setCategory("English Books");
+      setHide(false);
     } else if (value === "Videos") {
-      setItem(Videos)
-      setCategory("Videos")
-      setHide(false)
+      setItem(Videos);
+      setCategory("Videos");
+      setHide(false);
     }
-  }
+  };
   // dispatch(setValue(newValue));
 
   const handlePriceFilter = (priceFilter) => {
@@ -305,37 +309,33 @@ function Navbars() {
           product.variants[0].price >= priceFilter.minPrice) &&
         (priceFilter.maxPrice === "" ||
           product.variants[0].price <= priceFilter.maxPrice)
-    )
+    );
     if (priceFilter.minPrice === 3 && priceFilter.maxPrice === 150) {
-      setHide(true)
+      setHide(true);
     } else {
-      setHide(false)
+      setHide(false);
     }
     //setFilteredProducts(filtered);
-    setItem(filtered)
-  }
+    setItem(filtered);
+  };
 
   useMemo(() => {
     const filtered = items.filter((product) =>
       product.title.toLowerCase().includes(search.toLowerCase())
-    )
-
-    // const name = filtered.map((i)=> i.title)
-    // setSuggestions(name)
-    setItem(filtered)
-
-  }, [items, search])
+    );
+    setItem(filtered);
+  }, [items, search]);
 
   const handleSearchField = (e) => {
-    setSearchField(e.target.value)
-    window.scrollTo({ top: 2300, behavior: "smooth" })
-    setHide(false)
-    setCategory("Products")
+    setSearchField(e.target.value);
+    window.scrollTo({ top: 2300, behavior: "smooth" });
+    setHide(false);
+    setCategory("Products");
     if (e.target.value === "") {
-      setHide(true)
-      getItems()
+      setHide(true);
+      getItems();
     }
-  }
+  };
 
   // const handleSearchField = (e) => {
   //   const filtered = items.filter((product) =>
@@ -350,26 +350,30 @@ function Navbars() {
   //   }
   // };
 
-  var fruitArrays = {}
-  console.log(categories)
+  var fruitArrays = {};
+  console.log(categories);
   if (categories) {
     for (var i = 0; i < categories.length; i++) {
       const a = items.filter(
         (item) => item.tags === categories[i].attributes.Type
-      )
-      fruitArrays[categories[i].attributes.Type] = [a]
+      );
+      fruitArrays[categories[i].attributes.Type] = [a];
     }
   }
 
-  const englishbooks = items.filter((item) => item.tags === "English Books")
-  const newArrivalsItems = items.filter((item) => item.tags === "POS")
-  const bestSellersItems = items.filter((item) => item.tags === "")
-  const SwamijiKirtans = items.filter((item) => item.tags === "Swamiji Kirtans")
-  const BalMukundBooks = items.filter((item) => item.tags === "BalMukund Books")
+  const englishbooks = items.filter((item) => item.tags === "English Books");
+  const newArrivalsItems = items.filter((item) => item.tags === "POS");
+  const bestSellersItems = items.filter((item) => item.tags === "");
+  const SwamijiKirtans = items.filter(
+    (item) => item.tags === "Swamiji Kirtans"
+  );
+  const BalMukundBooks = items.filter(
+    (item) => item.tags === "BalMukund Books"
+  );
   const EnglishLectures = items.filter(
     (item) => item.tags === "English Lectures-Swamiji (Audio)"
-  )
-  const Videos = items.filter((item) => item.tags === "Videos")
+  );
+  const Videos = items.filter((item) => item.tags === "Videos");
 
   var settings = {
     dots: false,
@@ -410,29 +414,29 @@ function Navbars() {
         },
       },
     ],
-  }
+  };
 
   const change = () => {
-    dispatch(setValue("All"))
-    window.scrollTo(0, 0)
-  }
+    dispatch(setValue("All"));
+    window.scrollTo(0, 0);
+  };
 
   const handleSortOrderChange = (value) => {
     if (value === "asc") {
-      setItem(asc)
-      setHide(false)
+      setItem(asc);
+      setHide(false);
     }
     if (value === "desc") {
-      setItem(dsc)
-      setHide(false)
+      setItem(dsc);
+      setHide(false);
     }
-  }
+  };
 
   const handleCategoriesChange = (value) => {
     if (value in fruitArrays) {
-      setItem(fruitArrays[value][0])
-      setCategory(value)
-      setHide(false)
+      setItem(fruitArrays[value][0]);
+      setCategory(value);
+      setHide(false);
     }
     // if (value === "All Products" || "") {
     //   setItem(items);
@@ -461,31 +465,31 @@ function Navbars() {
     //   setCategory("Videos");
     //   setHide(false);
     // }
-  }
+  };
 
   const clearFilter = () => {
-    dispatch(setPriceFilter([3, 150]))
+    dispatch(setPriceFilter([3, 150]));
     const priceFilter = {
       minPrice: 3,
       maxPrice: 150,
-    }
-    handlePriceFilter(priceFilter)
-    handleCategoriesChange("All Products")
+    };
+    handlePriceFilter(priceFilter);
+    handleCategoriesChange("All Products");
     //dispatch(setIsFilterOpen({}))
-    dispatch(setSortOrder(""))
-  }
+    dispatch(setSortOrder(""));
+  };
 
   const clearMobFilter = () => {
-    dispatch(setPriceFilter([3, 150]))
+    dispatch(setPriceFilter([3, 150]));
     const priceFilter = {
       minPrice: 3,
       maxPrice: 150,
-    }
-    handlePriceFilter(priceFilter)
-    handleCategoriesChange("All Products")
-    dispatch(setIsFilterOpen({}))
-    dispatch(setSortOrder(""))
-  }
+    };
+    handlePriceFilter(priceFilter);
+    handleCategoriesChange("All Products");
+    dispatch(setIsFilterOpen({}));
+    dispatch(setSortOrder(""));
+  };
 
   //   const styles = theme => ({
   //     select: {
@@ -515,12 +519,12 @@ function Navbars() {
       right: "0px",
       background: "red",
     },
-  }))
-  const classes = styles()
+  }));
+  const classes = styles();
   return (
     // <Slider {...settings}>
     <Fragment>
-      <Box >
+      <Box>
         <Box
           display={isFilterOpen ? "block" : "none"}
           // backgroundColor="rgba(0, 0, 0, 0.4)"
@@ -591,29 +595,41 @@ function Navbars() {
         </Box>
         <Navbar expand="lg" className="navbox">
           <div className="navbars">
-            <Navbar.Brand href="#home"> <img
-              src={Jklog}
-              alt="not found"
-              style={{ width: "10rem", height: "100%", cursor: "pointer" }}
-              onClick={() => change()}
-            /></Navbar.Brand>
+            <Navbar.Brand href="#home">
+              {" "}
+              <img
+                src={Jklog}
+                alt="not found"
+                style={{ width: "10rem", height: "100%", cursor: "pointer" }}
+                onClick={() => change()}
+              />
+            </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#home" className="nav-item">HOME</Nav.Link>
+                <Nav.Link href="#home" className="nav-item">
+                  HOME
+                </Nav.Link>
                 <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Swamiji Kirtans</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.1">
+                    Swamiji Kirtans
+                  </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="BOOKS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">English Books</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">BalMukund Books</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.1">
+                    English Books
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    BalMukund Books
+                  </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">English Lectures</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.1">
+                    English Lectures
+                  </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Videos</NavDropdown.Item>
                 </NavDropdown>
-
               </Nav>
             </Navbar.Collapse>
             <Box
@@ -627,40 +643,36 @@ function Navbars() {
                 <input
                   placeholder="Search for Products..."
                   type="text"
-                  value={search} onChange={handleSearchField}
+                  value={search}
+                  onChange={handleSearchField}
                 />
-                  { /*  {search && suggestions.map((item) => (
-                  <li>{item}</li> 
-                ))} */}
-              
-             
-                { /* */}
-            
+                {search && (
+                  <div className="searchlist">
+                    {item.map((item) => (
+                      <div
+                        onClick={() => navigate(`/item/${item.id}`)}
+                        className="lst"
+                      >
+                        {item.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-                <IconButton  >
-
+                <IconButton>
                   <SearchOutlined
                     fontSize="medium"
                     sx={{ color: " #ff6d31;" }}
-
                   />
-
                 </IconButton>
               </div>
-                    
-                    
-                 
-                    
-              <IconButton className="Searchmb">
 
+              <IconButton className="Searchmb">
                 <SearchOutlined
                   fontSize="medium"
                   sx={{ color: "#fff" }}
                   onClick={() => setShow(!show)}
-
                 />
-
-
               </IconButton>
 
               <Badge
@@ -692,15 +704,11 @@ function Navbars() {
               >
                 <MenuOutlined />
               </IconButton>
-
             </Box>
-         
-
           </div>
-      
         </Navbar>
-     
-        <div className="container boxess"  >
+
+        <div className="container boxess">
           <div className="main-section">
             <div className="main-carousel">{<MainCarousel />}</div>
             <div className="side-images">
@@ -725,7 +733,7 @@ function Navbars() {
                 variant={breakPoint ? "h2" : "h1"}
                 textAlign="left"
                 padding="10px"
-              // color="#ff6d31"
+                // color="#ff6d31"
               >
                 <h2 className="trending"> TRENDING </h2>
               </Typography>
@@ -743,7 +751,7 @@ function Navbars() {
                 variant={breakPoint ? "h2" : "h1"}
                 textAlign="left"
                 padding="11px"
-              // color="#ff6d31"
+                // color="#ff6d31"
               >
                 <h2 className="bestsellers">BEST SELLERS</h2>
               </Typography>
@@ -784,7 +792,7 @@ function Navbars() {
               color="#ff6d31"
               padding="50px "
               fontFamily="HeuristicaRegular"
-            //color="#ff6d31"
+              //color="#ff6d31"
             >
               <b>{category} </b>
             </Typography>
@@ -795,7 +803,7 @@ function Navbars() {
               padding="50px "
               marginTop="38px"
               fontFamily="HeuristicaRegular"
-            //color="#ff6d31"
+              //color="#ff6d31"
             >
               <b>{value}</b>
             </Typography>
@@ -907,18 +915,18 @@ function Navbars() {
                 (hide
                   ? view
                     ? item
-                      .slice(0, 10)
-                      .map((item) => (
-                        <Item item={item} key={`${item.title}-${item.id}`} />
-                      ))
+                        .slice(0, 10)
+                        .map((item) => (
+                          <Item item={item} key={`${item.title}-${item.id}`} />
+                        ))
                     : item
-                      .slice(11, item.length)
-                      .map((item) => (
-                        <Item item={item} key={`${item.title}-${item.id}`} />
-                      ))
+                        .slice(11, item.length)
+                        .map((item) => (
+                          <Item item={item} key={`${item.title}-${item.id}`} />
+                        ))
                   : item.map((item) => (
-                    <Item item={item} key={`${item.title}-${item.id}`} />
-                  )))}
+                      <Item item={item} key={`${item.title}-${item.id}`} />
+                    )))}
               {value === "Trending" &&
                 newArrivalsItems.map((item) => (
                   <Item item={item} key={`${item.title}-${item.id}`} />
@@ -970,27 +978,40 @@ function Navbars() {
           </Button>
         </div>
       </Box>
-      {show && <div className="searchbox">
-        <div className="">  <IconButton  >
-
-          <SearchOutlined
-            fontSize="medium"
-            sx={{ color: " #ff6d31;" }}
-
-          />
-
-        </IconButton> <input
-            placeholder="Search for Products..."
-            type="text"
-            value={search} onChange={handleSearchField}
-          />
-
-
-          <IconButton onClick={() => setShow(false)} style={{ position: "absolute", right: 0, color: "#ff6d31" }} >
-            <CancelIcon />
-          </IconButton></div>
-
-      </div>}
+      {show && (
+        <div className="searchbox">
+          <div className="">
+            
+            <IconButton>
+              <SearchOutlined fontSize="medium" sx={{ color: " #ff6d31;" }} />
+            </IconButton> 
+            <input
+              placeholder="Search for Products..."
+              type="text"
+              value={search}
+              onChange={handleSearchField}
+            />
+            <IconButton
+              onClick={() => setShow(false)}
+              style={{ position: "absolute", right: 0, color: "#ff6d31" }}
+            >
+              <CancelIcon />
+            </IconButton>
+          </div>
+          {search && (
+            <div className="searchlist">
+              {item.map((item) => (
+                <div
+                  onClick={() => navigate(`/item/${item.id}`)}
+                  className="lst"
+                >
+                  {item.title}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
       <Box
         display="flex"
         justifyContent={"flex-end"}
@@ -1007,7 +1028,7 @@ function Navbars() {
       </Box>
     </Fragment>
     // </Slider>
-  )
+  );
 }
 
-export default Navbars
+export default Navbars;
