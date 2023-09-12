@@ -39,9 +39,6 @@ import {
   ShoppingBagOutlined,
   MenuOutlined,
 } from "@mui/icons-material";
-//import { useTheme } from "@emotion/react";
-//import axios from "axios";
-// import Stars from "./Stars";
 import { FaStar } from "react-icons/fa";
 import { setReviewed } from "../state";
 import useMediaQuery from "@mui/material/useMediaQuery";
