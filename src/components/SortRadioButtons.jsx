@@ -33,16 +33,11 @@ function SortRadioButtons({ onChange, value }) {
   };
   return (
     <>
-      <Typography
-        textAlign={"left"}
-        marginRight={"2em"}
-        fontSize={"20px"}
-        fontWeight={"bold"}
-        fontFamily={"Cabin"}
+      <p
+        className="priceheading"
       >
-        {" "}
         SORT BY
-      </Typography>
+      </p>
       <FormControl component="fieldset">
         <RadioGroup
           aria-label="sortOrder"
@@ -50,7 +45,7 @@ function SortRadioButtons({ onChange, value }) {
           value={sortOrder}
           onChange={breakPoint ? handleMobChange : handleChange}
           row
-          sx={{ gap: "1rem", margin: "1rem", color: "" }}
+
         >
           <FormControlLabel
             value="asc"
@@ -65,8 +60,8 @@ function SortRadioButtons({ onChange, value }) {
               />
             }
             label={
-              <Typography variant="h5" fontFamily={"Lora"}>
-                {" "}
+              <Typography variant="h5" fontFamily={"QuickSand"} style={{ fontSize: "15px" }}>
+
                 Price <b>Low</b> to <b>High </b> <ArrowUpwardIcon />
               </Typography>
             }
@@ -85,8 +80,8 @@ function SortRadioButtons({ onChange, value }) {
               />
             }
             label={
-              <Typography variant="h5" fontFamily={"Lora"}>
-                {" "}
+              <Typography variant="h5" fontFamily={"QuickSand"} style={{ fontSize: "15px" }}>
+
                 Price <b> High</b> to <b>Low</b> <ArrowDownwardIcon />
               </Typography>
             }

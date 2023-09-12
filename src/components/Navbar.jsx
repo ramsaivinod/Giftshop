@@ -205,9 +205,9 @@ function Navbars() {
       headers.append(
         "Authorization",
         "Basic " +
-          btoa(
-            "ce9a3ad16708f3eb4795659e809971c4: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"
-          )
+        btoa(
+          "ce9a3ad16708f3eb4795659e809971c4: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"
+        )
       );
       //https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products
       // "http://localhost:5000/products.json?limit=250",
@@ -386,12 +386,22 @@ function Navbars() {
     // width: "90%",
     responsive: [
       {
+        breakpoint: 1224,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          infinite: false,
+          dots: false,
+          // width: "80%",
+        },
+      },
+      {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 2,
-          infinite: true,
-          dots: true,
+          infinite: false,
+          dots: false,
           // width: "80%",
         },
       },
@@ -525,71 +535,7 @@ function Navbars() {
     // <Slider {...settings}>
     <Fragment>
       <Box>
-        <Box
-          display={isFilterOpen ? "block" : "none"}
-          // backgroundColor="rgba(0, 0, 0, 0.4)"
-          position="absolute"
-          zIndex={10}
-          width="30%"
-          height="30%"
-          left="0"
-          top="0"
-          overflow="auto"
-        >
-          <Box
-            position="fixed"
-            left="0"
-            bottom="0"
-            width="max(400px, 30%)"
-            height="100%"
-            backgroundColor="#e4e4e4"
-          >
-            <Box padding="30px" overflow="auto" height="100%">
-              <IconButton
-                onClick={() => dispatch(setIsFilterOpen({}))}
-                sx={{ marginBottom: "2em", marginRight: "50px" }}
-              >
-                <CancelIcon fontSize="large" />
-              </IconButton>
-              <Box
-                className="filter-sidebar"
-                sx={{ width: "300px", border: "" }}
-              >
-                <PriceFilter onPriceChange={handlePriceFilter} />
-                <div>
-                  <SortRadioButtons
-                    onChange={handleSortOrderChange}
-                    value={sortOrder}
-                  />
-                  {/*    
-                  
-                <CategoriesButton
-                    onChange={handleCategoriesChange}
-                    value={sortOrder}
-                  />*/}
 
-                  <Button
-                    onClick={
-                      breakPoint2 ? () => clearMobFilter() : () => clearFilter()
-                    }
-                    variant="contained"
-                    //color="secondary"
-                    sx={{
-                      marginLeft: "0em",
-                      fontWeight: "bold",
-                      fontSize: "1em",
-                      padding: "1em",
-                      marginBottom: breakPoint2 ? "3em" : "1em",
-                      fontFamily: "Rubik",
-                    }}
-                  >
-                    <strong> Clear</strong>
-                  </Button>
-                </div>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
         <Box className="offersavailable">
           <Papers />
         </Box>
@@ -733,7 +679,7 @@ function Navbars() {
                 variant={breakPoint ? "h2" : "h1"}
                 textAlign="left"
                 padding="10px"
-                // color="#ff6d31"
+              // color="#ff6d31"
               >
                 <h2 className="trending"> TRENDING </h2>
               </Typography>
@@ -751,7 +697,7 @@ function Navbars() {
                 variant={breakPoint ? "h2" : "h1"}
                 textAlign="left"
                 padding="11px"
-                // color="#ff6d31"
+              // color="#ff6d31"
               >
                 <h2 className="bestsellers">BEST SELLERS</h2>
               </Typography>
@@ -772,12 +718,13 @@ function Navbars() {
                   justifyContent="space-around"
                   rowGap="100px"
                   columnGap="3.33%"
-                >
-                  {bestSellersItems.map((item) => (
-                    <Fragment>
-                      <Item2 item={item} key={`${item.title}-${item.id}`} />
-                    </Fragment>
-                  ))}
+                >   <Slider {...settings} className="trendingitems">
+                    {bestSellersItems.map((item) => (
+                      <Fragment>
+                        <Item2 item={item} key={`${item.title}-${item.id}`} />
+                      </Fragment>
+                    ))}
+                  </Slider>
                 </Box>
               )}
             </Fragment>
@@ -786,39 +733,32 @@ function Navbars() {
           )}
 
           {value === "All" ? (
-            <Typography
-              fontSize="40px"
-              textAlign="center"
-              color="#ff6d31"
-              padding="50px "
-              fontFamily="HeuristicaRegular"
-              //color="#ff6d31"
+            <p
+              className="allproductheading"
             >
-              <b>{category} </b>
-            </Typography>
+              {category}
+            </p>
           ) : (
-            <Typography
-              variant="h1"
-              textAlign="center"
-              padding="50px "
-              marginTop="38px"
-              fontFamily="HeuristicaRegular"
-              //color="#ff6d31"
+            <p
+              className="allproductheading"
             >
-              <b>{value}</b>
-            </Typography>
+              {value}
+            </p>
           )}
 
           {/* <Button variant="outlined" sx={{marginLeft:"2em",marginTop:"0em"}} onClick={clear}> Clear Filter</Button> */}
-
+          {/**mobile filter start */}
           <Box
             display={breakPoint2 && value === "All" ? "flex" : "none"}
             alignContent={"flex-end"}
             sx={{
               height: "32px",
-              padding: "8px",
-              borderRadius: "8px",
+
+              borderRadius: "5px",
               background: "#ffdd93",
+              margin: "0 10px",
+              padding: "10px 5px",
+              fontSize: "20px"
             }}
           >
             <Button onClick={() => dispatch(setIsFilterOpen({}))}>
@@ -826,14 +766,15 @@ function Navbars() {
                 sx={{ cursor: "pointer", width: "40%" }}
                 fontSize="large"
               />
-              <Typography variant="h3" fontWeight="bold">
-                {" "}
-                Filtered
+              <Typography variant="h5" fontWeight="bold" fontFamily="HeuristicaRegular">
+
+                Filters
               </Typography>
             </Button>
           </Box>
+          {/**mobile filter end */}
           {/* <Button onClick={() => dispatch(setIsFilterOpen({}))}> Filter</Button> */}
-
+          {/**desktop filter start*/}
           <Box display="flex">
             <Box
               className="filter-sidebar"
@@ -841,24 +782,24 @@ function Navbars() {
                 width: "300px",
                 border: "1px solid #ccc",
                 display: breakPoint2 ? "none" : "",
-                marginLeft: "2em",
-                padding: "1em",
+
                 height: "fit-content",
               }}
             >
-              <PriceFilter onPriceChange={handlePriceFilter} />
-              <div>
-                <SortRadioButtons
-                  onChange={handleSortOrderChange}
-                  value={sortOrder}
-                />
-                <CategoriesButton
-                  onChange={handleCategoriesChange}
-                  value={sortOrder}
-                />
 
-                {/* render the sorted list */}
-                {/* <Box
+              <PriceFilter onPriceChange={handlePriceFilter} /> <div style={{ margin: "0 20px 20px 20px" }}>
+                <div>
+                  <SortRadioButtons
+                    onChange={handleSortOrderChange}
+                    value={sortOrder}
+                  />
+                  <CategoriesButton
+                    onChange={handleCategoriesChange}
+                    value={sortOrder}
+                  />
+
+                  {/* render the sorted list */}
+                  {/* <Box
                   display="flex"
                   marginRight="0rem"
                   flexDirection={"column"}
@@ -879,22 +820,24 @@ function Navbars() {
                     </Button>
                   ))}
                 </Box> */}
-                <Button
-                  onClick={() => clearFilter()}
-                  variant="contained"
-                  // color="primary"
-                  sx={{
-                    marginLeft: "0em",
-                    fontWeight: "bold",
-                    fontSize: "1em",
-                    padding: "1em",
-                    marginBottom: breakPoint2 ? "3em" : "1em",
-                    fontFamily: "Rubik",
-                    background: "#ff6d2f",
-                  }}
-                >
-                  <strong> Clear Filtered</strong>
-                </Button>
+                  <Button
+                    onClick={() => clearFilter()}
+                    variant="contained"
+                    // color="primary"
+                    sx={{
+                      marginLeft: "0em",
+                      fontWeight: "bold",
+                      fontSize: "1em",
+                      padding: ".7em",
+                      marginBottom: breakPoint2 ? "3em" : "1em",
+                      fontFamily: "Rubik",
+                      background: "#ff6d2f",
+                      marginTop: "1em"
+                    }}
+                  >
+                    <strong> Clear Filter</strong>
+                  </Button>
+                </div>
               </div>
             </Box>
 
@@ -904,29 +847,29 @@ function Navbars() {
               display="grid"
               gridTemplateColumns={
                 breakPoint
-                  ? "repeat(auto-fill, 125px)"
-                  : "repeat(auto-fill, 200px)"
+                  ? "repeat(auto-fill, 170px)"
+                  : "repeat(auto-fill, 270px)"
               }
               justifyContent="space-around"
-              rowGap="80px"
-              columnGap="3.33%"
+              rowGap={breakPoint ? "25px" : "40px"}
+              columnGap="2%"
             >
               {value === "All" &&
                 (hide
                   ? view
                     ? item
-                        .slice(0, 10)
-                        .map((item) => (
-                          <Item item={item} key={`${item.title}-${item.id}`} />
-                        ))
+                      .slice(0, 10)
+                      .map((item) => (
+                        <Item item={item} key={`${item.title}-${item.id}`} />
+                      ))
                     : item
-                        .slice(11, item.length)
-                        .map((item) => (
-                          <Item item={item} key={`${item.title}-${item.id}`} />
-                        ))
+                      .slice(11, item.length)
+                      .map((item) => (
+                        <Item item={item} key={`${item.title}-${item.id}`} />
+                      ))
                   : item.map((item) => (
-                      <Item item={item} key={`${item.title}-${item.id}`} />
-                    )))}
+                    <Item item={item} key={`${item.title}-${item.id}`} />
+                  )))}
               {value === "Trending" &&
                 newArrivalsItems.map((item) => (
                   <Item item={item} key={`${item.title}-${item.id}`} />
@@ -959,6 +902,7 @@ function Navbars() {
                 ))}
             </Box>
           </Box>
+          {/**desktop filter end*/}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button
               sx={{
@@ -982,10 +926,10 @@ function Navbars() {
       {show && (
         <div className="searchbox">
           <div className="">
-            
+
             <IconButton>
               <SearchOutlined fontSize="medium" sx={{ color: " #ff6d31;" }} />
-            </IconButton> 
+            </IconButton>
             <input
               placeholder="Search for Products..."
               type="text"
@@ -1027,7 +971,71 @@ function Navbars() {
           <b>Go To Top </b>
         </Button>
       </Box>
-    </Fragment>
+
+      {/**
+       * mobile filter start
+       */}
+      <Box
+        display={isFilterOpen ? "block" : "none"}
+        // backgroundColor="rgba(0, 0, 0, 0.4)"
+        position="fixed"
+        zIndex={99}
+        width="100%"
+        height="100%"
+        left="0"
+        top="0"
+        overflow="auto"
+        backgroundColor="#fff"
+      >
+
+        <Box overflow="auto" height="100%">
+          <IconButton
+            onClick={() => dispatch(setIsFilterOpen({}))}
+            style={{ position: "absolute", right: "0", margin: "5px" }}
+          >
+            <CancelIcon fontSize="large" />
+          </IconButton>
+          <Box
+            className="filter-sidebar" padding="30px" marginTop="10px"
+
+          >
+            <PriceFilter onPriceChange={handlePriceFilter} />
+            <div>
+              <SortRadioButtons
+                onChange={handleSortOrderChange}
+                value={sortOrder}
+              />
+              {/*    
+                  
+                <CategoriesButton
+                    onChange={handleCategoriesChange}
+                    value={sortOrder}
+                  />*/}
+
+              <Button
+                onClick={
+                  breakPoint2 ? () => clearMobFilter() : () => clearFilter()
+                }
+                variant="contained"
+                //color="secondary"
+                sx={{
+                  marginLeft: "0em",
+                  fontWeight: "bold",
+                  fontSize: "1em",
+                  padding: "1em",
+                  marginBottom: breakPoint2 ? "3em" : "1em",
+                  fontFamily: "Rubik",
+                }}
+              >
+                <strong> Clear</strong>
+              </Button>
+            </div>
+          </Box>
+        </Box>
+
+      </Box>
+      {/**mobile filter end */}
+    </Fragment >
     // </Slider>
   );
 }

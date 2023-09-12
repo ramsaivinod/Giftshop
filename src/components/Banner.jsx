@@ -50,6 +50,7 @@ var settings = {
   initialSlide: 0,
 
   responsive: [
+
     {
       breakpoint: 1024,
       settings: {

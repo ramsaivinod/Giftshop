@@ -1,4 +1,4 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -32,7 +32,7 @@ const Products = ({ item }) => {
     palette: { neutral },
   } = useTheme();
 
-  const {  title } = item;
+  const { title } = item;
   var modal = document.getElementById("myModal");
 
   // Get the button that opens the modal
@@ -57,7 +57,7 @@ const Products = ({ item }) => {
 
   //
 
-  
+
 
   const addtocart = () => {
     dispatch(addToCart({ item: { ...item, count } }));
@@ -65,9 +65,9 @@ const Products = ({ item }) => {
     console.log("snackbar");
   };
 
-  
+
   return (
-  
+
     <Box className="container" position="relative">
       <Box
         mb={"3px"}
@@ -100,7 +100,7 @@ const Products = ({ item }) => {
                       height="79%"
                       style={{ marginTop: "20px" }}
                       src={item.image?.src}
-                      //style={{ objectFit: "contain" }}
+                    //style={{ objectFit: "contain" }}
                     />
                   </Box>
 
@@ -216,7 +216,7 @@ const Products = ({ item }) => {
               position: "relative",
               width: breakPoint ? "140px" : "220px",
               height: breakPoint ? "200px" : "280px",
-              /* background: #232323; */
+              /*  background: #232323; */
               borderRadius: "20px",
               objectFit: "contain",
               boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
@@ -224,7 +224,7 @@ const Products = ({ item }) => {
               //  transition: isHovered ? "all 0.3s ease 0s":"",
               transition: "background-image 1s ease",
             }}
-          />{" "}
+          />
         </div>
 
         <Box
@@ -319,7 +319,7 @@ const Products = ({ item }) => {
         </Typography> */}
       </Box>
     </Box>
- 
+
   );
 };
 
