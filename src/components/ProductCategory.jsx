@@ -169,6 +169,13 @@ const ProductCategory = () => {
   const handleSearch = (id) => {
     console.log(id, 'id');
   };
+
+  useEffect(()=>{
+      setItem(productByCategory);
+      setCategory(category);
+      setHide(false);
+  },[category]);
+
   const handleDropdownChange = (event) => {
     window.scrollTo({ top: 2300, behavior: 'smooth' });
     dispatch(setSortOrder(event.target.value));
@@ -248,8 +255,8 @@ const ProductCategory = () => {
 
   useEffect(() => {
     setCategory(params.catName);
-    getItems();
-    getData();
+   // getItems();
+    //getData();
     getCategories();
     // getCollections();
   }, []);
@@ -327,6 +334,8 @@ const ProductCategory = () => {
     }
   }
 
+  const productByCategory = items.filter((item) => item.tags === category);
+
   const englishbooks = items.filter((item) => item.tags === 'English Books');
   const newArrivalsItems = items.filter((item) => item.tags === 'POS');
   const bestSellersItems = items.filter((item) => item.tags === '');
@@ -403,11 +412,8 @@ const ProductCategory = () => {
   };
 
   const handleCategoriesChange = (value) => {
-    if (value in fruitArrays) {
-      setItem(fruitArrays[value][0]);
       setCategory(value);
       setHide(false);
-    }
   };
 
   const clearFilter = () => {

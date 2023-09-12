@@ -256,7 +256,7 @@ function Navbars() {
   // }
 
   useEffect(() => {
-    getItems();
+    //getItems();
     getCategories();
     // getCollections();
   }, []);

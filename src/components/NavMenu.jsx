@@ -16,7 +16,7 @@ import { SearchOutlined } from "@mui/icons-material";
 import { setIsCartOpen, setIsNavOpen, setIsFilterOpen } from "../state";
 import { useNavigate } from "react-router-dom";
 import { encode as btoa } from "base-64";
-import { setItems, setValue, setPriceFilter, setSortOrder } from "../state";
+import { setItems, setValue, setPriceFilter, setSortOrder, setItemsCategories } from "../state";
 import React, { useEffect, useState, useMemo } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -91,6 +91,19 @@ function NavMenu({navFromTop}) {
 
       const resp = await result.json();
       if (resp) {
+
+        // get categorey
+        let listCat = [
+          ...new Set(
+            resp?.products
+              ?.filter((item) => item?.tags)
+              .map((item) => {
+                return item?.tags;
+              }),
+          ),
+        ];
+        dispatch(setItemsCategories(listCat));
+
         console.log(resp);
         setItem(resp?.products);
         dispatch(setItems(resp?.products));
@@ -112,7 +125,9 @@ function NavMenu({navFromTop}) {
   }
 
   useEffect(() => {
-    getItems();
+    if(!item?.length > 0 ){
+      getItems();
+    }
     getCategories();
   }, []);
 
@@ -232,25 +247,25 @@ function NavMenu({navFromTop}) {
                   HOME
                 </Nav.Link>
                 <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">
+                  <NavDropdown.Item href="/giftshop/category/Swamiji%20Kirtans">
                     Swamiji Kirtans
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="BOOKS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">
+                  <NavDropdown.Item href="/giftshop/category/English%20Books">
                     English Books
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
+                  <NavDropdown.Item href="/giftshop/category/BalMukund%20Books">
                     BalMukund Books
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">
+                  <NavDropdown.Item href="/giftshop/category/English%20Lectures-Swamiji%20(Audio)">
                     English Lectures
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Videos</NavDropdown.Item>
+                  <NavDropdown.Item href="/giftshop/category/English%20Lectures-Swamiji%20(Video)">Videos</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
