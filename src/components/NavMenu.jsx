@@ -407,6 +407,14 @@ function NavMenu({navFromTop}) {
                 />
                 {search && (
                   <div className="searchlist">
+                    {categoryList?.map((cat) => (
+                      <div
+                        onClick={() => navigate(`/category/${cat}`)}
+                        className="lst"
+                      >
+                        Category/{cat}
+                      </div>
+                    ))}
                     {item.map((item) => (
                       <div
                         onClick={() => navigate(`/item/${item.id}`)}
