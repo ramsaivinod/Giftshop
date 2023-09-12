@@ -230,7 +230,7 @@ function NavMenu({navFromTop}) {
 
   return (
     <>
-    <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }} >
+    {/* <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }} >
           <div className="navbars">
             <Navbar.Brand href="#home">
               {" "}
@@ -293,6 +293,120 @@ function NavMenu({navFromTop}) {
                         Category/{cat}
                       </div>
                     ))}
+                    {item.map((item) => (
+                      <div
+                        onClick={() => navigate(`/item/${item.id}`)}
+                        className="lst"
+                      >
+                        {item.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <IconButton>
+                  <SearchOutlined
+                    fontSize="medium"
+                    sx={{ color: " #ff6d31;" }}
+                  />
+                </IconButton>
+              </div>
+
+              <IconButton className="Searchmb">
+                <SearchOutlined
+                  fontSize="medium"
+                  sx={{ color: "#fff" }}
+                  onClick={() => setShow(!show)}
+                />
+              </IconButton>
+
+              <Badge
+                badgeContent={cart.length}
+                color="secondary"
+                invisible={cart.length === 0}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    right: 9,
+                    top: 5,
+                    padding: "0 4px",
+                    height: "14px",
+                    minWidth: "13px",
+                  },
+                }}
+              >
+                <IconButton
+                  onClick={() => dispatch(setIsCartOpen({}))}
+                  sx={{ color: "#FFFFFF" }}
+                >
+                  <ShoppingBagOutlined />
+                </IconButton>
+              </Badge>
+              <IconButton
+                aria-controls="basic-navbar-nav"
+                onClick={() => dispatch(setIsNavOpen({}))}
+                sx={{ color: "#FFFFFF" }}
+                className="menub"
+              >
+                <MenuOutlined />
+              </IconButton>
+            </Box>
+          </div>
+        </Navbar> */}
+        <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }}>
+          <div className="navbars container">
+            <Navbar.Brand href="#home">
+              {" "}
+              <img
+                src={Jklog}
+                alt="not found"
+                style={{ width: "10rem", height: "100%", cursor: "pointer" }}
+                onClick={() => change()}
+              />
+            </Navbar.Brand>
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/giftshop/" className="nav-item">
+                  HOME
+                </Nav.Link>
+                <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/giftshop/category/Swamiji%20Kirtans">
+                    Swamiji Kirtans
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="BOOKS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/giftshop/category/English%20Books">
+                    English Books
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/giftshop/category/BalMukund%20Books">
+                    BalMukund Books
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/giftshop/category/English%20Lectures-Swamiji%20(Audio)">
+                    English Lectures
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/giftshop/category/English%20Lectures-Swamiji%20(Video)">Videos</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+            <Box
+              //columnGap="20px",
+              display="flex"
+              justifyContent="space-between"
+              columnGap="0px"
+              zIndex="2"
+            >
+              <div className="Search">
+                <input
+                  placeholder="Search for Products..."
+                  type="text"
+                  value={search}
+                  onChange={handleSearchField}
+                />
+                {search && (
+                  <div className="searchlist">
                     {item.map((item) => (
                       <div
                         onClick={() => navigate(`/item/${item.id}`)}
