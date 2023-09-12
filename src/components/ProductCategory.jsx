@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {  Box, Typography, Button} from '@mui/material';
+import {  Box, Typography, Button,IconButton} from '@mui/material';
+import CancelIcon from '@mui/icons-material/Cancel';
 import Item from './Item';
 import { makeStyles } from 'tss-react/mui';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { encode as btoa } from 'base-64';
-import { setItems, setValue, setPriceFilter, setSortOrder, setItemsCategories } from '../state';
+import { setItems, setValue, setPriceFilter, setSortOrder, setItemsCategories,setIsFilterOpen } from '../state';
 import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -53,160 +54,17 @@ const ProductCategory = () => {
   const [hide, setHide] = useState(true);
   const [asc, setAsc] = useState([]);
   const [dsc, setDsc] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('');
-  //const [sortOrder, setSortOrder] = useState("");
-  const [category, setCategory] = useState('All Products');
-  const [collections, setCollections] = useState([]);
-  const [name, setName] = useState('All');
-  const [val, setVal] = useState('');
-  const [categories, setCategories] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
-
-  const [loading, setLoading] = useState(false);
   const params = useParams();
-  const [count, setCount] = useState(1);
-  const [hoverValue, setHoverValue] = useState(undefined);
-  const stars = Array(5).fill(0);
-
-  const handleMouseOver = (newHoverValue) => {
-    setHoverValue(newHoverValue);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
-  };
-
-
-
-  const getData = async () => {
-    try {
-      navigate(`/category/${params.catName}`);
-      setId(params.catName);
-
-      if (updateditem.tags === 'POS' || updateditem.tags === '' || updateditem.tags === undefined) {
-        dispatch(setValue('All'));
-      } else {
-        dispatch(setValue(updateditem[0].tags));
-      }
-
-      window.scrollTo(0, 0);
-    } catch (err) {
-      console.log(err, 'this is error');
-    }
-  };
-
-  const updateditem = item.filter((d) => {
-    // eslint-disable-next-line
-    return d.id == i;
-  });
-
-  if (updateditem) {
-    if (updateditem[0]?.tags === 'POS' || updateditem[0]?.tags === '' || updateditem[0]?.tags === undefined) {
-      dispatch(setValue('All'));
-    } else if (updateditem[0].tags === 'English Lectures-Swamiji (Audio)') {
-      dispatch(setValue('English Lectures'));
-    } else if (updateditem[0].tags === 'BalMukund Books') {
-      dispatch(setValue('Bal Mukund Books'));
-    } else if (updateditem[0].tags === 'Videos') {
-      dispatch(setValue('Videos'));
-    } else {
-      dispatch(setValue(updateditem[0].tags));
-    }
-  }
-  var settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    variableWidth: true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    width: '100%',
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true,
-          width: '100%',
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-          width: '60%',
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          width: '40%',
-          dots: false,
-        },
-      },
-    ],
-  };
-
-
+  const [category, setCategory] = useState(params.catName);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
   
-  const getCategories = () => {
-    fetchDataFromApi('/api/categories').then((res) => {
-      console.log(res);
-      setCategories(res.data);
-    });
-  };
-
-  const options = ['one', 'two', 'three'];
-  const defaultOption = options[0];
-
-  const handleSearch = (id) => {
-    console.log(id, 'id');
-  };
 
   useEffect(()=>{
-      setItem(productByCategory);
       setCategory(category);
+      setItem(productByCategory);
       setHide(false);
-  },[category]);
-
-  const handleDropdownChange = (event) => {
-    window.scrollTo({ top: 2300, behavior: 'smooth' });
-    dispatch(setSortOrder(event.target.value));
-    setVal(event.target.value);
-    if (event.target.value === 'All Products' || '') {
-      setItem(items);
-      setCategory('All Products');
-      setHide(true);
-    } else if (event.target.value === 'SwamijiKirtans') {
-      setItem(SwamijiKirtans);
-      setCategory('Swamiji Kirtans');
-      setHide(false);
-    } else if (event.target.value === 'EnglishLectures') {
-      setItem(EnglishLectures);
-      setCategory('English Lectures');
-      setHide(false);
-    } else if (event.target.value === 'BalMukundBooks') {
-      setItem(BalMukundBooks);
-      setCategory('Bal Mukund Books');
-      setHide(false);
-    } else if (event.target.value === 'englishbooks') {
-      setItem(englishbooks);
-      setCategory('English Books');
-      setHide(false);
-    } else if (event.target.value === 'Videos') {
-      setItem(Videos);
-      setCategory('Videos');
-      setHide(false);
-    }
-    // Do something with the selected value
-  };
+  },[category,items]);
 
   async function getItems() {
     try {
@@ -253,44 +111,6 @@ const ProductCategory = () => {
     }
   }
 
-  useEffect(() => {
-    setCategory(params.catName);
-   // getItems();
-    //getData();
-    getCategories();
-    // getCollections();
-  }, []);
-
-  const handleChange = (event, value) => {
-    dispatch(setSortOrder(value));
-    window.scrollTo({ top: 2300, behavior: 'smooth' });
-    if (value === 'All Products' || '') {
-      setItem(items);
-      setCategory('All Products');
-      setHide(true);
-    } else if (value === 'SwamijiKirtans') {
-      setItem(SwamijiKirtans);
-      setCategory('Swamiji Kirtans');
-      setHide(false);
-    } else if (value === 'EnglishLectures') {
-      setItem(EnglishLectures);
-      setCategory('English Lectures');
-      setHide(false);
-    } else if (value === 'BalMukundBooks') {
-      setItem(BalMukundBooks);
-      setCategory('Bal Mukund Books');
-      setHide(false);
-    } else if (value === 'englishbooks') {
-      setItem(englishbooks);
-      setCategory('English Books');
-      setHide(false);
-    } else if (value === 'Videos') {
-      setItem(Videos);
-      setCategory('Videos');
-      setHide(false);
-    }
-  };
-  // dispatch(setValue(newValue));
 
   const handlePriceFilter = (priceFilter) => {
     const filtered = asc.filter(
@@ -344,61 +164,6 @@ const ProductCategory = () => {
   const EnglishLectures = items.filter((item) => item.tags === 'English Lectures-Swamiji (Audio)');
   const Videos = items.filter((item) => item.tags === 'Videos');
 
-  var settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    // variableWidth: true,
-    slidesToShow: 4,
-    slidesToScroll: 2,
-    initialSlide: 0,
-    // width: "90%",
-    responsive: [
-      {
-        breakpoint: 1224,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 2,
-          infinite: false,
-          dots: false,
-          // width: "80%",
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 2,
-          infinite: false,
-          dots: false,
-          // width: "80%",
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-          // width: "60%",
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          // width: "40%",
-          dots: false,
-        },
-      },
-    ],
-  };
-
-  const change = () => {
-    dispatch(setValue('All'));
-    window.scrollTo(0, 0);
-  };
 
   const handleSortOrderChange = (value) => {
     if (value === 'asc') {
@@ -440,25 +205,6 @@ const ProductCategory = () => {
   };
 
 
-  const styles = makeStyles((theme) => ({
-    select: {
-      '&:before': {
-        borderColor: '',
-      },
-      '&:after': {
-        borderColor: '',
-      },
-    },
-    icon: {
-      right: '0px',
-      background: 'red',
-    },
-  }));
-  const classes = styles();
-
-  useEffect(() => {
-    console.log('itemsCategories', itemsCategories);
-  }, [itemsCategories]);
 
   return (
     <>
@@ -580,6 +326,80 @@ const ProductCategory = () => {
                 </div>
               </div>
             </Box>
+            {show && (
+              <div className="searchbox">
+                <div className="">
+                  <IconButton>
+                    <SearchOutlined fontSize="medium" sx={{ color: ' #ff6d31;' }} />
+                  </IconButton>
+                  <input placeholder="Search for Products..." type="text" value={search} onChange={handleSearchField} />
+                  <IconButton onClick={() => setShow(false)} style={{ position: 'absolute', right: 0, color: '#ff6d31' }}>
+                    <CancelIcon />
+                  </IconButton>
+                </div>
+                {search && (
+                  <div className="searchlist">
+                    {item.map((item) => (
+                      <div onClick={() => navigate(`/item/${item.id}`)} className="lst">
+                        {item.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            
+
+      {/**
+       * mobile filter start
+       */}
+      <Box
+        display={isFilterOpen ? 'block' : 'none'}
+        // backgroundColor="rgba(0, 0, 0, 0.4)"
+        position="fixed"
+        zIndex={99}
+        width="100%"
+        height="100%"
+        left="0"
+        top="0"
+        overflow="auto"
+        backgroundColor="#fff">
+        <Box overflow="auto" height="100%">
+          <IconButton
+            onClick={() => dispatch(setIsFilterOpen({}))}
+            style={{ position: 'absolute', right: '0', margin: '5px' }}>
+            <CancelIcon fontSize="large" />
+          </IconButton>
+          <Box className="filter-sidebar" padding="30px" marginTop="10px">
+            <PriceFilter onPriceChange={handlePriceFilter} />
+            <div>
+              <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
+              {/*    
+                  
+                <CategoriesButton
+                    onChange={handleCategoriesChange}
+                    value={sortOrder}
+                  />*/}
+
+              <Button
+                onClick={breakPoint2 ? () => clearMobFilter() : () => clearFilter()}
+                variant="contained"
+                //color="secondary"
+                sx={{
+                  marginLeft: '0em',
+                  fontWeight: 'bold',
+                  fontSize: '1em',
+                  padding: '1em',
+                  marginBottom: breakPoint2 ? '3em' : '1em',
+                  fontFamily: 'Rubik',
+                }}>
+                <strong> Clear</strong>
+              </Button>
+            </div>
+          </Box>
+        </Box>
+      </Box>
+      {/**mobile filter end */}
         </Fragment>
       )}
     </>

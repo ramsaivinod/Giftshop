@@ -164,7 +164,7 @@ function NavMenu({navFromTop}) {
 
   const handleSearchField = (e) => {
     setSearchField(e.target.value);
-    window.scrollTo({ top: 2300, behavior: "smooth" });
+   // window.scrollTo({ top: 2300, behavior: "smooth" });
     setHide(false);
     if (e.target.value === "") {
       setHide(true);
@@ -199,7 +199,7 @@ function NavMenu({navFromTop}) {
 
   const change = () => {
     dispatch(setValue("All"));
-    window.scrollTo(0, 0);
+   // window.scrollTo(0, 0);
   };
 
   const handleCategoriesChange = (value) => {
@@ -243,7 +243,7 @@ function NavMenu({navFromTop}) {
             </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#home" className="nav-item">
+                <Nav.Link href="/giftshop/" className="nav-item">
                   HOME
                 </Nav.Link>
                 <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
