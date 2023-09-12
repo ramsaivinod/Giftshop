@@ -21,6 +21,8 @@ function CategoriesButton({ onChange, value }) {
   // const isFilterOpen = useSelector((state) => state.cart.isFilterOpen);
 
 
+  const itemsCategories = useSelector((state) => state.cart.itemsCategories);
+
 
   useEffect(() => {
     getCategories()
@@ -78,10 +80,10 @@ function CategoriesButton({ onChange, value }) {
           row
 
         >
-          {resp.map((item, index) => (
+          {itemsCategories.map((item, index) => (
             <FormControlLabel
               key={index}
-              value={item.attributes.Type}
+              value={item}
               control={
                 <Radio
                   sx={{
@@ -94,8 +96,7 @@ function CategoriesButton({ onChange, value }) {
               }
               label={
                 <Typography variant="h5" fontFamily={"QuickSand"} sx={{ marginRight: "36px", fontSize: "15px" }}>
-
-                  {item.attributes.Type}
+                  {item}
                 </Typography>
               }
               labelPlacement="end"

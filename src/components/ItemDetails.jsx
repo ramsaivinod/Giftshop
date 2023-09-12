@@ -55,6 +55,7 @@ import Menu from "@mui/material/Menu";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import NavMenu from "./NavMenu";
 
 const colors = {
   orange: "#FFBA5A",
@@ -283,113 +284,8 @@ const ItemDetails = () => {
           {updateditem.map((updateditem, index) => (
             <Box width="100%" m="80px auto" key={updateditem.id} className="">
 
-              <Navbar expand="lg" className="navbox" style={{ top: 0 }}>
-                <div className="navbars">
-                  <Navbar.Brand href="#home"> <img
-                    src={Jklog}
-                    alt="logo"
-
-                    style={{
-                      width: "10rem",
-                      height: "100%",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      navigate(`/`);
-                      window.scrollTo(0, 0);
-                    }}
-                  /></Navbar.Brand>
-                  <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                      <Nav.Link href="#home" className="nav-item">HOME</Nav.Link>
-                      <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Swamiji Kirtans</NavDropdown.Item>
-                      </NavDropdown>
-                      <NavDropdown title="BOOKS" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">English Books</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">BalMukund Books</NavDropdown.Item>
-                      </NavDropdown>
-                      <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">English Lectures</NavDropdown.Item>
-                      </NavDropdown>
-                      <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Videos</NavDropdown.Item>
-                      </NavDropdown>
-
-                    </Nav>
-                  </Navbar.Collapse>
-                  <Box
-                    //columnGap="20px",
-                    display="flex"
-                    justifyContent="space-between"
-                    columnGap="0px"
-                    zIndex="2"
-                  >
-                    <div className="Search">
-                      <input
-                        placeholder="Search for Products..."
-                        type="text"
-                        value={search}
-                      />
-
-                      <IconButton  >
-
-                        <SearchOutlined
-                          fontSize="medium"
-                          sx={{ color: " #ff6d31;" }}
-
-                        />
-
-                      </IconButton>
-                    </div>
-                    <IconButton className="Searchmb">
-
-                      <SearchOutlined
-                        fontSize="medium"
-                        sx={{ color: "#fff" }}
-                        onClick={() => setShow(!show)}
-
-                      />
-
-
-                    </IconButton>
-
-                    <Badge
-                      badgeContent={cart.length}
-                      color="secondary"
-                      invisible={cart.length === 0}
-                      sx={{
-                        "& .MuiBadge-badge": {
-                          right: 9,
-                          top: 5,
-                          padding: "0 4px",
-                          height: "14px",
-                          minWidth: "13px",
-                        },
-                      }}
-                    >
-                      <IconButton
-                        onClick={() => dispatch(setIsCartOpen({}))}
-                        sx={{ color: "#FFFFFF" }}
-                      >
-                        <ShoppingBagOutlined />
-                      </IconButton>
-                    </Badge>
-                    <IconButton
-                      aria-controls="basic-navbar-nav"
-                      onClick={() => dispatch(setIsNavOpen({}))}
-                      sx={{ color: "#FFFFFF" }}
-                      className="menub"
-                    >
-                      <MenuOutlined />
-                    </IconButton>
-
-                  </Box>
-
-
-                </div>
-
-              </Navbar>
+      
+              <NavMenu navFromTop={true} />
               <div className="container">  <Box display="flex" flexWrap="wrap" columnGap="40px">
                 {/* IMAGES */}
 
