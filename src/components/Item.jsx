@@ -64,7 +64,7 @@ const Item = ({ item }) => {
 
   //
 
-  const donothing = () => { };
+  const donothing = () => {};
 
   const addtocart = () => {
     dispatch(addToCart({ item: { ...item, count } }));
@@ -72,7 +72,7 @@ const Item = ({ item }) => {
     console.log("snackbar");
   };
   return (
-    <Box className="containers" position="relative"  >
+    <Box className="container" position="relative">
       <Box
         mb={"3px"}
         padding={"10px"}
@@ -104,7 +104,7 @@ const Item = ({ item }) => {
                       height="auto"
                       style={{ marginTop: "4em" }}
                       src={item.image?.src}
-                    //style={{ objectFit: "contain" }}
+                      //style={{ objectFit: "contain" }}
                     />
 
                     {/* <Box  display="flex">
@@ -233,13 +233,9 @@ const Item = ({ item }) => {
           )}
         </Box>
         {/* 340,400 */}
-        <div className="product_list" style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
+        <div className="product_list">
           <img
-            className="product_imgs"
+            className="product_img"
             alt={item.name}
             width="30px"
             height="50px"
@@ -253,9 +249,9 @@ const Item = ({ item }) => {
               width: breakPoint ? "140px" : "220px",
               height: breakPoint ? "200px" : "280px",
               /* background: #232323; */
-              // borderRadius: "20px",
+             // borderRadius: "20px",
               objectFit: "contain",
-              // boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
+              boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
               overflow: "hidden",
               //  transition: isHovered ? "all 0.3s ease 0s":"",
               transition: "background-image 1s ease",
@@ -421,17 +417,16 @@ const Item = ({ item }) => {
             .replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase())}
         </Typography> */}
-        <Typography fontSize="16px" fontFamily={"QuickSand"} height={"4.1rem"} overflow={"hidden"} style={{ lineHeight: "1.2", }}>
-          {title}
+        <Typography fontSize="20px" fontFamily={"QuickSand"} height={"4.1rem"} overflow={"hidden"}>
+         {title}
         </Typography>
         <Typography fontWeight="bold" fontSize="16px" color={"green"} marginBottom={".51rem"}>
           ${variants[0].price}
         </Typography>
-        <div style={{ width: "100%" }}>
-          <Button style={{ width: "100%" }}
+          <Button
             sx={{
               backgroundColor: "#F24E1E",
-              marginTop: "0px",
+              marginTop:"0px",
               // marginTop:
               //   title.length > 25
               //     ? "30px"
@@ -440,7 +435,7 @@ const Item = ({ item }) => {
               //     : "60px",
               color: "white",
               borderRadius: 0,
-
+              minWidth: "150px",
               padding: "10px 20px",
               //borderRadius: "44.3862px",
               "&:hover": {
@@ -452,7 +447,6 @@ const Item = ({ item }) => {
           >
             ADD TO CART
           </Button>
-        </div>
       </Box>
     </Box>
   );

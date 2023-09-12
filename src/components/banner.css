@@ -74,18 +74,6 @@
   text-align: center;
 }
 
-.banner_box text {
-  font-family: 'HeuristicaRegular';
-  color: #000000;
-  font-size: 17px;
-  line-height: 20px;
-  margin: 0 0 10px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: 500;
-}
-
 .banner_icon:hover {
   text-decoration: underline;
 }

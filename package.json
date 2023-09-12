@@ -20,6 +20,7 @@
     "base-64": "^1.0.0",
     "bootstrap": "^5.3.1",
     "formik": "^2.2.9",
+    "framer-motion": "^10.16.4",
     "http-proxy-middleware": "^2.0.6",
     "loadash": "^1.0.0",
     "notistack": "^3.0.1",

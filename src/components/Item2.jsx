@@ -226,7 +226,6 @@ const Item2 = ({ item }) => {
         <Typography
           fontSize="14px"
           fontFamily={"QuickSand"}
-
           textAlign={"left"}
           sx={{ wordWrap: "break-word" }}
           className="product_title"

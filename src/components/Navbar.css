@@ -33,7 +33,7 @@
   } */
 .slick-list {
   margin: 0px 0px;
-  /* width: 93%; */
+  width: 93%;
   /* left:4%; */
 }
 
@@ -226,60 +226,7 @@
 .Searchmb {
   display: none !important;
 }
-.allproductheading{
-  text-align: center;
-  padding:50px;
-  margin-top: 35px;
-font-family: "HeuristicaRegular";
-    font-size: 2rem;
-    
-      color:#ff6d31;
-      font-weight: 800;
-       
-}
 
-.filterTitle{
-  margin-bottom: 1em;
-  background:radial-gradient(circle, #ffba9e 0%, rgb(255, 109, 47) 100%) ;
-  font-family: "cabin";
-  padding: 10px ;
-  font-size: 20px;
-    
-}
-
-.silders{
-  margin:0px 25px;
-}
-
-.priceheading{
-  text-align: left;
-  margin-right: 2em;
-  font-size: 16px;
-  font-weight: 800;
-  font-family: "cabin";
-  margin: 0;
-  
-}
-.slidep{
- margin-top: 40px;
-}
-
-.productitem{
-  width: 300px;
-
-}
- 
-.containers{
-      display: flex;
-        flex-direction: column;
-        justify-content: center;
-       
-        width: 100%;
-        padding: 5px;
-        margin: 0;  
-            box-shadow: 29px 13px 70px 13px rgb(173 187 173 / 52%);
-            border-radius: 5px;
-}
 @media (max-width:992px) {
   .navbox {
     background: #ff6d31;
@@ -390,8 +337,4 @@ font-family: "HeuristicaRegular";
     border: none;
   }
 
-    .allproductheading {
-     font-size: 1.3rem;
-  
-    }
 }

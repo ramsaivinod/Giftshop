@@ -61,21 +61,38 @@ function PriceFilter({ onPriceChange, onClear }) {
   }
   return (
     <>
-      <p
-
-
-        className="filterTitle"
+      <Typography
+        fontWeight={"bold"}
+        variant="h2"
+        sx={{
+          marginBottom: "1em",
+          // borderBottom: "1px solid black",
+          background:
+            "radial-gradient(circle, #ffba9e 0%, rgb(255, 109, 47) 100%)",
+        }}
+        fontFamily={"Cabin"}
       >
         FILTERS
-      </p>
-      <p className="silders">
-        <p
-          className="priceheading"
-        >
+      </Typography>
 
-          PRICE FILTER
-        </p>
-        <p className="slidep"> <Slider
+      <Typography
+        textAlign={"left"}
+        marginRight={"2em"}
+        fontSize={"20px"}
+        fontWeight={"bold"}
+        fontFamily={"Cabin"}
+      >
+        {" "}
+        PRICE FILTER
+      </Typography>
+      <Box
+        sx={{
+          width: breakPoint ? 200 : 200,
+          marginTop: "3em",
+          marginLeft: "1em",
+        }}
+      >
+        <Slider
           size="large"
           getAriaLabel={() => "Temperature range"}
           defaultValue={3}
@@ -86,9 +103,8 @@ function PriceFilter({ onPriceChange, onClear }) {
           min={3}
           max={150}
           sx={{ color: "#4795d8" }}
-        /> </p>
-      </p>
-
+        />
+      </Box>
       {/*  */}
 
       {/* <Box>
@@ -135,7 +151,6 @@ function PriceFilter({ onPriceChange, onClear }) {
         value={maxPrice}
         onChange={(e) => setMaxPrice(e.target.value)}
       /> */}
-
     </>
   )
 }

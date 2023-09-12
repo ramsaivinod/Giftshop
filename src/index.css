@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Fauna+One&display=swap");
 
+@font-face {
+  font-family: "HeuristicaRegular";
+  src: url("../public/Heuristica-Regular.otf")
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8,10 +13,9 @@ body {
   margin: 0;
   padding: 0;
   background: #F6F6F6;
-      overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 .app {
   margin: auto;
 }
-
