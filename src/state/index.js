@@ -10,7 +10,7 @@ const initialState = {
   cart: [],
   items: [],
   reviewd: [],
- priceFilter: [3, 150],
+  priceFilter: [3, 150],
   sortOrder: "",
   address:{},
   item:{},
@@ -18,7 +18,8 @@ const initialState = {
   code:false,
   success:true,
   directCoupon:false,
-  couponName:""
+  couponName:"",
+  itemsCategories: []
 };
 
 
@@ -123,6 +124,9 @@ export const cartSlice = createSlice({
     },
     setCouponName: (state, action) =>{
       state.couponName = action.payload
+    },
+    setItemsCategories : (state, action) => {
+      state.itemsCategories = action.payload;
     }
   },
 });
@@ -149,7 +153,8 @@ export const {
   setCode,
   setSuccess,
   setDirectCoupon,
-  setCouponName
+  setCouponName,
+  setItemsCategories
 } = cartSlice.actions;
 
 

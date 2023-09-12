@@ -41,12 +41,14 @@ function NavMenu({navFromTop}) {
   const isNavOpen = useSelector((state) => state.cart.isNavOpen);
   const isFilterOpen = useSelector((state) => state.cart.isFilterOpen);
   const cart = useSelector((state) => state.cart.cart);
+  const itemsCategories = useSelector((state) => state.cart.itemsCategories);
 
   const items = useSelector((state) => state.cart.items);
   const value = useSelector((state) => state.cart.value);
   const sortOrder = useSelector((state) => state.cart.sortOrder);
   const [item, setItem] = useState([]);
   const [search, setSearchField] = useState("");
+  const [categoryList,setCategoryList] = useState(itemsCategories);
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
   const [asc, setAsc] = useState([]);
@@ -138,15 +140,22 @@ function NavMenu({navFromTop}) {
     setItem(filtered);
   }, [items, search]);
 
+  useMemo(() => {
+    const filtered = itemsCategories.filter((cat) =>
+      cat.toLowerCase().includes(search.toLowerCase())
+    );
+    setCategoryList(filtered);
+  }, [items, search]);
+
   const handleSearchField = (e) => {
     setSearchField(e.target.value);
     window.scrollTo({ top: 2300, behavior: "smooth" });
     setHide(false);
-    setCategory("Products");
     if (e.target.value === "") {
       setHide(true);
       getItems();
     }
+
   };
 
   var fruitArrays = {};
@@ -181,7 +190,6 @@ function NavMenu({navFromTop}) {
   const handleCategoriesChange = (value) => {
     if (value in fruitArrays) {
       setItem(fruitArrays[value][0]);
-      setCategory(value);
       setHide(false);
     }
   };
@@ -200,6 +208,10 @@ function NavMenu({navFromTop}) {
       background: "red",
     },
   }));
+
+  useEffect(() => {
+    console.log('categoryList', categoryList);
+  }, [categoryList]);
 
   return (
     <>
@@ -258,6 +270,14 @@ function NavMenu({navFromTop}) {
                 />
                 {search && (
                   <div className="searchlist">
+                    {categoryList?.map((cat) => (
+                      <div
+                        onClick={() => navigate(`/category/${cat}`)}
+                        className="lst"
+                      >
+                        Category/{cat}
+                      </div>
+                    ))}
                     {item.map((item) => (
                       <div
                         onClick={() => navigate(`/item/${item.id}`)}

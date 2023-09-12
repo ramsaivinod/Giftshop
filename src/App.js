@@ -19,6 +19,7 @@ import Collections from "./components/Collections"
 import QuickView from "./components/QuickView"
 import Ticket from "./components/Ticket"
 import { Suspense, lazy } from "react"
+import ProductCategory from './components/ProductCategory';
 
 // const Navbar = lazy(() => import("./components/Navbar"));
 // const ItemDetails = lazy(() => import("./components/ItemDetails"));
@@ -68,6 +69,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navbar />} />
             <Route path="item/:itemId" element={<ItemDetails />} />
+            <Route path="category/:catName" element={<ProductCategory />} />
             <Route path="collection/:collectionId" element={<Collections />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="thank" element={<Thank />} />
