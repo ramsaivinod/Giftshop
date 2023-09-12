@@ -77,7 +77,6 @@ import "../styles/Item2.css";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import NavMenu from "./NavMenu";
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -540,8 +539,120 @@ function Navbars() {
         <Box className="offersavailable">
           <Papers />
         </Box>
-        
-        <NavMenu navFromTop={false} />
+        <Navbar expand="lg" className="navbox">
+          <div className="navbars container">
+            <Navbar.Brand href="#home">
+              {" "}
+              <img
+                src={Jklog}
+                alt="not found"
+                style={{ width: "10rem", height: "100%", cursor: "pointer" }}
+                onClick={() => change()}
+              />
+            </Navbar.Brand>
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="#home" className="nav-item">
+                  HOME
+                </Nav.Link>
+                <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">
+                    Swamiji Kirtans
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="BOOKS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">
+                    English Books
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    BalMukund Books
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">
+                    English Lectures
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Videos</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+            <Box
+              //columnGap="20px",
+              display="flex"
+              justifyContent="space-between"
+              columnGap="0px"
+              zIndex="2"
+            >
+              <div className="Search">
+                <input
+                  placeholder="Search for Products..."
+                  type="text"
+                  value={search}
+                  onChange={handleSearchField}
+                />
+                {search && (
+                  <div className="searchlist">
+                    {item.map((item) => (
+                      <div
+                        onClick={() => navigate(`/item/${item.id}`)}
+                        className="lst"
+                      >
+                        {item.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <IconButton>
+                  <SearchOutlined
+                    fontSize="medium"
+                    sx={{ color: " #ff6d31;" }}
+                  />
+                </IconButton>
+              </div>
+
+              <IconButton className="Searchmb">
+                <SearchOutlined
+                  fontSize="medium"
+                  sx={{ color: "#fff" }}
+                  onClick={() => setShow(!show)}
+                />
+              </IconButton>
+
+              <Badge
+                badgeContent={cart.length}
+                color="secondary"
+                invisible={cart.length === 0}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    right: 9,
+                    top: 5,
+                    padding: "0 4px",
+                    height: "14px",
+                    minWidth: "13px",
+                  },
+                }}
+              >
+                <IconButton
+                  onClick={() => dispatch(setIsCartOpen({}))}
+                  sx={{ color: "#FFFFFF" }}
+                >
+                  <ShoppingBagOutlined />
+                </IconButton>
+              </Badge>
+              <IconButton
+                aria-controls="basic-navbar-nav"
+                onClick={() => dispatch(setIsNavOpen({}))}
+                sx={{ color: "#FFFFFF" }}
+                className="menub"
+              >
+                <MenuOutlined />
+              </IconButton>
+            </Box>
+          </div>
+        </Navbar>
 
         <div className="container boxess">
           <div className="main-section">
@@ -621,11 +732,231 @@ function Navbars() {
             ""
           )}
 
-          
-          
+          {value === "All" ? (
+            <p
+              className="allproductheading"
+            >
+              {category}
+            </p>
+          ) : (
+            <p
+              className="allproductheading"
+            >
+              {value}
+            </p>
+          )}
+
+          {/* <Button variant="outlined" sx={{marginLeft:"2em",marginTop:"0em"}} onClick={clear}> Clear Filter</Button> */}
+          {/**mobile filter start */}
+          <Box
+            display={breakPoint2 && value === "All" ? "flex" : "none"}
+            alignContent={"flex-end"}
+            sx={{
+              height: "32px",
+
+              borderRadius: "5px",
+              background: "#ffdd93",
+              margin: "0 10px",
+              padding: "10px 5px",
+              fontSize: "20px"
+            }}
+          >
+            <Button onClick={() => dispatch(setIsFilterOpen({}))}>
+              <TuneIcon
+                sx={{ cursor: "pointer", width: "40%" }}
+                fontSize="large"
+              />
+              <Typography variant="h5" fontWeight="bold" fontFamily="HeuristicaRegular">
+
+                Filters
+              </Typography>
+            </Button>
+          </Box>
+          {/**mobile filter end */}
+          {/* <Button onClick={() => dispatch(setIsFilterOpen({}))}> Filter</Button> */}
+          {/**desktop filter start*/}
+          <Box display="flex">
+            <Box
+              className="filter-sidebar"
+              sx={{
+                width: "300px",
+                border: "1px solid #ccc",
+                display: breakPoint2 ? "none" : "",
+
+                height: "fit-content",
+              }}
+            >
+
+              <PriceFilter onPriceChange={handlePriceFilter} /> <div style={{ margin: "0 20px 20px 20px" }}>
+                <div>
+                  <SortRadioButtons
+                    onChange={handleSortOrderChange}
+                    value={sortOrder}
+                  />
+                  <CategoriesButton
+                    onChange={handleCategoriesChange}
+                    value={sortOrder}
+                  />
+
+                  {/* render the sorted list */}
+                  {/* <Box
+                  display="flex"
+                  marginRight="0rem"
+                  flexDirection={"column"}
+                  width="100%"
+                  sx={{ overflowX: "scroll" }}
+                >
+                  {collections.map((i) => (
+                    <Button
+                      key={i.id}
+                      onClick={() => {
+                        navigate(`collection/${i.id}`);
+                      }}
+                      variant="contained"
+                      sx={{ background: "#ff6d2f", margin: "1rem" }}
+                    >
+                      {" "}
+                      {i.title}{" "}
+                    </Button>
+                  ))}
+                </Box> */}
+                  <Button
+                    onClick={() => clearFilter()}
+                    variant="contained"
+                    // color="primary"
+                    sx={{
+                      marginLeft: "0em",
+                      fontWeight: "bold",
+                      fontSize: "1em",
+                      padding: ".7em",
+                      marginBottom: breakPoint2 ? "3em" : "1em",
+                      fontFamily: "Rubik",
+                      background: "#ff6d2f",
+                      marginTop: "1em"
+                    }}
+                  >
+                    <strong> Clear Filter</strong>
+                  </Button>
+                </div>
+              </div>
+            </Box>
+
+            <Box
+              width={breakPoint2 ? "100%" : "70%"}
+              margin="20px auto"
+              display="grid"
+              gridTemplateColumns={
+                breakPoint
+                  ? "repeat(auto-fill, 170px)"
+                  : "repeat(auto-fill, 270px)"
+              }
+              justifyContent="space-around"
+              rowGap={breakPoint ? "25px" : "40px"}
+              columnGap="2%"
+            >
+              {value === "All" &&
+                (hide
+                  ? view
+                    ? item
+                      .slice(0, 10)
+                      .map((item) => (
+                        <Item item={item} key={`${item.title}-${item.id}`} />
+                      ))
+                    : item
+                      .slice(11, item.length)
+                      .map((item) => (
+                        <Item item={item} key={`${item.title}-${item.id}`} />
+                      ))
+                  : item.map((item) => (
+                    <Item item={item} key={`${item.title}-${item.id}`} />
+                  )))}
+              {value === "Trending" &&
+                newArrivalsItems.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "Best Sellers" &&
+                bestSellersItems.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "English Books" &&
+                englishbooks.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+
+              {value === "Bal Mukund Books" &&
+                BalMukundBooks.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "English Lectures" &&
+                EnglishLectures.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+
+              {value === "Swamiji Kirtans" &&
+                SwamijiKirtans.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+              {value === "Videos" &&
+                Videos.map((item) => (
+                  <Item item={item} key={`${item.title}-${item.id}`} />
+                ))}
+            </Box>
+          </Box>
+          {/**desktop filter end*/}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              sx={{
+                display: hide && value === "All" ? "" : "none",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                background: "#ff6d31",
+              }}
+              onClick={() => setView(!view)}
+              variant={"contained"}
+            >
+              SHOW {view ? "ALL" : "LESS"}{" "}
+              {view ? (
+                <KeyboardDoubleArrowDownIcon />
+              ) : (
+                <KeyboardDoubleArrowUpIcon />
+              )}
+            </Button></div>
         </div>
       </Box>
-      
+      {show && (
+        <div className="searchbox">
+          <div className="">
+
+            <IconButton>
+              <SearchOutlined fontSize="medium" sx={{ color: " #ff6d31;" }} />
+            </IconButton>
+            <input
+              placeholder="Search for Products..."
+              type="text"
+              value={search}
+              onChange={handleSearchField}
+            />
+            <IconButton
+              onClick={() => setShow(false)}
+              style={{ position: "absolute", right: 0, color: "#ff6d31" }}
+            >
+              <CancelIcon />
+            </IconButton>
+          </div>
+          {search && (
+            <div className="searchlist">
+              {item.map((item) => (
+                <div
+                  onClick={() => navigate(`/item/${item.id}`)}
+                  className="lst"
+                >
+                  {item.title}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
       <Box
         display="flex"
         justifyContent={"flex-end"}
@@ -641,7 +972,69 @@ function Navbars() {
         </Button>
       </Box>
 
-      
+      {/**
+       * mobile filter start
+       */}
+      <Box
+        display={isFilterOpen ? "block" : "none"}
+        // backgroundColor="rgba(0, 0, 0, 0.4)"
+        position="fixed"
+        zIndex={99}
+        width="100%"
+        height="100%"
+        left="0"
+        top="0"
+        overflow="auto"
+        backgroundColor="#fff"
+      >
+
+        <Box overflow="auto" height="100%">
+          <IconButton
+            onClick={() => dispatch(setIsFilterOpen({}))}
+            style={{ position: "absolute", right: "0", margin: "5px" }}
+          >
+            <CancelIcon fontSize="large" />
+          </IconButton>
+          <Box
+            className="filter-sidebar" padding="30px" marginTop="10px"
+
+          >
+            <PriceFilter onPriceChange={handlePriceFilter} />
+            <div>
+              <SortRadioButtons
+                onChange={handleSortOrderChange}
+                value={sortOrder}
+              />
+              {/*    
+                  
+                <CategoriesButton
+                    onChange={handleCategoriesChange}
+                    value={sortOrder}
+                  />*/}
+
+              <Button
+                onClick={
+                  breakPoint2 ? () => clearMobFilter() : () => clearFilter()
+                }
+                variant="contained"
+                //color="secondary"
+                sx={{
+                  marginLeft: "0em",
+                  fontWeight: "bold",
+                  fontSize: "1em",
+                  padding: "1em",
+                  marginBottom: breakPoint2 ? "3em" : "1em",
+                  fontFamily: "Rubik",
+                }}
+              >
+                <strong> Clear</strong>
+              </Button>
+            </div>
+          </Box>
+        </Box>
+
+      </Box>
+      {/**mobile filter end */}
     </Fragment >
     // </Slider>
   );
