@@ -36,42 +36,55 @@ const Subscribe = () => {
               regularly!
             </p></div>
         </div>
-        <div className="col-md-8 col-sm-12">  <Box
-          p="2px 4px"
-          m="15px auto"
-          display="flex"
-          alignItems="center"
-          width={breakPoint ? "100%" : "55%"}
-          backgroundColor="#F2F2F2"
-        >
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Enter Name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-          />
-          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Enter email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-
-          <Button>
-            {" "}
-            <Typography
-              sx={{
-                p: "10px",
-                ":hover": { cursor: "pointer" },
-                background: "#ff6d2f",
-              }}
+        <div className="col-md-8 col-sm-12">
+          <div className="row">
+            <Box className="col-5"
+              p="2px 4px"
+              m="15px auto"
+              // display="flex"
+              alignItems="center"
+              // width={breakPoint ? "100%" : "55%"}
+              backgroundColor="#F2F2F2"
             >
-              Subscribe
-            </Typography>
-          </Button>
-        </Box></div>
+              <InputBase
+                width="100%"
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Enter Name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+            </Box>
+            <Box className="col-7"
+              p="2px 4px"
+              m="15px auto"
+              display="flex"
+              alignItems="center"
+              width={breakPoint ? "100%" : "55%"}
+              backgroundColor="#F2F2F2"
+            >
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Enter email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
+              <Button>
+                {" "}
+                <Typography
+                  sx={{
+                    p: "10px",
+                    ":hover": { cursor: "pointer" },
+                    background: "#ff6d2f",
+                  }}
+                >
+                  Subscribe
+                </Typography>
+              </Button>
+            </Box>
+          </div>
+        </div>
       </div>
 
 

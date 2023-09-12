@@ -61,7 +61,8 @@ const Wrapper = styled.section`
     img {
       max-width: 100%;
       height: 100%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      // box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      object-fit: contain;
     }
   }
 
@@ -78,16 +79,16 @@ const Wrapper = styled.section`
   .grid-four-column {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 0fr);
-    margin-top: -1em;
+    // margin-top: -1em;
   }
 
   @media (min-width: 300px) {
     .grid-four-column {
       margin-left: -4em;
     }
-    .main-screen img {
-      margin-left: -8em;
-    }
+    // .main-screen img {
+    //   margin-left: -8em;
+    // }
   }
 
   @media (min-width: 2000px) {

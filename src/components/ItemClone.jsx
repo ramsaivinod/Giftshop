@@ -196,11 +196,12 @@ const Item = ({ item }) => {
             style={{
               cursor: "pointer",
               position: "relative",
-              width: breakPoint ? "140px" :"220px" ,
+              // width: breakPoint ? "140px" :"220px" ,
               height:breakPoint ? "200px" :"280px" ,
               /* background: #232323; */
+              width: "100%",
               borderRadius: "20px",
-              objectFit: "contain",
+              objectFit: "fill",
               boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
             }}
           />{" "}

@@ -6,7 +6,7 @@
 .main-section {
     display: flex;
     /* justify-content: space-evenly; */
-    margin-top: -22px;
+    /* margin-top: -22px; */
 }
 
 .main-carousel {
@@ -21,9 +21,9 @@
     width: 63vh; */
     justify-content: center;
     /* width: 60vh; */
-    gap: 10px;
+    gap: 8px;
     overflow: hidden;
-    margin-top: 4px;
+    margin-left: 10px;
 }
 
 @media screen and (max-width:400px) {
@@ -33,20 +33,22 @@
 }
 
 .side-images img {
-    height: 35%;
-    /* height: 38.5%; */
-    object-fit: contain;
-
+    /* height: 35%; */
+    height: 36.5%;
+    /* object-fit: contain; */
 }
 
 @media (max-width:1400px) {
-    .side-images img {
-        height: 35%;
-        object-fit: contain;
+    .side-images {
+        margin-top: 10px;
     }
-
 }
 
+@media (max-width:1199px) {
+    .side-images {
+        margin-top: 20px;
+    }
+}
 
 @media (max-width:992px) {
     .main-carousel {

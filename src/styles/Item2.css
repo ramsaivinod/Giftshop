@@ -2,7 +2,7 @@
 
 .product_img {
   width: 100%;
-  height: 250px; 
+  height: 250px;
   object-fit: contain;
   margin: auto;
   box-shadow: rgba(149, 157, 165, 0.16) 0px 8px 24px;
@@ -13,10 +13,10 @@
   box-shadow: rgb(255 255 255) 0px 8px 24px;
 }
 
-.product_title{
-      white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+.product_title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .addtocart {
@@ -28,10 +28,10 @@
   margin-top: 9px;
   font-weight: bolder;
   /* background-color: #ff6d31;; */
- 
-    font-family: 'SourceSansProRegular';
-    /* padding: 6px 20px; */
-    background: #ff6d2f;
+
+  font-family: 'SourceSansProRegular';
+  /* padding: 6px 20px; */
+  background: #ff6d2f;
 }
 
 .trending {
@@ -46,6 +46,7 @@ button#myBtn {
   padding: 1.3rem;
   margin: 5px 0;
 }
+
 .bestsellers {
   font-family: "HeuristicaRegular";
   display: flex;
@@ -74,17 +75,19 @@ button#myBtn {
   padding: 0;
 }
 
-@media  screen and (max-width:400px) {
-  .trending, .bestsellers{
+@media screen and (max-width:400px) {
+
+  .trending,
+  .bestsellers {
     justify-content: center;
-    
-    font-size:1.2rem; 
+
+    font-size: 1.2rem;
     font-weight: 800;
     text-decoration: underline;
   }
- .trendingitems .slick-next, .trendingitems .slick-prev{
-  display: none !important;
- }
-} 
 
-
+  .trendingitems .slick-next,
+  .trendingitems .slick-prev {
+    display: none !important;
+  }
+}

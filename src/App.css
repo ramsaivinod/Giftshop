@@ -14,8 +14,8 @@
   max-width: 1440px;
   margin: 0 auto;
 } */
-*{
-   font-family:"HeuristicaRegular" !important;
+* {
+  font-family: "HeuristicaRegular" !important;
 }
 
 .App-logo {
@@ -42,7 +42,7 @@ margin-top: "2rem"
 }
 
 .boxess {
-  margin-top: 80px;
+  margin-top: 45px;
 }
 
 @media (max-width:700px) {
@@ -56,17 +56,17 @@ margin-top: "2rem"
 
 
 
-.container .card {
-  /* position: relative;
+/* .container .card { */
+/* position: relative;
   width: 320px;
   height: 450px;
   background: #232323;
   border-radius: 20px;
   overflow: hidden; */
-}
+/* } */
 
-.container .card:before {
-  /* content: "";
+/* .container .card:before { */
+/* content: "";
   position: absolute;
   top: 256p;
   left: 35px;
@@ -75,14 +75,14 @@ margin-top: "2rem"
   background: rgb(247 127 16);
   clip-path: circle(150px at 45% 20%);
   transition: 0.5s ease-in-out; */
-}
+/* } */
 
-.container .card:hover:before {
-  /* clip-path: circle(300px at 80% -20%); */
-}
+/* .container .card:hover:before { */
+/* clip-path: circle(300px at 80% -20%); */
+/* } */
 
-.container .card:after {
-  /* content: "";
+/* .container .card:after { */
+/* content: "";
   position: absolute;
   top: 30%;
   left: -20%;
@@ -90,31 +90,30 @@ margin-top: "2rem"
   font-weight: 800;
   font-style: italic;
   color: rgba(255, 255, 255, 0.04); */
+/* } */
 
-}
-
-.container .card .imgBx {
-  /* position: absolute;
+/* .container .card .imgBx { */
+/* position: absolute;
   top: 50%; */
-  /* transform: translate(-50% -50%);
+/* transform: translate(-50% -50%);
   width: 100%;
   height: 100%;
   transition: .5s; */
-}
+/* } */
 
-.container .card:hover .imgBx {
-  /* top: 0%;
+/* .container .card:hover .imgBx { */
+/* top: 0%;
   transform: translate(75% 75%); */
-  /* bug  */
-}
+/* bug  */
+/* } */
 
-.container .card .imgBx img {
-  /* position: absolute;
+/* .container .card .imgBx img { */
+/* position: absolute;
   top: 50%; */
-  /* left: 15%;  */
-  /* transform: translate(-50%, -50%) rotate(20deg); */
-  /* width: 270px; */
-}
+/* left: 15%;  */
+/* transform: translate(-50%, -50%) rotate(20deg); */
+/* width: 270px; */
+/* } */
 
 .App-header {
   background-color: #282c34;
@@ -180,7 +179,7 @@ position: absolute;
 
 @media (max-width:992px) {
   .boxess {
-    margin-top: 50px;
+    margin-top: 10px;
   }
 }
 
@@ -189,7 +188,7 @@ position: absolute;
 }
 
 @media (max-width:992px) {
-/* .image_jk {
+  /* .image_jk {
     width:275px;
   height: 370px;
     padding: 5px;

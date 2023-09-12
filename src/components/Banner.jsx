@@ -95,7 +95,7 @@ function Banner() {
               </div>
 
               <div className="banner_text">
-                <text>{p.c}</text>
+                <div className="text">{p.c}</div>
               </div>
             </div>
           )
