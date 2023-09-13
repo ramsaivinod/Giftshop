@@ -15,7 +15,7 @@
   margin: 0 auto;
 } */
 * {
-  font-family: "HeuristicaRegular" !important;
+  font-family: 'heuristica-regular', sans-serif !important;
 }
 
 .App-logo {

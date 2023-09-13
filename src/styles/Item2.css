@@ -35,7 +35,7 @@
 }
 
 .trending {
-  font-family: "HeuristicaRegular";
+  font-family: 'heuristica-regular', sans-serif;
   display: flex;
   font-size: 2rem;
   color: #ff6d31;
@@ -48,7 +48,7 @@ button#myBtn {
 }
 
 .bestsellers {
-  font-family: "HeuristicaRegular";
+  font-family: 'heuristica-regular', sans-serif;
   display: flex;
   /* width: 30%; */
   /* justify-content: center; */
