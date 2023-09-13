@@ -31,16 +31,16 @@ function Footer() {
               <Typography className="htxt">
                 Contact Us
               </Typography>
-              <Typography color="white">
+              <Typography color="white" style={{ fontSize: "16px", lineHeight: "24px", marginBottom: "10px" }}>
                 <MailOutlinedIcon style={{ position: "relative", top: "-2px", marginRight: "10px" }} />
                 Email: secretary@jkyog.org
               </Typography>
 
-              <Typography sx={{ wordWrap: "break-word" }} color="white">
+              <Typography sx={{ wordWrap: "break-word" }} color="white" style={{ fontSize: "16px", lineHeight: "24px", marginBottom: "10px" }}>
                 <HomeIcon style={{ position: "relative", top: "-2px", marginRight: "10px" }} />
                 Plano, Tx 75025 U.S
               </Typography>
-              <Typography color="white">
+              <Typography color="white" style={{ fontSize: "16px", lineHeight: "24px", marginBottom: "10px" }}>
                 <LocalPhoneIcon style={{ position: "relative", top: "-2px", marginRight: "10px" }} />
                 +1 (469) 795-9135
               </Typography>
