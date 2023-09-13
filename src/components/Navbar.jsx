@@ -22,8 +22,8 @@ import Select from "@mui/material/Select";
 import { makeStyles } from "tss-react/mui";
 import Benefits from "./Benefits";
 import "./style.css";
-import books from "../logo/3.avif";
-import coupons from "../logo/4.avif";
+import books from "../logo/banner-1.jpeg";
+import coupons from "../logo/banner-3.jpeg";
 import giftcard from "../logo/3.webp";
 //import { Image, Typography } from "@mui/material";
 import Handpicked from "./Handpicked";
@@ -547,7 +547,7 @@ function Navbars() {
           <div className="main-section">
             <div className="main-carousel">{<MainCarousel />}</div>
             <div className="side-images">
-              <img src={books} alt="image-1" />
+              <img src={books}   alt="image-1" />
               <img src={coupons} alt="image-1" />
             </div>
           </div>

@@ -25,7 +25,7 @@
 .handpic_image {
   width: 200px;
   height: 300px;
-  box-shadow: rgb(149 157 165 / 61%) 0px 0px 10px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 4px 12px;
   /* padding:5px; */
   /* border-radius: 5px; */
   cursor: pointer;
