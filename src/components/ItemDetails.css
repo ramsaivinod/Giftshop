@@ -99,6 +99,12 @@ img.product_img {
 }
 
 /* footer */
-.MuiBox-root.css-k008qs {
+/* .MuiBox-root.css-k008qs {
     display: -webkit-box !important;
+} */
+
+@media (max-width: 768px) {
+    .MuiBox-root.css-k008qs {
+        display: block !important;
+    }
 }

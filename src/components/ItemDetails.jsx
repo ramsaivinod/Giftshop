@@ -473,7 +473,7 @@ const ItemDetails = () => {
                   <Typography variant="h2" fontWeight="bold" fontFamily={"Lora"}>
                     Related Products
                   </Typography>
-                  <Slider {...settings}>
+                  <Slider {...settings} style={{margin: "0 15px"}}>
                     {item.slice(15, 28).map((item, i) => (
                       <RelatedProducts
                         item={item}

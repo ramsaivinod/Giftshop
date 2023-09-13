@@ -44,15 +44,14 @@ const CartMenu = () => {
       top="0"
       overflow="auto"
     >
-      <Box
+      <Box className="cart-page"
         position="fixed"
         right="0"
         bottom="0"
-        width="max(400px, 30%)"
         height="100%"
         backgroundColor="white"
       >
-        <Box padding="30px" overflow="auto" height="100%">
+        <Box overflow="auto" height="100%" className="full-cart-page">
           {/* HEADER */}
           <FlexBox mb="15px">
             <Typography variant="h3">SHOPPING BAG ({cart.length})</Typography>
@@ -66,7 +65,7 @@ const CartMenu = () => {
             {cart.map((item) => (
               <Box key={`${item.id}`}>
                 <FlexBox p="15px 0">
-                  <Box flex="1 1 40%">
+                  <Box className="flex-image" flex="1 1 40%">
                     <img
                       alt={item?.name}
                       width="123px"
