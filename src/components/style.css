@@ -26,6 +26,14 @@
     margin-left: 10px;
 }
 
+.cart-page {
+    width: max(500px, 30%);
+}
+
+.full-cart-page {
+    padding: 30px;
+}
+
 @media screen and (max-width:400px) {
     .side-images {
         height: 0vh;
@@ -63,5 +71,18 @@
 @media (max-width:500px) {
     .subscribe-sec {
         width: 100% !important;
+    }
+
+    .cart-page {
+        width: max(250px, 30%);
+    }
+
+    .flex-image {
+        display: none !important;
+        flex: inherit !important;
+    }
+
+    .full-cart-page {
+        padding: 30px;
     }
 }

@@ -237,7 +237,6 @@ function NavMenu({navFromTop}) {
               <img
                 src={Jklog}
                 alt="not found"
-                style={{ width: "10rem", height: "100%", cursor: "pointer" }}
                 onClick={() => change()}
               />
             </Navbar.Brand>
