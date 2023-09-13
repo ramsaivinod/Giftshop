@@ -75,6 +75,10 @@ button#myBtn {
   padding: 0;
 }
 
+.trendingitems {
+  margin: 0 65px;
+}
+
 @media screen and (max-width:400px) {
 
   .trending,
@@ -89,5 +93,9 @@ button#myBtn {
   .trendingitems .slick-next,
   .trendingitems .slick-prev {
     display: none !important;
+  }
+
+  .trendingitems {
+    margin: 0 15px;
   }
 }

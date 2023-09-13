@@ -20,15 +20,34 @@ function Footer() {
 
   return (
     <Box
-
       backgroundColor="#171381"
       style={{ backgroundImage: `url(${images})` }}
     >
       <Box className="footerbox" >
         <Subscribe />
-
         <div className="row content" style={{ marginTop: "50px" }}>
-          <div className="col-sm-12 col-md-3">
+          <div className="col-sm-12 col-md-5">
+            <Box>
+              <Typography className="htxt">
+                Contact Us
+              </Typography>
+              <Typography color="white">
+                <MailOutlinedIcon style={{ position: "relative", top: "-2px", marginRight: "10px" }} />
+                Email: secretary@jkyog.org
+              </Typography>
+
+              <Typography sx={{ wordWrap: "break-word" }} color="white">
+                <HomeIcon style={{ position: "relative", top: "-2px", marginRight: "10px" }} />
+                Plano, Tx 75025 U.S
+              </Typography>
+              <Typography color="white">
+                <LocalPhoneIcon style={{ position: "relative", top: "-2px", marginRight: "10px" }} />
+                +1 (469) 795-9135
+              </Typography>
+            </Box>
+
+          </div>
+          <div className="col-sm-12 col-md-3 programs-center">
             <Box>
               <Typography
                 className="htxt"
@@ -86,8 +105,6 @@ function Footer() {
                 </li>
               </ul>
             </Box>
-          </div>
-          <div className="col-sm-12 col-md-3">
             <Box>
               <Typography className="htxt">
                 Our Centers
@@ -131,34 +148,9 @@ function Footer() {
                 </li>
               </ul>
             </Box>
+
           </div>
-          <div className="col-sm-12 col-md-3 contact">
-            <Box  >
-              <Typography className="htxt">
-                Contact Us
-              </Typography>
-              <Typography color="white">
-
-                <MailOutlinedIcon style={{ color: "#ff6d2f" }} />
-
-                Email: secretary@jkyog.org
-              </Typography>
-
-              <Typography sx={{ wordWrap: "break-word" }} color="white">
-
-                <HomeIcon style={{ color: "#ff6d2f" }} />
-
-                Plano, Tx 75025 U.S
-              </Typography>
-              <Typography color="white">
-
-                <LocalPhoneIcon style={{ color: "#ff6d2f" }} />
-
-                +1 (469) 795-9135
-              </Typography>
-            </Box>
-          </div>
-          <div className="col-sm-12 col-md-3">
+          <div className="col-sm-12 col-md-4">
             <Box >
               <Typography className="htxt" color="white">
                 Connect With US
@@ -259,17 +251,22 @@ function Footer() {
             </Box>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
       </Box>
-
+      <section className="mini-footer">
+        <div className="content-area">
+          <div className="copy-right">© Copyright 2020 JKYog. All Rights Reserved.</div>
+          <div className="terms-policy">
+            <ul>
+              <li>
+                <a href="/jkyog_live/terms-use" target="_self">Terms and Conditions</a>
+              </li>
+              <li>
+                <a href="/jkyog_live/privacy-policy" target="_self">Privacy Policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </Box>
   )
 }

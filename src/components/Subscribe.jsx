@@ -20,25 +20,25 @@ const Subscribe = () => {
     <Box className="subscribe" >
       <div className="row"
       >
-        <div className="col-md-4 col-sm-12 textleft">
-
-          <IconButton>
-            <MarkEmailReadOutlinedIcon
-              fontSize="medium"
-              style={{ color: "#ff6d2f" }}
-            />
-          </IconButton>
-          <div> <p className="txt">
-            Subscribe To Our Newsletter
-          </p>
+        <div className="col-md-5 col-sm-12 textleft">
+          <div>
+            <p className="txt">
+              <IconButton>
+                <MarkEmailReadOutlinedIcon
+                  fontSize="medium"
+                  style={{ color: "#ff6d2f" }}
+                />
+              </IconButton>
+              Subscribe To Our Newsletter
+            </p>
             <p className="desc">
               Get all the latest news, upcoming programs, retreats and other updates
               regularly!
             </p></div>
         </div>
-        <div className="col-md-8 col-sm-12">
+        <div className="col-md-7 col-sm-12">
           <div className="row">
-            <Box className="col-5"
+            <Box className="col-5 subscribe-sec"
               p="2px 4px"
               m="15px auto"
               // display="flex"
@@ -46,8 +46,7 @@ const Subscribe = () => {
               // width={breakPoint ? "100%" : "55%"}
               backgroundColor="#F2F2F2"
             >
-              <InputBase
-                width="100%"
+              <InputBase style={{ height: "48px", fontWeight: "bold", fontSize: "16px", width: "100%" }}
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Enter Name"
                 onChange={(e) => setName(e.target.value)}
@@ -59,10 +58,10 @@ const Subscribe = () => {
               m="15px auto"
               display="flex"
               alignItems="center"
-              width={breakPoint ? "100%" : "55%"}
+              width={breakPoint ? "100%" : "52%"}
               backgroundColor="#F2F2F2"
             >
-              <InputBase
+              <InputBase style={{ height: "48px", fontWeight: "bold", fontSize: "16px", width: "100%" }}
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Enter email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -70,11 +69,11 @@ const Subscribe = () => {
               />
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
-              <Button>
+              <Button style={{ padding: "0" }}>
                 {" "}
-                <Typography
+                <Typography style={{ width: "100px", height: "44px" }}
                   sx={{
-                    p: "10px",
+                    p: "15px",
                     ":hover": { cursor: "pointer" },
                     background: "#ff6d2f",
                   }}
@@ -84,10 +83,12 @@ const Subscribe = () => {
               </Button>
             </Box>
           </div>
+          <div style={{ display: "flex", color: "#FFFFFF", fontSize: "15px" }}>
+            <input className="js-form-type-checkbox" type="checkbox" />
+            <label htmlFor="edit-join-me-to-whatsapp-group">Join me to WhatsApp group</label>
+          </div>
         </div>
       </div>
-
-
     </Box>
   );
 };

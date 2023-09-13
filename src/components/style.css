@@ -59,3 +59,9 @@
         display: none;
     }
 }
+
+@media (max-width:500px) {
+    .subscribe-sec {
+        width: 100% !important;
+    }
+}

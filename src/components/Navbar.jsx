@@ -572,7 +572,7 @@ function Navbars() {
               >
                 <h2 className="trending"> TRENDING </h2>
               </Typography>
-              <Slider {...settings} className="trendingitems" style={{ margin: '0 65px' }}>
+              <Slider {...settings} className="trendingitems" >
 
                 {newArrivalsItems.map((item) => (
                   <Item2 item={item} key={`${item.title}-${item.id}`} />
@@ -591,7 +591,7 @@ function Navbars() {
                 <h2 className="bestsellers">BEST SELLERS</h2>
               </Typography>
               {SwamijiKirtans?.length > 3 ? (
-                <Slider {...settings} className="trendingitems" style={{ margin: "0 65px" }}>
+                <Slider {...settings} className="trendingitems">
                   {SwamijiKirtans.map((item) => (
                     <Fragment>
                       <Item2 item={item} key={`${item.title}-${item.id}`} />
