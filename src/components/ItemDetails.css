@@ -3,3 +3,102 @@
 @import url("https://fonts.googleapis.com/css2?family=Labrada:ital,wght@0,200;0,300;1,400&family=PT+Sans:ital,wght@1,700&family=Shantell+Sans&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap');
+
+/* itemDetails */
+.MuiBox-root.css-nyrmvz {
+    margin: 66px auto;
+    padding: 60px 0 0;
+}
+p.MuiTypography-root.MuiTypography-body1.css-1dylaqm-MuiTypography-root {
+    text-align: right;
+    font-size: 20px;
+}
+
+.MuiBox-root.css-ulyp6h {
+    margin: 30px 0 30px 0;
+}
+
+.MuiBox-root.css-1f0b8rx {
+    -webkit-justify-content: flex-start;
+    margin-right: 0;
+    margin-top: 20px;
+}
+
+.MuiBox-root.css-1yiy97x {
+    border: none;
+    padding: 2px 20px;
+    background-color: #edaa38;
+    border-radius: 50px;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.css-7zqjjz-MuiButtonBase-root-MuiButton-root {
+    font-size: 14px;
+    border-radius: 50px;
+}
+h2.MuiTypography-root.MuiTypography-h2.css-1xppdsu-MuiTypography-root {
+    text-decoration-line: none !important;
+}
+
+.slick-list {
+    left: -2%;
+}
+
+.slick-prev, 
+.slick-next {
+    width: 45px !important;
+    height: 45px !important;
+}
+.slick-prev {
+    left: 0px;
+    z-index: 9;
+}
+.slick-next {
+    right: 0 !important;
+}
+
+.col-5.MuiBox-root.css-1640w44 {
+    padding: 14px 5px;
+}
+
+.css-egt6pe-MuiTypography-root {
+    padding: 10px 30px !important;
+    color: #fff;
+}
+
+span.MuiBadge-root.css-1owe06k-MuiBadge-root {
+    margin-left: 15px;
+}
+
+.MuiBox-root.css-14etygv {
+    margin-top: 0;
+}
+
+.MuiBox-root.css-o7rt0f {
+    margin-top: 10px;
+}
+
+.css-3f3xpm-MuiTypography-root {
+    margin: 5px 0 10px 0 !important;
+}
+
+.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {
+    opacity: 1;
+}
+
+.bzTSd .main-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+img.product_img {
+    width: 100% !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0;
+}
+
+/* footer */
+.MuiBox-root.css-k008qs {
+    display: -webkit-box !important;
+}

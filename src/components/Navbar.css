@@ -185,7 +185,7 @@
 
 .navbox {
   background: #ff6d31;
-  height: 66px;
+  height: 70px;
   position: fixed !important;
   width: 100%;
   z-index: 99;
@@ -194,7 +194,6 @@
 
 .offersavailable {
   position: fixed;
-
   width: 100%;
   top: 0;
   z-index: 99;
@@ -208,14 +207,15 @@
 .Search {
   background: #fff;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 50px;
   display: flex;
 }
 
 .Search input {
   border: #fff;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 10px 30px;
+  border-radius: 50px;
+  font-size: 14px;
 }
 
 .Search input:focus {
