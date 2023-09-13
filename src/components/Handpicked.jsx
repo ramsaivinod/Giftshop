@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import "../styles/HandPicked.css"
 import books from "../logo/6.webp"
 import coupons from "../logo/2.avif"
@@ -36,6 +37,8 @@ const Handpicked = () => {
   const BalMukundBooks = products
     .filter((item) => item.tags === "BalMukund Books")
     .slice(0, 5)
+
+    const navigate = useNavigate()
 
   var settings = {
     dots: false,
@@ -102,20 +105,20 @@ const Handpicked = () => {
             <Fragment>
               <Slider {...settings} style={{ width: "100%" }}>
                 {englishbooks.map((i) => {
-                  return <img src={i.image.src} className="handpic_image" />
+                  return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
                 })}
               </Slider>
             </Fragment>
           ) : currenth == "Kirtans" ? (
             <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
               {newArrivalsItems.map((i) => {
-                return <img src={i.image.src} className="handpic_image" />
+                return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
               })}</Slider>
             </Fragment>
           ) : currenth == "BestSellers" ? (
             <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
               {BalMukundBooks.map((i) => {
-                return <img src={i.image.src} className="handpic_image" />
+                return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
               })}</Slider>
             </Fragment>
           ) : (
@@ -129,7 +132,7 @@ const Handpicked = () => {
 
             <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
               {SwamijiKirtans.map((i) => {
-                return <img src={i.image.src} className="handpic_image" />
+                return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
               })}</Slider>
             </Fragment>
           )}
