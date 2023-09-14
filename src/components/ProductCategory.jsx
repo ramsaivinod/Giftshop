@@ -61,6 +61,10 @@ const ProductCategory = () => {
   
 
   useEffect(()=>{
+    setCategory(params.catName);
+  },[params.catName]);
+
+  useEffect(()=>{
       setCategory(category);
       setItem(productByCategory);
       setHide(false);
