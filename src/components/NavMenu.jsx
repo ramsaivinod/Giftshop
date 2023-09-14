@@ -240,7 +240,7 @@ function NavMenu({navFromTop}) {
     <>
         <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }}>
           <div className="navbars container">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand onClick={()=> {navigate(`/`)}} >
               {" "}
               <img
                 src={Jklog}
@@ -250,7 +250,7 @@ function NavMenu({navFromTop}) {
             </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="/giftshop/" className="nav-item">
+                <Nav.Link onClick={()=> {navigate(`/`)}} className="nav-item">
                   HOME
                 </Nav.Link>
                 <NavDropdown title="KIRTANS" id="basic-nav-dropdown">

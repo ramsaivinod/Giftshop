@@ -28,6 +28,7 @@ import '../styles/Item2.css';
 import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 import NavMenu from './NavMenu';
+import Item2 from "./Item2";
 
 
 const ProductCategory = () => {
@@ -290,26 +291,26 @@ const ProductCategory = () => {
                   {value === 'All' &&
                     (hide
                       ? view
-                        ? item.slice(0, 10).map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
+                        ? item.slice(0, 10).map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
                         : item
                           .slice(11, item.length)
-                          .map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
-                      : item.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />))}
+                          .map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
+                      : item.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />))}
                   {value === 'Trending' &&
-                    newArrivalsItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                    newArrivalsItems.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
                   {value === 'Best Sellers' &&
-                    bestSellersItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                    bestSellersItems.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
                   {value === 'English Books' &&
-                    englishbooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                    englishbooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
 
                   {value === 'Bal Mukund Books' &&
-                    BalMukundBooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                    BalMukundBooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
                   {value === 'English Lectures' &&
-                    EnglishLectures.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                    EnglishLectures.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
 
                   {value === 'Swamiji Kirtans' &&
-                    SwamijiKirtans.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                  {value === 'Videos' && Videos.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                    SwamijiKirtans.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'Videos' && Videos.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
                 </Box>
               </Box>
               {/**desktop filter end*/}

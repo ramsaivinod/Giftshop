@@ -254,7 +254,7 @@ const Item = ({ item }) => {
               height: breakPoint ? "200px" : "280px",
               /* background: #232323; */
               // borderRadius: "20px",
-              objectFit: "fill",
+              objectFit: "contain",
               // boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
               overflow: "hidden",
               //  transition: isHovered ? "all 0.3s ease 0s":"",

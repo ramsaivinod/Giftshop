@@ -201,7 +201,7 @@ const Item = ({ item }) => {
               /* background: #232323; */
               width: "100%",
               borderRadius: "20px",
-              objectFit: "fill",
+              objectFit: "contain",
               boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
             }}
           />{" "}
