@@ -24,7 +24,7 @@ function Footer() {
       style={{ backgroundImage: `url(${images})` }}
     >
       <Box className="footerbox" >
-        <Subscribe />
+        {/* <Subscribe /> */}
         <div className="row content" style={{ marginTop: "50px" }}>
           <div className="col-sm-12 col-md-5">
             <Box className="full-address">
