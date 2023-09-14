@@ -28,6 +28,7 @@ import '../styles/Item2.css';
 import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 import NavMenu from './NavMenu';
+import Item2 from "./Item2";
 
 
 const ProductCategory = () => {
@@ -59,12 +60,15 @@ const ProductCategory = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(()=>{
+    setCategory(params.catName);
+  },[params.catName]);
 
-  useEffect(() => {
-    setCategory(category);
-    setItem(productByCategory);
-    setHide(false);
-  }, [category, items]);
+  useEffect(()=>{
+      setCategory(category);
+      setItem(productByCategory);
+      setHide(false);
+  },[category,items]);
 
   async function getItems() {
     try {
@@ -278,6 +282,7 @@ const ProductCategory = () => {
 
                 <Box
                   width={breakPoint2 ? '100%' : '70%'}
+                  maxHeight={ item?.length > 3 ? 'auto' : '220px'}
                   marginTop={breakPoint2 ? '10px' : '0'}
                   display={breakPoint3 ? 'block' : 'grid'}
                   gridTemplateColumns={breakPoint ? 'repeat(auto-fill, 250px)' : 'repeat(auto-fill, 210px)'}
@@ -287,26 +292,12 @@ const ProductCategory = () => {
                   {value === 'All' &&
                     (hide
                       ? view
-                        ? item.slice(0, 10).map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
+                        ? item.slice(0, 10).map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
                         : item
                           .slice(11, item.length)
-                          .map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
-                      : item.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />))}
-                  {value === 'Trending' &&
-                    newArrivalsItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                  {value === 'Best Sellers' &&
-                    bestSellersItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                  {value === 'English Books' &&
-                    englishbooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-
-                  {value === 'Bal Mukund Books' &&
-                    BalMukundBooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                  {value === 'English Lectures' &&
-                    EnglishLectures.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-
-                  {value === 'Swamiji Kirtans' &&
-                    SwamijiKirtans.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                  {value === 'Videos' && Videos.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                          .map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
+                      : item.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />))}
+                  
                 </Box>
               </Box>
               {/**desktop filter end*/}

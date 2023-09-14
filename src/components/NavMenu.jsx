@@ -232,11 +232,15 @@ function NavMenu({navFromTop}) {
     display: show ? 'block' : 'none',
   };
 
+  const handleSwamijKirtansClick = (cat) => {
+    navigate(`/category/${cat}`);
+  }
+
   return (
     <>
         <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }}>
           <div className="navbars container">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand onClick={()=> {navigate(`/`)}} >
               {" "}
               <img
                 src={Jklog}
@@ -246,29 +250,29 @@ function NavMenu({navFromTop}) {
             </Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="/giftshop/" className="nav-item">
+                <Nav.Link onClick={()=> {navigate(`/`)}} className="nav-item">
                   HOME
                 </Nav.Link>
                 <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
-                  <NavDropdown.Item  href="/giftshop/category/Swamiji%20Kirtans">
+                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('Swamiji%20Kirtans')}} >
                     Swamiji Kirtans
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="BOOKS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/giftshop/category/English%20Books">
+                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('English%20Books')}} >
                     English Books
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/giftshop/category/BalMukund%20Books">
+                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('BalMukund%20Books')}}>
                     BalMukund Books
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/giftshop/category/English%20Lectures-Swamiji%20(Audio)">
+                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('English%20Lectures-Swamiji%20(Audio)')}} >
                     English Lectures
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/giftshop/category/English%20Lectures-Swamiji%20(Video)">Videos</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('English%20Lectures-Swamiji%20(Video)')}} >Videos</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
