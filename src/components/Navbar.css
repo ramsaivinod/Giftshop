@@ -381,6 +381,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
   .Search input {
     width: 90%;
   }
+
   .Searchmb {
     display: block !important;
   }
@@ -414,14 +415,14 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
   }
 }
 
-<<<<<<< HEAD
 @media (max-width:535px) {
   .containers {
     margin-bottom: 10px;
-=======
+  }
+}
+
 @media (max-width:400px) {
   .Search input {
     width: 80%;
->>>>>>> 9b3692905acc934773b89fa16fdfc33c46fdf80a
   }
 }
