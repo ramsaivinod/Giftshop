@@ -297,7 +297,21 @@ const ProductCategory = () => {
                           .slice(11, item.length)
                           .map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
                       : item.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />))}
-                  
+                      {value === 'Trending' &&
+                    newArrivalsItems.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                    {value === 'Best Sellers' &&
+                      bestSellersItems.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                    {value === 'English Books' &&
+                      englishbooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+
+                    {value === 'Bal Mukund Books' &&
+                      BalMukundBooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                    {value === 'English Lectures' &&
+                      EnglishLectures.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+
+                    {value === 'Swamiji Kirtans' &&
+                      SwamijiKirtans.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                    {value === 'Videos' && Videos.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
                 </Box>
               </Box>
               {/**desktop filter end*/}
