@@ -308,9 +308,9 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
     top: auto
   }
 
-  .navbox img {
+  /* .navbox img {
     height: 50px
-  }
+  } */
 
   .sidebarmenu {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -370,8 +370,16 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 @media (max-width:700px) {
   .Search {
     display: none;
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 100%;
+    margin-top: 5px;
   }
 
+  .Search input {
+    width: 90%;
+  }
   .Searchmb {
     display: block !important;
   }
@@ -402,5 +410,11 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 
   .allproductheading {
     font-size: 1.3rem;
+  }
+}
+
+@media (max-width:400px) {
+  .Search input {
+    width: 80%;
   }
 }

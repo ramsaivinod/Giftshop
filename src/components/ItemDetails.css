@@ -149,9 +149,10 @@ img.product_imgs {
     margin: 20px 0;
 }
 
-.headings h2 {
+.handpicked .headings h2 {
     height: unset !important;
-    padding: 0 40px !important;
+    line-height: unset !important;
+    padding: 6px 40px !important;
     border-radius: 50px !important;
     transition: .2s;
 }
@@ -161,7 +162,7 @@ img.product_imgs {
     color: #fff !important;
 }
 
-.headings h2:hover {
+.handpicked .headings h2:hover {
     background: #ff6d31 !important;
     color: #fff;
     transition: .2s;
