@@ -302,8 +302,10 @@ const Checkout = ({ val }) => {
 
   return (
     <>
-    <NavMenu navFromTop={true} />
-    <Box m="90px auto" 
+    <div style={{paddingBottom:'90px'}} >
+      <NavMenu navFromTop={true} />
+    </div>
+    <Box 
       className="container"
       // width={isNonMobile ? "80%" : "100%"}
       // m={isNonMobile ? "100px 100px" : "100px 5px"}

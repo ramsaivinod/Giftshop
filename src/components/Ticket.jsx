@@ -139,8 +139,11 @@ const Ticket = () => {
 
   return (
     <>
+      <div style={{paddingBottom:'90px'}} >
       <NavMenu navFromTop={true} />
-      <Box m="90px auto" className="container" >
+
+      </div>
+      <Box className="container" >
         {/* {!success && <SweetAlert />} */}
         <ReactJsAlert
           status={status} // true or false
