@@ -228,6 +228,10 @@ function NavMenu({navFromTop}) {
     console.log('categoryList', categoryList);
   }, [categoryList]);
 
+  const SearchStyle = {
+    display: show ? 'block' : 'none',
+  };
+
   return (
     <>
         <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }}>
@@ -275,7 +279,7 @@ function NavMenu({navFromTop}) {
               columnGap="0px"
               zIndex="2"
             >
-              <div className="Search">
+              <div className="Search" style={SearchStyle} >
                 <input
                   placeholder="Search for Products..."
                   type="text"
