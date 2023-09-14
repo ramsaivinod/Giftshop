@@ -27,7 +27,7 @@ function Footer() {
         <Subscribe />
         <div className="row content" style={{ marginTop: "50px" }}>
           <div className="col-sm-12 col-md-5">
-            <Box>
+            <Box className="full-address">
               <Typography className="htxt">
                 Contact Us
               </Typography>
@@ -45,7 +45,27 @@ function Footer() {
                 +1 (469) 795-9135
               </Typography>
             </Box>
-
+            <div className="donate-login-vol">
+              <ul>
+                <li>
+                  <a href="https://jkyog.org/donate" target="_blank" title="Donate Page Url">
+                    <img src="https://www.jkyog.org/themes/custom/jkyog/images/donate.png" alt="Donate" title="Donate" />
+                    <br />Donate
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.jkyog.org/volunteer" target="_self" title="Volunteer Page Url ">
+                    <img src="https://www.jkyog.org/themes/custom/jkyog/images/volunteer.png" alt="Volunteer" title="Volunteer" />
+                    <br />Volunteer
+                  </a>
+                </li>
+                <li>
+                  <a href="https://login.jkyog.org/user/login" title="Login Page Url" style={{ lineHeight: "25px" }}>
+                    <img src="https://www.jkyog.org/themes/custom/jkyog/images/login.png" alt="Login" title="Login" />      <br />Login
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="col-sm-12 col-md-3 programs-center">
             <Box>

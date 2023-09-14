@@ -3,10 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&family=Rubik&display=swap');
 
 .slick-track {
-  display: flex;
+  display: flex !important;
   /* padding-right: 20px;
     padding-left: 50px; */
-  /* justify-content: space-evenly */
+  justify-content: space-evenly;
 }
 
 .slick-slider {
@@ -20,6 +20,7 @@
 
 .slick-slide {
   padding: 10px;
+  /* min-width: 235px; */
   /* width: 50%; */
   /* width:1200px; */
 }
@@ -413,8 +414,14 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
   }
 }
 
+<<<<<<< HEAD
+@media (max-width:535px) {
+  .containers {
+    margin-bottom: 10px;
+=======
 @media (max-width:400px) {
   .Search input {
     width: 80%;
+>>>>>>> 9b3692905acc934773b89fa16fdfc33c46fdf80a
   }
 }
