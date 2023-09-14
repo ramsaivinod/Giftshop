@@ -94,7 +94,6 @@
 .selected {
   /* text-decoration: underline; */
   /* font-weight: bolder; */
-  color: #ff6d31 !important;
 }
 
 @media screen and (max-width:1200px) {

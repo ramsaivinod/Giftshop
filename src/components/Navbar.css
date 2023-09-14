@@ -239,10 +239,12 @@
 
 .filterTitle {
   margin-bottom: 1em;
-  background: radial-gradient(circle, #ffba9e 0%, rgb(255, 109, 47) 100%);
   font-family: 'heuristica-regular', sans-serif;
   padding: 10px;
   font-size: 20px;
+  background: #ff6d31;
+  color: #fff;
+  font-weight: 600;
 }
 
 .silders {
