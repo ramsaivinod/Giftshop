@@ -40,6 +40,7 @@ import DiscountIcon from "@mui/icons-material/Discount"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 
 import SweetAlert from "../components/Alerts/SweetAlert"
+import NavMenu from '../components/NavMenu';
 
 import {
   decreaseCount,
@@ -300,7 +301,9 @@ const Checkout = ({ val }) => {
   }
 
   return (
-    <Box
+    <>
+    <NavMenu navFromTop={true} />
+    <Box m="90px auto" 
       className="container"
       // width={isNonMobile ? "80%" : "100%"}
       // m={isNonMobile ? "100px 100px" : "100px 5px"}
@@ -710,6 +713,8 @@ const Checkout = ({ val }) => {
         </Formik>
       </Box>
     </Box>
+    </>
+    
   )
 }
 

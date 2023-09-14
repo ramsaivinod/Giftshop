@@ -34,6 +34,8 @@ import {
   setCouponName,
 } from "../state";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import NavMenu from '../components/NavMenu';
+
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -136,7 +138,8 @@ const Ticket = () => {
 
   return (
     <>
-      <Box>
+    <NavMenu navFromTop={true} />
+    <Box m="90px auto" >
         {/* {!success && <SweetAlert />} */}
         <ReactJsAlert
           status={status} // true or false
