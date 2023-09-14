@@ -156,7 +156,7 @@ img.product_imgs {
     transition: .2s;
 }
 
-.selected {
+.handpicked .selected {
     background: #ff6d31 !important;
     color: #fff !important;
 }
