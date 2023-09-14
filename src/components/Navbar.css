@@ -240,10 +240,12 @@
 
 .filterTitle {
   margin-bottom: 1em;
-  background: radial-gradient(circle, #ffba9e 0%, rgb(255, 109, 47) 100%);
   font-family: 'heuristica-regular', sans-serif;
   padding: 10px;
   font-size: 20px;
+  background: #ff6d31;
+  color: #fff;
+  font-weight: 600;
 }
 
 .silders {
@@ -307,9 +309,9 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
     top: auto
   }
 
-  .navbox img {
+  /* .navbox img {
     height: 50px
-  }
+  } */
 
   .sidebarmenu {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -369,8 +371,16 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 @media (max-width:700px) {
   .Search {
     display: none;
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 100%;
+    margin-top: 5px;
   }
 
+  .Search input {
+    width: 90%;
+  }
   .Searchmb {
     display: block !important;
   }
@@ -404,8 +414,14 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
   }
 }
 
+<<<<<<< HEAD
 @media (max-width:535px) {
   .containers {
     margin-bottom: 10px;
+=======
+@media (max-width:400px) {
+  .Search input {
+    width: 80%;
+>>>>>>> 9b3692905acc934773b89fa16fdfc33c46fdf80a
   }
 }

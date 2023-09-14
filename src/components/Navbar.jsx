@@ -570,7 +570,7 @@ function Navbars() {
                 padding="10px"
               // color="#ff6d31"
               >
-                <h2 className="trending"> TRENDING </h2>
+                <h2 className="trending"> Trending </h2>
               </Typography>
               <Slider {...settings} className="trendingitems" >
 
@@ -588,7 +588,7 @@ function Navbars() {
                 padding="11px"
               // color="#ff6d31"
               >
-                <h2 className="bestsellers">BEST SELLERS</h2>
+                <h2 className="bestsellers">Best Sellers</h2>
               </Typography>
               {SwamijiKirtans?.length > 3 ? (
                 <Slider {...settings} className="trendingitems">

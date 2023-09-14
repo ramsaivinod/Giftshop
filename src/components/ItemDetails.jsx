@@ -53,6 +53,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import NavMenu from "./NavMenu";
+import Item2 from "./Item2";
 
 const colors = {
   orange: "#FFBA5A",
@@ -184,23 +185,33 @@ const ItemDetails = () => {
     }
   }
   var settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
-    variableWidth: true,
+    // variableWidth: true,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 2,
     initialSlide: 0,
-    width: "100%",
+    // width: "90%",
     responsive: [
+      {
+        breakpoint: 1224,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          infinite: false,
+          dots: false,
+          // width: "80%",
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 2,
-          infinite: true,
-          dots: true,
-          width: "100%",
+          infinite: false,
+          dots: false,
+          // width: "80%",
         },
       },
       {
@@ -209,7 +220,7 @@ const ItemDetails = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-          width: "60%",
+          // width: "60%",
         },
       },
       {
@@ -217,7 +228,7 @@ const ItemDetails = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          width: "40%",
+          // width: "40%",
           dots: false,
         },
       },
@@ -474,11 +485,8 @@ const ItemDetails = () => {
                     Related Products
                   </Typography>
                   <Slider {...settings} style={{margin: "0 15px"}}>
-                    {item.slice(15, 28).map((item, i) => (
-                      <RelatedProducts
-                        item={item}
-                        key={`${item.title}-${item.id}`}
-                      />
+                    {item.filter(item=> item.tags === updateditem.tags).map((item, i) => (
+                      <Item2 item={item} key={`${item.title}-${item.id}`} />
                     ))}
                   </Slider>{" "}
                 </Box></div>

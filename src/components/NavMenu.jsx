@@ -49,7 +49,7 @@ function NavMenu({navFromTop}) {
   const [item, setItem] = useState([]);
   const [search, setSearchField] = useState("");
   const [categoryList,setCategoryList] = useState(itemsCategories);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [hide, setHide] = useState(true);
   const [asc, setAsc] = useState([]);
   const [dsc, setDsc] = useState([]);
@@ -228,6 +228,10 @@ function NavMenu({navFromTop}) {
     console.log('categoryList', categoryList);
   }, [categoryList]);
 
+  const SearchStyle = {
+    display: show ? 'block' : 'none',
+  };
+
   return (
     <>
         <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }}>
@@ -275,7 +279,7 @@ function NavMenu({navFromTop}) {
               columnGap="0px"
               zIndex="2"
             >
-              <div className="Search">
+              <div className="Search" style={SearchStyle} >
                 <input
                   placeholder="Search for Products..."
                   type="text"
