@@ -282,7 +282,7 @@ const ProductCategory = () => {
 
                 <Box
                   width={breakPoint2 ? '100%' : '70%'}
-                  maxHeight={'220px'}
+                  maxHeight={ item?.length > 3 ? 'auto' : '220px'}
                   marginTop={breakPoint2 ? '10px' : '0'}
                   display={breakPoint3 ? 'block' : 'grid'}
                   gridTemplateColumns={breakPoint ? 'repeat(auto-fill, 250px)' : 'repeat(auto-fill, 210px)'}
