@@ -49,7 +49,7 @@ function NavMenu({navFromTop}) {
   const [item, setItem] = useState([]);
   const [search, setSearchField] = useState("");
   const [categoryList,setCategoryList] = useState(itemsCategories);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [hide, setHide] = useState(true);
   const [asc, setAsc] = useState([]);
   const [dsc, setDsc] = useState([]);
