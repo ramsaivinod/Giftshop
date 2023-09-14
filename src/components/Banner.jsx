@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -85,30 +86,38 @@ var settings = {
   ],
 }
 function Banner() {
+  const [categoryList,setCategoryList] = useState([]);
   const breakPoint = useMediaQuery("(min-width:870px)")
   const navigate = useNavigate()
   const itemsCategories = useSelector((state) => state.cart.itemsCategories);
 
+  useEffect(()=>{
+    setCategoryList(itemsCategories);
+  },[itemsCategories])
 
   return (
 
 
     <div className="banner_box">
-      <Slider {...settings} style={{ width: "100%" }}>
-        {itemsCategories.map((item,i) => {
-          return (
-            <div key={i} className="banner_icon" onClick={() => navigate(`/category/${item}`)} >
-              <div className="bannerimg">
-                <img src={picsList[i]} alt="banner-image" className="banner_img" />
-              </div>
+      {categoryList?.length ? 
+        <Slider {...settings} style={{ width: "100%" }}>
+          {categoryList?.map((item,i) => {
+            return (
+              <div key={i} className="banner_icon" onClick={() => navigate(`/category/${item}`)} >
+                <div className="bannerimg">
+                  <img src={picsList[i]} alt="banner-image" className="banner_img" />
+                </div>
 
-              <div className="banner_text">
-                <div className="text">{item}</div>
+                <div className="banner_text">
+                  <div className="text">{item}</div>
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
       </Slider>
+      : <></>
+      }
+      
     </div>
   )
 }

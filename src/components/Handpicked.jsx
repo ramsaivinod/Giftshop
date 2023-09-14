@@ -103,14 +103,17 @@ const Handpicked = () => {
         <div className="image_section">
           {currenth == "English Books" ? (
             <Fragment>
-              <Slider {...settings} style={{ width: "100%" }}>
-                {englishbooks.map((i) => {
-                  return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
-                })}
-              </Slider>
+               {englishbooks?.length > 0 && 
+                <Slider {...settings} style={{ width: "100%" }}>
+                  {englishbooks.map((i) => {
+                    return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
+                  })}
+                </Slider>
+               }
             </Fragment>
           ) : currenth == "Kirtans" ? (
-            <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
+            <Fragment>   
+              <Slider {...settings} style={{ width: "100%" }}>
               {newArrivalsItems.map((i) => {
                 return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
               })}</Slider>

@@ -573,12 +573,14 @@ function Navbars() {
               >
                 <h2 className="trending"> Trending </h2>
               </Typography>
-              <Slider {...settings} className="trendingitems" >
+              {newArrivalsItems?.length > 0 &&
+                <Slider {...settings} className="trendingitems" >
 
-                {newArrivalsItems.map((item) => (
-                  <Item2 item={item} key={`${item.title}-${item.id}`} />
-                ))}
-              </Slider>{" "}
+                  {newArrivalsItems.map((item) => (
+                    <Item2 item={item} key={`${item.title}-${item.id}`} />
+                  ))}
+                </Slider>
+              }
               {/* <Benefits />*/}
               <Typography
                 //fontFamily={"Labrada"}
