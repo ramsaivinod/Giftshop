@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {  Box, Typography, Button,IconButton} from '@mui/material';
+import { Box, Typography, Button, IconButton } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Item from './Item';
 import { makeStyles } from 'tss-react/mui';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { encode as btoa } from 'base-64';
-import { setItems, setValue, setPriceFilter, setSortOrder, setItemsCategories,setIsFilterOpen } from '../state';
+import { setItems, setValue, setPriceFilter, setSortOrder, setItemsCategories, setIsFilterOpen } from '../state';
 import React, { Fragment, useEffect, useState, useMemo } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -45,7 +45,7 @@ const ProductCategory = () => {
   const [item, setItem] = useState([]);
   const breakPoint = useMediaQuery('(max-width:700px)');
   const breakPoint2 = useMediaQuery('(max-width:1220px)');
-  const breakPoint3 = useMediaQuery('(min-width:1220px)');
+  const breakPoint3 = useMediaQuery('(max-width:530px)');
   const [search, setSearchField] = useState('');
   const [menu, setMenu] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -58,13 +58,13 @@ const ProductCategory = () => {
   const [category, setCategory] = useState(params.catName);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
-  
 
-  useEffect(()=>{
-      setCategory(category);
-      setItem(productByCategory);
-      setHide(false);
-  },[category,items]);
+
+  useEffect(() => {
+    setCategory(category);
+    setItem(productByCategory);
+    setHide(false);
+  }, [category, items]);
 
   async function getItems() {
     try {
@@ -177,8 +177,8 @@ const ProductCategory = () => {
   };
 
   const handleCategoriesChange = (value) => {
-      setCategory(value);
-      setHide(false);
+    setCategory(value);
+    setHide(false);
   };
 
   const clearFilter = () => {
@@ -212,194 +212,194 @@ const ProductCategory = () => {
         <Loader />
       ) : (
         <Fragment>
-          <Box width="100%" m="80px auto"  className="">
-              <NavMenu navFromTop={true} />
-              <div className="container">
-                {value === 'All' ? (
-                  <p className="allproductheading">{category}</p>
-                ) : (
-                  <p className="allproductheading">{value}</p>
-                )}
+          <Box width="100%" m="80px auto" className="">
+            <NavMenu navFromTop={true} />
+            <div className="container">
+              {value === 'All' ? (
+                <p className="allproductheading">{category}</p>
+              ) : (
+                <p className="allproductheading">{value}</p>
+              )}
 
-                {/* <Button variant="outlined" sx={{marginLeft:"2em",marginTop:"0em"}} onClick={clear}> Clear Filter</Button> */}
-                {/**mobile filter start */}
+              {/* <Button variant="outlined" sx={{marginLeft:"2em",marginTop:"0em"}} onClick={clear}> Clear Filter</Button> */}
+              {/**mobile filter start */}
+              <Box
+                display={breakPoint2 && value === 'All' ? 'flex' : 'none'}
+                alignContent={'flex-end'}
+                sx={{
+                  height: '32px',
+
+                  borderRadius: '5px',
+                  background: '#ffdd93',
+                  margin: '0 10px',
+                  padding: '10px 5px',
+                  fontSize: '20px',
+                }}>
+                <Button onClick={() => dispatch(setIsFilterOpen({}))}>
+                  <TuneIcon sx={{ cursor: 'pointer', width: '40%' }} fontSize="large" />
+                  <Typography variant="h5" fontWeight="bold" fontFamily="HeuristicaRegular">
+                    Filters
+                  </Typography>
+                </Button>
+              </Box>
+              <Box display="flex" >
                 <Box
-                  display={breakPoint2 && value === 'All' ? 'flex' : 'none'}
-                  alignContent={'flex-end'}
+                  className="filter-sidebar"
                   sx={{
-                    height: '32px',
+                    width: '300px',
+                    border: '1px solid #ccc',
+                    display: breakPoint2 ? 'none' : '',
 
-                    borderRadius: '5px',
-                    background: '#ffdd93',
-                    margin: '0 10px',
-                    padding: '10px 5px',
-                    fontSize: '20px',
+                    height: 'fit-content',
                   }}>
-                  <Button onClick={() => dispatch(setIsFilterOpen({}))}>
-                    <TuneIcon sx={{ cursor: 'pointer', width: '40%' }} fontSize="large" />
-                    <Typography variant="h5" fontWeight="bold" fontFamily="HeuristicaRegular">
-                      Filters
-                    </Typography>
-                  </Button>
-                </Box>
-                <Box display="flex">
-                  <Box
-                    className="filter-sidebar"
-                    sx={{
-                      width: '300px',
-                      border: '1px solid #ccc',
-                      display: breakPoint2 ? 'none' : '',
-
-                      height: 'fit-content',
-                    }}>
-                    <PriceFilter onPriceChange={handlePriceFilter} />{' '}
-                    <div style={{ margin: '0 20px 20px 20px' }}>
-                      <div>
-                        <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
-                        <CategoriesButton onChange={handleCategoriesChange} value={sortOrder} />
-                        <Button
-                          onClick={() => clearFilter()}
-                          variant="contained"
-                          sx={{
-                            marginLeft: '0em',
-                            fontWeight: 'bold',
-                            fontSize: '1em',
-                            padding: '.7em',
-                            marginBottom: breakPoint2 ? '3em' : '1em',
-                            fontFamily: 'Rubik',
-                            background: '#ff6d2f',
-                            marginTop: '1em',
-                          }}>
-                          <strong> Clear Filter</strong>
-                        </Button>
-                      </div>
+                  <PriceFilter onPriceChange={handlePriceFilter} />{' '}
+                  <div style={{ margin: '0 20px 20px 20px' }}>
+                    <div>
+                      <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
+                      <CategoriesButton onChange={handleCategoriesChange} value={sortOrder} />
+                      <Button
+                        onClick={() => clearFilter()}
+                        variant="contained"
+                        sx={{
+                          marginLeft: '0em',
+                          fontWeight: 'bold',
+                          fontSize: '1em',
+                          padding: '.7em',
+                          marginBottom: breakPoint2 ? '3em' : '1em',
+                          fontFamily: 'Rubik',
+                          background: '#ff6d2f',
+                          marginTop: '1em',
+                        }}>
+                        <strong> Clear Filter</strong>
+                      </Button>
                     </div>
-                  </Box>
-
-                  <Box
-                    width={breakPoint2 ? '100%' : '70%'}
-                    margin="20px auto"
-                    display="grid"
-                    gridTemplateColumns={breakPoint ? 'repeat(auto-fill, 170px)' : 'repeat(auto-fill, 270px)'}
-                    justifyContent="space-around"
-                    rowGap={breakPoint ? '25px' : '40px'}
-                    columnGap="2%">
-                    {value === 'All' &&
-                      (hide
-                        ? view
-                          ? item.slice(0, 10).map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
-                          : item
-                              .slice(11, item.length)
-                              .map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
-                        : item.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />))}
-                    {value === 'Trending' &&
-                      newArrivalsItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'Best Sellers' &&
-                      bestSellersItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'English Books' &&
-                      englishbooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-
-                    {value === 'Bal Mukund Books' &&
-                      BalMukundBooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'English Lectures' &&
-                      EnglishLectures.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-
-                    {value === 'Swamiji Kirtans' &&
-                      SwamijiKirtans.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'Videos' && Videos.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
-                  </Box>
-                </Box>
-                {/**desktop filter end*/}
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Button
-                    sx={{
-                      display: hide && value === 'All' ? '' : 'none',
-                      fontWeight: 'bold',
-                      fontSize: '1rem',
-                      background: '#ff6d31',
-                    }}
-                    onClick={() => setView(!view)}
-                    variant={'contained'}>
-                    SHOW {view ? 'ALL' : 'LESS'}{' '}
-                    {view ? <KeyboardDoubleArrowDownIcon /> : <KeyboardDoubleArrowUpIcon />}
-                  </Button>
-                </div>
-              </div>
-            </Box>
-            {show && (
-              <div className="searchbox">
-                <div className="">
-                  <IconButton>
-                    <SearchOutlined fontSize="medium" sx={{ color: ' #ff6d31;' }} />
-                  </IconButton>
-                  <input placeholder="Search for Products..." type="text" value={search} onChange={handleSearchField} />
-                  <IconButton onClick={() => setShow(false)} style={{ position: 'absolute', right: 0, color: '#ff6d31' }}>
-                    <CancelIcon />
-                  </IconButton>
-                </div>
-                {search && (
-                  <div className="searchlist">
-                    {item.map((item) => (
-                      <div onClick={() => navigate(`/item/${item.id}`)} className="lst">
-                        {item.title}
-                      </div>
-                    ))}
                   </div>
-                )}
-              </div>
-            )}
-            
+                </Box>
 
-      {/**
+                <Box
+                  width={breakPoint2 ? '100%' : '70%'}
+                  marginTop={breakPoint2 ? '10px' : '0'}
+                  display={breakPoint3 ? 'block' : 'grid'}
+                  gridTemplateColumns={breakPoint ? 'repeat(auto-fill, 250px)' : 'repeat(auto-fill, 210px)'}
+                  justifyContent="space-around"
+                  rowGap={breakPoint ? '25px' : '40px'}
+                  columnGap="2%">
+                  {value === 'All' &&
+                    (hide
+                      ? view
+                        ? item.slice(0, 10).map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
+                        : item
+                          .slice(11, item.length)
+                          .map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)
+                      : item.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />))}
+                  {value === 'Trending' &&
+                    newArrivalsItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'Best Sellers' &&
+                    bestSellersItems.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'English Books' &&
+                    englishbooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+
+                  {value === 'Bal Mukund Books' &&
+                    BalMukundBooks.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'English Lectures' &&
+                    EnglishLectures.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+
+                  {value === 'Swamiji Kirtans' &&
+                    SwamijiKirtans.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'Videos' && Videos.map((item) => <Item item={item} key={`${item.title}-${item.id}`} />)}
+                </Box>
+              </Box>
+              {/**desktop filter end*/}
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Button
+                  sx={{
+                    display: hide && value === 'All' ? '' : 'none',
+                    fontWeight: 'bold',
+                    fontSize: '1rem',
+                    background: '#ff6d31',
+                  }}
+                  onClick={() => setView(!view)}
+                  variant={'contained'}>
+                  SHOW {view ? 'ALL' : 'LESS'}{' '}
+                  {view ? <KeyboardDoubleArrowDownIcon /> : <KeyboardDoubleArrowUpIcon />}
+                </Button>
+              </div>
+            </div>
+          </Box>
+          {show && (
+            <div className="searchbox">
+              <div className="">
+                <IconButton>
+                  <SearchOutlined fontSize="medium" sx={{ color: ' #ff6d31;' }} />
+                </IconButton>
+                <input placeholder="Search for Products..." type="text" value={search} onChange={handleSearchField} />
+                <IconButton onClick={() => setShow(false)} style={{ position: 'absolute', right: 0, color: '#ff6d31' }}>
+                  <CancelIcon />
+                </IconButton>
+              </div>
+              {search && (
+                <div className="searchlist">
+                  {item.map((item) => (
+                    <div onClick={() => navigate(`/item/${item.id}`)} className="lst">
+                      {item.title}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+
+          {/**
        * mobile filter start
        */}
-      <Box
-        display={isFilterOpen ? 'block' : 'none'}
-        // backgroundColor="rgba(0, 0, 0, 0.4)"
-        position="fixed"
-        zIndex={99}
-        width="100%"
-        height="100%"
-        left="0"
-        top="0"
-        overflow="auto"
-        backgroundColor="#fff">
-        <Box overflow="auto" height="100%">
-          <IconButton
-            onClick={() => dispatch(setIsFilterOpen({}))}
-            style={{ position: 'absolute', right: '0', margin: '5px' }}>
-            <CancelIcon fontSize="large" />
-          </IconButton>
-          <Box className="filter-sidebar" padding="30px" marginTop="10px">
-            <PriceFilter onPriceChange={handlePriceFilter} />
-            <div>
-              <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
-              {/*    
+          <Box
+            display={isFilterOpen ? 'block' : 'none'}
+            // backgroundColor="rgba(0, 0, 0, 0.4)"
+            position="fixed"
+            zIndex={99}
+            width="100%"
+            height="100%"
+            left="0"
+            top="0"
+            overflow="auto"
+            backgroundColor="#fff">
+            <Box overflow="auto" height="100%">
+              <IconButton
+                onClick={() => dispatch(setIsFilterOpen({}))}
+                style={{ position: 'absolute', right: '0', margin: '5px' }}>
+                <CancelIcon fontSize="large" />
+              </IconButton>
+              <Box className="filter-sidebar" padding="30px" marginTop="10px">
+                <PriceFilter onPriceChange={handlePriceFilter} />
+                <div>
+                  <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
+                  {/*    
                   
                 <CategoriesButton
                     onChange={handleCategoriesChange}
                     value={sortOrder}
                   />*/}
 
-              <Button
-                onClick={breakPoint2 ? () => clearMobFilter() : () => clearFilter()}
-                variant="contained"
-                //color="secondary"
-                sx={{
-                  marginLeft: '0em',
-                  fontWeight: 'bold',
-                  fontSize: '1em',
-                  padding: '1em',
-                  marginBottom: breakPoint2 ? '3em' : '1em',
-                  fontFamily: 'Rubik',
-                }}>
-                <strong> Clear</strong>
-              </Button>
-            </div>
+                  <Button
+                    onClick={breakPoint2 ? () => clearMobFilter() : () => clearFilter()}
+                    variant="contained"
+                    //color="secondary"
+                    sx={{
+                      marginLeft: '0em',
+                      fontWeight: 'bold',
+                      fontSize: '1em',
+                      padding: '1em',
+                      marginBottom: breakPoint2 ? '3em' : '1em',
+                      fontFamily: 'Rubik',
+                    }}>
+                    <strong> Clear</strong>
+                  </Button>
+                </div>
+              </Box>
+            </Box>
           </Box>
-        </Box>
-      </Box>
-      {/**mobile filter end */}
+          {/**mobile filter end */}
         </Fragment>
       )}
     </>
