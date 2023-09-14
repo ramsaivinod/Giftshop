@@ -67,9 +67,9 @@ const Ticket = () => {
       headers.append(
         "Authorization",
         "Basic " +
-          btoa(
-            "ce9a3ad16708f3eb4795659e809971c4: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"
-          )
+        btoa(
+          "ce9a3ad16708f3eb4795659e809971c4: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"
+        )
       );
 
       //
@@ -92,19 +92,20 @@ const Ticket = () => {
     box: {
       height: "auto",
       textAlign: "center",
-      width: "50%",
-      padding: "30px 10%",
+      width: "75%",
+      padding: "5px",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
+      border : "1px solid white"
     },
     box2: {
       height: "auto",
       textAlign: "center",
-      width: breakPoint?"100%":"50%",
-      padding: breakPoint?"15px 10%":"30px 10%",
-      display: breakPoint?"block":"block",
+      width: breakPoint ? "100%" : "75%",
+      padding: breakPoint ? "15px 10%" : "5%",
+      display: breakPoint ? "block" : "block",
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
@@ -138,8 +139,8 @@ const Ticket = () => {
 
   return (
     <>
-    <NavMenu navFromTop={true} />
-    <Box m="90px auto" >
+      <NavMenu navFromTop={true} />
+      <Box m="90px auto" className="container" >
         {/* {!success && <SweetAlert />} */}
         <ReactJsAlert
           status={status} // true or false
@@ -257,7 +258,7 @@ const Ticket = () => {
           size="large"
           sx={{
             backgroundColor: "#ff6d2f",
-            fontWeight:"bolder"
+            fontWeight: "bolder"
           }}
           onClick={() => {
             navigate("/checkout");
@@ -275,90 +276,89 @@ const Ticket = () => {
           <Box
             sx={{
               height: breakPoint ? "7rem" : "15rem",
-              width: "90%",
+              width: "100%",
               background: "#515477",
               display: "inline-flex",
               position: "relative",
               marginTop: "16px",
               justifyContent: "center",
-              transform: "translateX(5%)",
+              // transform: "translateX(5%)",
             }}
           >
             {breakPoint ? (
-           <Box sx={style.box2}>
-           <Box> 
-           <Typography
-             variant="h5"
-             sx={{
-               color: "whitesmoke",
-               fontSize: breakPoint ? "12px" : "25px",
-             }}
-           >
-            
-             ${-coupon[0]?.value} Off Entire Order
-           </Typography>
-           </Box>
-           <Box sx={style.box2}> 
-           <Typography
-             variant="h1"
-             sx={{
-               mr: "10px",
-               color: "whitesmoke",
-               fontSize: breakPoint ? "21px" : "48px",
-             }}
-           >
-             {" "}
-             {/* {coupon.map((i)=>{
+              <Box sx={style.box2}>
+                <Box>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      color: "whitesmoke",
+                      fontSize: breakPoint ? "12px" : "25px",
+                    }}
+                  >
+                    ${-coupon[0]?.value} Off Entire Order
+                  </Typography>
+                </Box>
+                <Box sx={style.box2}>
+                  <Typography
+                    variant="h1"
+                    sx={{
+                      mr: "10px",
+                      color: "whitesmoke",
+                      fontSize: breakPoint ? "21px" : "48px",
+                    }}
+                  >
+                    {" "}
+                    {/* {coupon.map((i)=>{
                return(i.title)
              })} */}
-             {coupon[0]?.title}
-           </Typography>
-           <Box>
-           {((success && !csuccess) ) && (
-             <Button
-               variant="h3"
-               onClick={() => {
-                 handleDiscount(coupon[0]?.title, 0);
-               }}
-               sx={{
-                 color: "whitesmoke",
-                 textDecoration: "underline",
-                 m: breakPoint ?"0px":"30px",
-                 fontSize: breakPoint ? "14px" : "30px",
-               }}
-             >
-             
-               {"Apply Now"  }
-             </Button>
-           )}
-            </Box>
-           </Box>
-           {/* {add && <SweetAlert2/>} */}
-           </Box>
+                    {coupon[0]?.title}
+                  </Typography>
+                  <Box>
+                    {((success && !csuccess)) && (
+                      <Button
+                        variant="h3"
+                        onClick={() => {
+                          handleDiscount(coupon[0]?.title, 0);
+                        }}
+                        sx={{
+                          color: "whitesmoke",
+                          textDecoration: "underline",
+                          m: breakPoint ? "0px" : "30px",
+                          fontSize: breakPoint ? "14px" : "30px",
+                        }}
+                      >
+
+                        {"Apply Now"}
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+                {/* {add && <SweetAlert2/>} */}
+              </Box>
             ) : (
               <Box sx={style.box2}>
-              <Typography variant="h1" sx={{ mr: "10px", color: "whitesmoke" ,fontSize:breakPoint ? "21px":"48px"}}>
-                {" "}
-                {/* {coupon.map((i)=>{
+                <Typography variant="h1" sx={{ mr: "10px", color: "whitesmoke", fontSize: breakPoint ? "21px" : "48px" }}>
+                  {" "}
+                  {/* {coupon.map((i)=>{
                   return(i.title)
                 })} */}
-            
-        {coupon[0]?.title }
-              </Typography>
-              <Typography variant="h5" sx={{ color: "whitesmoke",fontSize:breakPoint ? "12px":"25px" }}>
-                {" "}
-               ${-coupon[0]?.value} Off Entire Order
-              </Typography>
-             { success && <Button
-                variant="h3"
-                onClick={()=>{handleDiscount(coupon[0]?.title ,0)}}
-                sx={{ color: "whitesmoke", textDecoration: "underline" ,m:"30px",fontSize:breakPoint ? "14px":"30px"}}
-              >
-                {" "}
-                Apply Now
-              </Button>}
-              {/* {add && <SweetAlert2/>} */}
-            </Box>
+
+                  {coupon[0]?.title}
+                </Typography>
+                <Typography variant="h5" sx={{ color: "whitesmoke", fontSize: breakPoint ? "12px" : "25px" }}>
+                  {" "}
+                  ${-coupon[0]?.value} Off Entire Order
+                </Typography>
+                {success && <Button
+                  variant="h3"
+                  onClick={() => { handleDiscount(coupon[0]?.title, 0) }}
+                  sx={{ color: "whitesmoke", textDecoration: "underline", m: "30px", fontSize: breakPoint ? "14px" : "30px" }}
+                >
+                  {" "}
+                  Apply Now
+                </Button>}
+                {/* {add && <SweetAlert2/>} */}
+              </Box>
             )}
 
             {/* <Divider sx={{background:"whitesmoke", width:"1px",height:"50%", transform: "translateY(50%)"}} flexItem/>
@@ -408,13 +408,13 @@ const Ticket = () => {
             </Card> */}
         </Box>
 
-        <Box
+        <Box className="offer-box"
           sx={{
-            height: "15rem",
-            width: "92%",
+            height: "auto",
+            width: "100%",
             background: "#367f8c",
-            display: "inline-flex",
-            position: "relative",
+            // display: "inline-flex",
+            // position: "relative",
             marginTop: "16px",
             justifyContent: "center",
           }}
@@ -425,7 +425,7 @@ const Ticket = () => {
               sx={{
                 mr: "10px",
                 color: "whitesmoke",
-                fontSize: breakPoint ? "16px" : "40px",
+                fontSize: breakPoint ? "16px" : "30px",
               }}
             >
               {" "}
@@ -475,7 +475,7 @@ const Ticket = () => {
               sx={{
                 mr: "10px",
                 color: "whitesmoke",
-                fontSize: breakPoint ? "16px" : "40px",
+                fontSize: breakPoint ? "16px" : "30px",
               }}
             >
               {" "}
@@ -523,7 +523,7 @@ const Ticket = () => {
             <img
               src={truck}
               alt=""
-              style={{ height: breakPoint ? "10%" : "30%" }}
+              style={{ height: breakPoint ? "75px" : "30%" }}
             />
             <Typography
               variant="h3"
@@ -548,7 +548,7 @@ const Ticket = () => {
             <img
               src={premium}
               alt=""
-              style={{ height: breakPoint ? "10%" : "30%" }}
+              style={{ height: breakPoint ? "75px" : "30%" }}
             />
             <Typography
               variant="h3"
@@ -573,7 +573,7 @@ const Ticket = () => {
             <img
               src={offer}
               alt=""
-              style={{ height: breakPoint ? "10%" : "30%" }}
+              style={{ height: breakPoint ? "75px" : "30%" }}
             />
             <Typography
               variant="h3"
