@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab"
+import { useNavigate } from "react-router-dom";
 //import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   setIsNavOpen,
@@ -19,6 +20,7 @@ const FlexBox = styled(Box)`
 `;
 
 const SideBar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 //   const breakPoint = useMediaQuery("(max-width:700px)");
 //   const breakPoint2 = useMediaQuery("(max-width:1000px)");
@@ -31,6 +33,10 @@ const SideBar = () => {
     window.scrollTo(0,0)
 
   };
+
+    const handleNavMenuClick = (cat) => {
+    navigate(`/category/${cat}`);
+  }
 
  
   return (
@@ -88,7 +94,7 @@ const SideBar = () => {
                 fontSize: "1rem",
                 fontWeight:"bold"
               }}
-              onClick={() => dispatch(setIsNavOpen({}))} 
+              onClick={()=> {handleNavMenuClick('Swamiji%20Kirtans')}}
           
             />
             <Tab
@@ -99,7 +105,7 @@ const SideBar = () => {
                 fontWeight:"bold"
                 
               }}
-              onClick={() => dispatch(setIsNavOpen({}))} 
+              onClick={()=> {handleNavMenuClick('English%20Books')}}
            
             />
             <Tab
@@ -109,7 +115,7 @@ const SideBar = () => {
                 fontSize: "1rem",
                 fontWeight:"bold"
               }}
-              onClick={() => dispatch(setIsNavOpen({}))} 
+              onClick={()=> {handleNavMenuClick('BalMukund%20Books')}}
           
             />
             <Tab
@@ -119,7 +125,7 @@ const SideBar = () => {
                 fontSize: "1rem",
                 fontWeight:"bold"
               }}
-              onClick={() => dispatch(setIsNavOpen({}))} 
+              onClick={()=> {handleNavMenuClick('English%20Lectures-Swamiji%20(Audio)')}}
         
             />
           </Tabs>

@@ -232,7 +232,7 @@ function NavMenu({navFromTop}) {
     display: show ? 'block' : 'none',
   };
 
-  const handleSwamijKirtansClick = (cat) => {
+  const handleNavMenuClick = (cat) => {
     navigate(`/category/${cat}`);
   }
 
@@ -254,25 +254,25 @@ function NavMenu({navFromTop}) {
                   HOME
                 </Nav.Link>
                 <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('Swamiji%20Kirtans')}} >
+                  <NavDropdown.Item onClick={()=> {handleNavMenuClick('Swamiji%20Kirtans')}} >
                     Swamiji Kirtans
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="BOOKS" id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('English%20Books')}} >
+                  <NavDropdown.Item onClick={()=> {handleNavMenuClick('English%20Books')}} >
                     English Books
                   </NavDropdown.Item>
-                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('BalMukund%20Books')}}>
+                  <NavDropdown.Item onClick={()=> {handleNavMenuClick('BalMukund%20Books')}}>
                     BalMukund Books
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('English%20Lectures-Swamiji%20(Audio)')}} >
+                  <NavDropdown.Item onClick={()=> {handleNavMenuClick('English%20Lectures-Swamiji%20(Audio)')}} >
                     English Lectures
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={()=> {handleSwamijKirtansClick('English%20Lectures-Swamiji%20(Video)')}} >Videos</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=> {handleNavMenuClick('English%20Lectures-Swamiji%20(Video)')}} >Videos</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>

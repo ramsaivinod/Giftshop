@@ -61,7 +61,7 @@ const ProductCategory = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
-    setCategory(params.catName);
+    setCategory(params?.catName);
   },[params.catName]);
 
   useEffect(()=>{
