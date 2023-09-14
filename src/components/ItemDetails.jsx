@@ -485,8 +485,8 @@ const ItemDetails = () => {
                     Related Products
                   </Typography>
                   <Slider {...settings} style={{margin: "0 15px"}}>
-                    {item.slice(15, 28).map((item, i) => (
-                      <Item2 item={item} key={`${item.title}1-${item.id}`} />
+                    {item.filter(item=> item.tags === updateditem.tags).map((item, i) => (
+                      <Item2 item={item} key={`${item.title}-${item.id}`} />
                     ))}
                   </Slider>{" "}
                 </Box></div>
