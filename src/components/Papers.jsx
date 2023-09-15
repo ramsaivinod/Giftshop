@@ -36,6 +36,7 @@ const styles = {
     display: "flex",
     scrollBehavior: "smooth",
     scrollSnapType: "x mandatory",
+    backgroundColor: "#4d4d4d",
     "&::-webkit-scrollbar": {
       display: "none",
     },
@@ -49,7 +50,6 @@ const styles = {
     width: "100%",
     height: "20px",
     borderRadius: "0px",
-    gap: "5rem",
     scrollSnapAlign: "center",
   },
   arrowButton: {
@@ -91,84 +91,34 @@ const Papers = () => {
 
   return (
     <div style={styles.container} ref={containerRef}>
-      {breakPoint ? (
-        <Paper
-          onClick={() => {
-            navigate("/coupon");
-            window.scrollTo(0, 0);
-          }}
-          sx={{
-            backgroundColor: "#374450",
-            padding: "20px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "25px",
-            gap: "40rem",
-            borderRadius: "0px",
-            scrollSnapAlign: "center",
-          }}
-          elevation={3}
-        >
-          <IconButton
-            sx={{ ...styles.arrowButton, ...styles.leftArrowButton }}
-            onClick={scrollLeft}
-          >
-            <ChevronLeft />
-          </IconButton>
 
-          <Typography
-            sx={{ color: "white", fontWeight: "bold", fontSize: "15px" }}
-          >
-            10% OFF on your next purchase
-          </Typography>
-          <IconButton
-            sx={{ ...styles.arrowButton, ...styles.rightArrowButton }}
-            onClick={scrollRight}
-          >
-            <ChevronRight />
-          </IconButton>
-          <Typography
 
-            sx={{
-              color: "white",
-              fontWeight: "bold",
-              fontSize: "15px",
-
-              cursor: "pointer",
-            }}
-          >
-            SEE ALL OFFERS
-          </Typography>
-        </Paper>
-      ) : (
-        <Paper sx={styles.paper} elevation={3} onClick={() => {
+      <Paper
+        onClick={() => {
           navigate("/coupon");
           window.scrollTo(0, 0);
-        }}>
-          <Typography
-            sx={{ color: "white", fontWeight: "bold", fontSize: "10px" }}
-          >
-            20% OFF on your next purchase
+        }}
+        sx={{
+          backgroundColor: "#374450",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "25px",
+          borderRadius: "0px",
+          scrollSnapAlign: "center",
+        }}
+        elevation={3} className="nav-offer"
+      >
+        <marquee>
+          <Typography className="slide-offer">
+            <span>10% OFF on your next purchase</span>
+            <span>SEE ALL OFFERS</span>
           </Typography>
+        </marquee>
 
-          <Typography
-            // onClick={() => {
-            //   navigate("/coupon");
-            //   window.scrollTo(0, 0);
-            // }}
-            sx={{
-              color: "white",
-              fontWeight: "bold",
-              fontSize: "10px",
-              textDecoration: "underline",
-            }}
-          >
-            SEE ALL OFFER
-          </Typography>
-        </Paper>
-      )}
+      </Paper>
+
       {/* <Paper sx={styles.paper} elevation={3}>
 
       </Paper> */}
