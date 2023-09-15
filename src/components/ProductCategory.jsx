@@ -61,6 +61,15 @@ const ProductCategory = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
+    let arr = items.filter((item) => item.tags === params.catName);
+    let arr2 = items.filter((item) => item.tags === params.catName);
+    arr = arr.slice().sort((a, b) => a.variants[0].price - b.variants[0].price);
+    arr2 = arr2.slice().sort((a, b) => b.variants[0].price - a.variants[0].price);
+    setAsc(arr);
+    setDsc(arr2);
+  },[params.catName]);  
+
+  useEffect(()=>{
     setCategory(params?.catName);
   },[params.catName]);
 
@@ -260,7 +269,7 @@ const ProductCategory = () => {
                   <div style={{ margin: '0 20px 20px 20px' }}>
                     <div>
                       <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
-                      <CategoriesButton onChange={handleCategoriesChange} value={sortOrder} />
+                      <CategoriesButton onChange={handleCategoriesChange} value={category} />
                       <Button
                         onClick={() => clearFilter()}
                         variant="contained"
