@@ -49,7 +49,7 @@ function NavMenu({navFromTop}) {
   const [item, setItem] = useState([]);
   const [search, setSearchField] = useState("");
   const [categoryList,setCategoryList] = useState(itemsCategories);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
   const [asc, setAsc] = useState([]);
   const [dsc, setDsc] = useState([]);
@@ -233,7 +233,7 @@ function NavMenu({navFromTop}) {
   const handleNavMenuClick = (cat) => {
     navigate(`/category/${cat}`);
   }
-
+console.log(show);
   return (
     <>
         <Navbar expand="lg" className="navbox" style={{ top: navFromTop ? 0 : "" }}>

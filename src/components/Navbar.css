@@ -6,7 +6,7 @@
   display: flex !important;
   /* padding-right: 20px;
     padding-left: 50px; */
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 }
 
 .slick-slider {
@@ -293,6 +293,22 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
   cursor: pointer;
 }
 
+.searchActive {
+  display: block !important;
+}
+
+.nav-offer {
+  padding: 25px;
+}
+
+.slide-offer {
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  gap: 30rem;
+  display: flex;
+}
+
 @media (max-width:992px) {
   .navbox {
     background: #ff6d31;
@@ -365,6 +381,14 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
   .navbar-brand img {
     width: auto;
   }
+
+  .nav-offer {
+    padding: 0px;
+  }
+
+  .slide-offer {
+    gap: 25rem;
+  }
 }
 
 
@@ -374,7 +398,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
     position: absolute;
     top: 100%;
     right: 0%;
-    width: 100%;
+    width: 95%;
     margin-top: 5px;
   }
 
@@ -413,11 +437,19 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
   .allproductheading {
     font-size: 1.3rem;
   }
+
+  .slide-offer {
+    gap: 20rem;
+  }
 }
 
 @media (max-width:535px) {
   .containers {
     margin-bottom: 10px;
+  }
+
+  .slide-offer {
+    gap: 15rem;
   }
 }
 
