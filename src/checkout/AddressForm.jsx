@@ -48,7 +48,7 @@ const AddressForm = ({
         </Typography> */}
         <TextField
          // fullWidth
-      
+          required={true}
           type="text"
           label="Email"
           onBlur={handleBlur}
@@ -61,6 +61,7 @@ const AddressForm = ({
         />
         <TextField
           //fullWidth
+          required={true}
           type="text"
           label="Phone Number"
           onBlur={handleBlur}
@@ -74,7 +75,7 @@ const AddressForm = ({
      
     
       <TextField
-    
+        required={true}
         type="text"
         label="First Name"
         onBlur={handleBlur}
@@ -86,7 +87,7 @@ const AddressForm = ({
         sx={{ gridColumn: "span 4",width:isNonMobile ? "80%" :"100%" }}
       />
       <TextField
-        
+        required={true}
         type="text"
         label="Last Name"
         onBlur={handleBlur}
@@ -99,7 +100,7 @@ const AddressForm = ({
       />
       
       <TextField
-        
+        required={true}
         type="text"
         label="Country"
         onBlur={handleBlur}
@@ -111,7 +112,7 @@ const AddressForm = ({
         sx={{ gridColumn: "span 4",width:isNonMobile ? "80%" :"100%"}}
       />
       <TextField
-        
+        required={true}
         type="text"
         label="Street Address"
         onBlur={handleBlur}
@@ -135,6 +136,7 @@ const AddressForm = ({
         sx={{ gridColumn: "span 4",width:isNonMobile ? "80%" :"100%"}}
       />
       <TextField
+        required={true}
         fullWidth
         type="text"
         label="City"
@@ -147,7 +149,7 @@ const AddressForm = ({
         sx={{ gridColumn: "span 4",width:isNonMobile ? "80%" :"100%"  }}
       />
       <TextField
-        
+        required={true}
         type="text"
         label="Province"
         onBlur={handleBlur}
@@ -159,7 +161,7 @@ const AddressForm = ({
        sx={{ gridColumn: "span 2" }}
       />
       <TextField
-        
+        required={true}
         type="text"
         label="Zip Code"
         onBlur={handleBlur}
