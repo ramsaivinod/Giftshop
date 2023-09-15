@@ -88,6 +88,7 @@ const Checkout = ({ val }) => {
   const [type, setType] = useState(false)
   const directCoupon = useSelector((state) => state.cart.directCoupon)
   const couponName = useSelector((state) => state.cart.couponName)
+  const [isDisablePaymen,setIsDisablePaymen] = useState(true);
 
   let totalPrice = cart.reduce((total, item) => {
     return total + item.count * item.variants[0].price
@@ -118,6 +119,11 @@ const Checkout = ({ val }) => {
       makePayment(address)
     }
   }, [address, pay])
+
+  useEffect(()=>{
+    const isActive = address.email && address.firstName && address.lastName && address.phoneNumber && address.state;
+    setIsDisablePaymen(!isActive);
+  },[address])
 
   // useEffect(() => {}, [price, h]);
 
@@ -190,6 +196,7 @@ const Checkout = ({ val }) => {
   }
 
   async function makePayment(data) {
+    
     const requestBody = {
       //  userName: [values.firstName, values.lastName].join(" "),
       order: {
@@ -637,6 +644,7 @@ const Checkout = ({ val }) => {
                             }{" "}
                             {success ? (
                               <PayPalButtons
+                                disabled={isDisablePaymen}
                                 style={{ layout: "vertical", color: "blue" }}
                                 createOrder={(data, actions) =>
                                   createOrder(price, actions)
