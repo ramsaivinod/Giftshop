@@ -1,7 +1,5 @@
 //import { useTheme } from "@emotion/react";
 import { Box, Typography, IconButton } from "@mui/material"
-//import { shades } from "../theme";
-//import Link from "@mui/material";
 import Subscribe from "./Subscribe"
 import images from "../images/main-footer-bg.jpg"
 import menu from "../images/menu-shape.png"

@@ -188,72 +188,7 @@ const Ticket = () => {
             columnGap: "80px",
           }}
         >
-          {/* <Card
-            style={{
-              display: "flex",
-              alignItems: "center",
-              maxWidth: 500,
-              height: "150px",
-            }}
-          >
-            <CardMedia
-              component="img"
-              alt="Deals and Offers"
-              image={img}
-              title="Deals and Offers"
-              style={{ height: "100%", width: "200px" }}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Exclusive member benefits
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Check out our latest deals and offers and save big! Limited time
-                only.
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                style={{ marginTop: "10px" }}
-              >
-                Shop Now
-              </Button>
-            </CardContent>
-          </Card>
-          <Card
-            style={{
-              display: "flex",
-              alignItems: "center",
-              maxWidth: 500,
-              height: "150px",
-            }}
-          >
-            <CardMedia
-              component="img"
-              alt="Deals and Offers"
-              image={img2}
-              title="Deals and Offers"
-              style={{ height: "100%", width: "200px" }}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Amazing Deals and Offers!
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Check out our latest deals and offers and save big! Limited time
-                only.
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                style={{ marginTop: "10px" }}
-              >
-                Shop Now
-              </Button>
-            </CardContent>
-          </Card> */}
+
         </div>
 
         <Button
@@ -364,15 +299,7 @@ const Ticket = () => {
               </Box>
             )}
 
-            {/* <Divider sx={{background:"whitesmoke", width:"1px",height:"50%", transform: "translateY(50%)"}} flexItem/>
-          <Box sx={style.box}> 
-            <Typography variant="h1" sx={{ mr: "10px", color: "whitesmoke" }}>
-            {" "}
-            40% Off on Deals
-          </Typography>
-          <Typography variant="h3" sx={{color:"whitesmoke"}}> Online & In Stores</Typography>
-          <Typography variant="h5" sx={{color:"whitesmoke", textDecoration:"underline"}}> Shop Now</Typography>
-            </Box> */}
+ 
           </Box>
 
           {/* <Card

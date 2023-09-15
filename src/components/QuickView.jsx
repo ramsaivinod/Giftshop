@@ -6,12 +6,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart, setDisplay } from "../state";
 import { useNavigate } from "react-router-dom";
-//import { AddBoxTwoTone, MenuOutlined } from "@mui/icons-material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-// import { Link } from "react-router-dom";
 import "../App.css";
-//import Jklog from "../logo/jklogo.png";
-//import "./product.scss";
+
 import "./item.scss";
 import "./ItemDetails";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -170,21 +166,6 @@ const QuickView = () => {
                   TAGS: <strong> {item.tags}</strong>
                 </Typography>
                 <Box>
-                  {/* <Box m="20px 0 5px 0" display="flex">
-                  <FavoriteBorderOutlinedIcon />
-                  <Typography sx={{ ml: "5px" }} fontSize="11px">
-                    ADD TO WISHLIST
-                  </Typography>
-                </Box> */}
-                  {/* <Typography fontSize={breakPoint ? "12px" : "16px"} fontFamily={"Rubik"}>
-                    CATEGORIES: <strong> {item.tags}</strong>
-                  </Typography> */}
-                  {/* <Typography
-                  alignItems="flex-end"
-                  fontSize={breakPoint ? "12px" : "16px"}
-                >
-                  PRICE - ${item?.variants[0].price}
-                </Typography> */}
                 </Box>
               </Box>
             </Box>

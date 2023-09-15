@@ -6,9 +6,6 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart ,setItem ,setDisplay} from "../state";
 import { useNavigate } from "react-router-dom";
-//import { AddBoxTwoTone, MenuOutlined } from "@mui/icons-material";
-//import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-// import { Link } from "react-router-dom";
 import "../App.css";
 //import Jklog from "../logo/jklogo.png";
 import "./product.scss";
@@ -19,7 +16,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { enqueueSnackbar } from "notistack";
-// import { width } from "@mui/system";
+
 
 const RelatedProducts = ({ item }) => {
   const navigate = useNavigate();
@@ -40,19 +37,6 @@ const RelatedProducts = ({ item }) => {
   } = useTheme();
 
   const { variants, title } = item;
-//  var modal = document.getElementById("myModal");
-
-  // window.onclick = function (event) {
-  //   // console.log(event.target)
-  //   if (event.target == modal) {
-  //     setDisplay(!display);
-  //     // modal.style.display = "none";
-  //   }
-  // };
-
-  // const close = () => {
-  //   modal.style.display = "none";
-  // };
 
   const addtocart = () => {
     dispatch(addToCart({ item: { ...item, count } }));
@@ -226,9 +210,6 @@ const RelatedProducts = ({ item }) => {
             <Button
               id="myBtn"
               sx={{
-                // background: "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(233,222,192,1) 94%)",
-                // fontWeight: "bolder",
-                // fontSize: "medium",
                 color: "whitesmoke",
                 borderRadius: "100%",
                 backgroundColor: "#ff6d31",
@@ -284,62 +265,9 @@ const RelatedProducts = ({ item }) => {
                 />
               </IconButton>
             </Button>
-            {/* <Button
-              id="myBtn"
-              onClick={() => {
-                dispatch(setDisplay(!display));
-                dispatch(setItem(item));
-              }}
-              sx={{
-                // background: "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(233,222,192,1) 94%)",
-                // fontWeight: "bolder",
-                // fontSize: "medium",
-                color: "whitesmoke",
-                borderRadius: "100%",
-                backgroundColor: "#ff6d31",
-                width: "10%",
-                minWidth: "40px",
-                height: "34px",
-                "&:hover": {
-                  //you want this to be the same as the backgroundColor above
-                  backgroundColor: "#ff6d31",
-                },
-              }}
-            >
-              <IconButton style={{ widht: "2px", height: "40px" }}>
-                <RemoveRedEyeOutlinedIcon
-                  fontSize="medium"
-                  sx={{ transform: "scale(1.3)", color: "whitesmoke" }}
-                />
-              </IconButton>
-            </Button> */}
 
-            {/* <Box
-              className="box1"
-              display="flex"
-              alignItems="center"
-              backgroundColor="#ff6d31"
-              borderRadius="3px"
-            >
-              <IconButton
-                onClick={() => setCount(Math.max(count - 1, 1))}
-                color={shades.primary[900]}
-              >
-                <RemoveIcon />
-              </IconButton>
-              <Typography color={shades.primary[900]}>
-                <b> {count}</b>
-              </Typography>
-              <IconButton
-                onClick={() => setCount(count + 1)}
-                color={shades.primary[900]}
-              >
-                <AddIcon />
-              </IconButton>
-              <IconButton sx={{ color: "black" }}>
-              <MenuOutlined />
-            </IconButton>
-            </Box> */}
+
+
           </Box>
         </Box>
       </Box>
@@ -356,26 +284,13 @@ const RelatedProducts = ({ item }) => {
       </Button> */}
 
 <Box mt="3px">
-        {/* <Typography variant="subtitle2" color={neutral.dark} fontSize="16px">
-          {tags
-            .replace(/([A-Z])/g, " $1")
-            .replace(/^./, (str) => str.toUpperCase())}
-        </Typography> */}
         <Typography
           fontSize="20px"
           fontFamily={"Lora"}
           sx={{ wordWrap: "break-word" }}
         >
-          {/* {title.length > 26 ? (
-            <b>
-              {" "}
-              {title.slice(0, 22)}
-              <br /> - {title.slice(22, title.length)}
-            </b>
-          ) : ( */}
           <b> {title}</b>
-          {/* )} */}
-          {/* <b> {title}</b>  */}
+  
         </Typography>
         <Typography fontWeight="bold" fontSize="16px" color={"green"}>
           ${variants[0].price}

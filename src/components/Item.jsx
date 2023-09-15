@@ -6,15 +6,11 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart, setItem } from "../state";
 import { useNavigate } from "react-router-dom";
-//import { AddBoxTwoTone, MenuOutlined } from "@mui/icons-material";
-// import { Link } from "react-router-dom";
 import "../App.css";
-//import Jklog from "../logo/jklogo.png";
 import "./product.scss";
 import "./item.scss";
 import "./ItemDetails";
 import useMediaQuery from "@mui/material/useMediaQuery";
-// import { width } from "@mui/system";
 import { makeStyles } from "tss-react/mui";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -42,13 +38,7 @@ const Item = ({ item }) => {
   const { variants, title } = item;
   var modal = document.getElementById("myModal");
 
-  // Get the button that opens the modal
-  // var btn = document.getElementById("myBtn");
 
-  // // Get the <span> element that closes the modal
-  // var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks anywhere outside of the modal, close it
 
   window.onclick = function (event) {
     // console.log(event.target)
@@ -57,12 +47,6 @@ const Item = ({ item }) => {
       // modal.style.display = "none";
     }
   };
-
-  // const close = () => {
-  //   modal.style.display = "none";
-  // };
-
-  //
 
   const donothing = () => { };
 
@@ -208,21 +192,6 @@ const Item = ({ item }) => {
                       TAGS: <strong> {item.tags}</strong>
                     </Typography>
                     <Box>
-                      {/* <Box m="20px 0 5px 0" display="flex">
-                  <FavoriteBorderOutlinedIcon />
-                  <Typography sx={{ ml: "5px" }} fontSize="11px">
-                    ADD TO WISHLIST
-                  </Typography>
-                </Box> */}
-                      {/* <Typography fontSize={breakPoint ? "12px" : "16px"} fontFamily={"Rubik"}>
-                    CATEGORIES: <strong> {item.tags}</strong>
-                  </Typography> */}
-                      {/* <Typography
-                  alignItems="flex-end"
-                  fontSize={breakPoint ? "12px" : "16px"}
-                >
-                  PRICE - ${item?.variants[0].price}
-                </Typography> */}
                     </Box>
                   </Box>
                 </Box>
@@ -287,9 +256,6 @@ const Item = ({ item }) => {
             <Button
               id="myBtn"
               sx={{
-                // background: "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(233,222,192,1) 94%)",
-                // fontWeight: "bolder",
-                // fontSize: "medium",
                 color: "whitesmoke",
                 borderRadius: "100%",
                 backgroundColor: "#ff6d31",
@@ -332,7 +298,6 @@ const Item = ({ item }) => {
                 height: "34px",
                 marginBottom: "10px",
                 "&:hover": {
-                  //you want this to be the same as the backgroundColor above
                   backgroundColor: "#ff6d31",
                 },
               }}
@@ -350,13 +315,8 @@ const Item = ({ item }) => {
               id="myBtn"
               onClick={() => {
                 setDisplay(!display);
-                //  dispatch(setItem(item));
-                //dispatch(setDisplay(!display));
               }}
               sx={{
-                // background: "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(233,222,192,1) 94%)",
-                // fontWeight: "bolder",
-                // fontSize: "medium",
                 color: "whitesmoke",
                 borderRadius: "100%",
                 backgroundColor: "#ff6d31",
@@ -377,32 +337,7 @@ const Item = ({ item }) => {
               </IconButton>
             </Button>
 
-            {/* <Box
-              className="box1"
-              display="flex"
-              alignItems="center"
-              backgroundColor="#ff6d31"
-              borderRadius="3px"
-            >
-              <IconButton
-                onClick={() => setCount(Math.max(count - 1, 1))}
-                color={shades.primary[900]}
-              >
-                <RemoveIcon />
-              </IconButton>
-              <Typography color={shades.primary[900]}>
-                <b> {count}</b>
-              </Typography>
-              <IconButton
-                onClick={() => setCount(count + 1)}
-                color={shades.primary[900]}
-              >
-                <AddIcon />
-              </IconButton>
-              <IconButton sx={{ color: "black" }}>
-              <MenuOutlined />
-            </IconButton>
-            </Box> */}
+
           </Box>
         </Box>
       </Box>
@@ -416,11 +351,6 @@ const Item = ({ item }) => {
       </Button> */}
 
       <Box mt="3px">
-        {/* <Typography variant="subtitle2" color={neutral.dark} fontSize="16px">
-          {tags
-            .replace(/([A-Z])/g, " $1")
-            .replace(/^./, (str) => str.toUpperCase())}
-        </Typography> */}
         <Typography fontSize="16px" fontFamily={"QuickSand"} height={"4.1rem"} overflow={"hidden"} style={{ lineHeight: "1.2", }}>
           {title}
         </Typography>
@@ -432,12 +362,6 @@ const Item = ({ item }) => {
             sx={{
               backgroundColor: "#F24E1E",
               marginTop: "0px",
-              // marginTop:
-              //   title.length > 25
-              //     ? "30px"
-              //     : title.length > 26 && title.length < 80
-              //     ? "10px"
-              //     : "60px",
               color: "white",
               borderRadius: 0,
 

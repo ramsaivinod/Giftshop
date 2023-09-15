@@ -1,10 +1,7 @@
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CancelIcon from '@mui/icons-material/Cancel';
-import styled from "@emotion/styled";
 import React, { useState } from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab"
 //import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   setIsNavOpen,
@@ -14,8 +11,6 @@ import PriceFilter from "./PriceFilter";
 
 const FilterBar = () => {
     const dispatch = useDispatch();
-    //   const breakPoint = useMediaQuery("(max-width:700px)");
-    //   const breakPoint2 = useMediaQuery("(max-width:1000px)");
       const value = useSelector((state) => state.cart.value);
       const isNavOpen = useSelector((state) => state.cart.isNavOpen);
       const handleChange = (event, newValue) => {

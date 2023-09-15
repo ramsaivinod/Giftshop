@@ -1,30 +1,4 @@
-// import React from "react";
 
-// import { Paper, Typography, Box } from "@mui/material";
-
-// const Papers = () => {
-//   return (
-//     <Paper
-//       sx={{
-//         backgroundColor: "purple",
-//         padding: "0px",
-//         //marginTop:"-100em",
-//         // marginTop:"80px",
-//         // marginBottom:"-80px",
-//         display: "flex",
-//         justifyContent: "center",
-//         alignItems: "center",
-//         width: "100%",
-//         height: "20px",
-//       }}
-//       elevation={3}
-//     >
-//       <Typography sx={{ color: "white", fontWeight: "bold", fontSize: "18px" }}>
-//         20% OFF on your next purchase
-//       </Typography>
-//     </Paper>
-//   );
-// };
 
 import React, { useRef } from "react";
 import { Paper, Typography, IconButton } from "@mui/material";
@@ -154,10 +128,6 @@ const Papers = () => {
           </Typography>
 
           <Typography
-            // onClick={() => {
-            //   navigate("/coupon");
-            //   window.scrollTo(0, 0);
-            // }}
             sx={{
               color: "white",
               fontWeight: "bold",
@@ -169,47 +139,10 @@ const Papers = () => {
           </Typography>
         </Paper>
       )}
-      {/* <Paper sx={styles.paper} elevation={3}>
-
-      </Paper> */}
-      {/* <Paper sx={styles.paper} elevation={3}>
-        <Typography sx={{ color: "white", fontWeight: "bold", fontSize: "18px" }}>
-          Free Shipping on all orders
-        </Typography>
-      </Paper> */}
     </div>
   );
 };
 
 export default Papers;
 
-//export default Papers;
 
-//   paper: {
-//     backgroundColor: '#6A5ACD',
-//     padding: theme.spacing(1),
-//     display: 'flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     width: '100%',
-//   },
-//   text: {
-//     color: 'white',
-//     fontWeight: 'bold',
-//     fontSize: '18px',
-//   },
-// }));
-
-// function CouponDiscount(props) {
-//   const classes = useStyles();
-
-//   return (
-//     <Paper className={classes.paper} elevation={3}>
-//       <Typography className={classes.text}>
-//         {props.discount}% OFF on your next purchase
-//       </Typography>
-//     </Paper>
-//   );
-// }
-
-// export default CouponDiscount;

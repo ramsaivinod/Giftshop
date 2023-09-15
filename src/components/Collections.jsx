@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { encode as btoa } from "base-64";
-import Item from "./Item";
-import Item2 from "./Item2";
 import { useSelector } from "react-redux";
 import Products from "./Products";
 import { Box, Typography } from "@mui/material";

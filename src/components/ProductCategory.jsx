@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography, Button, IconButton } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import Item from './Item';
-import { makeStyles } from 'tss-react/mui';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { encode as btoa } from 'base-64';
@@ -379,12 +377,7 @@ const ProductCategory = () => {
                 <PriceFilter onPriceChange={handlePriceFilter} />
                 <div>
                   <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
-                  {/*    
-                  
-                <CategoriesButton
-                    onChange={handleCategoriesChange}
-                    value={sortOrder}
-                  />*/}
+    
 
                   <Button
                     onClick={breakPoint2 ? () => clearMobFilter() : () => clearFilter()}

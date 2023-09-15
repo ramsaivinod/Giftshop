@@ -35,13 +35,7 @@ const Products = ({ item }) => {
   const { title } = item;
   var modal = document.getElementById("myModal");
 
-  // Get the button that opens the modal
-  // var btn = document.getElementById("myBtn");
 
-  // // Get the <span> element that closes the modal
-  // var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks anywhere outside of the modal, close it
 
   window.onclick = function (event) {
     // console.log(event.target)
@@ -51,11 +45,6 @@ const Products = ({ item }) => {
     }
   };
 
-  // const close = () => {
-  //   modal.style.display = "none";
-  // };
-
-  //
 
 
 
@@ -306,17 +295,10 @@ const Products = ({ item }) => {
       </Button>
 
       <Box mt="3px">
-        {/* <Typography variant="subtitle2" color={neutral.dark} fontSize="16px">
-          {tags
-            .replace(/([A-Z])/g, " $1")
-            .replace(/^./, (str) => str.toUpperCase())}
-        </Typography> */}
         <Typography fontSize="16px">
           <b> {title}</b>
         </Typography>
-        {/* <Typography fontWeight="bold" fontSize="16px">
-          ${variants[0].price}
-        </Typography> */}
+
       </Box>
     </Box>
 

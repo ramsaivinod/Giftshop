@@ -1,26 +1,8 @@
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  Grid,
-  IconButton,
-  Container,
-  Icon,
-  useTheme,
-  Button,
-} from "@mui/material"
-import { ShoppingCart, LocalShipping, Payment } from "@mui/icons-material"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import CloseIcon from "@mui/icons-material/Close"
-import AddIcon from "@mui/icons-material/Add"
-import RemoveIcon from "@mui/icons-material/Remove"
-import MoneyIcon from "@mui/icons-material/Money"
-import { shades, theme } from "../theme"
-import { makeStyles } from "tss-react/mui"
-import top100 from "../logo/top100.png"
 import audiobooks from "../logo/JKYOG-Academy-compressed.jpeg"
 import books from "../logo/Purpose-of-Life-min.jpeg"
 import coupons from "../logo/SMEX-Thumbnail-min.jpeg"
@@ -28,9 +10,7 @@ import giftcard from "../logo/SMLA-min.jpeg"
 import pen from "../logo/Yoga.jpeg"
 import trophy from "../logo/5.webp"
 
-
 import useMediaQuery from "@mui/material/useMediaQuery"
-import giftcard2 from "../logo/giftcard.svg"
 import "./banner.css"
 import { useNavigate } from "react-router-dom"
 import { Fragment } from "react"
@@ -115,7 +95,7 @@ function Banner() {
             )
           })}
       </Slider>
-      : <></>
+      : <Fragment></Fragment>
       }
       
     </div>

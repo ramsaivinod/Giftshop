@@ -1,20 +1,12 @@
 import { useState, useCallback, Fragment } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IconButton, Box, Typography, useTheme, Button } from "@mui/material"
-import AddIcon from "@mui/icons-material/Add"
-import RemoveIcon from "@mui/icons-material/Remove"
-import { shades } from "../theme"
 import { addToCart, setDisplay, setItem } from "../state"
 import { useNavigate } from "react-router-dom"
-//import { AddBoxTwoTone, MenuOutlined } from "@mui/icons-material";
-// import { Link } from "react-router-dom";
 import "../App.css"
-//import Jklog from "../logo/jklogo.png";
-//import "./product.scss";
 import "./item.scss"
 import "./ItemDetails"
 import useMediaQuery from "@mui/material/useMediaQuery"
-import QuickView from "./QuickView"
 import { enqueueSnackbar } from "notistack"
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined"
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
@@ -28,7 +20,6 @@ const Item2 = ({ item }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [count, setCount] = useState(1)
-  //const [display, setDisplay] = useState(false);
   const [isHovered, setIsHovered] = useState(false)
   const breakPoint = useMediaQuery("(min-width:700px)")
   const breakPoint2 = useMediaQuery("(min-width:300px)")
@@ -87,21 +78,7 @@ const Item2 = ({ item }) => {
               height="50px"
               src={item.image.src}
               onClick={() => navigate(`/item/${item.id}`)}
-              style={
-                {
-                  //opacity: isHovered ? 0.6 : 1,
-                  // cursor: "pointer",
-                  // position: "relative",
-                  // width: breakPoint ? "220px" : breakPoint2 ? "180px" : "100px",
-                  // height: breakPoint ? "270px" : breakPoint2 ? "220px" : "140px",
-                  // /* background: #232323; */
-                  // borderRadius: "0px",
-                  // objectFit: "contain",
-                  // transition: "transform 0.5s ease-in-out",
-                  // transformStyle: "preserve-3d",
-                  // boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
-                }
-              }
+
             />
           )}
         </div>
@@ -115,12 +92,6 @@ const Item2 = ({ item }) => {
             top: "20px",
             right: "-40px",
           }}
-        // position="absolute"
-        // bottom="53%"
-        // left="14%" //-43% //-27%
-        // width="0%"
-        // padding="0 100px"
-        // cursor="pointer"
         >
           <Box
             display={breakPoint3 ? "none" : "flex"}
@@ -245,18 +216,6 @@ const Item2 = ({ item }) => {
         </Typography>
         <button
           className="addtocart"
-          /*    sx={{
-            backgroundColor: "#F24E1E",
-            color: "white",
-            borderRadius: 0,
-            minWidth: "150px",
-            padding: "10px 40px",
-            borderRadius: "44.3862px",
-            "&:hover": {
-              //you want this to be the same as the backgroundColor above
-              backgroundColor: "#F24E1E",
-            },
-          }} */
           onClick={() => addtocart()}
         >
           ADD TO CART
