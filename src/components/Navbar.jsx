@@ -571,7 +571,7 @@ function Navbars() {
                 padding="10px"
               // color="#ff6d31"
               >
-                <h2 className="trending"> Trending </h2>
+                <h2 className="trending" style={{fontFamily: 'HeuristicaRegular'}}> Trending </h2>
               </Typography>
               {newArrivalsItems?.length > 0 &&
                 <Slider {...settings} className="trendingitems" >
@@ -591,7 +591,7 @@ function Navbars() {
                 padding="11px"
               // color="#ff6d31"
               >
-                <h2 className="bestsellers">Best Sellers</h2>
+                <h2 className="bestsellers" style={{fontFamily: 'HeuristicaRegular'}}>Best Sellers</h2>
               </Typography>
               {SwamijiKirtans?.length > 3 ? (
                 <Slider {...settings} className="trendingitems">

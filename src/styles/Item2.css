@@ -28,14 +28,11 @@
   margin-top: 9px;
   font-weight: bolder;
   /* background-color: #ff6d31;; */
-
-  font-family: 'SourceSansProRegular';
   /* padding: 6px 20px; */
   background: #ff6d2f;
 }
 
 .trending {
-  font-family: 'heuristica-regular', sans-serif;
   display: block;
   font-size: 2rem;
   color: #ff6d31;
@@ -49,7 +46,6 @@ button#myBtn {
 }
 
 .bestsellers {
-  font-family: 'heuristica-regular', sans-serif;
   display: block;
   /* width: 30%; */
   /* justify-content: center; */

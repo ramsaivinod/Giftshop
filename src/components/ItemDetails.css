@@ -9,6 +9,7 @@
     margin: 66px auto;
     padding: 60px 0 0;
 }
+
 p.MuiTypography-root.MuiTypography-body1.css-1dylaqm-MuiTypography-root {
     text-align: right;
     font-size: 20px;
@@ -35,23 +36,27 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiButton-textPrimary.Mu
     font-size: 14px;
     border-radius: 50px;
 }
+
 h2.MuiTypography-root.MuiTypography-h2.css-1xppdsu-MuiTypography-root {
     text-decoration-line: none !important;
+    font-family: HeuristicaRegular;
 }
 
 .slick-list {
     left: -2%;
 }
 
-.slick-prev, 
+.slick-prev,
 .slick-next {
     width: 45px !important;
     height: 45px !important;
 }
+
 .slick-prev {
     left: 0px;
     z-index: 9;
 }
+
 .slick-next {
     right: 15px !important;
 }
@@ -81,7 +86,8 @@ span.MuiBadge-root.css-1owe06k-MuiBadge-root {
     margin: 5px 0 10px 0 !important;
 }
 
-.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before {
     opacity: 1;
 }
 
@@ -105,6 +111,7 @@ img.product_img {
 .MuiBox-root.css-1t6c90p {
     margin-left: 20px;
 }
+
 p.MuiTypography-root.MuiTypography-body1.css-1ogtypt-MuiTypography-root {
     margin-top: 15px;
 }
@@ -113,6 +120,7 @@ p.MuiTypography-root.MuiTypography-body1.css-1ogtypt-MuiTypography-root {
 .MuiBox-root.css-1a2kt9l {
     border-radius: 50px;
 }
+
 .css-1fwmtsq-MuiButtonBase-root-MuiButton-root,
 button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.css-h2izk7-MuiButtonBase-root-MuiButton-root,
 button.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.css-xhiik6-MuiButtonBase-root-MuiButton-root,
@@ -184,6 +192,7 @@ img.product_imgs {
 .css-fkv5vw-MuiTypography-root {
     color: #fff;
 }
+
 /* .MuiBox-root.css-k008qs {
     display: -webkit-box !important;
 } */
@@ -196,5 +205,5 @@ img.product_imgs {
     .MuiBox-root.css-a7d046 {
         width: 55% !important;
     }
-    
+
 }

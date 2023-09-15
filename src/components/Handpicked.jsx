@@ -38,7 +38,7 @@ const Handpicked = () => {
     .filter((item) => item.tags === "BalMukund Books")
     .slice(0, 5)
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
   var settings = {
     dots: false,
@@ -87,7 +87,7 @@ const Handpicked = () => {
   return (
     <div className="handpicked">
       <div className="hp_body">
-        <h1 className="main_heading"> Discover unique hand-picked items</h1>
+        <h1 className="main_heading" style={{ fontFamily: 'HeuristicaRegular' }}> Discover unique hand-picked items</h1>
         <div className="headings">
           {heading.map((h) => {
             return (
@@ -103,20 +103,20 @@ const Handpicked = () => {
         <div className="image_section">
           {currenth == "English Books" ? (
             <Fragment>
-               {englishbooks?.length > 0 && 
+              {englishbooks?.length > 0 &&
                 <Slider {...settings} style={{ width: "100%" }}>
                   {englishbooks.map((i) => {
                     return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
                   })}
                 </Slider>
-               }
+              }
             </Fragment>
           ) : currenth == "Kirtans" ? (
-            <Fragment>   
+            <Fragment>
               <Slider {...settings} style={{ width: "100%" }}>
-              {newArrivalsItems.map((i) => {
-                return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
-              })}</Slider>
+                {newArrivalsItems.map((i) => {
+                  return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
+                })}</Slider>
             </Fragment>
           ) : currenth == "BestSellers" ? (
             <Fragment>   <Slider {...settings} style={{ width: "100%" }}>

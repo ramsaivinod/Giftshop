@@ -91,7 +91,7 @@
 .nav-link {
   font-size: 16px !important;
   font-weight: bold !important;
-  font-family: 'heuristica-regular', sans-serif;
+  font-family: HeuristicaRegular;
   margin: 0px 14px;
   padding: 0px;
   color: rgb(255, 255, 255) !important;
@@ -232,7 +232,7 @@
   text-align: center;
   /* padding: 50px; */
   margin-top: -30px;
-  font-family: 'heuristica-regular', sans-serif;
+  font-family: HeuristicaRegular;
   font-size: 2rem;
   color: #ff6d31;
   font-weight: 800;
@@ -240,7 +240,7 @@
 
 .filterTitle {
   margin-bottom: 1em;
-  font-family: 'heuristica-regular', sans-serif;
+  font-family: HeuristicaRegular;
   padding: 10px;
   font-size: 20px;
   background: #ff6d31;
@@ -257,7 +257,7 @@
   margin-right: 2em;
   font-size: 16px;
   font-weight: 800;
-  font-family: 'heuristica-regular', sans-serif;
+  font-family: HeuristicaRegular;
   margin: 0;
 
 }
