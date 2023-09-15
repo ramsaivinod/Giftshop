@@ -382,7 +382,11 @@ const ItemDetails = () => {
                       backgroundColor={"#edaa38"}
                     >
                       <IconButton
-                        onClick={() => setCount(Math.max(count - 1, 0))}
+                        onClick={() => {
+                          if(count > 1){
+                            setCount(Math.max(count - 1, 0));
+                          }
+                        }}
                       >
                         <RemoveIcon />
                       </IconButton>
