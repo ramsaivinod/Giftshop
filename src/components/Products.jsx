@@ -11,7 +11,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 // import { Link } from "react-router-dom";
 import "../App.css";
 //import Jklog from "../logo/jklogo.png";
-import "./product.scss";
+import "../styles/product.scss";
 import "./ItemDetails";
 import useMediaQuery from "@mui/material/useMediaQuery";
 // import { width } from "@mui/system";

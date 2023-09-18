@@ -31,7 +31,7 @@ import trophy from "../logo/5.webp"
 
 import useMediaQuery from "@mui/material/useMediaQuery"
 import giftcard2 from "../logo/giftcard.svg"
-import "./banner.css"
+import "../styles/banner.css"
 import { useNavigate } from "react-router-dom"
 import { Fragment } from "react"
 

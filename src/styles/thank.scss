@@ -6,34 +6,40 @@
 }
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap");
+
 html,
 body {
   font-family: HeuristicaRegular;
 }
+
 .thankyou-page ._header {
   background: #fee028;
   padding: 100px 30px;
   margin-top: -7%;
   text-align: center;
-  background: #fee028 url(https://codexcourier.com/images/main_page.jpg)
-    center/cover no-repeat;
+  background: #fee028 url(https://codexcourier.com/images/main_page.jpg) center/cover no-repeat;
 }
+
 .thankyou-page ._header .logo {
   max-width: 30%;
   margin: 0 auto 50px;
 }
+
 .thankyou-page ._header .logo img {
   width: 100%;
 }
+
 .thankyou-page ._header h1 {
   font-size: 65px;
   font-weight: 800;
   color: white;
   margin: -30px;
 }
+
 .thankyou-page ._body {
   margin: -70px 0 30px;
 }
+
 .thankyou-page ._body ._box {
   margin: auto;
   max-width: 80%;
@@ -50,6 +56,7 @@ body {
   font-weight: 600;
   color: #4ab74a;
 }
+
 .thankyou-page ._footer {
   text-align: center;
   padding: 50px 30px;
@@ -68,8 +75,6 @@ body {
 }
 
 .table {
-  // background-color: red;
-  //font-variant: ;
   margin-top: -4rem;
   margin-bottom: 3rem;
   border: 2px solid #dee2e6;
@@ -79,19 +84,17 @@ body {
   font-size: smaller;
 }
 
-@media (max-width: 700px) and (min-width:300px){
+@media (max-width: 700px) and (min-width:300px) {
   .thankyou-page ._body ._box {
     max-width: 100%;
-    padding:45px
-    
+    padding: 45px
   }
 }
 
 
-@media (max-width: 350px) and (min-width:0px){
-    .thankyou-page ._body ._box {
-      max-width: 98%;
-      padding: 17px;
-    }
+@media (max-width: 350px) and (min-width:0px) {
+  .thankyou-page ._body ._box {
+    max-width: 98%;
+    padding: 17px;
   }
-  
+}

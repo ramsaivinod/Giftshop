@@ -2,7 +2,7 @@ import { Slider, Box, Button, Typography } from "@mui/material"
 import React, { useState } from "react"
 import styled from "@emotion/styled"
 import useMediaQuery from "@mui/material/useMediaQuery"
-import "./pricefilter.css"
+import "../styles/pricefilter.css"
 import Radio from "@mui/material/Radio"
 import RadioGroup from "@mui/material/RadioGroup"
 import FormControlLabel from "@mui/material/FormControlLabel"
@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl"
 import { setPriceFilter } from "../state"
 import { useDispatch, useSelector } from "react-redux"
 import "../theme.js"
-import "./style.css"
+import "../styles/style.css"
 const FlexBox = styled(Box)`
   display: flex;
   // justify-content: space-between;

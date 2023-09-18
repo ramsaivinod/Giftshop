@@ -1,4 +1,4 @@
-import "./frame-component.css";
+import "../styles/frame-component.css";
 import img1 from "../logo/rectangle-5@2x.png"
 import img2 from "../logo/rectangle-6@2x.png"
 import img3 from "../logo/rectangle-8@2x.png"

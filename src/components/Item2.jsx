@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 import "../App.css"
 //import Jklog from "../logo/jklogo.png";
 //import "./product.scss";
-import "./item.scss"
+import "../styles/item.scss"
 import "./ItemDetails"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import QuickView from "./QuickView"
