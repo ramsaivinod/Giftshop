@@ -12,11 +12,11 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import "../App.css";
 //import Jklog from "../logo/jklogo.png";
 //import "./product.scss";
-import "./item.scss";
+import "../styles/item.scss";
 import "./ItemDetails";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { enqueueSnackbar } from "notistack";
-import "./item.scss";
+import "../styles/item.scss";
 
 const QuickView = () => {
   const navigate = useNavigate();

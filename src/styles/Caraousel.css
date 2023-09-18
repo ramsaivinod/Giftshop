@@ -1,38 +1,11 @@
 .carousel-root {
-  /* width: 1001px;
-  height: 551px; */
   position: relative;
   overflow: hidden;
-  /*  margin: auto; */
 }
 
 .carousel.carousel-slider .control-arrow:hover {
   background: transparent;
 }
-
-/* .slick-prev {
-  left: -30px !important;
-  width: 35px !important;
-  height: 35px !important;
-}
-
-.slick-next {
-  right: -30px !important;
-  width: 35px !important;
-  height: 35px !important;
-}
-
-.slick-prev:before,
-.slick-next:before {
-  font-size: 35px !important;
-  line-height: 1.1 !important;
-} */
-
-/* @media screen and (min-width: 400px) {
-  .carousel .slider-wrapper {
-    width: 80%;
-  }
-} */
 
 @media screen and (min-width: 1000px) {
   .carousel .slider-wrapper {
@@ -54,7 +27,6 @@
     height: 220px;
     position: relative;
     overflow: hidden;
-    /*  margin: auto; */
   }
 
   .carousel .slider-wrapper {

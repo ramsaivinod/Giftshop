@@ -7,7 +7,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
-import "./style.css";
+import "../styles/style.css";
 import {
   ShoppingBagOutlined,
   MenuOutlined,
@@ -22,7 +22,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./Navbar.css";
+import "../styles/Navbar.css";
 import "../App.css";
 import styled from "@emotion/styled";
 import "react-dropdown/style.css";

@@ -10,7 +10,7 @@ import { setSortOrder } from "../state";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsFilterOpen } from "../state";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import "./style.css";
+import "../styles/style.css";
 
 function SortRadioButtons({ onChange, value }) {
   //const [sortOrder, setSortOrder] = useState(value);

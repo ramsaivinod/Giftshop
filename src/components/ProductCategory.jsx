@@ -3,7 +3,7 @@ import { Box, Typography, Button, IconButton } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Item from './Item';
 import { makeStyles } from 'tss-react/mui';
-import './style.css';
+import '../styles/style.css';
 import { useNavigate } from 'react-router-dom';
 import { encode as btoa } from 'base-64';
 import { setItems, setValue, setPriceFilter, setSortOrder, setItemsCategories, setIsFilterOpen } from '../state';
@@ -12,7 +12,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './Navbar.css';
+import '../styles/Navbar.css';
 import '../App.css';
 import PriceFilter from './PriceFilter';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';

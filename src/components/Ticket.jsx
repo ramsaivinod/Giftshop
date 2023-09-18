@@ -24,7 +24,7 @@ import {
   Box,
   Divider,
 } from "@mui/material";
-import "./style.css";
+import "../styles/style.css";
 import { Image, WindowSharp } from "@mui/icons-material";
 import {
   setPrice,

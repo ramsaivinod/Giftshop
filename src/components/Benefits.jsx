@@ -1,4 +1,4 @@
-import styles from "./benefits.module.css";
+import styles from "../styles/benefits.module.css";
 import bag from "../logo/frame-17.svg"
 import bag2 from "../logo/frame-171.svg"
 import bag3 from "../logo/frame-172.svg"

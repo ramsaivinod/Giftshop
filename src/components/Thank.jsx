@@ -10,7 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import "./thank.scss";
+import "../styles/thank.scss";
 import logo from "../logo/jklogo.png";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import { useSelector } from "react-redux";

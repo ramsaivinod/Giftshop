@@ -38,6 +38,7 @@
     display: flex;
 }
 
+
 @media screen and (max-width:400px) {
     .side-images {
         height: 0vh;
@@ -97,3 +98,4 @@
         padding: 30px;
     }
 }
+

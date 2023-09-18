@@ -163,7 +163,8 @@ margin-top: "2rem"
   height: 370px; */
   padding: 5px;
   border-radius: 5px;
-  background: #fffdfc
+  background: #fffdfc;
+  margin: 15px 5px;
 }
 
 /* .product_img{

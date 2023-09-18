@@ -28,9 +28,9 @@ import Jklog from "../logo/jklogo.png";
 import Slider from "react-slick";
 import RelatedProducts from "./RelatedProducts";
 import SideBar from "./SideBar";
-import "./ItemDetails.css";
+import "../styles/ItemDetails.css";
 import ReactMagnifier from "@sandeepv68/react-magnifier";
-import "./Navbar.css"
+import "../styles/Navbar.css"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { SearchOutlined } from "@mui/icons-material"
 import CancelIcon from "@mui/icons-material/Cancel"
