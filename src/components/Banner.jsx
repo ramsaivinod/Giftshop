@@ -27,6 +27,7 @@ import coupons from "../logo/SMEX-Thumbnail-min.jpeg"
 import giftcard from "../logo/SMLA-min.jpeg"
 import pen from "../logo/Yoga.jpeg"
 import trophy from "../logo/5.webp"
+import { fetchDataFromApi } from "../utils/api";
 
 
 import useMediaQuery from "@mui/material/useMediaQuery"
@@ -87,6 +88,7 @@ var settings = {
 }
 function Banner() {
   const [categoryList,setCategoryList] = useState([]);
+  const [tags,setTags] = useState([]);
   const breakPoint = useMediaQuery("(min-width:870px)")
   const navigate = useNavigate()
   const itemsCategories = useSelector((state) => state.cart.itemsCategories);
@@ -95,21 +97,37 @@ function Banner() {
     setCategoryList(itemsCategories);
   },[itemsCategories])
 
+
+  useEffect(()=>{
+    const getTags = async() => {
+      try {
+        const  resp = await fetchDataFromApi("/api/gift-shop-contents?populate=*");
+        if(resp){
+          setTags(resp?.data);
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+      
+    };
+    getTags()
+  },[])
+
   return (
 
 
     <div className="banner_box">
-      {categoryList?.length ? 
+      {tags?.length ? 
         <Slider {...settings} style={{ width: "100%" }}>
-          {categoryList?.map((item,i) => {
+          {tags?.map((item,i) => {
             return (
-              <div key={i} className="banner_icon" onClick={() => navigate(`/category/${item}`)} >
+              <div key={i} className="banner_icon" onClick={() => navigate(`/category/${item?.attributes?.title}`)} >
                 <div className="bannerimg">
-                  <img src={picsList[i]} alt="banner-image" className="banner_img" />
+                  <img src={item?.attributes?.content_image?.data?.attributes?.url} alt="banner-image" className="banner_img" />
                 </div>
 
                 <div className="banner_text">
-                  <div className="text">{item}</div>
+                  <div className="text">{item?.attributes?.title}</div>
                 </div>
               </div>
             )

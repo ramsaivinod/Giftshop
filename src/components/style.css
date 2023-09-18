@@ -44,11 +44,18 @@
     }
 }
 
-.side-images img {
+.side-images a {
     /* height: 35%; */
     height: 36.5%;
     object-fit: cover;
 }
+
+.side-images a img {
+    /* height: 35%; */
+    height: 100%;
+    object-fit: cover;
+}
+
 
 @media (max-width:1400px) {
     .side-images {
@@ -67,7 +74,7 @@
         width: 100%;
     }
 
-    .side-images {
+    .side-images {  
         display: none;
     }
 }

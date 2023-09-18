@@ -39,7 +39,7 @@ import { SearchOutlined } from "@mui/icons-material";
 //import { shades } from "../theme";
 import { FormControl, InputLabel } from "@mui/material";
 import { setIsCartOpen, setIsNavOpen, setIsFilterOpen } from "../state";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { encode as btoa } from "base-64";
 import { setItems, setValue, setPriceFilter, setSortOrder } from "../state";
 import React, { Fragment, useEffect, useState, useRef, useMemo } from "react";
@@ -116,6 +116,7 @@ function Navbars() {
   const [val, setVal] = useState("");
   const [categories, setCategories] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
+  const [sideBanner, setSideBanner] = useState([]);
 
   const getCategories = () => {
     fetchDataFromApi("/api/categories").then((res) => {
@@ -533,6 +534,28 @@ function Navbars() {
     },
   }));
   const classes = styles();
+
+  useEffect(()=>{
+    const getBanner = async() => {
+      try {
+        const  resp = await fetchDataFromApi("/api/gift-shop-sideimages?populate=*");
+        if(resp){
+          setSideBanner(resp?.data);
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    
+      // 'categoriesData' is not available here immediately after calling 'fetchDataFromApi'
+    
+      // You can perform other operations here, but avoid relying on 'categoriesData' at this point
+    };
+    getBanner()
+  },[])
+
+  const [banner1,banner2] = sideBanner;
+
+
   return (
     // <Slider {...settings}>
     <Fragment>
@@ -547,10 +570,12 @@ function Navbars() {
         <div className="container boxess">
           <div className="main-section">
             <div className="main-carousel">{<MainCarousel />}</div>
-            <div className="side-images">
-              <img src={books}   alt="image-1" />
-              <img src={coupons} alt="image-1" />
+            {banner1 && banner2 && <>
+              <div className="side-images">
+              <Link to={banner1?.attributes?.side_images_url}><img src={banner1?.attributes?.side_images?.data?.attributes?.url}   alt="image-1" /></Link>
+              <Link to={banner2?.attributes?.side_images_url}><img src={banner2?.attributes?.side_images?.data?.attributes?.url} alt="image-1" /></Link>
             </div>
+            </>}
           </div>
 
           {<Banner />}

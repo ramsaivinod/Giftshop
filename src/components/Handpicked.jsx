@@ -12,30 +12,28 @@ import { useState } from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+
+import { fetchDataFromApi } from "../utils/api";
+
 const Handpicked = () => {
-  const [heading, setHeadings] = useState([
-    "English Books",
-    "BestSellers",
-    "Kirtans",
-  ])
-  const [currenth, setCurrenth] = useState("English Books")
+  const [heading, setHeadings] = useState([])
+
+  const [currenth, setCurrenth] = useState("")
   //const [products, setProducts] = useState([]);
   const products = useSelector((state) => state.cart.items)
 
   const englishbooks = products
-    .filter((item) => item.tags === "English Books")
+    .filter((item) => item.tags === currenth)
     .slice(0, 5)
   const newArrivalsItems = products
-    .filter((item) => item.tags == "POS")
+    .filter((item) => item.tags == currenth)
     .slice(0, 5)
-  const bestSellersItems = products
-    .filter((item) => item.tags == "")
-    .slice(0, 5)
+
   const SwamijiKirtans = products
-    .filter((item) => item.tags == "Swamiji Kirtans")
+    .filter((item) => item.tags == currenth)
     .slice(0, 5)
   const BalMukundBooks = products
-    .filter((item) => item.tags === "BalMukund Books")
+    .filter((item) => item.tags === currenth)
     .slice(0, 5)
 
   const navigate = useNavigate()
@@ -84,12 +82,30 @@ const Handpicked = () => {
       },
     ],
   }
+
+  useEffect(()=>{
+    const getHandpic = async() => {
+      try {
+        const  resp = await fetchDataFromApi("/api/gift-shop-items?populate=*");
+        if(resp){
+          console.log("handping",resp?.data.map(item=> item?.attributes?.title));
+          setHeadings(resp?.data.map(item=> item?.attributes?.title));
+          setCurrenth(heading[1]);
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+      
+    };
+    getHandpic();
+  },[]);
+
   return (
     <div className="handpicked">
       <div className="hp_body">
         <h1 className="main_heading" style={{ fontFamily: 'HeuristicaRegular' }}> Discover unique hand-picked items</h1>
         <div className="headings">
-          {heading.map((h) => {
+          {heading?.map((h) => {
             return (
               <h2
                 onClick={() => setCurrenth(h)}
@@ -101,44 +117,19 @@ const Handpicked = () => {
           })}
         </div>
         <div className="image_section">
-          {currenth == "English Books" ? (
-            <Fragment>
-              {englishbooks?.length > 0 &&
-                <Slider {...settings} style={{ width: "100%" }}>
-                  {englishbooks.map((i) => {
-                    return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
-                  })}
-                </Slider>
-              }
-            </Fragment>
-          ) : currenth == "Kirtans" ? (
-            <Fragment>
-              <Slider {...settings} style={{ width: "100%" }}>
-                {newArrivalsItems.map((i) => {
-                  return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
-                })}</Slider>
-            </Fragment>
-          ) : currenth == "BestSellers" ? (
-            <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
-              {BalMukundBooks.map((i) => {
-                return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
-              })}</Slider>
-            </Fragment>
-          ) : (
-            // : currenth == "Audiobooks" ? (
-            //   <Fragment>
-            //     {SwamijiKirtans.map((i) => {
-            //       return <img src={i.image.src} />;
-            //     })}
-            //   </Fragment>
-            // )
-
-            <Fragment>   <Slider {...settings} style={{ width: "100%" }}>
-              {SwamijiKirtans.map((i) => {
-                return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
-              })}</Slider>
-            </Fragment>
-          )}
+            {heading?.map((h) => {
+                return (
+                  <Fragment>
+                    {currenth == h && products?.filter((item) => item.tags === h)?.slice(0, 5)?.length > 0 &&
+                      <Slider {...settings} style={{ width: "100%" }}>
+                        {products?.filter((item) => item.tags === h)?.slice(0, 5)?.map((i) => {
+                          return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
+                        })}
+                      </Slider>
+                    }
+                  </Fragment>
+                )
+              })}
         </div>
       </div>
     </div>
