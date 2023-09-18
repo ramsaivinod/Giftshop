@@ -10,6 +10,7 @@ import "../App.css";
 import "../styles/Caraousel.css"
 import { useEffect ,useState} from "react";
 import { fetchDataFromApi } from "../utils/api";
+import { Link } from "react-router-dom";
 
 
 // imports all images from assets folder
@@ -34,7 +35,7 @@ const [response,setRes] = useState([])
 useEffect(()=>{
   const getCategories = async() => {
     try {
-      const  resp = await fetchDataFromApi("/api/banners?populate=*");
+      const  resp = await fetchDataFromApi("/api/gift-shop-banners?populate=*");
       if(resp){
         console.log(resp.data,"respData")
         setRes(resp?.data)
@@ -95,19 +96,21 @@ console.log(response,"response")
       )}
     >
       {response && response.map((texture, index) => (
+        <Link to={texture?.attributes?.banner_url}>
         <Box key={`carousel-image-${index}`}>
-          <img
-            className="carousel-img"
-            src={texture.attributes.Image.data[0].attributes.url}
-            alt={`carousel-${index}`}
-            style={{
-              width: breakPoint?"":"100%",
-              height: "auto",
-              marginTop: breakPoint ? "4.1rem" : "4.1rem",
-              objectFit: breakPoint ? "cover" : "",
-              backgroundAttachment: "fixed",
-            }}
-          />
+            <img
+              className="carousel-img"
+              src={texture?.attributes?.banner_image?.data?.attributes?.url}
+              alt={`carousel-${index}`}
+              style={{
+                width: breakPoint?"":"100%",
+                height: "auto",
+                marginTop: breakPoint ? "4.1rem" : "4.1rem",
+                objectFit: breakPoint ? "cover" : "",
+                backgroundAttachment: "fixed",
+              }}
+            />
+          
           {/* <Box
             color="white"
             padding="20px"
@@ -132,6 +135,7 @@ console.log(response,"response")
             </Typography>
           </Box> */}
         </Box>
+        </Link>
       ))}
     </Carousel>
   );
