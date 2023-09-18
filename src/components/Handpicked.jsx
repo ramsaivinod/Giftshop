@@ -22,22 +22,7 @@ const Handpicked = () => {
   //const [products, setProducts] = useState([]);
   const products = useSelector((state) => state.cart.items)
 
-  const englishbooks = products
-    .filter((item) => item.tags === currenth)
-    .slice(0, 5)
-  const newArrivalsItems = products
-    .filter((item) => item.tags == currenth)
-    .slice(0, 5)
-
-  const SwamijiKirtans = products
-    .filter((item) => item.tags == currenth)
-    .slice(0, 5)
-  const BalMukundBooks = products
-    .filter((item) => item.tags === currenth)
-    .slice(0, 5)
-
   const navigate = useNavigate()
-
   var settings = {
     dots: false,
     infinite: false,
@@ -99,6 +84,11 @@ const Handpicked = () => {
     };
     getHandpic();
   },[]);
+
+  // heading
+  useEffect(()=>{
+    setCurrenth(heading[1]);
+  },[heading]);
 
   return (
     <div className="handpicked">
