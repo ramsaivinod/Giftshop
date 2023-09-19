@@ -24,6 +24,7 @@ import { fetchDataFromApi } from '../utils/api';
 import _ from 'lodash';
 import '../styles/Item2.css';
 import NavMenu from './NavMenu';
+import { HOMEPAGE_CONST } from '../utils/constants';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -249,7 +250,7 @@ function HomePage() {
           onClick={() => window.scroll({ top: 0, left: 0, behavior: 'smooth' })}
           variant="contained"
           sx={{ background: '#ff6d2f' }}>
-          <b>Go To Top </b>
+          <b>{HOMEPAGE_CONST.goToTop}</b>
         </Button>
       </Box>
     </Fragment>
