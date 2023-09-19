@@ -1,26 +1,26 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { shades } from "../theme";
-import { addToCart, setItem } from "../state";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { IconButton, Box, Typography, useTheme, Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { shades } from '../theme';
+import { addToCart, setItem } from '../state';
+import { useNavigate } from 'react-router-dom';
 //import { AddBoxTwoTone, MenuOutlined } from "@mui/icons-material";
 // import { Link } from "react-router-dom";
-import "../App.css";
+import '../App.css';
 //import Jklog from "../logo/jklogo.png";
-import "../styles/product.scss";
-import "../styles/item.scss";
-import "./ItemDetails";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import '../styles/product.scss';
+import '../styles/item.scss';
+import './ItemDetails';
+import useMediaQuery from '@mui/material/useMediaQuery';
 // import { width } from "@mui/system";
-import { makeStyles } from "tss-react/mui";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import { makeStyles } from 'tss-react/mui';
+import { SnackbarProvider, enqueueSnackbar } from 'notistack';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 
 const Item = ({ item }) => {
   const navigate = useNavigate();
@@ -28,19 +28,19 @@ const Item = ({ item }) => {
   const [count, setCount] = useState(1);
   const [display, setDisplay] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const breakPoint = useMediaQuery("(max-width:700px)");
+  const breakPoint = useMediaQuery('(max-width:700px)');
   const [isLiked, setIsLiked] = useState(true);
 
   const handleIconClick = () => {
     setIsLiked(!isLiked);
   };
-  const useStyles = makeStyles({ root: { backgroundColor: "red" } });
+  const useStyles = makeStyles({ root: { backgroundColor: 'red' } });
   const {
     palette: { neutral },
   } = useTheme();
 
   const { variants, title } = item;
-  var modal = document.getElementById("myModal");
+  var modal = document.getElementById('myModal');
 
   // Get the button that opens the modal
   // var btn = document.getElementById("myBtn");
@@ -64,32 +64,31 @@ const Item = ({ item }) => {
 
   //
 
-  const donothing = () => { };
+  const donothing = () => {};
 
   const addtocart = () => {
     dispatch(addToCart({ item: { ...item, count } }));
-    enqueueSnackbar("Added to Cart!");
-    console.log("snackbar");
+    enqueueSnackbar('Added to Cart!');
+    console.log('snackbar');
   };
   return (
-    <Box className="containers" position="relative"  >
+    <Box className="containers" position="relative">
       <Box
-        mb={"3px"}
-        padding={"10px"}
+        mb={'3px'}
+        padding={'10px'}
         className="product"
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
         sx={{
-          borderRadius: "20px",
-          padding: "2px",
-          marginBottom: "1px",
+          borderRadius: '20px',
+          padding: '2px',
+          marginBottom: '1px',
           //clipPath: "circle(150px at 80% 20%)";
           // clipPath:"circle(150px at 80% 20%)",
-        }}
-      >
+        }}>
         <Box>
           {display ? (
-            <div id="myModal" className="modal" style={{ display: "block" }}>
+            <div id="myModal" className="modal" style={{ display: 'block' }}>
               <div className="modal-content">
                 <span className="close" onClick={() => setDisplay(!display)}>
                   &times;
@@ -97,14 +96,14 @@ const Item = ({ item }) => {
                 <Box display="flex" flexWrap="wrap" columnGap="10px">
                   {/* IMAGES */}
 
-                  <Box flex="1 1 10%" mb={breakPoint ? "" : "10px"}>
+                  <Box flex="1 1 10%" mb={breakPoint ? '' : '10px'}>
                     <img
                       alt={item?.title}
-                      width={breakPoint ? "30%" : "100%"}
+                      width={breakPoint ? '30%' : '100%'}
                       height="auto"
-                      style={{ marginTop: "4em" }}
+                      style={{ marginTop: '4em' }}
                       src={item.image?.src}
-                    //style={{ objectFit: "contain" }}
+                      //style={{ objectFit: "contain" }}
                     />
 
                     {/* <Box  display="flex">
@@ -114,97 +113,76 @@ const Item = ({ item }) => {
                     <Typography
                       m="20px 0 5px 0"
                       alignItems="flex-end"
-                      fontSize={breakPoint ? "12px" : "24px"}
-                      fontFamily={"Rubik"}
-                    >
-                      PRICE -{" "}
-                      <b style={{ color: "green" }}>
-                        ${item?.variants[0].price}
-                      </b>
+                      fontSize={breakPoint ? '12px' : '24px'}
+                      fontFamily={'Rubik'}>
+                      PRICE - <b style={{ color: 'green' }}>${item?.variants[0].price}</b>
                     </Typography>
                   </Box>
 
                   {/* ACTIONS */}
-                  <Box flex="1 1 50%" mb={breakPoint ? "0px" : "10px"}>
-                    <Box
-                      display="flex"
-                      justifyContent="space-between"
-                      fontSize="16px"
-                    ></Box>
+                  <Box flex="1 1 50%" mb={breakPoint ? '0px' : '10px'}>
+                    <Box display="flex" justifyContent="space-between" fontSize="16px"></Box>
 
-                    <Box m={breakPoint ? "0px 0 0px 0" : "65px 0 25px 0"}>
+                    <Box m={breakPoint ? '0px 0 0px 0' : '65px 0 25px 0'}>
                       <Typography
-                        variant={breakPoint ? "h5" : "h2"}
-                        style={{ textDecorationLine: "underline" }}
-                        fontFamily={"Lora"}
-                      >
+                        variant={breakPoint ? 'h5' : 'h2'}
+                        style={{ textDecorationLine: 'underline' }}
+                        fontFamily={'Lora'}>
                         {item?.title}
                       </Typography>
 
                       <Typography
                         style={{
-                          fontFamily: "Rubik",
-                          paddingLeft: "20px",
+                          fontFamily: 'Rubik',
+                          paddingLeft: '20px',
                         }}
-                        sx={{ mt: breakPoint ? "5px" : "20px", padding: "3px" }}
-                        fontSize={breakPoint ? "12px" : "16px"}
-                        textAlign={"left"}
+                        sx={{ mt: breakPoint ? '5px' : '20px', padding: '3px' }}
+                        fontSize={breakPoint ? '12px' : '16px'}
+                        textAlign={'left'}
                         dangerouslySetInnerHTML={{
                           __html: item.body_html,
-                        }}
-                      >
+                        }}>
                         {/* {item?.attributes?.longDescription} */}
                       </Typography>
                     </Box>
 
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      minHeight={breakPoint ? "15px" : "50px"}
-                    >
+                    <Box display="flex" alignItems="center" minHeight={breakPoint ? '15px' : '50px'}>
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent={"flex-end"}
+                        justifyContent={'flex-end'}
                         border={`1.5px solid ${shades.primary[500]}`}
-                        backgroundColor={"#edaa38"}
+                        backgroundColor={'#edaa38'}
                         mr="20px"
-                        p="2px 5px"
-                      >
-                        <IconButton
-                          onClick={() => setCount(Math.max(count - 1, 0))}
-                        >
+                        p="2px 5px">
+                        <IconButton onClick={() => setCount(Math.max(count - 1, 0))}>
                           <RemoveIcon />
                         </IconButton>
-                        <Typography sx={{ p: "0 5px" }}>{count}</Typography>
+                        <Typography sx={{ p: '0 5px' }}>{count}</Typography>
                         <IconButton onClick={() => setCount(count + 1)}>
                           <AddIcon />
                         </IconButton>
                       </Box>
                       <Button
                         sx={{
-                          backgroundColor: "#cf4520",
-                          color: "white",
-                          fontFamily: "Rubik",
+                          backgroundColor: '#cf4520',
+                          color: 'white',
+                          fontFamily: 'Rubik',
                           borderRadius: 0,
-                          minWidth: breakPoint ? "150px" : "100px",
-                          padding: "10px 10px",
-                          "&:hover": {
+                          minWidth: breakPoint ? '150px' : '100px',
+                          padding: '10px 10px',
+                          '&:hover': {
                             //you want this to be the same as the backgroundColor above
-                            backgroundColor: "#222222",
+                            backgroundColor: '#222222',
                           },
                         }}
                         onClick={() => {
                           addtocart();
-                        }}
-                      >
+                        }}>
                         <b>ADD TO CART</b>
                       </Button>
                     </Box>
-                    <Typography
-                      fontSize={breakPoint ? "12px" : "16px"}
-                      fontFamily={"Rubik"}
-                    >
+                    <Typography fontSize={breakPoint ? '12px' : '16px'} fontFamily={'Rubik'}>
                       TAGS: <strong> {item.tags}</strong>
                     </Typography>
                     <Box>
@@ -229,15 +207,17 @@ const Item = ({ item }) => {
               </div>
             </div>
           ) : (
-            ""
+            ''
           )}
         </Box>
         {/* 340,400 */}
-        <div className="product_list" style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
+        <div
+          className="product_list"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <img
             className="product_imgs"
             alt={item.name}
@@ -248,73 +228,67 @@ const Item = ({ item }) => {
             onClick={() => navigate(`/item/${item.id}`)}
             style={{
               opacity: isHovered ? 0.6 : 1,
-              cursor: "pointer",
-              position: "relative",
-              width: breakPoint ? "140px" : "220px",
-              height: breakPoint ? "200px" : "280px",
+              cursor: 'pointer',
+              position: 'relative',
+              width: breakPoint ? '140px' : '220px',
+              height: breakPoint ? '200px' : '280px',
               /* background: #232323; */
               // borderRadius: "20px",
-              objectFit: "contain",
+              objectFit: 'contain',
               // boxShadow: "29px 13px 70px 13px rgb(0 36 0 / 52%)",
-              overflow: "hidden",
+              overflow: 'hidden',
               //  transition: isHovered ? "all 0.3s ease 0s":"",
-              transition: "background-image 1s ease",
+              transition: 'background-image 1s ease',
             }}
-          />{" "}
+          />{' '}
         </div>
 
         <Box
-          display={isHovered ? "block" : "none"}
-          style={{ cursor: "pointer" }}
+          display={isHovered ? 'block' : 'none'}
+          style={{ cursor: 'pointer' }}
           position="absolute"
           bottom="65%"
           left="74%" //-43% //-27%
           width="0%"
-          padding="0 0px"
-        >
+          padding="0 0px">
           <Box
-            display={breakPoint ? "none" : "flex"}
+            display={breakPoint ? 'none' : 'flex'}
             justifyContent="space-between"
             onClick={() => donothing}
-            flexDirection={"column"}
+            flexDirection={'column'}
             style={{
-              margin: "0px",
-              padding: "0px 0px",
+              margin: '0px',
+              padding: '0px 0px',
               // border: "2px solid green",
-              width: "0em",
-            }}
-          >
+              width: '0em',
+            }}>
             <Button
               id="myBtn"
               sx={{
                 // background: "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(233,222,192,1) 94%)",
                 // fontWeight: "bolder",
                 // fontSize: "medium",
-                color: "whitesmoke",
-                borderRadius: "100%",
-                backgroundColor: "#ff6d31",
-                width: "10%",
-                minWidth: "40px",
-                height: "34px",
-                marginBottom: "10px",
-                "&:hover": {
+                color: 'whitesmoke',
+                borderRadius: '100%',
+                backgroundColor: '#ff6d31',
+                width: '10%',
+                minWidth: '40px',
+                height: '34px',
+                marginBottom: '10px',
+                '&:hover': {
                   //you want this to be the same as the backgroundColor above
-                  backgroundColor: "#ff6d31",
+                  backgroundColor: '#ff6d31',
                 },
-              }}
-            >
-              <IconButton style={{ widht: "30px", height: "40px" }}>
+              }}>
+              <IconButton style={{ widht: '30px', height: '40px' }}>
                 {isLiked ? (
                   <FavoriteBorderOutlinedIcon
                     fontSize="medium"
                     onClick={handleIconClick}
-                    style={{ transform: "scale(1.3)", color: "whitesmoke" }}
+                    style={{ transform: 'scale(1.3)', color: 'whitesmoke' }}
                   />
                 ) : (
-                  <FavoriteOutlinedIcon
-                    fontSize="medium"
-                    onClick={handleIconClick}
-                  />
+                  <FavoriteOutlinedIcon fontSize="medium" onClick={handleIconClick} />
                 )}
               </IconButton>
             </Button>
@@ -324,25 +298,21 @@ const Item = ({ item }) => {
                 addtocart();
               }}
               sx={{
-                color: "whitesmoke",
-                borderRadius: "100%",
-                backgroundColor: "#ff6d31",
-                width: "10%",
-                minWidth: "40px",
-                height: "34px",
-                marginBottom: "10px",
-                "&:hover": {
+                color: 'whitesmoke',
+                borderRadius: '100%',
+                backgroundColor: '#ff6d31',
+                width: '10%',
+                minWidth: '40px',
+                height: '34px',
+                marginBottom: '10px',
+                '&:hover': {
                   //you want this to be the same as the backgroundColor above
-                  backgroundColor: "#ff6d31",
+                  backgroundColor: '#ff6d31',
                 },
-              }}
-            >
-              <IconButton style={{ widht: "30px", height: "40px" }}>
-                {" "}
-                <ShoppingCartOutlinedIcon
-                  fontSize="medium"
-                  style={{ transform: "scale(1.3)", color: "whitesmoke" }}
-                />
+              }}>
+              <IconButton style={{ widht: '30px', height: '40px' }}>
+                {' '}
+                <ShoppingCartOutlinedIcon fontSize="medium" style={{ transform: 'scale(1.3)', color: 'whitesmoke' }} />
               </IconButton>
             </Button>
 
@@ -357,23 +327,19 @@ const Item = ({ item }) => {
                 // background: "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(233,222,192,1) 94%)",
                 // fontWeight: "bolder",
                 // fontSize: "medium",
-                color: "whitesmoke",
-                borderRadius: "100%",
-                backgroundColor: "#ff6d31",
-                width: "10%",
-                minWidth: "40px",
-                height: "34px",
-                "&:hover": {
+                color: 'whitesmoke',
+                borderRadius: '100%',
+                backgroundColor: '#ff6d31',
+                width: '10%',
+                minWidth: '40px',
+                height: '34px',
+                '&:hover': {
                   //you want this to be the same as the backgroundColor above
-                  backgroundColor: "#ff6d31",
+                  backgroundColor: '#ff6d31',
                 },
-              }}
-            >
-              <IconButton style={{ widht: "2px", height: "40px" }}>
-                <RemoveRedEyeOutlinedIcon
-                  fontSize="medium"
-                  sx={{ transform: "scale(1.3)", color: "whitesmoke" }}
-                />
+              }}>
+              <IconButton style={{ widht: '2px', height: '40px' }}>
+                <RemoveRedEyeOutlinedIcon fontSize="medium" sx={{ transform: 'scale(1.3)', color: 'whitesmoke' }} />
               </IconButton>
             </Button>
 
@@ -421,35 +387,40 @@ const Item = ({ item }) => {
             .replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase())}
         </Typography> */}
-        <Typography fontSize="16px" fontFamily={"QuickSand"} height={"4.1rem"} overflow={"hidden"} style={{ lineHeight: "1.2", }}>
+        <Typography
+          fontSize="16px"
+          fontFamily={'QuickSand'}
+          height={'4.1rem'}
+          overflow={'hidden'}
+          style={{ lineHeight: '1.2' }}>
           {title}
         </Typography>
-        <Typography fontWeight="bold" fontSize="16px" color={"green"} marginBottom={".51rem"}>
+        <Typography fontWeight="bold" fontSize="16px" color={'green'} marginBottom={'.51rem'}>
           ${variants[0].price}
         </Typography>
-        <div style={{ width: "100%" }}>
-          <Button style={{ width: "100%" }}
+        <div style={{ width: '100%' }}>
+          <Button
+            style={{ width: '100%' }}
             sx={{
-              backgroundColor: "#F24E1E",
-              marginTop: "0px",
+              backgroundColor: '#F24E1E',
+              marginTop: '0px',
               // marginTop:
               //   title.length > 25
               //     ? "30px"
               //     : title.length > 26 && title.length < 80
               //     ? "10px"
               //     : "60px",
-              color: "white",
+              color: 'white',
               borderRadius: 0,
 
-              padding: "10px 20px",
+              padding: '10px 20px',
               //borderRadius: "44.3862px",
-              "&:hover": {
+              '&:hover': {
                 //you want this to be the same as the backgroundColor above
-                backgroundColor: "#F24E1E",
+                backgroundColor: '#F24E1E',
               },
             }}
-            onClick={() => addtocart()}
-          >
+            onClick={() => addtocart()}>
             ADD TO CART
           </Button>
         </div>

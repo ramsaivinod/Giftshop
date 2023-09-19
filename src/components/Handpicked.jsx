@@ -1,28 +1,20 @@
-import React, { Fragment, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import "../styles/HandPicked.css"
-import books from "../logo/6.webp"
-import coupons from "../logo/2.avif"
-import giftcard from "../logo/3.webp"
-import pen from "../logo/4.webp"
-import trophy from "../logo/5.webp"
-import audiobooks from "../logo/1.avif"
-import { useState } from "react"
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import React, { Fragment, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import '../styles/HandPicked.css';
+import { useState } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-import { fetchDataFromApi } from "../utils/api";
+import { fetchDataFromApi } from '../utils/api';
 
 const Handpicked = () => {
-  const [heading, setHeadings] = useState([])
+  const [heading, setHeadings] = useState([]);
+  const [currenth, setCurrenth] = useState('');
+  const products = useSelector((state) => state.cart.items);
 
-  const [currenth, setCurrenth] = useState("")
-  //const [products, setProducts] = useState([]);
-  const products = useSelector((state) => state.cart.items)
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   var settings = {
     dots: false,
     infinite: false,
@@ -37,7 +29,6 @@ const Handpicked = () => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 2,
-
         },
       },
       {
@@ -45,8 +36,6 @@ const Handpicked = () => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-
-
         },
       },
       {
@@ -54,7 +43,6 @@ const Handpicked = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-
         },
       },
       {
@@ -62,68 +50,74 @@ const Handpicked = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-
         },
       },
     ],
-  }
+  };
 
-  useEffect(()=>{
-    const getHandpic = async() => {
+  useEffect(() => {
+    const getHandpic = async () => {
       try {
-        const  resp = await fetchDataFromApi("/api/gift-shop-items?populate=*");
-        if(resp){
-          console.log("handping",resp?.data.map(item=> item?.attributes?.title));
-          setHeadings(resp?.data.map(item=> item?.attributes?.title));
+        const resp = await fetchDataFromApi('/api/gift-shop-items?populate=*');
+        if (resp) {
+          console.log(
+            'handping',
+            resp?.data.map((item) => item?.attributes?.title),
+          );
+          setHeadings(resp?.data.map((item) => item?.attributes?.title));
           setCurrenth(heading[1]);
         }
       } catch (error) {
-        console.error("Error fetching blogs:", error);
+        console.error('Error fetching blogs:', error);
       }
-      
     };
     getHandpic();
-  },[]);
+  }, []);
 
   // heading
-  useEffect(()=>{
+  useEffect(() => {
     setCurrenth(heading[1]);
-  },[heading]);
+  }, [heading]);
 
   return (
     <div className="handpicked">
       <div className="hp_body">
-        <h1 className="main_heading" style={{ fontFamily: 'HeuristicaRegular' }}> Discover unique hand-picked items</h1>
+        <h1 className="main_heading" style={{ fontFamily: 'HeuristicaRegular' }}>
+          {' '}
+          Discover unique hand-picked items
+        </h1>
         <div className="headings">
           {heading?.map((h) => {
             return (
-              <h2
-                onClick={() => setCurrenth(h)}
-                className={currenth == h ? "selected" : ""}
-              >
+              <h2 onClick={() => setCurrenth(h)} className={currenth == h ? 'selected' : ''}>
                 {h}
               </h2>
-            )
+            );
           })}
         </div>
         <div className="image_section">
-            {heading?.map((h) => {
-                return (
-                  <Fragment>
-                    {currenth == h && products?.filter((item) => item.tags === h)?.slice(0, 5)?.length > 0 &&
-                      <Slider {...settings} style={{ width: "100%" }}>
-                        {products?.filter((item) => item.tags === h)?.slice(0, 5)?.map((i) => {
-                          return <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
-                        })}
-                      </Slider>
-                    }
-                  </Fragment>
-                )
-              })}
+          {heading?.map((h) => {
+            return (
+              <Fragment>
+                {currenth == h && products?.filter((item) => item.tags === h)?.slice(0, 5)?.length > 0 && (
+                  <Slider {...settings} style={{ width: '100%' }}>
+                    {products
+                      ?.filter((item) => item.tags === h)
+                      ?.slice(0, 5)
+                      ?.map((i) => {
+                        return (
+                          <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
+                        );
+                      })}
+                  </Slider>
+                )}
+              </Fragment>
+            );
+          })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Handpicked
+export default Handpicked;
