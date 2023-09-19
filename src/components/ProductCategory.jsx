@@ -1,55 +1,47 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Typography, Button, IconButton } from '@mui/material';
-import CancelIcon from '@mui/icons-material/Cancel';
-import Item from './Item';
-import { makeStyles } from 'tss-react/mui';
-import '../styles/style.css';
-import { useNavigate } from 'react-router-dom';
-import { encode as btoa } from 'base-64';
-import { setItems, setValue, setPriceFilter, setSortOrder, setItemsCategories, setIsFilterOpen } from '../state';
-import React, { Fragment, useEffect, useState, useMemo } from 'react';
-import useMediaQuery from '@mui/material/useMediaQuery';
+// Import statements for dependencies and components
+import '../styles/style.css'; // Import CSS styles
+import { useDispatch, useSelector } from 'react-redux'; // Import Redux hooks
+import { Box, Typography, Button, IconButton } from '@mui/material'; // Import Material-UI components
+import CancelIcon from '@mui/icons-material/Cancel'; // Import CancelIcon
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook from React Router
+import { encode as btoa } from 'base-64'; // Import btoa function for base64 encoding
+import React, { Fragment, useEffect, useState, useMemo } from 'react'; // Import React and its hooks
+import useMediaQuery from '@mui/material/useMediaQuery'; // Import useMediaQuery hook
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import '../styles/Navbar.css';
-import '../App.css';
-import PriceFilter from './PriceFilter';
-import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
-import styled from '@emotion/styled';
-import SortRadioButtons from './SortRadioButtons';
-import CategoriesButton from './CategoriesButton';
-import TuneIcon from '@mui/icons-material/Tune';
-import 'react-dropdown/style.css';
-import { fetchDataFromApi } from '../utils/api';
-import _ from 'lodash';
-import '../styles/Item2.css';
-import { useParams } from "react-router-dom";
-import Loader from "./Loader";
-import NavMenu from './NavMenu';
-import Item2 from "./Item2";
+import 'slick-carousel/slick/slick.css'; // Import slick carousel styles
+import 'slick-carousel/slick/slick-theme.css'; // Import slick carousel theme styles
+import '../styles/Navbar.css'; // Import Navbar styles
+import '../App.css'; // Import global App styles
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp'; // Import KeyboardDoubleArrowUpIcon
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown'; // Import KeyboardDoubleArrowDownIcon
+import TuneIcon from '@mui/icons-material/Tune'; // Import TuneIcon
+import 'react-dropdown/style.css'; // Import React Dropdown styles
+import _ from 'lodash'; // Import lodash library
+import '../styles/Item2.css'; // Import Item2 styles
+import { useParams } from 'react-router-dom'; // Import useParams hook
 
+import SortRadioButtons from './SortRadioButtons'; // Import SortRadioButtons component
+import CategoriesButton from './CategoriesButton'; // Import CategoriesButton component
+import PriceFilter from './PriceFilter'; // Import PriceFilter component
+import { setItems, setPriceFilter, setSortOrder, setItemsCategories, setIsFilterOpen } from '../state'; // Import Redux actions
+import Loader from './Loader'; // Import Loader component
+import NavMenu from './NavMenu'; // Import NavMenu component
+import Item2 from './Item2'; // Import Item2 component
 
+// ProductCategory component definition
 const ProductCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const isNavOpen = useSelector((state) => state.cart.isNavOpen);
   const isFilterOpen = useSelector((state) => state.cart.isFilterOpen);
-  const cart = useSelector((state) => state.cart.cart);
 
   const items = useSelector((state) => state.cart.items);
   const value = useSelector((state) => state.cart.value);
   const sortOrder = useSelector((state) => state.cart.sortOrder);
-  const itemsCategories = useSelector((state) => state.cart.itemsCategories);
   const [item, setItem] = useState([]);
   const breakPoint = useMediaQuery('(max-width:700px)');
   const breakPoint2 = useMediaQuery('(max-width:1220px)');
   const breakPoint3 = useMediaQuery('(max-width:530px)');
   const [search, setSearchField] = useState('');
-  const [menu, setMenu] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [show, setShow] = useState(false);
   const [view, setView] = useState(true);
   const [hide, setHide] = useState(true);
@@ -60,25 +52,29 @@ const ProductCategory = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
+  // useEffect to filter and sort items based on category
+  useEffect(() => {
     let arr = items.filter((item) => item.tags === params.catName);
     let arr2 = items.filter((item) => item.tags === params.catName);
     arr = arr.slice().sort((a, b) => a.variants[0].price - b.variants[0].price);
     arr2 = arr2.slice().sort((a, b) => b.variants[0].price - a.variants[0].price);
     setAsc(arr);
     setDsc(arr2);
-  },[params.catName]);  
+  }, [params.catName]);
 
-  useEffect(()=>{
+  // useEffect to set the current category based on URL params
+  useEffect(() => {
     setCategory(params?.catName);
-  },[params.catName]);
+  }, [params.catName]);
 
-  useEffect(()=>{
-      setCategory(category);
-      setItem(productByCategory);
-      setHide(false);
-  },[category,items]);
+  // useEffect to update items and category when category or items change
+  useEffect(() => {
+    setCategory(category);
+    setItem(productByCategory);
+    setHide(false);
+  }, [category, items]);
 
+  // Function to fetch items from an external API
   async function getItems() {
     try {
       var headers = new Headers();
@@ -86,8 +82,6 @@ const ProductCategory = () => {
         'Authorization',
         'Basic ' + btoa('ce9a3ad16708f3eb4795659e809971c4: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'),
       );
-      //https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products
-      // "http://localhost:5000/products.json?limit=250",
 
       const result = await fetch('https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products', {
         headers: headers,
@@ -96,7 +90,7 @@ const ProductCategory = () => {
       const resp = await result.json();
 
       if (resp) {
-        // get categorey
+        // Get categories
         let listCat = [
           ...new Set(
             resp?.products
@@ -124,7 +118,7 @@ const ProductCategory = () => {
     }
   }
 
-
+  // Function to handle filtering items by price
   const handlePriceFilter = (priceFilter) => {
     const filtered = asc.filter(
       (product) =>
@@ -136,18 +130,18 @@ const ProductCategory = () => {
     } else {
       setHide(false);
     }
-    //setFilteredProducts(filtered);
+
     setItem(filtered);
   };
 
+  // useMemo hook to filter items based on search input
   useMemo(() => {
     const filtered = items.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()));
     setItem(filtered);
   }, [items, search]);
 
+  // Function to handle search field input
   const handleSearchField = (e) => {
-    // itemsCategories
-
     setSearchField(e.target.value);
     window.scrollTo({ top: 2300, behavior: 'smooth' });
     setHide(false);
@@ -158,6 +152,7 @@ const ProductCategory = () => {
     }
   };
 
+  // Object to store items grouped by categories
   var fruitArrays = {};
   console.log(categories);
   if (categories) {
@@ -167,8 +162,10 @@ const ProductCategory = () => {
     }
   }
 
+  // Filter items by current category
   const productByCategory = items.filter((item) => item.tags === category);
 
+  // Filter items by specific categories
   const englishbooks = items.filter((item) => item.tags === 'English Books');
   const newArrivalsItems = items.filter((item) => item.tags === 'POS');
   const bestSellersItems = items.filter((item) => item.tags === '');
@@ -177,7 +174,7 @@ const ProductCategory = () => {
   const EnglishLectures = items.filter((item) => item.tags === 'English Lectures-Swamiji (Audio)');
   const Videos = items.filter((item) => item.tags === 'Videos');
 
-
+  // Function to handle sorting order change
   const handleSortOrderChange = (value) => {
     if (value === 'asc') {
       setItem(asc);
@@ -189,11 +186,13 @@ const ProductCategory = () => {
     }
   };
 
+  // Function to handle category change
   const handleCategoriesChange = (value) => {
     setCategory(value);
     setHide(false);
   };
 
+  // Function to clear filters
   const clearFilter = () => {
     dispatch(setPriceFilter([3, 150]));
     const priceFilter = {
@@ -205,6 +204,7 @@ const ProductCategory = () => {
     dispatch(setSortOrder(''));
   };
 
+  // Function to clear mobile filters
   const clearMobFilter = () => {
     dispatch(setPriceFilter([3, 150]));
     const priceFilter = {
@@ -216,8 +216,6 @@ const ProductCategory = () => {
     dispatch(setIsFilterOpen({}));
     dispatch(setSortOrder(''));
   };
-
-
 
   return (
     <>
@@ -233,9 +231,6 @@ const ProductCategory = () => {
               ) : (
                 <p className="allproductheading">{value}</p>
               )}
-
-              {/* <Button variant="outlined" sx={{marginLeft:"2em",marginTop:"0em"}} onClick={clear}> Clear Filter</Button> */}
-              {/**mobile filter start */}
               <Box
                 display={breakPoint2 && value === 'All' ? 'flex' : 'none'}
                 alignContent={'flex-end'}
@@ -255,7 +250,7 @@ const ProductCategory = () => {
                   </Typography>
                 </Button>
               </Box>
-              <Box display="flex" >
+              <Box display="flex">
                 <Box
                   className="filter-sidebar"
                   sx={{
@@ -291,7 +286,7 @@ const ProductCategory = () => {
 
                 <Box
                   width={breakPoint2 ? '100%' : '70%'}
-                  maxHeight={ item?.length > 3 ? 'auto' : '220px'}
+                  maxHeight={item?.length > 3 ? 'auto' : '220px'}
                   marginTop={breakPoint2 ? '10px' : '0'}
                   display={breakPoint3 ? 'block' : 'grid'}
                   gridTemplateColumns={breakPoint ? 'repeat(auto-fill, 250px)' : 'repeat(auto-fill, 210px)'}
@@ -303,24 +298,24 @@ const ProductCategory = () => {
                       ? view
                         ? item.slice(0, 10).map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
                         : item
-                          .slice(11, item.length)
-                          .map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
+                            .slice(11, item.length)
+                            .map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)
                       : item.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />))}
-                      {value === 'Trending' &&
+                  {value === 'Trending' &&
                     newArrivalsItems.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'Best Sellers' &&
-                      bestSellersItems.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'English Books' &&
-                      englishbooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'Best Sellers' &&
+                    bestSellersItems.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'English Books' &&
+                    englishbooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
 
-                    {value === 'Bal Mukund Books' &&
-                      BalMukundBooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'English Lectures' &&
-                      EnglishLectures.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'Bal Mukund Books' &&
+                    BalMukundBooks.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'English Lectures' &&
+                    EnglishLectures.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
 
-                    {value === 'Swamiji Kirtans' &&
-                      SwamijiKirtans.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
-                    {value === 'Videos' && Videos.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'Swamiji Kirtans' &&
+                    SwamijiKirtans.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
+                  {value === 'Videos' && Videos.map((item) => <Item2 item={item} key={`${item.title}-${item.id}`} />)}
                 </Box>
               </Box>
               {/**desktop filter end*/}
@@ -334,8 +329,7 @@ const ProductCategory = () => {
                   }}
                   onClick={() => setView(!view)}
                   variant={'contained'}>
-                  SHOW {view ? 'ALL' : 'LESS'}{' '}
-                  {view ? <KeyboardDoubleArrowDownIcon /> : <KeyboardDoubleArrowUpIcon />}
+                  SHOW {view ? 'ALL' : 'LESS'} {view ? <KeyboardDoubleArrowDownIcon /> : <KeyboardDoubleArrowUpIcon />}
                 </Button>
               </div>
             </div>
@@ -363,10 +357,9 @@ const ProductCategory = () => {
             </div>
           )}
 
-
           {/**
-       * mobile filter start
-       */}
+           * mobile filter start
+           */}
           <Box
             display={isFilterOpen ? 'block' : 'none'}
             // backgroundColor="rgba(0, 0, 0, 0.4)"
@@ -388,13 +381,6 @@ const ProductCategory = () => {
                 <PriceFilter onPriceChange={handlePriceFilter} />
                 <div>
                   <SortRadioButtons onChange={handleSortOrderChange} value={sortOrder} />
-                  {/*    
-                  
-                <CategoriesButton
-                    onChange={handleCategoriesChange}
-                    value={sortOrder}
-                  />*/}
-
                   <Button
                     onClick={breakPoint2 ? () => clearMobFilter() : () => clearFilter()}
                     variant="contained"
