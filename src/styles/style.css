@@ -46,14 +46,13 @@
 }
 
 .side-images a {
-    /* height: 35%; */
     height: 36.5%;
     object-fit: cover;
 }
 
 .side-images a img {
-    /* height: 35%; */
     height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
