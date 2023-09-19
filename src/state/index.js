@@ -1,30 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isCartOpen: false,
-  isFilterOpen:false,
-  quickDisplay:false,
-  value: "All",
-  emailAddress: "",
+  isFilterOpen: false,
+  quickDisplay: false,
+  value: 'All',
+  emailAddress: '',
   cart: [],
   items: [],
   reviewd: [],
   priceFilter: [3, 150],
-  sortOrder: "",
-  address:{},
-  item:{},
-  price:1,
-  code:false,
-  success:true,
-  directCoupon:false,
-  couponName:"",
-  itemsCategories: []
+  sortOrder: '',
+  address: {},
+  item: {},
+  price: 1,
+  code: false,
+  success: true,
+  directCoupon: false,
+  couponName: '',
+  itemsCategories: [],
 };
 
-
 export const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     setItems: (state, action) => {
@@ -33,30 +31,16 @@ export const cartSlice = createSlice({
     setReviewed: (state, action) => {
       state.reviewd = [action.payload];
     },
-    // rateProduct: (state, action) => {
-    //   const { itemed } = action.payload;
-    //   const product = itemed.items.filter(
-    //     (item) => item.id === itemed.productId
-    //   );
-    //   state.reviewd = [...state.reviewd, product];
-    //   console.log(state.reviewd);
-
-    //   // state.items = items.filter((item) => item.id === productId);
-    //   // console.log(product);
-    //   // if (product) {
-    //   //   product.title = rating;
-    //   // }
-    // },
     addToCart: (state, action) => {
       state.cart = [...state.cart, action.payload.item];
-      state.price =  state.cart
-          .map((item, sumi = 0) => {
-            return (sumi = +item.variants[0].price * item.count);
-          })
-          .reduce(function (acc, val) {
-            return acc + val;
-          }, 0)
-  },
+      state.price = state.cart
+        .map((item, sumi = 0) => {
+          return (sumi = +item.variants[0].price * item.count);
+        })
+        .reduce(function (acc, val) {
+          return acc + val;
+        }, 0);
+    },
 
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
@@ -83,20 +67,20 @@ export const cartSlice = createSlice({
     setEmailAddress: (state, action) => {
       state.emailAddress = action.payload;
     },
-    setItem: (state,action)=> {
+    setItem: (state, action) => {
       state.item = action.payload;
     },
     setIsCartOpen: (state) => {
       state.isCartOpen = !state.isCartOpen;
     },
-    setCode: (state) =>{
-        state.code = !state.code;
+    setCode: (state) => {
+      state.code = !state.code;
     },
     setDirectCoupon: (state) => {
-          state.directCoupon = !state.directCoupon
+      state.directCoupon = !state.directCoupon;
     },
-    setSuccess: (state)=>{
-        state.success=!state.success
+    setSuccess: (state) => {
+      state.success = !state.success;
     },
     setIsNavOpen: (state) => {
       state.isNavOpen = !state.isNavOpen;
@@ -104,7 +88,7 @@ export const cartSlice = createSlice({
     setIsFilterOpen: (state) => {
       state.isFilterOpen = !state.isFilterOpen;
     },
-    setDisplay :(state) =>{
+    setDisplay: (state) => {
       state.quickDisplay = !state.quickDisplay;
     },
     setValue: (state, action) => {
@@ -119,18 +103,17 @@ export const cartSlice = createSlice({
     setAddress: (state, action) => {
       state.address = action.payload;
     },
-    setPrice :(state,action)=>{
-        state.price = action.payload
+    setPrice: (state, action) => {
+      state.price = action.payload;
     },
-    setCouponName: (state, action) =>{
-      state.couponName = action.payload
+    setCouponName: (state, action) => {
+      state.couponName = action.payload;
     },
-    setItemsCategories : (state, action) => {
+    setItemsCategories: (state, action) => {
       state.itemsCategories = action.payload;
-    }
+    },
   },
 });
-
 
 export const {
   setItems,
@@ -154,8 +137,7 @@ export const {
   setSuccess,
   setDirectCoupon,
   setCouponName,
-  setItemsCategories
+  setItemsCategories,
 } = cartSlice.actions;
-
 
 export default cartSlice.reducer;
