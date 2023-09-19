@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 //import { AddBoxTwoTone, MenuOutlined } from "@mui/icons-material";
 // import { Link } from "react-router-dom";
 import '../App.css';
-//import Jklog from "../logo/jklogo.png";
+//import Jklog from "../assets/logo/jklogo.png";
 import '../styles/product.scss';
 import '../styles/item.scss';
 import './ItemDetails';

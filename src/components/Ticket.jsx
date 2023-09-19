@@ -11,9 +11,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { setPrice, setCode, setSuccess, setDirectCoupon, setCouponName } from '../state';
 import NavMenu from '../components/NavMenu';
 
-import truck from '../logo/truck.png';
-import premium from '../logo/premium.png';
-import offer from '../logo/offer.png';
+import truck from '../assets/logo/truck.png';
+import premium from '../assets/logo/premium.png';
+import offer from '../assets/logo/offer.png';
 
 // Ticket component definition
 const Ticket = () => {

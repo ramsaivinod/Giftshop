@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import logo from '../logo/jklogo.png';
+import logo from '../assets/logo/jklogo.png';
 
 export default function Thank() {
   const breakPoint = useMediaQuery('(max-width:1100px)');

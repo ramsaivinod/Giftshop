@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 // import { Link } from "react-router-dom";
 import '../App.css';
-//import Jklog from "../logo/jklogo.png";
+//import Jklog from "../assets/logo/jklogo.png";
 import './product.scss';
 import './ItemDetails';
 import useMediaQuery from '@mui/material/useMediaQuery';

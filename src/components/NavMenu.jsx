@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Jklog from '../logo/jklogo.png';
+import Jklog from '../assets/logo/jklogo.png';
 
 import { Badge, Box, IconButton } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';

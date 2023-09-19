@@ -1,7 +1,7 @@
 // Import necessary modules, components, and icons
 import { Box, Typography, IconButton } from '@mui/material';
-import images from '../images/main-footer-bg.jpg';
-import menu from '../images/menu-shape.png';
+import images from '../assets/images/main-footer-bg.jpg';
+import menu from '../assets/images/menu-shape.png';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';

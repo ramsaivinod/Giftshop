@@ -1,8 +1,8 @@
 import '../styles/frame-component.css';
-import img1 from '../logo/rectangle-5@2x.png';
-import img2 from '../logo/rectangle-6@2x.png';
-import img3 from '../logo/rectangle-8@2x.png';
-import img4 from '../logo/rectangle-7@2x.png';
+import img1 from '../assets/logo/rectangle-5@2x.png';
+import img2 from '../assets/logo/rectangle-6@2x.png';
+import img3 from '../assets/logo/rectangle-8@2x.png';
+import img4 from '../assets/logo/rectangle-7@2x.png';
 
 const FrameComponent = () => {
   return (

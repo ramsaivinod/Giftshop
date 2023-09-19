@@ -1,8 +1,8 @@
 import styles from '../styles/benefits.module.css';
-import bag from '../logo/frame-17.svg';
-import bag2 from '../logo/frame-171.svg';
-import bag3 from '../logo/frame-172.svg';
-import bag4 from '../logo/frame-173.svg';
+import bag from '../assets/logo/frame-17.svg';
+import bag2 from '../assets/logo/frame-171.svg';
+import bag3 from '../assets/logo/frame-172.svg';
+import bag4 from '../assets/logo/frame-173.svg';
 
 const FrameComponent = () => {
   return (
