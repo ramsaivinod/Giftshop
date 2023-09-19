@@ -1,4 +1,7 @@
+// Importing CSS styles for the App component
 import './App.css';
+
+// Importing necessary components and libraries
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -14,32 +17,37 @@ import QuickView from './components/QuickView';
 import Ticket from './components/Ticket';
 import ProductCategory from './components/ProductCategory';
 
+// The main App component
 function App() {
   return (
     <div>
       <div className="App">
+        {/* Setting up the router with a base URL */}
         <BrowserRouter basename="/giftshop">
+          {/* Providing a notification system using SnackbarProvider */}
           <SnackbarProvider
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             variant={'success'}
             autoHideDuration={1000}
           />
-
+          {/* Defining the application routes */}
           <Routes>
-            <Route path="/" element={<Navbar />} />
-            <Route path="item/:itemId" element={<ItemDetails />} />
-            <Route path="category/:catName" element={<ProductCategory />} />
-            <Route path="collection/:collectionId" element={<Collections />} />
-            <Route path="checkout" element={<Checkout />} />
-            <Route path="thank" element={<Thank />} />
-            <Route path="checkout/success" element={<Confirmation />} />
-            <Route path="coupon" element={<Ticket />} />
+            <Route path="/" element={<Navbar />} /> {/* Home page */}
+            <Route path="item/:itemId" element={<ItemDetails />} /> {/* Item details */}
+            <Route path="category/:catName" element={<ProductCategory />} /> {/* Product categories */}
+            <Route path="collection/:collectionId" element={<Collections />} /> {/* Collections */}
+            <Route path="checkout" element={<Checkout />} /> {/* Checkout */}
+            <Route path="thank" element={<Thank />} /> {/* Thank you page */}
+            <Route path="checkout/success" element={<Confirmation />} /> {/* Checkout success */}
+            <Route path="coupon" element={<Ticket />} /> {/* Coupon page */}
           </Routes>
-          <CartMenu />
-          <QuickView />
-          <SideBar />
+          {/* Displaying common components */}
+          <CartMenu /> {/* Shopping cart menu */}
+          <QuickView /> {/* Quick view component */}
+          <SideBar /> {/* Sidebar for navigation */}
         </BrowserRouter>
       </div>
+      {/* Displaying the footer component */}
       <Footer />
     </div>
   );
