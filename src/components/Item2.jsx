@@ -1,4 +1,3 @@
-import '../App.css';
 import '../styles/item.scss';
 import './ItemDetails';
 import '../styles/Item2.css';
@@ -35,16 +34,24 @@ const Item2 = ({ item }) => {
   } = useTheme();
 
   const { variants, title } = item;
+
   const addtocart = () => {
+    if (count <= 0) {
+      // Validation: Ensure that the count is greater than 0 before adding to cart.
+      console.error('Invalid count: Count must be greater than 0');
+      return; // Do not add to cart if count is invalid
+    }
+
     dispatch(addToCart({ item: { ...item, count } }));
     enqueueSnackbar('Added to Cart!');
     console.log('snackbar');
   };
+
   return (
     <Box
       position="relative"
       style={{
-        transform: isHovered ? 'translate3d(0, 0, -10px)' : '' /* Translate the image upwards */,
+        transform: isHovered ? 'translate3d(0, 0, -10px)' : '',
         boxShadow: isHovered ? '0 10px 20px rgba(0, 0, 0, 0.2)' : '',
         cursor: 'pointer',
       }}
@@ -78,7 +85,6 @@ const Item2 = ({ item }) => {
           style={{
             cursor: 'pointer',
             position: 'absolute',
-
             top: '20px',
             right: '-40px',
           }}>
@@ -133,7 +139,6 @@ const Item2 = ({ item }) => {
                 height: '34px',
                 marginBottom: '10px',
                 '&:hover': {
-                  //you want this to be the same as the backgroundColor above
                   backgroundColor: '#ff6d31',
                 },
               }}>
@@ -156,7 +161,6 @@ const Item2 = ({ item }) => {
                 minWidth: '40px',
                 height: '34px',
                 '&:hover': {
-                  //you want this to be the same as the backgroundColor above
                   backgroundColor: '#ff6d31',
                 },
               }}>
