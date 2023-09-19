@@ -6,7 +6,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { shades } from '../theme';
 import { addToCart, setDisplay } from '../state';
 import { useNavigate } from 'react-router-dom';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import '../App.css';
 import '../styles/item.scss';
 import './ItemDetails';
@@ -18,7 +17,6 @@ const QuickView = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
-  const [isHovered, setIsHovered] = useState(false);
   const breakPoint = useMediaQuery('(max-width:700px)');
   const display = useSelector((state) => state.cart.quickDisplay);
   const item = useSelector((state) => state.cart.item);
