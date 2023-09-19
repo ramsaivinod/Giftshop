@@ -2,7 +2,7 @@
 import './App.css';
 
 // Importing necessary components and libraries
-import Navbar from './components/Navbar';
+import HomePage from './components/HomePage';
 import Footer from './components/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ItemDetails from './components/ItemDetails';
@@ -32,7 +32,7 @@ function App() {
           />
           {/* Defining the application routes */}
           <Routes>
-            <Route path="/" element={<Navbar />} /> {/* Home page */}
+            <Route path="/" element={<HomePage />} /> {/* Home page */}
             <Route path="item/:itemId" element={<ItemDetails />} /> {/* Item details */}
             <Route path="category/:catName" element={<ProductCategory />} /> {/* Product categories */}
             <Route path="collection/:collectionId" element={<Collections />} /> {/* Collections */}
