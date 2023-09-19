@@ -14,6 +14,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 
 import { addToCart, setDisplay, setItem } from '../state';
+import { PRODUCT } from '../utils/constants';
 
 const Item2 = ({ item }) => {
   const navigate = useNavigate();
@@ -186,7 +187,7 @@ const Item2 = ({ item }) => {
           $ {variants[0].price}
         </Typography>
         <button className="addtocart" onClick={() => addtocart()}>
-          ADD TO CART
+          {PRODUCT.ADD_TO_CART}
         </button>
       </Box>
     </Box>

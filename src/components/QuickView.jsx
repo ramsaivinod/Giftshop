@@ -12,6 +12,7 @@ import './ItemDetails';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { enqueueSnackbar } from 'notistack';
 import '../styles/item.scss';
+import { QUICKVIEW } from '../utils/constants';
 
 const QuickView = () => {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const QuickView = () => {
                   alignItems="flex-end"
                   fontSize={breakPoint ? '12px' : '24px'}
                   fontFamily={'Rubik'}>
-                  PRICE - <b style={{ color: 'green' }}>${item?.variants[0].price}</b>
+                  {QUICKVIEW.PRICE} - <b style={{ color: 'green' }}>${item?.variants[0].price}</b>
                 </Typography>
               </Box>
 
@@ -124,11 +125,11 @@ const QuickView = () => {
                     onClick={() => {
                       addtocart();
                     }}>
-                    <b>ADD TO CART</b>
+                    <b>{QUICKVIEW.ADD_TO_CART}</b>
                   </Button>
                 </Box>
                 <Typography fontSize={breakPoint ? '12px' : '16px'} fontFamily={'Rubik'}>
-                  TAGS: <strong> {item.tags}</strong>
+                  {QUICKVIEW.TAGS}: <strong> {item.tags}</strong>
                 </Typography>
               </Box>
             </Box>

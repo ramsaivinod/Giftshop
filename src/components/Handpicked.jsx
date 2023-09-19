@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { fetchDataFromApi } from '../utils/api';
+import { HANDPICED_CONST } from '../utils/constants';
 
 const Handpicked = () => {
   const [heading, setHeadings] = useState([]);
@@ -83,8 +84,7 @@ const Handpicked = () => {
     <div className="handpicked">
       <div className="hp_body">
         <h1 className="main_heading" style={{ fontFamily: 'HeuristicaRegular' }}>
-          {' '}
-          Discover unique hand-picked items
+          {HANDPICED_CONST.title}
         </h1>
         <div className="headings">
           {heading?.map((h) => {

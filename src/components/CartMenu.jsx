@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { shades } from '../theme';
 import { decreaseCount, increaseCount, removeFromCart, setIsCartOpen } from '../state';
+import { CART } from '../utils/constants';
 
 // Create a styled component for a flex container
 const FlexBox = styled(Box)`
@@ -44,7 +45,9 @@ const CartMenu = () => {
         <Box overflow="auto" height="100%" className="full-cart-page">
           {/* HEADER */}
           <FlexBox mb="15px">
-            <Typography variant="h3">SHOPPING BAG ({cart.length})</Typography>
+            <Typography variant="h3">
+              {CART.SHOPPING_BAG} ({cart.length})
+            </Typography>
             <IconButton onClick={() => dispatch(setIsCartOpen({}))}>
               <CloseIcon />
             </IconButton>
@@ -87,7 +90,7 @@ const CartMenu = () => {
           {/* ACTIONS */}
           <Box m="20px 0">
             <FlexBox m="20px 0">
-              <Typography fontWeight="bold">SUBTOTAL</Typography>
+              <Typography fontWeight="bold">{CART.SUBTOTAL}</Typography>
               <Typography fontWeight="bold">${totalPrice}</Typography>
             </FlexBox>
             <Button
@@ -109,7 +112,7 @@ const CartMenu = () => {
                 dispatch(setIsCartOpen({}));
                 window.scrollTo(0, 0);
               }}>
-              CHECKOUT
+              {CART.CHECKOUT}
             </Button>
           </Box>
         </Box>

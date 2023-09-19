@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../theme.js';
 import '../styles/style.css';
 
+import { PRICE_FILTER } from '../utils/constants';
+
 function PriceFilter({ onPriceChange, onClear }) {
   const value = useSelector((state) => state.cart.priceFilter);
   const dispatch = useDispatch();
@@ -23,9 +25,9 @@ function PriceFilter({ onPriceChange, onClear }) {
   }
   return (
     <>
-      <p className="filterTitle">FILTERS</p>
+      <p className="filterTitle">{PRICE_FILTER.TITLE}</p>
       <p className="silders">
-        <p className="priceheading">PRICE FILTER</p>
+        <p className="priceheading">{PRICE_FILTER.HEADER}</p>
         <p className="slidep">
           {' '}
           <Slider

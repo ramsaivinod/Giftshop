@@ -27,6 +27,7 @@ import { setItems, setPriceFilter, setSortOrder, setItemsCategories, setIsFilter
 import Loader from './Loader'; // Import Loader component
 import NavMenu from './NavMenu'; // Import NavMenu component
 import Item2 from './Item2'; // Import Item2 component
+import { PRODUCT_CATEGORY } from '../utils/constants';
 
 // ProductCategory component definition
 const ProductCategory = () => {
@@ -246,7 +247,7 @@ const ProductCategory = () => {
                 <Button onClick={() => dispatch(setIsFilterOpen({}))}>
                   <TuneIcon sx={{ cursor: 'pointer', width: '40%' }} fontSize="large" />
                   <Typography variant="h5" fontWeight="bold" fontFamily="HeuristicaRegular">
-                    Filters
+                    {PRODUCT_CATEGORY.TITLE}
                   </Typography>
                 </Button>
               </Box>
@@ -278,7 +279,7 @@ const ProductCategory = () => {
                           background: '#ff6d2f',
                           marginTop: '1em',
                         }}>
-                        <strong> Clear Filter</strong>
+                        <strong>{PRODUCT_CATEGORY.CLEAR_FILTER}</strong>
                       </Button>
                     </div>
                   </div>
@@ -393,7 +394,7 @@ const ProductCategory = () => {
                       marginBottom: breakPoint2 ? '3em' : '1em',
                       fontFamily: 'Rubik',
                     }}>
-                    <strong> Clear</strong>
+                    <strong>{PRODUCT_CATEGORY.CLEAR}</strong>
                   </Button>
                 </div>
               </Box>

@@ -41,6 +41,8 @@ const styles = {
   },
 };
 
+import { PAPERS } from '../utils/constants';
+
 const Papers = () => {
   const breakPoint = useMediaQuery('(min-width:1000px)');
   const containerRef = useRef(null);
@@ -81,8 +83,8 @@ const Papers = () => {
         className="nav-offer">
         <marquee>
           <Typography className="slide-offer">
-            <span>10% OFF on your next purchase</span>
-            <span>SEE ALL OFFERS</span>
+            <span>{PAPERS.TITLE}</span>
+            <span>{PAPERS.DESC}</span>
           </Typography>
         </marquee>
       </Paper>

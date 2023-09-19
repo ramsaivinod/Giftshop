@@ -24,7 +24,7 @@ import { fetchDataFromApi } from '../utils/api';
 import _ from 'lodash';
 import '../styles/Item2.css';
 import NavMenu from './NavMenu';
-import { HOMEPAGE_CONST } from '../utils/constants';
+import { HOMEPAGE_CONST, TRENDING, BESTSELLTER } from '../utils/constants';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -196,8 +196,7 @@ function HomePage() {
                 textAlign="left"
                 padding="10px">
                 <h2 className="trending" style={{ fontFamily: 'HeuristicaRegular' }}>
-                  {' '}
-                  Trending{' '}
+                  {TRENDING}
                 </h2>
               </Typography>
               {newArrivalsItems?.length > 0 && (
@@ -209,7 +208,7 @@ function HomePage() {
               )}
               <Typography fontFamily={'Lora'} variant={breakPoint ? 'h2' : 'h1'} textAlign="left" padding="11px">
                 <h2 className="bestsellers" style={{ fontFamily: 'HeuristicaRegular' }}>
-                  Best Sellers
+                  {BESTSELLTER}
                 </h2>
               </Typography>
               {SwamijiKirtans?.length > 3 ? (

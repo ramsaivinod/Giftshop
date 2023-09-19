@@ -24,6 +24,7 @@ import Loader from './Loader';
 import MyImage from './MyImage';
 import NavMenu from './NavMenu';
 import Item2 from './Item2';
+import { ITEM_DETAILS } from '../utils/constants';
 
 const ItemDetails = () => {
   // Define variables and hooks
@@ -165,7 +166,8 @@ const ItemDetails = () => {
                       alignItems="flex-end"
                       fontSize={!breakPoint ? '12px' : '22px'}
                       fontFamily={'Rubik'}>
-                      PRICE - <strong style={{ color: 'green' }}>${updateditem?.variants[0].price}</strong>
+                      {ITEM_DETAILS.PRICE} -{' '}
+                      <strong style={{ color: 'green' }}>${updateditem?.variants[0].price}</strong>
                     </Typography>
                   </Box>
                   <Box flex="1 1 50%" mb="40px">
@@ -236,13 +238,13 @@ const ItemDetails = () => {
                           },
                         }}
                         onClick={() => dispatch(addToCart({ item: { ...updateditem, count } }))}>
-                        ADD TO CART
+                        {ITEM_DETAILS.ADD_TO_CART}
                       </Button>
                     </Box>
 
                     <Box display={'flex'} justifyContent={'end'} mr={!breakPoint ? '20px' : '200px'}>
                       <Typography fontSize={!breakPoint ? '12px' : '16px'} fontFamily={'Rubik'}>
-                        TAGS: <strong> {updateditem.tags} </strong>
+                        {ITEM_DETAILS.TAGS}: <strong> {updateditem.tags} </strong>
                       </Typography>
                     </Box>
                   </Box>
@@ -251,7 +253,7 @@ const ItemDetails = () => {
                 <Box display="flex" flexWrap="wrap" gap="15px"></Box>
                 <Box mt="50px" mr="30px" width="100%">
                   <Typography variant="h2" fontWeight="bold" fontFamily={'Lora'}>
-                    Related Products
+                    {ITEM_DETAILS.RELATED_PRODUCTS}
                   </Typography>
                   <Slider {...settings} style={{ margin: '0 15px' }}>
                     {item

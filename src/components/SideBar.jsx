@@ -38,7 +38,6 @@ const SideBar = () => {
           style={{ position: 'absolute', right: 0, color: '#fff' }}>
           <CancelIcon />
         </IconButton>
-        {/* Sidebar tabs */}
         <Tabs
           textColor="primary"
           indicatorColor="green"

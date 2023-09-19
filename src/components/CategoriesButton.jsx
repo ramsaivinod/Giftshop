@@ -9,6 +9,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { setIsFilterOpen } from '../state';
 import { setSortOrder } from '../state';
+import { CATEGORIES_BUTTON } from '../utils/constants';
 
 import '../styles/style.css';
 
@@ -34,7 +35,7 @@ function CategoriesButton({ onChange, value }) {
 
   return (
     <Fragment>
-      <p className="priceheading mt-4">CATEGORY</p>
+      <p className="priceheading mt-4">{CATEGORIES_BUTTON.CATEGORY}</p>
       <FormControl component="fieldset">
         <RadioGroup
           aria-label="sortOrder"
