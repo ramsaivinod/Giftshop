@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from "tss-react/mui";
+import { makeStyles } from 'tss-react/mui';
 import { Box, Container, Grid, IconButton } from '@mui/material';
 import { ShoppingCart, LocalShipping, Payment } from '@mui/icons-material';
 

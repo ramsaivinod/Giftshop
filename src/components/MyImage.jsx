@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Zoom from "react-img-hover-zoom";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-//= [{ src: "" }]
 const MyImage = ({ imgs }) => {
   const [mainImage, setMainImage] = useState(imgs[0]);
 
@@ -69,12 +67,11 @@ const Wrapper = styled.section`
   // .main-screen img {
   //   transition: all 0.3s ease-in-out;
   // }
-  
+
   // .main-screen img:hover {
   //   transform: scale(1.2);
   //   cursor: zoom-in;
   // }
-  
 
   .grid-four-column {
     grid-template-columns: 1fr;
