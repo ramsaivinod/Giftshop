@@ -1,18 +1,20 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { IconButton, Box, Typography, useTheme, Button } from '@mui/material';
-import { addToCart, setDisplay, setItem } from '../state';
-import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import '../styles/item.scss';
 import './ItemDetails';
+import '../styles/Item2.css';
+
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { IconButton, Box, Typography, useTheme, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { enqueueSnackbar } from 'notistack';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-import '../styles/Item2.css';
+
+import { addToCart, setDisplay, setItem } from '../state';
 
 const Item2 = ({ item }) => {
   const navigate = useNavigate();
