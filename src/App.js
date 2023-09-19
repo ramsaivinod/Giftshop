@@ -1,17 +1,19 @@
 // Importing CSS styles for the App component
 import './App.css';
 
-// Importing necessary components and libraries
+// Importing necessary libraries
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
+
+// Importing necessary components
 import HomePage from './components/HomePage';
 import Footer from './components/Footer';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ItemDetails from './components/ItemDetails';
 import CartMenu from './components/CartMenu';
 import SideBar from './components/SideBar';
 import Checkout from './checkout/Checkout';
 import Confirmation from './checkout/Confirmation';
 import Thank from './components/Thank';
-import { SnackbarProvider } from 'notistack';
 import Collections from './components/Collections';
 import QuickView from './components/QuickView';
 import Ticket from './components/Ticket';
