@@ -71,11 +71,13 @@
   font-size: 16px;
   font-weight: bold;
   text-align: center;
+
+
 }
 
 .banner_text .text {
-  font-family: HeuristicaRegular;
-  color: #000000;
+  font-family: 'Satoshi', sans-serif;
+  color: var(--font-clr) !important; 
   font-size: 17px;
   /* line-height: 20px; */
   /* margin: 0 0 10px 0; */

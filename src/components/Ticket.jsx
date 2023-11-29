@@ -125,7 +125,7 @@ const Ticket = () => {
             onClick={() => navigate(`/`)}
             variant="contained"
             sx={{
-              backgroundColor: '#ff6d2f',
+              backgroundColor: '#EF6F1F',
               position: 'absolute',
               left: '0',
               ml: breakPoint ? '14px' : '100px',
@@ -147,7 +147,7 @@ const Ticket = () => {
           variant="contained"
           size="large"
           sx={{
-            backgroundColor: '#ff6d2f',
+            backgroundColor: '#EF6F1F',
             fontWeight: 'bolder',
           }}
           onClick={() => {

@@ -7,6 +7,10 @@
 /* Utility styles for tailwind */
 @tailwind utilities;
 
+:root{
+  --font-clr:#645743;
+  --font-style: 'Satoshi, sans-serif' ;
+}
 /* Global styles for all elements */
 * {
   font-family: 'SourceSansProRegular', sans-serif;

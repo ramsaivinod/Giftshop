@@ -5,8 +5,8 @@
   justify-content: center;
   color: #ff6d31;
   margin-top: 30px;
-  font-family: HeuristicaRegular;
   text-transform: capitalize;
+  font-family: 'Satoshi', sans-serif;
 }
 
 .hp_body {
@@ -30,6 +30,7 @@
   /* border-radius: 5px; */
   cursor: pointer;
   object-fit: contain;
+  background-color: #FFFF;
 }
 
 .handpic_image:hover {
@@ -56,6 +57,7 @@
 
 .image_section .slick-list {
   width: 100%;
+  background-color: #FBE5C4;
 }
 
 .image_section .slick-next,
@@ -69,6 +71,7 @@
   justify-content: center;
   gap: 30px;
   margin-bottom: 0px;
+
 }
 
 .headings h2 {
@@ -80,8 +83,9 @@
   border: none;
   padding: 0 0.5rem;
   height: 50px;
-  color: #000000;
+  color: #645743 !important; 
   position: relative;
+  font-family: 'Satoshi', sans-serif;
 }
 
 .headings h2:hover {
@@ -96,7 +100,7 @@
   font-weight: bolder;
 } */
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
   .image_section {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     justify-items: center;
@@ -104,17 +108,18 @@
 
   .handpic_image {
     margin: 1rem 0 1rem;
+
   }
 }
 
-@media screen and (max-width:992px) {
+@media screen and (max-width: 992px) {
   .main_heading,
   .trending {
     margin-top: 0;
   }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   .main_heading,
   .trending {
     font-size: 1.5rem;
@@ -128,7 +133,7 @@
   }
 }
 
-@media screen and (max-width:530px) {
+@media screen and (max-width: 530px) {
   .handpicked .headings {
     display: block;
     text-align: center;
@@ -136,7 +141,7 @@
   }
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width: 400px) {
   .main_heading {
     display: flex;
     text-align: left;
@@ -150,7 +155,6 @@
 
   .image_section {
     display: flex;
-
   }
 
   .handpic_image {
@@ -162,9 +166,9 @@
   }
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width: 320px) {
   .main_heading,
   .trending {
     font-size: 1rem;
   }
-} 
+}

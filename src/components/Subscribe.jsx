@@ -16,7 +16,7 @@ const Subscribe = () => {
           <div>
             <p className="txt">
               <IconButton>
-                <MarkEmailReadOutlinedIcon fontSize="medium" style={{ color: '#ff6d2f' }} />
+                <MarkEmailReadOutlinedIcon fontSize="medium" style={{ color: '#EF6F1F' }} />
               </IconButton>
               Subscribe To Our Newsletter
             </p>
@@ -65,7 +65,7 @@ const Subscribe = () => {
                   sx={{
                     p: '15px',
                     ':hover': { cursor: 'pointer' },
-                    background: '#ff6d2f',
+                    background: '#EF6F1F',
                   }}>
                   Subscribe
                 </Typography>

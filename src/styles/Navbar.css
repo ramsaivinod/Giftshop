@@ -47,17 +47,29 @@
   }
   } */
 
-.slick-prev {
+/* .slick-prev {
   width: 25px;
   left: -11px;
   top: 150px;
+  position: absolute;
+  height: 25px;
+  background: tomato !important;
+
+  position: relative;
+
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+} */
+
+.slick-prev{
+  width: 25px;
+  right: 25px;
+  top: 150px;
+ left: -11px;
   /* top: 20%; */
   position: absolute;
   height: 25px;
   background: tomato !important;
-  /* z-index: 1; */
-  position: relative;
-  /* left: 12px; */
   border-radius: 50%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
@@ -91,7 +103,7 @@
 .nav-link {
   font-size: 16px !important;
   font-weight: bold !important;
-  font-family: HeuristicaRegular;
+  font-family: Satoshi, sans-serif;
   margin: 0px 14px;
   padding: 0px;
   color: rgb(255, 255, 255) !important;
@@ -102,12 +114,29 @@
 
 .dropdown-item {
   font-size: 15px !important;
-  line-height: 35px;
+  font-family: Satoshi, sans-serif;
+  line-height: 1.5rem/* 24px */;
+  color: #645743 !important; 
+  text-align: left;
+
+
+
 }
 
 .dropdown-item:hover {
-  background: #ff6d31 !important;
-  color: #fff !important;
+  background: rgb(253 186 116)!important;
+  color: rgb(17 24 39 ) !important;
+  border-radius: 4px/* 8px */; /* Adjust the border-radius on hover */
+}
+
+.dropdown-menu[data-bs-popper] {
+  margin-top: 0 !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border-style: 0px solid;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  position: absolute;
+  left:-20px;
 }
 
 /* @media screen {
@@ -118,14 +147,14 @@
 .searchlist {
   position: absolute;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  right: 66px;
+  /* right: 66px; */
   top: 66px;
   background: #fff;
   width: 330px;
   cursor: pointer;
   height: 500px;
   overflow-y: scroll;
-
+  z-index: 2;
 
 }
 
@@ -136,7 +165,7 @@
 }
 
 .lst:hover {
-  background: #ff6d31;
+  background: #EF6F1F;
   color: #fff;
 }
 
@@ -165,13 +194,6 @@
   background-color: transparent !important;
 }
 
-.dropdown-menu[data-bs-popper] {
-  margin-top: 0 !important;
-  padding: 0 !important;
-  border-radius: inherit !important;
-  border: 0px solid !important;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
 
 .css-1pc7nlx-MuiButtonBase-root-MuiIconButton-root:hover,
 .css-1pc7nlx-MuiButtonBase-root-MuiIconButton-root,
@@ -185,21 +207,23 @@
 }
 
 .navbox {
-  background: #ff6d31;
+  background: #EF6F1F;
   height: 70px;
   position: fixed !important;
   width: 100%;
   z-index: 99;
-  top: 40px;
+  top: 0px;
+}
+@media (min-width:900px){
+  .offersavailable {
+    top: 111px;
+    position: sticky;
+    width: 100%;
+    z-index: 1;
+  
+  }
 }
 
-.offersavailable {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 99;
-
-}
 
 .menub {
   display: none !important;
@@ -217,13 +241,13 @@
   padding: 10px 30px;
   border-radius: 50px;
   font-size: 14px;
+  border: 1px solid #645743;
 }
 
 .Search input:focus {
-  outline: none;
-  border: none;
+  outline: #645743;
+  border: 1px solid #645743;
 }
-
 .Searchmb {
   display: none !important;
 }
@@ -232,18 +256,18 @@
   text-align: center;
   /* padding: 50px; */
   margin-top: -30px;
-  font-family: HeuristicaRegular;
   font-size: 2rem;
-  color: #ff6d31;
+  color: #EF6F1F;
   font-weight: 800;
+  font-family: "Satoshi";
 }
 
 .filterTitle {
   margin-bottom: 1em;
-  font-family: HeuristicaRegular;
+  font-family: Satoshi, sans-serif;
   padding: 10px;
   font-size: 20px;
-  background: #ff6d31;
+  background: #EF6F1F;
   color: #fff;
   font-weight: 600;
 }
@@ -257,7 +281,7 @@
   margin-right: 2em;
   font-size: 16px;
   font-weight: 800;
-  font-family: HeuristicaRegular;
+  font-family: Satoshi, sans-serif;
   margin: 0;
 
 }
@@ -285,7 +309,10 @@
 
 button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-tz9m1-MuiButtonBase-root-MuiIconButton-root {
   padding: 0;
+  color: black;
 }
+
+
 
 .navbar-brand img {
   width: 10rem;
@@ -311,7 +338,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 
 @media (max-width:992px) {
   .navbox {
-    background: #ff6d31;
+    background: #EF6F1F;
     height: 66px;
     position: fixed !important;
     width: 100%;
@@ -331,7 +358,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 
   .sidebarmenu {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    background-color: #ff6d31;
+    background-color: #EF6F1F;
     position: fixed;
     z-index: 99;
     right: 15px;
@@ -344,6 +371,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 
   .menub {
     display: block !important;
+   
   }
 
   .navbars {
@@ -357,7 +385,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
     right: 0 !important;
     top: 66px !important;
     width: 50%;
-    z-index: 99;
+    z-index: 1;
     text-align: left;
   }
 
@@ -404,6 +432,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 
   .Search input {
     width: 90%;
+
   }
 
   .Searchmb {
@@ -456,5 +485,6 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.menub.css-
 @media (max-width:400px) {
   .Search input {
     width: 80%;
+
   }
 }

@@ -1,45 +1,49 @@
 // Import necessary modules and components
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Typography, Button } from '@mui/material';
-import MainCarousel from './MainCarousel';
-import '../styles/style.css';
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Typography, Button } from "@mui/material";
+import MainCarousel from "./MainCarousel";
+import { useNavigate } from "react-router-dom";
+import Handpicked from "./Handpicked";
+import { Link } from "react-router-dom";
+import { encode as btoa } from "base-64";
+import { setItems } from "../state";
+import React, { Fragment, useEffect, useState, useMemo } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
-import Handpicked from './Handpicked';
-import { Link } from 'react-router-dom';
-import { encode as btoa } from 'base-64';
-import { setItems } from '../state';
-import React, { Fragment, useEffect, useState, useMemo } from 'react';
-import useMediaQuery from '@mui/material/useMediaQuery';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import '../styles/Navbar.css';
-import Slider from 'react-slick';
-import '../App.css';
-import Item2 from './Item2';
-import 'react-dropdown/style.css';
-import Banner from './Banner';
-import Papers from './Papers';
-import { fetchDataFromApi } from '../utils/api';
-import _ from 'lodash';
-import '../styles/Item2.css';
-import NavMenu from './NavMenu';
-import { HOMEPAGE_CONST, TRENDING, BESTSELLTER } from '../utils/constants';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../styles/style.css";
+import "../styles/Navbar.css";
+import Slider from "react-slick";
+import "../App.css";
+import Item2 from "./Item2";
+import "react-dropdown/style.css";
+import Banner from "./Banner";
+import Papers from "./Papers";
+import { fetchDataFromApi } from "../utils/api";
+import _ from "lodash";
+import "../styles/Item2.css";
+import NavMenu from "./NavMenu";
+import { HOMEPAGE_CONST, TRENDING, BESTSELLTER } from "../utils/constants";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 function HomePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Select relevant data from Redux store
   const items = useSelector((state) => state.cart.items);
   const value = useSelector((state) => state.cart.value);
-  const breakPoint = useMediaQuery('(max-width:700px)');
+  const breakPoint = useMediaQuery("(max-width:700px)");
 
   const [categories, setCategories] = useState([]);
   const [sideBanner, setSideBanner] = useState([]);
 
   // Function to fetch categories from the API
   const getCategories = () => {
-    fetchDataFromApi('/api/categories').then((res) => {
+    fetchDataFromApi("/api/categories").then((res) => {
       console.log(res);
       setCategories(res.data);
     });
@@ -50,28 +54,38 @@ function HomePage() {
     try {
       var headers = new Headers();
       headers.append(
-        'Authorization',
-        'Basic ' + btoa('ce9a3ad16708f3eb4795659e809971c4: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'),
+        "Authorization",
+        "Basic " +
+          btoa(
+            "ce9a3ad16708f3eb4795659e809971c4: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"
+          )
       );
 
-      const result = await fetch('https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products', {
-        headers: headers,
-      });
+      const result = await fetch(
+        "https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products",
+        {
+          headers: headers,
+        }
+      );
 
       const resp = await result.json();
       if (resp) {
         console.log(resp);
         dispatch(setItems(resp?.products));
-        console.log(resp?.products, 'res');
+        console.log(resp?.products, "res");
         let arr = resp?.products;
         let arr2 = resp?.products;
-        arr = arr.slice().sort((a, b) => a.variants[0].price - b.variants[0].price);
-        arr2 = arr2.slice().sort((a, b) => b.variants[0].price - a.variants[0].price);
+        arr = arr
+          .slice()
+          .sort((a, b) => a.variants[0].price - b.variants[0].price);
+        arr2 = arr2
+          .slice()
+          .sort((a, b) => b.variants[0].price - a.variants[0].price);
         setAsc(arr);
         setDsc(arr2);
       }
     } catch (err) {
-      console.log(err, 'this is error');
+      console.log(err, "this is error");
     }
   }
 
@@ -86,22 +100,26 @@ function HomePage() {
   console.log(categories);
   if (categories) {
     for (var i = 0; i < categories.length; i++) {
-      const a = items.filter((item) => item.tags === categories[i].attributes.Type);
+      const a = items.filter(
+        (item) => item.tags === categories[i].attributes.Type
+      );
       fruitArrays[categories[i].attributes.Type] = [a];
     }
   }
 
   // Filter items based on tags
-  const newArrivalsItems = items.filter((item) => item.tags === 'POS');
-  const bestSellersItems = items.filter((item) => item.tags === '');
-  const SwamijiKirtans = items.filter((item) => item.tags === 'Swamiji Kirtans');
+  const newArrivalsItems = items.filter((item) => item.tags === "POS");
+  const bestSellersItems = items.filter((item) => item.tags === "");
+  const SwamijiKirtans = items.filter(
+    (item) => item.tags === "Swamiji Kirtans"
+  );
 
   // Settings for the Slick Carousel
   var settings = {
     dots: false,
     infinite: false,
     speed: 500,
-    marginBottom: '30px',
+    marginBottom: "30px",
     slidesToShow: 4,
     slidesToScroll: 2,
     initialSlide: 0,
@@ -147,34 +165,97 @@ function HomePage() {
   useEffect(() => {
     const getBanner = async () => {
       try {
-        const resp = await fetchDataFromApi('/api/gift-shop-sideimages?populate=*');
+        const resp = await fetchDataFromApi(
+          "/api/gift-shop-sideimages?populate=*"
+        );
         if (resp) {
           setSideBanner(resp?.data);
         }
       } catch (error) {
-        console.error('Error fetching blogs:', error);
+        console.error("Error fetching blogs:", error);
       }
     };
     getBanner();
   }, []);
 
+  const handleNavMenuClick = (cat) => {
+    navigate(`/category/${cat}`);
+  };
   const [banner1, banner2] = sideBanner;
 
   return (
     <Fragment>
       <Box>
-        <Box className="offersavailable">
+      <Box className="offersavailable">
           <Papers />
         </Box>
-
         <NavMenu navFromTop={false} />
 
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto custom-nav">
+            <Nav.Link
+              onClick={() => {
+                navigate(`/`);
+              }}
+              className="nav-item"
+              id="basic-nav-dropdown"
+            >
+              HOME
+            </Nav.Link>
+
+            <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
+              <NavDropdown.Item
+                onClick={() => {
+                  handleNavMenuClick("Swamiji%20Kirtans");
+                }}
+                className="dropdownitem"
+              >
+                Swamiji Kirtans
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="BOOKS" id="basic-nav-dropdown">
+              <NavDropdown.Item
+                onClick={() => {
+                  handleNavMenuClick("English%20Books");
+                }}
+              >
+                English Books
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                onClick={() => {
+                  handleNavMenuClick("BalMukund%20Books");
+                }}
+              >
+                BalMukund Books
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
+              <NavDropdown.Item
+                onClick={() => {
+                  handleNavMenuClick("English%20Lectures-Swamiji%20(Audio)");
+                }}
+              >
+                English Lectures
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
+              <NavDropdown.Item
+                onClick={() => {
+                  handleNavMenuClick("English%20Lectures-Swamiji%20(Video)");
+                }}
+              >
+                Videos
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      
         <div className="container boxess">
           <div className="main-section">
             <div className="main-carousel">{<MainCarousel />}</div>
-            {banner1 && banner2 && (
+            {/* {banner1 && banner2 && (
               <>
-                <div className="side-images">
+                <div className="side-images" >
                   <Link to={banner1?.attributes?.side_images_url}>
                     <img src={banner1?.attributes?.side_images?.data?.attributes?.url} alt="image-1" />
                   </Link>
@@ -183,19 +264,23 @@ function HomePage() {
                   </Link>
                 </div>
               </>
-            )}
+            )} */}
           </div>
 
           {<Banner />}
           {<Handpicked />}
-          {value === 'All' ? (
+          {value === "All" ? (
             <Fragment>
               <Typography
-                fontFamily={'Montagu Slab'}
-                variant={breakPoint ? 'h2' : 'h1'}
+                fontFamily={"Montagu Slab"}
+                variant={breakPoint ? "h2" : "h1"}
                 textAlign="left"
-                padding="10px">
-                <h2 className="trending" style={{ fontFamily: 'HeuristicaRegular' }}>
+                padding="10px"
+              >
+                <h2
+                  className="trending"
+                  style={{ fontFamily: "Satoshi, sans-serif" }}
+                >
                   {TRENDING}
                 </h2>
               </Typography>
@@ -206,8 +291,16 @@ function HomePage() {
                   ))}
                 </Slider>
               )}
-              <Typography fontFamily={'Lora'} variant={breakPoint ? 'h2' : 'h1'} textAlign="left" padding="11px">
-                <h2 className="bestsellers" style={{ fontFamily: 'HeuristicaRegular' }}>
+              <Typography
+                fontFamily={"Lora"}
+                variant={breakPoint ? "h2" : "h1"}
+                textAlign="left"
+                padding="11px"
+              >
+                <h2
+                  className="bestsellers"
+                  style={{ fontFamily: "Satoshi, sans-serif" }}
+                >
                   {BESTSELLTER}
                 </h2>
               </Typography>
@@ -223,11 +316,12 @@ function HomePage() {
                 <Box
                   margin="20px auto"
                   display="grid"
-                  gridTemplateColumns={'repeat(auto-fill, 250px)'}
+                  gridTemplateColumns={"repeat(auto-fill, 250px)"}
                   justifyContent="space-around"
                   rowGap="100px"
-                  columnGap="3.33%">
-                  {' '}
+                  columnGap="3.33%"
+                >
+                  {" "}
                   <Slider {...settings} className="trendingitems">
                     {bestSellersItems.map((item) => (
                       <Fragment>
@@ -239,16 +333,22 @@ function HomePage() {
               )}
             </Fragment>
           ) : (
-            ''
+            ""
           )}
         </div>
       </Box>
 
-      <Box display="flex" justifyContent={'flex-end'} marginRight="5rem" className="gototp">
+      <Box
+        display="flex"
+        justifyContent={"flex-end"}
+        marginRight="5rem"
+        className="gototp"
+      >
         <Button
-          onClick={() => window.scroll({ top: 0, left: 0, behavior: 'smooth' })}
+          onClick={() => window.scroll({ top: 0, left: 0, behavior: "smooth" })}
           variant="contained"
-          sx={{ background: '#ff6d2f' }}>
+          sx={{ background: "#EF6F1F" }}
+        >
           <b>{HOMEPAGE_CONST.goToTop}</b>
         </Button>
       </Box>

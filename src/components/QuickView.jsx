@@ -75,13 +75,13 @@ const QuickView = () => {
                   <Typography
                     variant={breakPoint ? 'h5' : 'h2'}
                     style={{ textDecorationLine: 'underline' }}
-                    fontFamily={'Lora'}>
+                    fontFamily={'Satoshi'}>
                     {item?.title}
                   </Typography>
 
                   <Typography
                     style={{
-                      fontFamily: 'Rubik',
+                      fontFamily: 'Satoshi',
                       paddingLeft: '20px',
                     }}
                     sx={{ mt: breakPoint ? '5px' : '20px', padding: '3px' }}

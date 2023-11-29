@@ -70,7 +70,7 @@ const Papers = () => {
           window.scrollTo(0, 0);
         }}
         sx={{
-          backgroundColor: '#374450',
+          backgroundColor: '#291900',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -82,7 +82,7 @@ const Papers = () => {
         elevation={3}
         className="nav-offer">
         <marquee>
-          <Typography className="slide-offer">
+          <Typography className="slide-offer" >
             <span>{PAPERS.TITLE}</span>
             <span>{PAPERS.DESC}</span>
           </Typography>

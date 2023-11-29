@@ -83,7 +83,7 @@ const Handpicked = () => {
   return (
     <div className="handpicked">
       <div className="hp_body">
-        <h1 className="main_heading" style={{ fontFamily: 'HeuristicaRegular' }}>
+        <h1 className="main_heading" >
           {HANDPICED_CONST.title}
         </h1>
         <div className="headings">

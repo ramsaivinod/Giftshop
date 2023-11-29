@@ -9,6 +9,13 @@
   padding: 5px;
 }
 
+#typo {
+  color: var(--font-clr);
+  font-family: var(--font-style);
+  font-size: 17px;
+  margin-left: 5px;
+}
+
 .image_jk.MuiBox-root.css-79elbk:hover .product_img {
   box-shadow: rgb(255 255 255) 0px 8px 24px;
 }
@@ -64,7 +71,7 @@ button#myBtn {
 }
 
 .list {
-  background: #FFFFFF;
+  background: #ffffff;
   display: inline-block;
   text-align: center;
   position: relative;
@@ -77,8 +84,7 @@ button#myBtn {
   margin: 0 45px;
 }
 
-@media screen and (max-width:400px) {
-
+@media screen and (max-width: 400px) {
   .trending,
   .bestsellers {
     justify-content: center;

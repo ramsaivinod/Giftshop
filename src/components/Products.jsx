@@ -58,7 +58,7 @@ const Products = ({ item }) => {
         <Box>
           {display ? (
             <div id="myModal" className="modal" style={{ display: 'block' }}>
-              <div className="modal-content">
+              <div className="modal-content" >
                 <span className="close" onClick={() => setDisplay(!display)}>
                   &times;
                 </span>
@@ -87,7 +87,7 @@ const Products = ({ item }) => {
 
                       <Typography
                         style={{
-                          fontFamily: "'Shantell Sans', cursive",
+                          fontFamily: "Satoshi",
                         }}
                         sx={{ mt: breakPoint ? '5px' : '20px' }}
                         fontSize={breakPoint ? '12px' : '16px'}
@@ -190,7 +190,7 @@ const Products = ({ item }) => {
               padding: '5px 10px',
               width: '17em',
             }}>
-            <Box className="box1" display="flex" alignItems="center" backgroundColor="#ff6d31" borderRadius="3px">
+            <Box className="box1" display="flex" alignItems="center" backgroundColor="#EF6F1F" borderRadius="3px">
               <IconButton onClick={() => setCount(Math.max(count - 1, 1))} color={shades.primary[900]}>
                 <RemoveIcon />
               </IconButton>

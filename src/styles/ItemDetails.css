@@ -53,7 +53,7 @@ h2.MuiTypography-root.MuiTypography-h2.css-1xppdsu-MuiTypography-root {
 }
 
 .slick-prev {
-    left: 0px;
+    /* left: 0px; */
     z-index: 9;
 }
 

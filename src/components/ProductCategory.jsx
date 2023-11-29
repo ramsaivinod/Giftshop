@@ -246,7 +246,7 @@ const ProductCategory = () => {
                 }}>
                 <Button onClick={() => dispatch(setIsFilterOpen({}))}>
                   <TuneIcon sx={{ cursor: 'pointer', width: '40%' }} fontSize="large" />
-                  <Typography variant="h5" fontWeight="bold" fontFamily="HeuristicaRegular">
+                  <Typography variant="h5" fontWeight="bold" fontFamily="Satoshi, sans-serif">
                     {PRODUCT_CATEGORY.TITLE}
                   </Typography>
                 </Button>
@@ -276,7 +276,7 @@ const ProductCategory = () => {
                           padding: '.7em',
                           marginBottom: breakPoint2 ? '3em' : '1em',
                           fontFamily: 'Rubik',
-                          background: '#ff6d2f',
+                          background: '#EF6F1F',
                           marginTop: '1em',
                         }}>
                         <strong>{PRODUCT_CATEGORY.CLEAR_FILTER}</strong>
@@ -326,7 +326,7 @@ const ProductCategory = () => {
                     display: hide && value === 'All' ? '' : 'none',
                     fontWeight: 'bold',
                     fontSize: '1rem',
-                    background: '#ff6d31',
+                    background: '#EF6F1F',
                   }}
                   onClick={() => setView(!view)}
                   variant={'contained'}>
@@ -339,10 +339,10 @@ const ProductCategory = () => {
             <div className="searchbox">
               <div className="">
                 <IconButton>
-                  <SearchOutlined fontSize="medium" sx={{ color: ' #ff6d31;' }} />
+                  <SearchOutlined fontSize="medium" sx={{ color: ' #EF6F1F;' }} />
                 </IconButton>
                 <input placeholder="Search for Products..." type="text" value={search} onChange={handleSearchField} />
-                <IconButton onClick={() => setShow(false)} style={{ position: 'absolute', right: 0, color: '#ff6d31' }}>
+                <IconButton onClick={() => setShow(false)} style={{ position: 'absolute', right: 0, color: '#EF6F1F' }}>
                   <CancelIcon />
                 </IconButton>
               </div>
