@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css'; // Importing the slick carousel CSS
-import 'slick-carousel/slick/slick-theme.css'; // Importing the slick carousel theme CSS
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; // Importing the slick carousel CSS
+import "slick-carousel/slick/slick-theme.css"; // Importing the slick carousel theme CSS
 
-import { fetchDataFromApi } from '../utils/api'; // Importing a function to fetch data from an API
+import { fetchDataFromApi } from "../utils/api"; // Importing a function to fetch data from an API
 
-import '../styles/banner.css'; // Importing CSS styles for the banner
+import "../styles/banner.css"; // Importing CSS styles for the banner
+import { FEATURED_ITEM } from "../utils/constants";
+import { Avatar, Skeleton } from "@mui/material";
 
 // Slick carousel settings
 var settings = {
@@ -51,13 +53,15 @@ function Banner() {
     const getTags = async () => {
       try {
         // Call the fetchDataFromApi function to fetch data
-        const resp = await fetchDataFromApi('/api/gift-shop-contents?populate=*');
+        const resp = await fetchDataFromApi(
+          "/api/gift-shop-contents?populate=*"
+        );
         if (resp) {
           // Update the 'tags' state with the fetched data
           setTags(resp?.data);
         }
       } catch (error) {
-        console.error('Error fetching blogs:', error);
+        console.error("Error fetching blogs:", error);
       }
     };
     getTags(); // Call the getTags function to initiate the data fetching
@@ -65,11 +69,18 @@ function Banner() {
 
   return (
     <div className="banner_box">
-      {tags?.length ? ( // Check if there are tags available in the state
-        <Slider {...settings} style={{ width: '100%' }}>
+      <h1 className="main_heading" style={{ marginBottom: "30px" }}>
+        {FEATURED_ITEM.title}
+      </h1>
+      {tags.length > 0 ? ( // Check if there are tags available in the state
+        <Slider {...settings} style={{ width: "100%" }}>
           {tags?.map((item, i) => {
             return (
-              <div key={i} className="banner_icon" onClick={() => navigate(`/category/${item?.attributes?.title}`)}>
+              <div
+                key={i}
+                className="banner_icon"
+                onClick={() => navigate(`/category/${item?.attributes?.title}`)}
+              >
                 <div className="bannerimg">
                   <img
                     src={item?.attributes?.content_image?.data?.attributes?.url}
@@ -86,7 +97,11 @@ function Banner() {
           })}
         </Slider>
       ) : (
-        <></>
+        <div style={{ width: "100%", display: "flex" }}>
+          <Skeleton variant="circular">
+            <Avatar sx={{ width: 200, height: 200 }} />
+          </Skeleton>
+        </div>
       )}
     </div>
   );

@@ -104,7 +104,7 @@ const CartMenu = () => {
                 m: '20px 0',
                 display: cart.length === 0 ? 'none' : '',
                 '&:hover': {
-                  backgroundColor: '#ff6d31',
+                  backgroundColor: '#EF6F1F',
                 },
               }}
               onClick={() => {

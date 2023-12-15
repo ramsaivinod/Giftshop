@@ -80,7 +80,7 @@ function Footer() {
             <Box>
               <Typography className="htxt">Programs</Typography>
               {/* List of program links */}
-              <ul style={{ color: '#ff6d2f' }}>
+              <ul style={{ color: '#EF6F1F' }}>
                 <li>
                   <a href="https://www.jkyog.org/life-transformation-programs" target="_blank" rel="noreferrer">
                     <Typography color="white" textAlign={'left'}>
@@ -118,7 +118,7 @@ function Footer() {
             <Box>
               <Typography className="htxt">Our Centers</Typography>
               {/* List of center links */}
-              <ul style={{ color: '#ff6d2f' }}>
+              <ul style={{ color: '#EF6F1F' }}>
                 <li>
                   <a href="https://www.jkyog.org/centers" target="_blank" rel="noreferrer">
                     <Typography color="white" textAlign={'left'}>
@@ -157,43 +157,43 @@ function Footer() {
                   <IconButton>
                     <a href="https://www.youtube.com/channel/UCclfz6zVWWOpsQsg3OheI3g" target="_blank" rel="noreferrer">
                       {' '}
-                      <YouTubeIcon fontSize="large" style={{ color: '#ff6d2f' }} />
+                      <YouTubeIcon fontSize="large" style={{ color: '#EF6F1F' }} />
                     </a>
                   </IconButton>
                 </Box>
                 <IconButton>
                   <a href="https://www.facebook.com/Swami.Mukundananda/" target="_blank" rel="noreferrer">
-                    <FacebookIcon fontSize="large" style={{ color: '#ff6d2f' }} />
+                    <FacebookIcon fontSize="large" style={{ color: '#EF6F1F' }} />
                   </a>
                 </IconButton>
                 <IconButton>
                   <a href="https://twitter.com/Sw_Mukundananda" target="_blank" rel="noreferrer">
                     {' '}
-                    <TwitterIcon fontSize="large" style={{ color: '#ff6d2f' }} />
+                    <TwitterIcon fontSize="large" style={{ color: '#EF6F1F' }} />
                   </a>
                 </IconButton>
                 <IconButton>
                   <a href="https://chat.whatsapp.com/HwyzZcNFJAUIESvu9VwFOU" target="_blank" rel="noreferrer">
                     {' '}
-                    <WhatsAppIcon fontSize="large" style={{ color: '#ff6d2f' }} />
+                    <WhatsAppIcon fontSize="large" style={{ color: '#EF6F1F' }} />
                   </a>
                 </IconButton>
                 <IconButton>
                   <a href="https://www.linkedin.com/in/swamimukundananda/" target="_blank" rel="noreferrer">
                     {' '}
-                    <LinkedInIcon fontSize="large" style={{ color: '#ff6d2f' }} />
+                    <LinkedInIcon fontSize="large" style={{ color: '#EF6F1F' }} />
                   </a>
                 </IconButton>
                 <IconButton>
                   <a href="https://www.instagram.com/swami_mukundananda/?hl=en" target="_blank" rel="noreferrer">
                     {' '}
-                    <InstagramIcon fontSize="large" style={{ color: '#ff6d2f' }} />
+                    <InstagramIcon fontSize="large" style={{ color: '#EF6F1F' }} />
                   </a>
                 </IconButton>
                 <IconButton>
                   <a href="https://www.pinterest.com/SwamiMukundananda/" target="_blank" rel="noreferrer">
                     {' '}
-                    <PinterestIcon fontSize="large" style={{ color: '#ff6d2f' }} />
+                    <PinterestIcon fontSize="large" style={{ color: '#EF6F1F' }} />
                   </a>
                 </IconButton>
               </Box>

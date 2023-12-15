@@ -7,6 +7,10 @@
 /* Utility styles for tailwind */
 @tailwind utilities;
 
+:root{
+  --font-clr:#645743;
+  --font-style: 'Satoshi, sans-serif' ;
+}
 /* Global styles for all elements */
 * {
   font-family: 'SourceSansProRegular', sans-serif;
@@ -95,4 +99,9 @@
 /* Hide the webkit scrollbar */
 ::-webkit-scrollbar {
   display: none;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiDialog-paperFullWidth.css-tlc64q-MuiPaper-root-MuiDialog-paper  {
+  border-radius: 2rem;
+  padding: 1rem;
 }
