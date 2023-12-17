@@ -69,9 +69,12 @@ function Banner() {
 
   return (
     <div className="banner_box">
-      <h1 className="main_heading" style={{ marginBottom: "30px" }}>
+      <h2
+        className="trending"
+        style={{ fontFamily: "Satoshi, sans-serif" }}
+      >
         {FEATURED_ITEM.title}
-      </h1>
+      </h2>
       {tags.length > 0 ? ( // Check if there are tags available in the state
         <Slider {...settings} style={{ width: "100%" }}>
           {tags?.map((item, i) => {

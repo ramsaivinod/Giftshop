@@ -17,6 +17,8 @@ import { fetchDataFromApi } from "../utils/api";
 function FaqPage() {
   const [loading, setLoading] = useState(false);
   const [faqs, setFaqs] = useState([]);
+  const [faqsData, setFaqsData] = useState([]);
+  const [search, setSearch] = useState("");
 
   const getAllFaqs = async () => {
     setLoading(true);
@@ -25,6 +27,7 @@ function FaqPage() {
       if (response?.data) {
         console.log(response.data, "faqs");
         setFaqs(response.data);
+        setFaqsData(response.data);
       } else {
         console.log("No FAQs data received from API");
       }
@@ -38,6 +41,24 @@ function FaqPage() {
   useEffect(() => {
     getAllFaqs();
   }, []);
+
+  // useEffect(() => {
+  //   if (searchField) {
+  //     let templates = faqsData?.filter(item => {
+  //       return item.name.toLowerCase().includes(searchField.toLowerCase())
+  //     });
+
+
+  //     setWorkflow(templates);
+  //   } else {
+  //     setWorkflow(workflowData);
+  //   }
+  // }, [search]);
+
+
+  useEffect(() => {
+    console.log("search",search);
+  }, [search]);
 
   return (
     <Fragment>
@@ -55,6 +76,16 @@ function FaqPage() {
           >
             Frequently Asked Question
           </Typography>
+          <div className="searchbox-faq">
+            <div className="input-container">
+              <input
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search for Questions..."
+                type="text"
+                value={search}
+              />
+            </div>
+          </div>
           {!loading ? (
             <div style={{ display: "flex", flexDirection: "column" }}>
               {faqs.map((item, index) => (
