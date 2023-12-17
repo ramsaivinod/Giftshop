@@ -24,9 +24,7 @@ import _ from "lodash";
 import "../styles/Item2.css";
 import NavMenu from "./NavMenu";
 import HelpDesk from "./HelpDesk";
-import {
-  ABOUT_JKYOG_GIFT_SHOP,
-} from "../utils/constants";
+import { ABOUT_JKYOG_GIFT_SHOP } from "../utils/constants";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -128,7 +126,9 @@ function HomePage() {
   }
 
   // Filter items based on tags
-  const newArrivalsItems = items.filter((item) => item.tags === trendingItem?.Category);
+  const newArrivalsItems = items.filter(
+    (item) => item.tags === trendingItem?.Category
+  );
   const bestSellersItems = items.filter((item) => item.tags === "");
   const SwamijiKirtans = items.filter(
     (item) => item.tags === productByCategory?.Tag
@@ -233,7 +233,9 @@ function HomePage() {
 
   const getTendingItem = async () => {
     try {
-      const resp = await fetchDataFromApi("/api/gift-shop-home-trending-item?populate=*");
+      const resp = await fetchDataFromApi(
+        "/api/gift-shop-home-trending-item?populate=*"
+      );
       if (resp) {
         setTrendingItem(resp?.data.attributes);
       }
@@ -245,7 +247,9 @@ function HomePage() {
   // /api/gift-shop-home-products-by-category
   const getShopHomeProductsByCategory = async () => {
     try {
-      const resp = await fetchDataFromApi("/api/gift-shop-home-products-by-category?populate=*");
+      const resp = await fetchDataFromApi(
+        "/api/gift-shop-home-products-by-category?populate=*"
+      );
       if (resp) {
         setProductByCategory(resp?.data.attributes);
       }
@@ -254,17 +258,19 @@ function HomePage() {
     }
   };
 
-    // gift-shop-home-products-by-under-price
-    const getProductByUnderPrice = async () => {
-      try {
-        const resp = await fetchDataFromApi("/api/gift-shop-home-products-by-under-price?populate=*");
-        if (resp) {
-          setUnderThePrice(resp?.data.attributes);
-        }
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
+  // gift-shop-home-products-by-under-price
+  const getProductByUnderPrice = async () => {
+    try {
+      const resp = await fetchDataFromApi(
+        "/api/gift-shop-home-products-by-under-price?populate=*"
+      );
+      if (resp) {
+        setUnderThePrice(resp?.data.attributes);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
 
   // Fetch side banner images and megamenudata from the API on component mount
   useEffect(() => {
@@ -410,10 +416,9 @@ function HomePage() {
           </Nav>
         </Navbar.Collapse>
 
-        <div className="container boxess">
-          <div className="main-section">
-            <div className="main-carousel">{<MainCarousel />}</div>
-            {/* {banner1 && banner2 && (
+        <div className="main-section">
+          <div className="main-carousel">{<MainCarousel />}</div>
+          {/* {banner1 && banner2 && (
               <>
                 <div className="side-images" >
                   <Link to={banner1?.attributes?.side_images_url}>
@@ -422,11 +427,13 @@ function HomePage() {
                   <Link to={banner2?.attributes?.side_images_url}>
                     <img src={banner2?.attributes?.side_images?.data?.attributes?.url} alt="image-1" />
                   </Link>
-                </div>
+                  </div>
               </>
             )} */}
-          </div>
+        </div>
 
+        <div className="container boxess">
+          
           {<Banner />}
           {/* {<Handpicked />} */}
           {value === "All" ? (
@@ -451,23 +458,33 @@ function HomePage() {
                   ))}
                 </Slider>
               )}
-              {/*Single Banner */}
-              <Link to={singleBanner?.link}>
-                <Box>
-                  <img
-                    className="carousel-img"
-                    src={singleBanner?.imgUrl?.data.attributes.url}
-                    alt="none"
-                    style={{
-                      width: breakPoint ? "" : "100%",
-                      height: "auto",
-                      marginTop: breakPoint ? "4.1rem" : "4.1rem",
-                      objectFit: breakPoint ? "cover" : "",
-                      backgroundAttachment: "fixed",
-                    }}
-                  />
-                </Box>
-              </Link>
+            </Fragment>
+          ) : (
+            ""
+          )}
+        </div>
+
+        {/*Single Banner */}
+        <Link to={singleBanner?.link}>
+          <Box>
+            <img
+              className="carousel-img"
+              src={singleBanner?.imgUrl?.data.attributes.url}
+              alt="none"
+              style={{
+                width: breakPoint ? "" : "100%",
+                height: "auto",
+                marginTop: breakPoint ? "4.1rem" : "4.1rem",
+                objectFit: breakPoint ? "cover" : "",
+                backgroundAttachment: "fixed",
+              }}
+            />
+          </Box>
+        </Link>
+
+        <div className="container boxess">
+          {value === "All" ? (
+            <Fragment>
               <Typography
                 fontFamily={"Lora"}
                 variant={breakPoint ? "h2" : "h1"}
@@ -578,7 +595,12 @@ function HomePage() {
                 {/* <div className="about_jkyog_gift_shop_image"></div> */}
                 <img
                   src={aboutJKYogDetails?.Thumbnail?.data.attributes.url}
-                  style={{ width: "40%", height: "300px", objectFit: "fill", borderRadius: "1rem" }}
+                  style={{
+                    width: "40%",
+                    height: "300px",
+                    objectFit: "fill",
+                    borderRadius: "1rem",
+                  }}
                 />
                 <div className="about_jkyog_gift_shop_textBox">
                   <p className="about_jkyog_gift_shop_text">
@@ -638,6 +660,7 @@ function HomePage() {
             ""
           )}
         </div>
+
       </Box>
 
       {/* <Box

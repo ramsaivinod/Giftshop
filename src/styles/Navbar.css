@@ -224,7 +224,7 @@
     top: 111px;
     position: sticky;
     width: 100%;
-    z-index: 1;
+    z-index: 999;
   
   }
 }
@@ -233,7 +233,7 @@
     top: 0px;
     position: sticky;
     width: 100%;
-    z-index: 1;
+    z-index: 999;
   
   }
 }
