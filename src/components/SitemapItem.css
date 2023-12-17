@@ -1,0 +1,22 @@
+.sitemap-item {
+    margin: 10px;
+    flex-basis: calc(33% - 20px); /* Adjust this percentage based on how many columns you want */
+  }
+  
+  .sitemap-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .sitemap-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sitemap-list-item {
+    margin-bottom: 5px;
+    color: #555;
+    cursor: pointer;
+    font-size: 16px;
+  }

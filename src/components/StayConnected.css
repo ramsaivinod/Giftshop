@@ -1,0 +1,37 @@
+.stay-connected {
+    width: 100%; /* Full width */
+    padding: 20px; /* Padding around the content */
+    text-align: center; /* Center text */
+    margin-bottom: 20px; /* Margin at the bottom */
+  }
+  
+  .stay-connected h2 {
+    margin-bottom: 20px; /* Space below the heading */
+  }
+  
+  .stay-connected form {
+    display: flex;
+    justify-content: center; /* Center the form items horizontally */
+    gap: 10px; /* Space between input and button */
+  }
+  
+  .email-input {
+    padding: 10px;
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Slightly rounded corners */
+    width: 300px; /* Fixed width, adjust as necessary */
+  }
+  
+  .subscribe-button {
+    padding: 10px 20px;
+    background-color: #0066cc; /* Blue background */
+    color: white; /* White text */
+    border: none;
+    border-radius: 4px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  .subscribe-button:hover {
+    background-color: #0055a5; /* Slightly darker blue on hover */
+  }
+  

@@ -21,6 +21,7 @@ import ProductCategory from './components/ProductCategory';
 import SearchResults from './components/searchResults';
 import FaqPage from './components/FaqPage';
 import ProductDisplay from './components/productDisplay';
+import SiteMap from './components/SiteMap';
 
 // The main App component
 function App() {
@@ -48,6 +49,7 @@ function App() {
             <Route path="search" element={<SearchResults />} /> {/* Search results Page */}
             <Route path="faq" element={<FaqPage />} /> {/* Faq's page */}
             <Route path="product-details" element={<ProductDisplay />} /> {/* Faq's page */}
+            <Route path="sitemap" element={<SiteMap />} /> {/* SiteMap's page */}
           </Routes>
           {/* Displaying common components */}
           <CartMenu /> {/* Shopping cart menu */}
