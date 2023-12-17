@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Paper, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { fetchDataFromApi } from "../utils/api";
 import { useNavigate } from 'react-router-dom';
 const styles = {
   container: {
@@ -47,6 +48,7 @@ const Papers = () => {
   const breakPoint = useMediaQuery('(min-width:1000px)');
   const containerRef = useRef(null);
   const navigate = useNavigate();
+  const [coupen, setCoupen] = useState('');
 
   const scrollLeft = () => {
     containerRef.current.scrollBy({
@@ -61,6 +63,22 @@ const Papers = () => {
       behavior: 'smooth',
     });
   };
+
+  // gift-shop-advertisement-bar
+  const getCoupenCode = async () => {
+    try {
+      const resp = await fetchDataFromApi("/api/gift-shop-advertisement-bar?populate=*");
+      if (resp) {
+        setCoupen(resp?.data.attributes);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
+
+  useEffect(()=>{
+    getCoupenCode();
+  },[])
 
   return (
     <div style={styles.container} ref={containerRef}>
@@ -83,8 +101,8 @@ const Papers = () => {
         className="nav-offer">
         <marquee>
           <Typography className="slide-offer" >
-            <span>{PAPERS.TITLE}</span>
-            <span>{PAPERS.DESC}</span>
+            <span>{coupen?.Title}</span>
+            <span>{coupen?.shortDescrption}</span>
           </Typography>
         </marquee>
       </Paper>

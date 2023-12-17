@@ -14,6 +14,7 @@ import NavMenu from '../components/NavMenu';
 import truck from '../assets/logo/truck.png';
 import premium from '../assets/logo/premium.png';
 import offer from '../assets/logo/offer.png';
+import { fetchDataFromApi } from "../utils/api";
 
 // Ticket component definition
 const Ticket = () => {
@@ -30,25 +31,35 @@ const Ticket = () => {
   const [status, setStatus] = useState(false);
   const [type, setType] = useState('');
   const [title, setTitle] = useState('');
+  const [coupen, setCoupen] = useState('');
 
   const navigate = useNavigate();
 
   // Fetch coupon data from an external API on component mount
   useEffect(() => {
     async function applycoupan() {
-      var headers = new Headers();
-      headers.append(
-        'Authorization',
-        'Basic ' + btoa('ce9a3ad16708f3eb4795659e809971c4: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'),
-      );
+      try {
+        var headers = new Headers();
+        headers.append(
+          'Authorization',
+          'Basic ' + btoa('your_api_key_here'),
+        );
 
-      const result = await fetch('https://qc2n483pw9.execute-api.us-east-1.amazonaws.com/QA', {
-        headers: headers,
-      });
+        const result = await fetch('https://your_api_endpoint_here', {
+          headers: headers,
+        });
 
-      const itemJson = await result.json();
-      const l = JSON.parse(itemJson.body);
-      setCoupon(l.price_rules);
+        if (!result.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const itemJson = await result.json();
+        const l = JSON.parse(itemJson.body);
+        setCoupon(l.price_rules);
+      } catch (error) {
+        console.error('There was an error fetching the coupons:', error);
+        // Handle the error appropriately
+      }
     }
     applycoupan();
   }, []);
@@ -99,6 +110,23 @@ const Ticket = () => {
     }
   };
 
+   // gift-shop-advertisement-bar
+   const getCoupenCode = async () => {
+    try {
+      const resp = await fetchDataFromApi("/api/gift-shop-advertisement-bar?populate=*");
+      if (resp) {
+        setCoupen(resp?.data.attributes);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
+
+  useEffect(()=>{
+    getCoupenCode();
+  },[])
+
+
   // Render the Ticket component
   return (
     <>
@@ -115,10 +143,10 @@ const Ticket = () => {
           Close={() => setStatus(false)}
         />
         <Typography variant="h2" fontFamily={'Lora'}>
-          Coupons and Deals
+          {coupen?.detailTitle}
         </Typography>
         <Typography variant="h3" sx={{ mt: '30px', mb: '50px', fontFamily: 'Rubik' }}>
-          Explore current JKYOG featured coupons, deals, sales, and promotions to discover great savings
+          {coupen?.detailShortDescrption}
         </Typography>
         <Box mt="30px">
           <Button
