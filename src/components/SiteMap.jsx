@@ -122,7 +122,7 @@ const Sitemap = () => {
   return (
     <div>
       <NavMenu navFromTop={true} />
-      <div className="main-section">
+      <div className="main-section container">
         <div className="sitemap">
           {sections.map((section, index) => (
             <SitemapItem key={index} title={section.title} items={section.items} />
