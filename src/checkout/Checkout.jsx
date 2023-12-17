@@ -1,22 +1,31 @@
 // Import necessary modules and components
-import { Box, Button, Stepper, Step, StepLabel, Typography, Divider, Input } from '@mui/material';
-import { Formik } from 'formik';
-import { useEffect, useState } from 'react';
-import * as yup from 'yup';
-import { encode as btoa } from 'base-64';
-import { useNavigate } from 'react-router-dom';
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from '@emotion/styled';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import axios from 'axios';
-import DiscountIcon from '@mui/icons-material/Discount';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import {
+  Box,
+  Button,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+  Divider,
+  Input,
+} from "@mui/material";
+import { Formik } from "formik";
+import { useEffect, useState } from "react";
+import * as yup from "yup";
+import { encode as btoa } from "base-64";
+import { useNavigate } from "react-router-dom";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "@emotion/styled";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
+import DiscountIcon from "@mui/icons-material/Discount";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import { setPrice, setCode, setSuccess } from '../state';
-import Shipping from './Shipping';
-import { shades } from '../theme';
-import NavMenu from '../components/NavMenu';
+import { setPrice, setCode, setSuccess } from "../state";
+import Shipping from "./Shipping";
+import { shades } from "../theme";
+import NavMenu from "../components/NavMenu";
 
 // Define a styled component for flexible box layout
 const FlexBox = styled(Box)`
@@ -30,11 +39,11 @@ const Checkout = ({ val }) => {
   // Select necessary Redux state variables
   const address = useSelector((state) => state.cart.address);
   const price = useSelector((state) => state.cart.price);
-  const isNonMobile = useMediaQuery('(min-width:800px)');
-  const isNonMobile2 = useMediaQuery('(min-width:1000px)');
+  const isNonMobile = useMediaQuery("(min-width:800px)");
+  const isNonMobile2 = useMediaQuery("(min-width:1000px)");
   const dispatch = useDispatch();
   const code = useSelector((state) => state.cart.code);
-  const [coupan, setCoupan] = useState('');
+  const [coupan, setCoupan] = useState("");
   const [activeStep, setActiveStep] = useState(0);
   const cart = useSelector((state) => state.cart.cart);
   const success = useSelector((state) => state.cart.success);
@@ -42,7 +51,7 @@ const Checkout = ({ val }) => {
   const navigate = useNavigate();
   const [orderId, setOrderId] = useState(false);
   const [cs, setCodeSuccess] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [pay, setPay] = useState(false);
   const [h, setH] = useState(true);
   const [isPaypalVisible, setIsPaypalVisible] = useState(true);
@@ -82,27 +91,32 @@ const Checkout = ({ val }) => {
 
   // Check if the address is complete and enable/disable payment button accordingly
   useEffect(() => {
-    const isActive = address.email && address.firstName && address.lastName && address.phoneNumber && address.state;
+    const isActive =
+      address.email &&
+      address.firstName &&
+      address.lastName &&
+      address.phoneNumber &&
+      address.state;
     setIsDisablePayment(!isActive);
   }, [address]);
 
   // Create an order for PayPal payment
   const createOrder = (data, actions) => {
-    console.log(data, 'Data');
+    console.log(data, "Data");
     return actions.order
       .create({
         purchase_units: [
           {
-            description: '',
+            description: "",
             amount: {
-              currency_code: 'USD',
+              currency_code: "USD",
               value: data,
             },
           },
         ],
       })
       .then((orderId) => {
-        console.log(orderId, 'orderId');
+        console.log(orderId, "orderId");
         setOrderId(orderId);
         return orderId;
       });
@@ -117,12 +131,12 @@ const Checkout = ({ val }) => {
 
     // Copy billing address to shipping address if they are the same
     if (isFirstStep && values.shippingAddress.isSameAddress) {
-      actions.setFieldValue('shippingAddress', {
+      actions.setFieldValue("shippingAddress", {
         ...values.billingAddress,
         isSameAddress: true,
       });
     }
-    console.log(values.shippingAddress, 'shipping address');
+    console.log(values.shippingAddress, "shipping address");
     actions.setTouched({});
   };
 
@@ -136,11 +150,11 @@ const Checkout = ({ val }) => {
 
   // Handle payment error by PayPal
   const onError = (data, actions) => {
-    setError('An Error Occurred With Your Payment');
+    setError("An Error Occurred With Your Payment");
   };
 
   // Make the actual payment
-  async function makePayment(data) {
+  const makePayment = async (data) => {
     // Define the request body
     const requestBody = {
       order: {
@@ -148,7 +162,7 @@ const Checkout = ({ val }) => {
           title: item.title,
           price: item.variants[0].price,
           quantity: item.count,
-          taxable: 'false',
+          taxable: "false",
         })),
         email: data.email,
         shipping_address: {
@@ -173,32 +187,42 @@ const Checkout = ({ val }) => {
         },
       },
     };
-
+    const requestDataFormat = {
+      body: JSON.stringify(requestBody),
+    };
+    console.log(requestBody);
     // Send the payment request to the server
-    const response = await axios.post('https://m48e2fta9d.execute-api.us-east-1.amazonaws.com/jkyogstage/orders', {
-      body: requestBody,
-    });
-    console.log(data.firstName, 'address');
-    console.log(data.lastName, 'search');
-    console.log(response.data, 'data');
+    const response = await axios.post(
+      "https://m48e2fta9d.execute-api.us-east-1.amazonaws.com/jkyogstage/orders",
+      requestBody
+    );
+    // console.log(data.firstName, "address");
+    // console.log(data.lastName, "search");
+    console.log(response.data, "data");
     setPay(false);
     const session = response.data;
     if (session.body) {
-      navigate('/thank');
+      navigate("/thank");
     }
-  }
+  };
 
   // Apply coupon
   async function applyCoupon() {
     var headers = new Headers();
     headers.append(
-      'Authorization',
-      'Basic ' + btoa('ce9a3ad16708f3eb4795659e809971c4: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'),
+      "Authorization",
+      "Basic " +
+        btoa(
+          "ce9a3ad16708f3eb4795659e809971c4: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"
+        )
     );
 
-    const result = await fetch('https://qc2n483pw9.execute-api.us-east-1.amazonaws.com/QA', {
-      headers: headers,
-    });
+    const result = await fetch(
+      "https://qc2n483pw9.execute-api.us-east-1.amazonaws.com/QA",
+      {
+        headers: headers,
+      }
+    );
 
     const itemJson = await result.json();
     const l = JSON.parse(itemJson.body);
@@ -219,11 +243,11 @@ const Checkout = ({ val }) => {
   // Render the Checkout component
   return (
     <>
-      <div style={{ paddingBottom: '90px' }}>
+      <div style={{ paddingBottom: "90px" }}>
         <NavMenu navFromTop={true} />
       </div>
       <Box className="container">
-        <Stepper activeStep={activeStep} sx={{ m: '20px 0' }}>
+        <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
           <Step>
             <StepLabel>Billing</StepLabel>
           </Step>
@@ -235,8 +259,17 @@ const Checkout = ({ val }) => {
           <Formik
             onSubmit={handleFormSubmit}
             initialValues={initialValues}
-            validationSchema={checkoutSchema[activeStep]}>
-            {({ values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue }) => (
+            validationSchema={checkoutSchema[activeStep]}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+              setFieldValue,
+            }) => (
               <form onSubmit={handleSubmit}>
                 {isFirstStep && (
                   <>
@@ -253,18 +286,24 @@ const Checkout = ({ val }) => {
                           />
                         </Box>
 
-                        <Box padding="30px" overflow="auto" height="100%" width="70%">
+                        <Box
+                          padding="30px"
+                          overflow="auto"
+                          height="100%"
+                          width="70%"
+                        >
                           {/* HEADER */}
                           <FlexBox mb="15px">
                             <Typography variant="h3">
                               <strong>SHOPPING BAG ({cart.length}) </strong>
                             </Typography>
-                            <Box display={!isNonMobile ? 'none' : ''}>
+                            <Box display={!isNonMobile ? "none" : ""}>
                               <Button
                                 onClick={() => navigate(`/`)}
                                 variant="contained"
-                                sx={{ backgroundColor: '#ff6d2f' }}>
-                                {' '}
+                                sx={{ backgroundColor: "#ff6d2f" }}
+                              >
+                                {" "}
                                 <ArrowBackIcon />
                                 <Typography> Continue Shopping</Typography>
                               </Button>
@@ -280,8 +319,8 @@ const Checkout = ({ val }) => {
                                   <Box flex="1 1 40%">
                                     <img
                                       alt={item?.name}
-                                      width={!isNonMobile2 ? '60em' : '180em'}
-                                      height={!isNonMobile2 ? '100em' : '250em'}
+                                      width={!isNonMobile2 ? "60em" : "180em"}
+                                      height={!isNonMobile2 ? "100em" : "250em"}
                                       src={item.image?.src}
                                     />
                                   </Box>
@@ -302,17 +341,27 @@ const Checkout = ({ val }) => {
                           <Box m="20px 0">
                             <Divider />
                             <FlexBox m="20px 0">
-                              <Typography fontWeight="bold" sx={{ display: isNonMobile ? '' : 'none' }}>
+                              <Typography
+                                fontWeight="bold"
+                                sx={{ display: isNonMobile ? "" : "none" }}
+                              >
                                 COUPON CODE
                               </Typography>
                               <Box
                                 sx={{
                                   p: 2,
                                   border: `1px dashed ${
-                                    cs ? 'grey' : success ? (isPaypalVisible ? 'red' : 'green') : 'green'
+                                    cs
+                                      ? "grey"
+                                      : success
+                                      ? isPaypalVisible
+                                        ? "red"
+                                        : "green"
+                                      : "green"
                                   }`,
-                                  background: 'white',
-                                }}>
+                                  background: "white",
+                                }}
+                              >
                                 {!directCoupon ? (
                                   <Input
                                     placeholder="Enter Coupon Code"
@@ -321,7 +370,11 @@ const Checkout = ({ val }) => {
                                     onChange={(e) => setCoupan(e.target.value)}
                                   />
                                 ) : (
-                                  <Input placeholder="Enter Coupon Code" type="text" value={couponName} />
+                                  <Input
+                                    placeholder="Enter Coupon Code"
+                                    type="text"
+                                    value={couponName}
+                                  />
                                 )}
                               </Box>
 
@@ -332,10 +385,12 @@ const Checkout = ({ val }) => {
                                   handleButtonClick();
                                 }}
                                 sx={{
-                                  display: isNonMobile && h && !code ? '' : 'none',
-                                }}>
-                                {' '}
-                                Apply{' '}
+                                  display:
+                                    isNonMobile && h && !code ? "" : "none",
+                                }}
+                              >
+                                {" "}
+                                Apply{" "}
                               </Button>
                             </FlexBox>
                             {!isNonMobile && (
@@ -345,30 +400,44 @@ const Checkout = ({ val }) => {
                                   applyCoupon();
                                   handleButtonClick();
                                 }}
-                                sx={{ display: h ? '' : 'none' }}>
-                                {' '}
-                                Apply{' '}
+                                sx={{ display: h ? "" : "none" }}
+                              >
+                                {" "}
+                                Apply{" "}
                               </Button>
                             )}
                             <Divider />
                             {code ? (
                               <>
-                                {' '}
+                                {" "}
                                 <FlexBox m="20px 0">
-                                  <Typography fontWeight="bold">SUBTOTAL</Typography>
-                                  <Typography fontWeight="bold" sx={{ textDecoration: 'line-through' }}>
+                                  <Typography fontWeight="bold">
+                                    SUBTOTAL
+                                  </Typography>
+                                  <Typography
+                                    fontWeight="bold"
+                                    sx={{ textDecoration: "line-through" }}
+                                  >
                                     ${totalPrice}
                                   </Typography>
                                 </FlexBox>
                                 <FlexBox>
-                                  <Typography fontWeight="bold">TOTAL</Typography>
-                                  <Typography fontWeight="bold">${code ? price : totalPrice}</Typography>
+                                  <Typography fontWeight="bold">
+                                    TOTAL
+                                  </Typography>
+                                  <Typography fontWeight="bold">
+                                    ${code ? price : totalPrice}
+                                  </Typography>
                                 </FlexBox>
                               </>
                             ) : (
                               <FlexBox m="20px 0">
-                                <Typography fontWeight="bold">SUBTOTAL</Typography>
-                                <Typography fontWeight="bold">${code ? price : totalPrice}</Typography>
+                                <Typography fontWeight="bold">
+                                  SUBTOTAL
+                                </Typography>
+                                <Typography fontWeight="bold">
+                                  ${code ? price : totalPrice}
+                                </Typography>
                               </FlexBox>
                             )}
                             <Divider />
@@ -380,12 +449,20 @@ const Checkout = ({ val }) => {
                       <Box>
                         <Box
                           sx={{
-                            display: values.firstName !== '' && values.country !== '' ? '' : 'none',
-                          }}>
+                            display:
+                              values.firstName !== "" && values.country !== ""
+                                ? ""
+                                : "none",
+                          }}
+                        >
                           {type && (
-                            <Typography sx={{ mb: '15px' }} fontSize="18px">
+                            <Typography sx={{ mb: "15px" }} fontSize="18px">
                               <strong>
-                                Make Payment With <b style={{ color: '#ff6d2f' }}> Discount Applied</b>
+                                Make Payment With{" "}
+                                <b style={{ color: "#ff6d2f" }}>
+                                  {" "}
+                                  Discount Applied
+                                </b>
                               </strong>
                             </Typography>
                           )}
@@ -396,13 +473,16 @@ const Checkout = ({ val }) => {
                                 variant="contained"
                                 size="large"
                                 sx={{
-                                  padding: '18px 22px',
+                                  padding: "18px 22px",
                                   background:
-                                    'linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(230,114,20,1) 94%)',
-                                  fontWeight: 'bolder',
-                                  fontSize: 'medium',
-                                }}>
-                                Proceed to &nbsp; <strong> Pay With Discount </strong> &nbsp; &nbsp; <DiscountIcon />
+                                    "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(230,114,20,1) 94%)",
+                                  fontWeight: "bolder",
+                                  fontSize: "medium",
+                                }}
+                              >
+                                Proceed to &nbsp;{" "}
+                                <strong> Pay With Discount </strong> &nbsp;
+                                &nbsp; <DiscountIcon />
                               </Button>
                             ) : (
                               <></>
@@ -410,15 +490,20 @@ const Checkout = ({ val }) => {
 
                             <PayPalScriptProvider
                               options={{
-                                'client-id':
-                                  'AVRcsMIkUdUB-1PC0AHfQWISSMbQV2pCr8IVGiQd1QLkA8EWQzYY9owvyPm1zWdQjNO4sAXnxQyDgtJz',
-                              }}>
+                                "client-id":
+                                  "AYQ5fCEYi8xgTe5wBLDbv4Ttv5f1UptJSoO2h_VtJYFiw8gduAz_A0KfpkcdWERq6qwORcPKY_7g5jD8",
+                              }}
+                            >
                               {success ? (
                                 <PayPalButtons
                                   disabled={isDisablePayment}
-                                  style={{ layout: 'vertical', color: 'blue' }}
-                                  createOrder={(data, actions) => createOrder(price, actions)}
-                                  onApprove={(data, actions) => onApprove(data, actions)}
+                                  style={{ layout: "vertical", color: "blue" }}
+                                  createOrder={(data, actions) =>
+                                    createOrder(price, actions)
+                                  }
+                                  onApprove={(data, actions) =>
+                                    onApprove(data, actions)
+                                  }
                                   onError={(error) => onError(error)}
                                 />
                               ) : (
@@ -438,15 +523,16 @@ const Checkout = ({ val }) => {
                       color="primary"
                       variant="contained"
                       sx={{
-                        display: 'flex',
+                        display: "flex",
                         backgroundColor: shades.primary[400],
-                        boxShadow: 'none',
-                        color: 'white',
+                        boxShadow: "none",
+                        color: "white",
                         borderRadius: 0,
-                        padding: '15px 40px',
-                        width: '20%',
+                        padding: "15px 40px",
+                        width: "20%",
                       }}
-                      onClick={wrapper}>
+                      onClick={wrapper}
+                    >
                       Back
                     </Button>
                   )}
@@ -463,77 +549,77 @@ const Checkout = ({ val }) => {
 // Define initial form values
 const initialValues = {
   billingAddress: {
-    email: '',
-    phoneNumber: '',
-    firstName: '',
-    lastName: '',
-    country: '',
-    street1: '',
-    street2: '',
-    city: '',
-    state: '',
-    zipCode: '',
+    email: "",
+    phoneNumber: "",
+    firstName: "",
+    lastName: "",
+    country: "",
+    street1: "",
+    street2: "",
+    city: "",
+    state: "",
+    zipCode: "",
   },
   shippingAddress: {
     isSameAddress: true,
-    firstName: '',
-    lastName: '',
-    country: '',
-    street1: '',
-    street2: '',
-    city: '',
-    state: '',
-    zipCode: '',
+    firstName: "",
+    lastName: "",
+    country: "",
+    street1: "",
+    street2: "",
+    city: "",
+    state: "",
+    zipCode: "",
   },
-  email: '',
-  phoneNumber: '',
+  email: "",
+  phoneNumber: "",
 };
 
 // Define validation schema for the form
 const checkoutSchema = [
   yup.object().shape({
     billingAddress: yup.object().shape({
-      email: yup.string().required('required'),
-      phoneNumber: yup.string().required('required'),
-      firstName: yup.string().required('required'),
-      lastName: yup.string().required('required'),
-      country: yup.string().required('required'),
-      street1: yup.string().required('required'),
+      email: yup.string().required("required"),
+      phoneNumber: yup.string().required("required"),
+      firstName: yup.string().required("required"),
+      lastName: yup.string().required("required"),
+      country: yup.string().required("required"),
+      street1: yup.string().required("required"),
       street2: yup.string(),
-      city: yup.string().required('required'),
-      state: yup.string().required('required'),
-      zipCode: yup.string().required('required'),
+      city: yup.string().required("required"),
+      state: yup.string().required("required"),
+      zipCode: yup.string().required("required"),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
-      firstName: yup.string().when('isSameAddress', {
+      firstName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required('required'),
+        then: yup.string().required("required"),
       }),
-      lastName: yup.string().when('isSameAddress', {
+      lastName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required('required'),
+        then: yup.string().required("required"),
       }),
-      country: yup.string().when('isSameAddress', {
+      country: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required('required'),
+        then: yup.string().required("required"),
       }),
-      street1: yup.string().when('isSameAddress', {
+      street1: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required('required'),
+        then: yup.string().required("required"),
       }),
       street2: yup.string(),
-      city: yup.string().when('isSameAddress', {
+      city: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required('required'),
+        then: yup.string().required("required"),
       }),
-      state: yup.string().when('isSameAddress', {
+      state: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required('required'),
+        then: yup.string().required("required"),
       }),
-      zipCode: yup.string().when('isSameAddress', {
+      zipCode: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required('required'),
+        then: yup.string().required("required"),
       }),
     }),
   }),

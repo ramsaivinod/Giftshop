@@ -13,7 +13,7 @@
   width: 100%;
 }
 
-@media (min-width:834px ){
+@media (min-width: 834px) {
   #basic-navbar-nav {
     position: fixed;
     border-bottom: 1px solid black;

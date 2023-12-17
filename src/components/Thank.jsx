@@ -1,5 +1,5 @@
 import '../styles/thank.scss';
-
+import { useSelector } from 'react-redux';
 import React from 'react';
 import Table from '@mui/material/Table';
 import Box from '@mui/material/Box';

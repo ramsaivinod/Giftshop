@@ -18,6 +18,9 @@ import Collections from './components/Collections';
 import QuickView from './components/QuickView';
 import Ticket from './components/Ticket';
 import ProductCategory from './components/ProductCategory';
+import SearchResults from './components/searchResults';
+import FaqPage from './components/FaqPage';
+import ProductDisplay from './components/productDisplay';
 
 // The main App component
 function App() {
@@ -42,6 +45,9 @@ function App() {
             <Route path="thank" element={<Thank />} /> {/* Thank you page */}
             <Route path="checkout/success" element={<Confirmation />} /> {/* Checkout success */}
             <Route path="coupon" element={<Ticket />} /> {/* Coupon page */}
+            <Route path="search" element={<SearchResults />} /> {/* Search results Page */}
+            <Route path="faq" element={<FaqPage />} /> {/* Faq's page */}
+            <Route path="product-details" element={<ProductDisplay />} /> {/* Faq's page */}
           </Routes>
           {/* Displaying common components */}
           <CartMenu /> {/* Shopping cart menu */}

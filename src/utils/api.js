@@ -9,10 +9,10 @@ export const fetchDataFromApi = async (url) => {
   };
   try {
     const { data } = await axios.get(API_URL + url, options);
-    console.log(data, 'DATA');
+    // console.log(data, 'DATA');
     return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };

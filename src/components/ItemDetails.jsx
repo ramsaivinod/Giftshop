@@ -150,6 +150,7 @@ const ItemDetails = () => {
         );
 
         const itemJson = await result.json();
+        console.log(itemJson, "from-product display page");
         setItem(itemJson.products);
         setLoading(false);
       } catch (err) {

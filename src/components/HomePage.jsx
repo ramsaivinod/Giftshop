@@ -1,13 +1,12 @@
 // Import necessary modules and components
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
 import MainCarousel from "./MainCarousel";
 import { useNavigate } from "react-router-dom";
-import Handpicked from "./Handpicked";
 import { Link } from "react-router-dom";
 import { encode as btoa } from "base-64";
 import { setItems } from "../state";
-import React, { Fragment, useEffect, useState, useMemo } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import "slick-carousel/slick/slick.css";
@@ -24,10 +23,19 @@ import { fetchDataFromApi } from "../utils/api";
 import _ from "lodash";
 import "../styles/Item2.css";
 import NavMenu from "./NavMenu";
-import { HOMEPAGE_CONST, TRENDING, BESTSELLTER } from "../utils/constants";
+import HelpDesk from "./HelpDesk";
+import {
+  ABOUT_JKYOG_GIFT_SHOP,
+} from "../utils/constants";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import {
+  ArrowForward,
+  ArrowForwardIos,
+  HelpOutline,
+  MailOutline,
+} from "@mui/icons-material";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -40,6 +48,18 @@ function HomePage() {
 
   const [categories, setCategories] = useState([]);
   const [sideBanner, setSideBanner] = useState([]);
+  const [singleBanner, setSingleBanner] = useState({});
+  const [trendingItem, setTrendingItem] = useState({});
+  const [underThePrice, setUnderThePrice] = useState({});
+  const [productByCategory, setProductByCategory] = useState({});
+  const [aboutJKYogDetails, setAboutJKYogDetails] = useState({});
+  const [selectedSubItems, setSelectedSubItems] = useState([]);
+  const [megaMenu, setMegaMenu] = useState([]);
+  const [showHelpDeskForm, setShowHelpDeskForm] = useState(false);
+
+  const handleSubCategoryClick = (subItems) => {
+    setSelectedSubItems(subItems);
+  };
 
   // Function to fetch categories from the API
   const getCategories = () => {
@@ -108,10 +128,10 @@ function HomePage() {
   }
 
   // Filter items based on tags
-  const newArrivalsItems = items.filter((item) => item.tags === "POS");
+  const newArrivalsItems = items.filter((item) => item.tags === trendingItem?.Category);
   const bestSellersItems = items.filter((item) => item.tags === "");
   const SwamijiKirtans = items.filter(
-    (item) => item.tags === "Swamiji Kirtans"
+    (item) => item.tags === productByCategory?.Tag
   );
 
   // Settings for the Slick Carousel
@@ -161,95 +181,235 @@ function HomePage() {
     ],
   };
 
-  // Fetch side banner images from the API on component mount
-  useEffect(() => {
-    const getBanner = async () => {
+  const getMegaMenu = async () => {
+    try {
+      const response = await fetchDataFromApi("/api/web-app-mega-menu");
+      // console.log(response, "MegaMenu");
+      if (response) {
+        setMegaMenu(response?.data.attributes.menuItems);
+      }
+    } catch (error) {
+      console.error("Error fetching MegaMenu:", error);
+    }
+  };
+
+  const getBanner = async () => {
+    try {
+      const resp = await fetchDataFromApi(
+        "/api/gift-shop-sideimages?populate=*"
+      );
+      // console.log(resp, "responsmosmf");
+      if (resp) {
+        setSideBanner(resp?.data);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
+
+  const getSingleBanner = async () => {
+    try {
+      const resp = await fetchDataFromApi("/api/homepage-banner?populate=*");
+      if (resp) {
+        console.log(resp?.data, "/api/homepage-banner");
+        setSingleBanner(resp?.data.attributes);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
+
+  const getAboutJKYogDetails = async () => {
+    try {
+      const resp = await fetchDataFromApi("/api/homepage-about-us?populate=*");
+      if (resp) {
+        // console.log(resp?.data, "/api/homepage-about-us");
+        setAboutJKYogDetails(resp?.data.attributes);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
+
+  const getTendingItem = async () => {
+    try {
+      const resp = await fetchDataFromApi("/api/gift-shop-home-trending-item?populate=*");
+      if (resp) {
+        setTrendingItem(resp?.data.attributes);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
+
+  // /api/gift-shop-home-products-by-category
+  const getShopHomeProductsByCategory = async () => {
+    try {
+      const resp = await fetchDataFromApi("/api/gift-shop-home-products-by-category?populate=*");
+      if (resp) {
+        setProductByCategory(resp?.data.attributes);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
+  };
+
+    // gift-shop-home-products-by-under-price
+    const getProductByUnderPrice = async () => {
       try {
-        const resp = await fetchDataFromApi(
-          "/api/gift-shop-sideimages?populate=*"
-        );
+        const resp = await fetchDataFromApi("/api/gift-shop-home-products-by-under-price?populate=*");
         if (resp) {
-          setSideBanner(resp?.data);
+          setUnderThePrice(resp?.data.attributes);
         }
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
     };
+
+  // Fetch side banner images and megamenudata from the API on component mount
+  useEffect(() => {
+    getMegaMenu();
     getBanner();
+    getSingleBanner();
+    getAboutJKYogDetails();
+    getTendingItem();
+    getShopHomeProductsByCategory();
+    getProductByUnderPrice();
   }, []);
 
-  const handleNavMenuClick = (cat) => {
-    navigate(`/category/${cat}`);
+  const handleHelpDeskFormChange = () => {
+    setShowHelpDeskForm(!showHelpDeskForm);
   };
   const [banner1, banner2] = sideBanner;
 
   return (
     <Fragment>
       <Box>
-      <Box className="offersavailable">
+        <Box className="offersavailable">
           <Papers />
         </Box>
         <NavMenu navFromTop={false} />
 
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" fixed="top">
           <Nav className="me-auto custom-nav">
-            <Nav.Link
-              onClick={() => {
-                navigate(`/`);
-              }}
-              className="nav-item"
-              id="basic-nav-dropdown"
-            >
-              HOME
-            </Nav.Link>
+            {megaMenu.length > 0 ? (
+              megaMenu.map((item, index) =>
+                item.SUB_CATEGORIES.length > 0 ? (
+                  <NavDropdown
+                    key={index}
+                    title={item.TITLE}
+                    id="basic-nav-dropdown"
+                    onClick={() =>
+                      handleSubCategoryClick(item.SUB_CATEGORIES[0].SUB_ITEMS)
+                    }
+                  >
+                    <div className="dropdownCoverBox">
+                      <div className="dropdownLeftPanel">
+                        <div className="dropdownLeftPanelHeader">
+                          <p
+                            style={{
+                              lineHeight: 1.4,
+                              letterSpacing: ".1299px",
+                              fontSize: 18,
+                            }}
+                          >
+                            All {item.TITLE}
+                          </p>
+                          <ArrowForward size="medium" sx={{ margin: "2px" }} />
+                        </div>
 
-            <NavDropdown title="KIRTANS" id="basic-nav-dropdown">
-              <NavDropdown.Item
-                onClick={() => {
-                  handleNavMenuClick("Swamiji%20Kirtans");
-                }}
-                className="dropdownitem"
-              >
-                Swamiji Kirtans
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="BOOKS" id="basic-nav-dropdown">
-              <NavDropdown.Item
-                onClick={() => {
-                  handleNavMenuClick("English%20Books");
-                }}
-              >
-                English Books
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                onClick={() => {
-                  handleNavMenuClick("BalMukund%20Books");
-                }}
-              >
-                BalMukund Books
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="AUDIOS" id="basic-nav-dropdown">
-              <NavDropdown.Item
-                onClick={() => {
-                  handleNavMenuClick("English%20Lectures-Swamiji%20(Audio)");
-                }}
-              >
-                English Lectures
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="VIDEOS" id="basic-nav-dropdown">
-              <NavDropdown.Item
-                onClick={() => {
-                  handleNavMenuClick("English%20Lectures-Swamiji%20(Video)");
-                }}
-              >
-                Videos
-              </NavDropdown.Item>
-            </NavDropdown>
+                        {item.SUB_CATEGORIES.map((subItem, index) => (
+                          <NavDropdown.Item
+                            key={index}
+                            className="dropdownitem dropdownitem-selected"
+                            style={{ justifyContent: "space-between" }}
+                            onMouseOver={() =>
+                              handleSubCategoryClick(subItem.SUB_ITEMS)
+                            }
+                            onClick={() => {
+                              navigate(
+                                `/search?category=${subItem.CATEGORY_TITLE}&filter=All&searchInput=none`
+                              );
+                            }}
+                          >
+                            {subItem.CATEGORY_TITLE}
+                            <ArrowForwardIos
+                              size="small"
+                              sx={{ margin: "2px" }}
+                            />
+                          </NavDropdown.Item>
+                        ))}
+                      </div>
+                      <div className="dropdownRightPanel">
+                        <div className="dropdownRightPanelSubCategory">
+                          {selectedSubItems.map((subItem, index) => (
+                            <p
+                              key={index}
+                              style={{
+                                fontSize: 20,
+                                fontWeight: 400,
+                                cursor: "pointer",
+                                lineHeight: 1.4,
+                                letterSpacing: ".1299px",
+                              }}
+                              onClick={() =>
+                                navigate(
+                                  `/search?category=${subItem.ITEM_TITLE}&filter=All&searchInput=none`
+                                )
+                              }
+                            >
+                              {subItem.ITEM_TITLE}
+                            </p>
+                          ))}
+                        </div>
+                        <div className="dropdownRightPanelImage">
+                          <div className="dropdownRightPanelImageDiv">
+                            <img
+                              className="dropdownRightPanelImageImg"
+                              src="https://jipl-strapi-aws-s3-images-bucket.s3.amazonaws.com/bannerimage_1_5ec00547a5.png"
+                            />
+                            <p
+                              style={{
+                                marginTop: "1rem",
+                                marginBottom: 0,
+                                fontSize: "12.99px",
+                                lineHeight: 1.4,
+                                letterSpacing: ".1299px",
+                              }}
+                            >
+                              Editor's Picks
+                            </p>
+                            <p
+                              style={{
+                                marginTop: "5px",
+                                marginBottom: 0,
+                                fontWeight: 500,
+                                fontSize: 16,
+                                lineHeight: 1.25,
+                                letterSpacing: ".08px",
+                              }}
+                            >
+                              JKYog Authors
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </NavDropdown>
+                ) : (
+                  <Nav.Link className="nav-item" id="basic-nav-dropdown">
+                    {item.TITLE}
+                  </Nav.Link>
+                )
+              )
+            ) : (
+              <div style={{ padding: "1rem" }}>
+                <CircularProgress />
+              </div>
+            )}
           </Nav>
         </Navbar.Collapse>
-      
+
         <div className="container boxess">
           <div className="main-section">
             <div className="main-carousel">{<MainCarousel />}</div>
@@ -268,20 +428,20 @@ function HomePage() {
           </div>
 
           {<Banner />}
-          {<Handpicked />}
+          {/* {<Handpicked />} */}
           {value === "All" ? (
             <Fragment>
               <Typography
                 fontFamily={"Montagu Slab"}
                 variant={breakPoint ? "h2" : "h1"}
                 textAlign="left"
-                padding="10px"
+                marginTop="1rem"
               >
                 <h2
                   className="trending"
                   style={{ fontFamily: "Satoshi, sans-serif" }}
                 >
-                  {TRENDING}
+                  {trendingItem?.Title}
                 </h2>
               </Typography>
               {newArrivalsItems?.length > 0 && (
@@ -291,17 +451,34 @@ function HomePage() {
                   ))}
                 </Slider>
               )}
+              {/*Single Banner */}
+              <Link to={singleBanner?.link}>
+                <Box>
+                  <img
+                    className="carousel-img"
+                    src={singleBanner?.imgUrl?.data.attributes.url}
+                    alt="none"
+                    style={{
+                      width: breakPoint ? "" : "100%",
+                      height: "auto",
+                      marginTop: breakPoint ? "4.1rem" : "4.1rem",
+                      objectFit: breakPoint ? "cover" : "",
+                      backgroundAttachment: "fixed",
+                    }}
+                  />
+                </Box>
+              </Link>
               <Typography
                 fontFamily={"Lora"}
                 variant={breakPoint ? "h2" : "h1"}
                 textAlign="left"
-                padding="11px"
+                marginTop="1rem"
               >
                 <h2
-                  className="bestsellers"
+                  className="swamijiBooks"
                   style={{ fontFamily: "Satoshi, sans-serif" }}
                 >
-                  {BESTSELLTER}
+                  {productByCategory?.Title}
                 </h2>
               </Typography>
               {SwamijiKirtans?.length > 3 ? (
@@ -331,6 +508,131 @@ function HomePage() {
                   </Slider>
                 </Box>
               )}
+              <Typography
+                fontFamily={"Lora"}
+                variant={breakPoint ? "h2" : "h1"}
+                textAlign="left"
+                marginTop="1rem"
+              >
+                <h2
+                  className="swamijiBooks"
+                  style={{ fontFamily: "Satoshi, sans-serif" }}
+                >
+                  {underThePrice.Title}
+                </h2>
+              </Typography>
+              {SwamijiKirtans?.length > 3 ? (
+                <Slider {...settings} className="trendingitems">
+                  {SwamijiKirtans.map(
+                    (item) =>
+                      Number(item.variants[0].price) <= underThePrice.Price && (
+                        <Fragment>
+                          <Item2 item={item} key={`${item.title}-${item.id}`} />
+                        </Fragment>
+                      )
+                  )}
+                </Slider>
+              ) : (
+                <Box
+                  margin="20px auto"
+                  display="grid"
+                  gridTemplateColumns={"repeat(auto-fill, 250px)"}
+                  justifyContent="space-around"
+                  rowGap="100px"
+                  columnGap="3.33%"
+                >
+                  {" "}
+                  <Slider {...settings} className="trendingitems">
+                    {bestSellersItems.map(
+                      (item) =>
+                        Number(item.variants[0].price) <= 30 && (
+                          <Fragment>
+                            <Item2
+                              item={item}
+                              key={`${item.title}-${item.id}`}
+                            />
+                          </Fragment>
+                        )
+                      // <Fragment>
+                      //   <Item2 item={item} key={`${item.title}-${item.id}`} />
+                      // </Fragment>
+                    )}
+                  </Slider>
+                </Box>
+              )}
+              <Typography
+                fontFamily={"Lora"}
+                variant={breakPoint ? "h2" : "h1"}
+                textAlign="left"
+                marginTop="1rem"
+                marginBottom="1.5rem"
+              >
+                <h2
+                  className="about_jkyog_gift_shop"
+                  style={{ fontFamily: "Satoshi, sans-serif" }}
+                >
+                  {ABOUT_JKYOG_GIFT_SHOP}
+                </h2>
+              </Typography>
+              <div className="about_jkyog_gift_shop_box">
+                {/* <div className="about_jkyog_gift_shop_image"></div> */}
+                <img
+                  src={aboutJKYogDetails?.Thumbnail?.data.attributes.url}
+                  style={{ width: "40%", height: "300px", objectFit: "fill", borderRadius: "1rem" }}
+                />
+                <div className="about_jkyog_gift_shop_textBox">
+                  <p className="about_jkyog_gift_shop_text">
+                    {aboutJKYogDetails?.description}
+                  </p>
+                  <div style={{ width: "100%" }}>
+                    <button
+                      className="addtocart"
+                      onClick={() => navigate(aboutJKYogDetails?.Link)}
+                    >
+                      Learn More
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <Typography
+                fontFamily={"Lora"}
+                variant={breakPoint ? "h2" : "h1"}
+                textAlign="left"
+                marginTop="2rem"
+              >
+                <h2
+                  className="about_jkyog_gift_shop"
+                  style={{ fontFamily: "Satoshi, sans-serif" }}
+                >
+                  Need help? You're in the right place
+                </h2>
+              </Typography>
+              <div className="need_help">
+                <button
+                  className="need_help_buttons"
+                  onClick={() => navigate("/faq")}
+                >
+                  <HelpOutline
+                    sx={{ cursor: "pointer", width: "1.5em", height: "1.2em" }}
+                    fontSize="large"
+                  />
+                  FAQ's
+                </button>
+                <button
+                  className="need_help_buttons"
+                  onClick={handleHelpDeskFormChange}
+                >
+                  <MailOutline
+                    sx={{ cursor: "pointer", width: "1.5em", height: "1.2em" }}
+                    fontSize="large"
+                  />
+                  Help Desk
+                </button>
+              </div>
+              <HelpDesk
+                showForm={showHelpDeskForm}
+                onFormChange={handleHelpDeskFormChange}
+              />
             </Fragment>
           ) : (
             ""
@@ -338,7 +640,7 @@ function HomePage() {
         </div>
       </Box>
 
-      <Box
+      {/* <Box
         display="flex"
         justifyContent={"flex-end"}
         marginRight="5rem"
@@ -351,7 +653,7 @@ function HomePage() {
         >
           <b>{HOMEPAGE_CONST.goToTop}</b>
         </Button>
-      </Box>
+      </Box> */}
     </Fragment>
   );
 }

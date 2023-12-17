@@ -4,10 +4,14 @@ import Jklog from "../assets/logo/jklogo.png";
 import { Badge, Box, IconButton } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
 import "../styles/style.css";
-import { ShoppingBagOutlined, MenuOutlined } from "@mui/icons-material";
+import {
+  ShoppingBagOutlined,
+  MenuOutlined,
+  ShoppingCartOutlined,
+} from "@mui/icons-material";
 import { SearchOutlined } from "@mui/icons-material";
 import { setIsCartOpen, setIsNavOpen, setIsFilterOpen } from "../state";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { encode as btoa } from "base-64";
 import {
   setItems,
@@ -34,6 +38,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 function NavMenu({ navFromTop }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setSearchField("")
+  }, [location.search]);
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const isNavOpen = useSelector((state) => state.cart.isNavOpen);
@@ -55,10 +64,11 @@ function NavMenu({ navFromTop }) {
   const [val, setVal] = useState("");
   const [categories, setCategories] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
   const getCategories = () => {
     fetchDataFromApi("/api/categories").then((res) => {
-      console.log(res);
+      // console.log("categories========", res);
       setCategories(res.data);
     });
   };
@@ -85,6 +95,7 @@ function NavMenu({ navFromTop }) {
       );
 
       const resp = await result.json();
+      // console.log("resp",resp)
       if (resp) {
         let listCat = [
           ...new Set(
@@ -95,12 +106,16 @@ function NavMenu({ navFromTop }) {
               })
           ),
         ];
-        dispatch(setItemsCategories(listCat));
 
-        console.log(resp);
+        const modifiedCategory = GetSortedCategory(listCat);
+        // console.log("initialCategory",listCat)
+        // console.log("modifiedCategory",modifiedCategory);
+        dispatch(setItemsCategories(modifiedCategory));
+
+        // console.log("searchResponse", resp);
         setItem(resp?.products);
         dispatch(setItems(resp?.products));
-        console.log(resp?.products, "res");
+        // console.log(resp?.products, "res");
         let arr = resp?.products;
         let arr2 = resp?.products;
         arr = arr
@@ -116,6 +131,19 @@ function NavMenu({ navFromTop }) {
       console.log(err, "this is error");
     }
   }
+
+  const GetSortedCategory = (arr) => {
+    // Join all array elements into a single string
+    const concatenatedString = arr.join(", ");
+
+    // Split the string into an array of words using commas and spaces as separators
+    const wordsArray = concatenatedString.split(/\s*,\s*/);
+
+    // Filter out unique words
+    const uniqueWords = [...new Set(wordsArray)];
+
+    return uniqueWords;
+  };
 
   useEffect(() => {
     if (!item?.length > 0) {
@@ -148,15 +176,18 @@ function NavMenu({ navFromTop }) {
   }, [items, search]);
 
   useMemo(() => {
+    // console.log("itemsCategories",itemsCategories)
     const filtered = itemsCategories.filter((cat) =>
       cat.toLowerCase().includes(search.toLowerCase())
     );
+    // console.log("filtered", filtered)
     setCategoryList(filtered);
   }, [items, search]);
 
   const handleSearchField = (e) => {
     setSearchField(e.target.value);
     setHide(false);
+    // console.log(search, "search");
     if (e.target.value === "") {
       setHide(true);
       getItems();
@@ -164,7 +195,7 @@ function NavMenu({ navFromTop }) {
   };
 
   var fruitArrays = {};
-  console.log(categories);
+  // console.log(categories);
   if (categories) {
     for (var i = 0; i < categories.length; i++) {
       const a = items.filter(
@@ -213,7 +244,7 @@ function NavMenu({ navFromTop }) {
   }));
 
   useEffect(() => {
-    console.log("categoryList", categoryList);
+    // console.log("categoryList", categoryList);
   }, [categoryList]);
 
   const SearchClass = show ? "searchActive" : "";
@@ -221,7 +252,41 @@ function NavMenu({ navFromTop }) {
   const handleNavMenuClick = (cat) => {
     navigate(`/category/${cat}`);
   };
-  console.log(show);
+  // console.log(show);
+
+  const handleKeyDownSearch = (e) => {
+    if (search) {
+      // Handle arrow key navigation
+      if (e.key === "ArrowUp") {
+        console.log("up");
+        setSelectedItemIndex((prevIndex) =>
+          prevIndex === null ? 0 : Math.max(0, prevIndex - 1)
+        );
+      } else if (e.key === "ArrowDown") {
+        console.log("down");
+        setSelectedItemIndex((prevIndex) =>
+          prevIndex === null
+            ? 0
+            : Math.min(categoryList.length + item.length - 1, prevIndex + 1)
+        );
+      } else if (e.key === "Enter") {
+        console.log("enter");
+        navigate(`/search?category=none&filter=All&searchInput=${search}`);
+        // Handle Enter key press
+        // if (selectedItemIndex !== null) {
+        //   const selectedCategory = categoryList[selectedItemIndex];
+        //   const selectedItem = item[selectedItemIndex - categoryList.length];
+
+        //   if (selectedCategory) {
+        //     navigate(`/category/${selectedCategory}`);
+        //   } else if (selectedItem) {
+        //     navigate(`/item/${selectedItem.id}`);
+        //   }
+        // }
+      }
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -230,6 +295,14 @@ function NavMenu({ navFromTop }) {
         style={{ top: navFromTop ? 0 : "", backgroundColor: "#FFFFFF" }}
       >
         <div className="navbars container">
+          <IconButton
+            aria-controls="basic-navbar-nav"
+            onClick={() => dispatch(setIsNavOpen({}))}
+            sx={{ color: "#FFFFFF" }}
+            className="menub"
+          >
+            <MenuOutlined />
+          </IconButton>
           <Navbar.Brand
             onClick={() => {
               navigate(`/`);
@@ -251,28 +324,103 @@ function NavMenu({ navFromTop }) {
             columnGap="0px"
             zIndex="2"
             flex="1"
-      
           >
             <div className={`Search ${SearchClass}`}>
-              <input
-                placeholder="Search for Products..."
-                type="text"
-                value={search}
-                onChange={handleSearchField}
-                style={{flex:"1"}}
-              />
-              {search && (
-                <div className="searchlist">
-                  {categoryList?.map((cat) => (
+              <div
+                className="inputfield"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flex: "1",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <input
+                  placeholder="Search for Products..."
+                  type="text"
+                  value={search}
+                  onChange={handleSearchField}
+                  onKeyDown={(e) => {
+                    handleKeyDownSearch(e);
+                  }}
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    borderRadius: !search ? "50px" : "",
+                  }}
+                />
+                {search && (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      className="clear-icon"
+                      onClick={() => setSearchField("")}
+                      style={{
+                        cursor: "pointer",
+                        // position: "absolute",
+                        margin: "0px 8px 0px -32px",
+                        fill: "#645743",
+                        border: "1px solid #645743",
+                        borderRadius: "50%",
+                        zIndex: 1,
+                      }}
+                    >
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+                    </svg>
                     <div
-                      onClick={() => navigate(`/category/${cat}`)}
+                      style={{
+                        background: "#EF6F1F",
+                        padding: "6.5px 10px",
+                        borderTopRightRadius: "2rem",
+                        borderBottomRightRadius: "2rem",
+                        border: "1px solid #645743",
+                      }}
+                    >
+                      <SearchOutlined
+                        fontSize="large"
+                        sx={{
+                          color: "white",
+                          zIndex: 1,
+                          cursor: "pointer",
+                          background: "#EF6F1F",
+                          borderRadius: "1rem",
+                        }}
+                        onClick={() =>
+                          navigate(
+                            `/search?category=none&filter=All&searchInput=${search}`
+                          )
+                        }
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* <IconButton>
+                <SearchOutlined fontSize="medium" sx={{ color: " #EF6F1F;" }} onClick={handleSearchField} />
+              </IconButton> */}
+              {search && (categoryList.length > 0 || item.length > 0) && (
+                <div className="searchlist">
+                  {categoryList?.map((cat, index) => (
+                    <div
+                      key={index}
+                      onClick={() =>
+                        navigate(
+                          `/search?category=${cat}&filter=All&searchInput=${search}`
+                        )
+                      }
                       className="lst"
                     >
-                      Category/{cat}
+                      {cat}
                     </div>
                   ))}
-                  {item.map((item) => (
+                  {item.map((item, index) => (
                     <div
+                      key={index}
                       onClick={() => navigate(`/item/${item.id}`)}
                       className="lst"
                     >
@@ -281,24 +429,20 @@ function NavMenu({ navFromTop }) {
                   ))}
                 </div>
               )}
-
-              <IconButton>
-                <SearchOutlined fontSize="medium" sx={{ color: " #EF6F1F;" }} />
-              </IconButton>
             </div>
 
             <IconButton className="Searchmb">
               <SearchOutlined
                 fontSize="medium"
-                sx={{ color: "#fff" }}
+                sx={{ color: "black" }}
                 onClick={() => setShow(!show)}
               />
             </IconButton>
 
             <Badge
-              badgeContent={cart.length}
+              badgeContent={cart.length === 0 ? "0" : cart.length}
               color="secondary"
-              invisible={cart.length === 0}
+              invisible={cart.length >1000}// any random stuff to not execute this line
               sx={{
                 "& .MuiBadge-badge": {
                   right: 9,
@@ -311,19 +455,18 @@ function NavMenu({ navFromTop }) {
             >
               <IconButton
                 onClick={() => dispatch(setIsCartOpen({}))}
-                sx={{ color: "#645743" }}
+                sx={{
+                  color: "black",
+                  "@media (max-width: 992px)": {
+                    "& .MuiSvgIcon-root": {
+                      fontSize: "medium",
+                    },
+                  },
+                }}
               >
-                <ShoppingBagOutlined />
+                <ShoppingCartOutlined fontSize="large" />
               </IconButton>
             </Badge>
-            <IconButton
-              aria-controls="basic-navbar-nav"
-              onClick={() => dispatch(setIsNavOpen({}))}
-              sx={{ color: "#FFFFFF" }}
-              className="menub"
-            >
-              <MenuOutlined />
-            </IconButton>
           </Box>
         </div>
       </Navbar>
