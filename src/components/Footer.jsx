@@ -16,6 +16,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import HomeIcon from "@mui/icons-material/Home";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import { Link } from "react-router-dom";
 import "../styles/footer.css";
 
 function Footer() {
@@ -340,13 +341,23 @@ function Footer() {
             <ul>
               {/* Links to terms and conditions and privacy policy */}
               <li>
-                <a href="/jkyog_live/terms-use" target="_self">
-                  Terms and Conditions
+                <a href="/giftshop/terms-use" target="_self">
+                    Terms of Use
                 </a>
               </li>
               <li>
-                <a href="/jkyog_live/privacy-policy" target="_self">
-                  Privacy Policy
+                <a href="/giftshop/copyright-trademark" target="_self">
+                  Copyright & Trademark
+                </a>
+              </li>
+              <li>
+                <a href="/giftshop/privacy-policy" target="_self">
+                  Cookie Policy
+                </a>
+              </li>
+              <li>
+                <a href="/giftshop/sitemap" target="_self">
+                  Sitemap
                 </a>
               </li>
             </ul>
