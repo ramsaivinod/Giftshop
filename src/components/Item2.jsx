@@ -78,7 +78,7 @@ const Item2 = ({ item }) => {
               width="30px"
               height="50px"
               src={item.image.src}
-              onClick={() => navigate(`/item/${item.id}`)}
+              onClick={() => navigate(`/product-details/${item.id}`)}
             />
           )}
         </div>

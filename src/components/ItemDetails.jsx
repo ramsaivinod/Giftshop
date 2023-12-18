@@ -42,7 +42,7 @@ const ItemDetails = () => {
   // Function to get data from API
   const getData = async () => {
     try {
-      navigate(`/item/${params.itemId}`);
+      navigate(`/product-details/${params.itemId}`);
       setId(params.itemId);
 
       if (

@@ -1,16 +1,63 @@
-import { Box, Typography, Button } from "@mui/material";
-import { Fragment, useRef, useState } from "react";
+import { Box, Typography, Button, Skeleton } from "@mui/material";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import { RANDOM_ITEMS } from "../utils/constants";
 import Slider from "react-slick";
 import Item2 from "./Item2";
+import { addToCart, setDisplay, setItem } from "../state";
+import { enqueueSnackbar } from "notistack";
 
 function ProductDisplay() {
+  const params = useParams();
   const [zoomed, setZoomed] = useState(false);
   const zoomRef = useRef(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [productData, setProductData] = useState(null);
+  const [count, setCount] = useState(1);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getProductDetail();
+  }, []);
+
+  const getProductDetail = async () => {
+    const productId = params.itemId;
+    const allProduct = await getAllProducts();
+    const product = getProductById(allProduct, productId);
+    console.log(product);
+    setProductData({ data: product, displayImage: product.images[0].src });
+  };
+
+  const getAllProducts = async () => {
+    try {
+      var headers = new Headers();
+      headers.append(
+        "Authorization",
+        "Basic " +
+          btoa(
+            "ce9a3ad16708f3eb4795659e809971c4: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"
+          )
+      );
+      const result = await fetch(
+        "https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products",
+        {
+          headers: headers,
+        }
+      );
+      const response = await result.json();
+      return response.products;
+    } catch (err) {
+      console.log(err, "this is error");
+    }
+  };
+
+  const getProductById = (products, productId) => {
+    return products.find((product) => Number(product.id) === Number(productId));
+  };
 
   const cursorStyle = {
     position: "absolute",
@@ -101,6 +148,17 @@ function ProductDisplay() {
     ],
   };
 
+  const addtocart = () => {
+    if (count <= 0) {
+      // Validation: Ensure that the count is greater than 0 before adding to cart.
+      console.error("Invalid count: Count must be greater than 0");
+      return; // Do not add to cart if count is invalid
+    }
+
+    dispatch(addToCart({ item: { ...productData.data, count } }));
+    enqueueSnackbar("Added to Cart!");
+  };
+
   return (
     <Fragment>
       <Box>
@@ -123,55 +181,50 @@ function ProductDisplay() {
               height: "450px",
               width: "5% ",
               position: "relative",
-              overflow: "hidden",
+              overflow: "scroll",
               paddingRight: "0.2rem",
             }}
           >
-            <Box
-              sx={{
-                cursor: "pointer",
-                boxShadow: "0.6px 1.3px 1.3px hsl(0deg 0% 0% / 0.48)",
-                border: "1px solid white",
-                "&:hover": {
-                  border: "2px solid orange",
-                },
-              }}
-            >
-              <img
-                style={{ objectFit: "contain", height: "70px" }}
-                src="https://cdn.shopify.com/s/files/1/0325/5084/6509/products/7Mindsets-Gujarati.png?v=1700577915"
-              />
-            </Box>
-            <Box
-              sx={{
-                cursor: "pointer",
-                boxShadow: "0.6px 1.3px 1.3px hsl(0deg 0% 0% / 0.48)",
-                border: "1px solid white",
-                "&:hover": {
-                  border: "2px solid orange",
-                },
-              }}
-            >
-              <img
-                style={{ objectFit: "contain", height: "70px" }}
-                src="https://cdn.shopify.com/s/files/1/0325/5084/6509/products/7Mindsets-Gujarati.png?v=1700577915"
-              />
-            </Box>
-            <Box
-              sx={{
-                cursor: "pointer",
-                boxShadow: "0.6px 1.3px 1.3px hsl(0deg 0% 0% / 0.48)",
-                border: "1px solid white",
-                "&:hover": {
-                  border: "2px solid orange",
-                },
-              }}
-            >
-              <img
-                style={{ objectFit: "contain", height: "70px" }}
-                src="https://cdn.shopify.com/s/files/1/0325/5084/6509/products/7Mindsets-Gujarati.png?v=1700577915"
-              />
-            </Box>
+            {productData !== null
+              ? productData.data.images.map((item, index) => (
+                  <Box
+                    key={index}
+                    onClick={() =>
+                      setProductData({ ...productData, displayImage: item.src })
+                    }
+                    sx={{
+                      cursor: "pointer",
+                      boxShadow: "0.6px 1.3px 1.3px hsl(0deg 0% 0% / 0.48)",
+                      border: "1px solid white",
+                      "&:hover": {
+                        border: "2px solid orange",
+                      },
+                    }}
+                  >
+                    <img
+                      style={{ objectFit: "contain", height: "70px" }}
+                      src={item.src}
+                    />
+                  </Box>
+                ))
+              : Array.from({ length: 5 }, (_, index) => (
+                  <Box
+                    sx={{
+                      cursor: "pointer",
+                      boxShadow: "0.6px 1.3px 1.3px hsl(0deg 0% 0% / 0.48)",
+                      border: "1px solid white",
+                      "&:hover": {
+                        border: "2px solid orange",
+                      },
+                    }}
+                  >
+                    <Skeleton
+                      variant="rectangular"
+                      width="100%"
+                      height="70px"
+                    />
+                  </Box>
+                ))}
           </div>
 
           <div
@@ -196,21 +249,25 @@ function ProductDisplay() {
                 },
               }}
             >
-              <img
-                onMouseEnter={() => setZoomed(true)}
-                onMouseLeave={() => setZoomed(false)}
-                onMouseMove={handleZoomDisplay}
-                alt="Product"
-                style={{
-                  objectFit: "contain",
-                  height: "inherit",
-                  width: "100%",
-                }}
-                src="https://cdn.shopify.com/s/files/1/0325/5084/6509/products/7Mindsets-Gujarati.png?v=1700577915"
-              />
+              {productData !== null ? (
+                <img
+                  onMouseEnter={() => setZoomed(true)}
+                  onMouseLeave={() => setZoomed(false)}
+                  onMouseMove={handleZoomDisplay}
+                  alt="Product"
+                  style={{
+                    objectFit: "contain",
+                    height: "inherit",
+                    width: "100%",
+                  }}
+                  src={productData !== null && productData.displayImage}
+                />
+              ) : (
+                <Skeleton variant="rectangular" width="100%" height="100%" />
+              )}
             </Box>
           </div>
-          {zoomed && (
+          {productData !== null && zoomed && (
             <div
               ref={zoomRef}
               style={{
@@ -221,8 +278,9 @@ function ProductDisplay() {
                 overflow: "hidden",
                 right: "2rem",
                 zIndex: 1,
-                backgroundImage: `url(${"https://cdn.shopify.com/s/files/1/0325/5084/6509/products/7Mindsets-Gujarati.png?v=1700577915"})`,
+                backgroundImage: `url(${productData.displayImage})`,
                 backgroundRepeat: "no-repeat",
+                backgroundColor: "#fff",
                 boxShadow:
                   "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
               }}
@@ -253,7 +311,11 @@ function ProductDisplay() {
                   fontWeight: 600,
                 }}
               >
-                7 Divine Laws to Awaken Your Best Self - English Edition
+                {productData != null ? (
+                  productData.data.title
+                ) : (
+                  <Skeleton variant="text" width="100%" />
+                )}
               </Typography>
               <div
                 style={{
@@ -264,26 +326,30 @@ function ProductDisplay() {
                   gap: "1rem",
                 }}
               >
-                <Box>
-                  {[...Array(5)].map((star, index) => {
-                    index += 1;
-                    return (
-                      <button
-                        type="button"
-                        key={index}
-                        style={{
-                          color:
-                            index <= (hover || rating) ? "#ccc" : "#F5961D",
-                        }}
-                        // onClick={() => setRating(index)}
-                        // onMouseEnter={() => setHover(index)}
-                        // onMouseLeave={() => setHover(rating)}
-                      >
-                        <span className="star">&#9733;</span>
-                      </button>
-                    );
-                  })}
-                </Box>
+                {productData !== null ? (
+                  <Box>
+                    {[...Array(5)].map((star, index) => {
+                      index += 1;
+                      return (
+                        <button
+                          type="button"
+                          key={index}
+                          style={{
+                            color:
+                              index <= (hover || rating) ? "#ccc" : "#F5961D",
+                          }}
+                          // onClick={() => setRating(index)}
+                          // onMouseEnter={() => setHover(index)}
+                          // onMouseLeave={() => setHover(rating)}
+                        >
+                          <span className="star">&#9733;</span>
+                        </button>
+                      );
+                    })}
+                  </Box>
+                ) : (
+                  <Skeleton variant="text" width="45%" />
+                )}
                 <Box
                   sx={{
                     display: "flex",
@@ -299,7 +365,11 @@ function ProductDisplay() {
                       paddingTop: "0.8rem",
                     }}
                   >
-                    5.0
+                    {productData != null ? (
+                      5.0
+                    ) : (
+                      <Skeleton variant="text" width="100%" />
+                    )}
                   </Typography>
                   <Typography
                     sx={{
@@ -314,7 +384,11 @@ function ProductDisplay() {
                       },
                     }}
                   >
-                    (78 Reviews)
+                    {productData != null ? (
+                      "(78 Reviews)"
+                    ) : (
+                      <Skeleton variant="text" width="100%" />
+                    )}
                   </Typography>
                 </Box>
               </div>
@@ -327,18 +401,27 @@ function ProductDisplay() {
                     fontWeight: 500,
                   }}
                 >
-                  $ 49.90
+                  {/* $ {productData != null && productData.data.variants[0].price} */}
+                  {productData != null ? (
+                    "$ " + productData.data.variants[0].price
+                  ) : (
+                    <Skeleton variant="text" width="20%" />
+                  )}
                 </Typography>
               </Box>
 
               <Box sx={{ padding: "1rem 0" }}>
                 <Button
+                  disabled={productData === null}
                   variant="contained"
                   sx={{
                     backgroundColor: "#F28C28",
                     fontSize: "1.2rem",
                     borderRadius: "2rem",
                     padding: "0.3rem 3.125rem",
+                  }}
+                  onClick={() => {
+                    addtocart();
                   }}
                 >
                   Add to Cart
@@ -377,22 +460,16 @@ function ProductDisplay() {
                 lineHeight: "30px",
               }}
             >
-              Just as heat is inherent in fire, so is our desire to become
-              better.' Why are personal growth and life transformation so
-              difficult? Does Creation wish that we fail? Of course not! The
-              purpose behind the Universe's grand design is to make us succeed.
-              Our own unawareness of the laws of the Universe creates the
-              impediment. Just as physical phenomena are regulated by laws,
-              there are spiritual principles governing the journey of life as
-              well. Knowledge of them helps us understand why success comes so
-              easily to some but remains a struggle for others; why some are
-              still putting on their shoes, while others have finished the race.
-              The beauty is that, like the physical laws of nature, the divine
-              principles governing happiness and fulfilment in life are also
-              eternally valid. In this book, Swami Mukundananda explains the 7
-              divine laws in an easily graspable manner. With knowledge of the
-              Vedic scriptures and witty anecdotes that everyone can relate to,
-              this book will empower you to become the best version of yourself.
+              {productData != null ? (
+                productData.data.body_html.replace(/<\/?p>/g, "")
+              ) : (
+                <>
+                  <Skeleton variant="text" width="100%" />
+                  <Skeleton variant="text" width="100%" />
+                  <Skeleton variant="text" width="100%" />
+                  <Skeleton variant="text" width="100%" />
+                </>
+              )}
             </Typography>
           </Box>
         </section>
@@ -419,6 +496,7 @@ function ProductDisplay() {
           <Box>
             {Object.entries(itemDetails).map(([key, value]) => (
               <div
+                key={key}
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -430,7 +508,6 @@ function ProductDisplay() {
                 }}
               >
                 <Typography
-                  key={key}
                   style={{
                     fontFamily: "Satoshi, sans-serif",
                     fontSize: "1rem",

@@ -349,7 +349,7 @@ const ProductCategory = () => {
               {search && (
                 <div className="searchlist">
                   {item.map((item) => (
-                    <div onClick={() => navigate(`/item/${item.id}`)} className="lst">
+                    <div onClick={() => navigate(`/product-details/${item.id}`)} className="lst">
                       {item.title}
                     </div>
                   ))}

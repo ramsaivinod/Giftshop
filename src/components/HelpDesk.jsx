@@ -94,12 +94,10 @@ function HelpDesk({ showForm, onFormChange }) {
   const handleFormSubmit = () => {
     setIsLoading(true);
     const templateParams = {
-      // Include all the form fields you want to send in the email
       to_name: `${helpDeskForm.firstName} ${helpDeskForm.lastName}`,
       message: helpDeskForm.description,
       reply_to: helpDeskForm.email,
       subject: helpDeskForm.subject,
-      // Add more parameters as needed
     };
 
     emailjs
@@ -113,16 +111,13 @@ function HelpDesk({ showForm, onFormChange }) {
         (response) => {
           console.log("SUCCESS!", response.status, response.text);
           enqueueSnackbar("Help Desk Request Send Successfully");
-
           handleCloseEvent();
-          // Handle successful response
         },
         (error) => {
           console.log("FAILED...", error);
           enqueueSnackbar(
             "Some error occurred while sending Help Desk Request"
           );
-          // Handle errors
         }
       )
       .finally(() => {

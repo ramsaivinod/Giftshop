@@ -6,7 +6,7 @@
 .main-section {
   display: flex;
   /* justify-content: space-evenly; */
-  margin-top: 2.75rem;
+  /* margin-top: -22px; */
 }
 
 .main-carousel {
@@ -22,7 +22,6 @@
     z-index: 1;
     background-color: #ffff;
     width: 100%;
-    z-index: 9;
   }
 }
 
@@ -74,7 +73,6 @@
   display: flex;
 }
 
-
 @media screen and (max-width: 400px) {
   .side-images {
     height: 0vh;
@@ -111,16 +109,6 @@
 
   .side-images {
     display: none;
-  }
-
-  .main-section {
-    margin-top: -1rem;
-  }
-}
-
-@media only screen and (max-width: 833px) {
-  .main-section {
-    margin-top: -1rem!important;
   }
 }
 

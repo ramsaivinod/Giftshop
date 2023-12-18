@@ -106,7 +106,7 @@ const Handpicked = () => {
                       ?.slice(0, 5)
                       ?.map((i) => {
                         return (
-                          <img onClick={() => navigate(`/item/${i.id}`)} src={i.image.src} className="handpic_image" />
+                          <img onClick={() => navigate(`/product-details/${i.id}`)} src={i.image.src} className="handpic_image" />
                         );
                       })}
                   </Slider>

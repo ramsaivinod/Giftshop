@@ -48,7 +48,7 @@ function App() {
             <Route path="coupon" element={<Ticket />} /> {/* Coupon page */}
             <Route path="search" element={<SearchResults />} /> {/* Search results Page */}
             <Route path="faq" element={<FaqPage />} /> {/* Faq's page */}
-            <Route path="product-details" element={<ProductDisplay />} /> {/* Faq's page */}
+            <Route path="product-details/:itemId" element={<ProductDisplay />} /> {/* Faq's page */}
             <Route path="sitemap" element={<SiteMap />} /> {/* SiteMap's page */}
           </Routes>
           {/* Displaying common components */}

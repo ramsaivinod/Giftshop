@@ -311,96 +311,44 @@ function HomePage() {
                     }
                   >
                     <div className="dropdownCoverBox">
-                      <div className="dropdownLeftPanel">
-                        <div className="dropdownLeftPanelHeader">
-                          <p
-                            style={{
-                              lineHeight: 1.4,
-                              letterSpacing: ".1299px",
-                              fontSize: 18,
-                            }}
+                      {item.SUB_CATEGORIES.map((subItem, index) => (
+                        <>
+                          <div
+                            style={{ display: "flex", flexDirection: "column" }}
                           >
-                            All {item.TITLE}
-                          </p>
-                          <ArrowForward size="medium" sx={{ margin: "2px" }} />
-                        </div>
-
-                        {item.SUB_CATEGORIES.map((subItem, index) => (
-                          <NavDropdown.Item
-                            key={index}
-                            className="dropdownitem dropdownitem-selected"
-                            style={{ justifyContent: "space-between" }}
-                            onMouseOver={() =>
-                              handleSubCategoryClick(subItem.SUB_ITEMS)
-                            }
-                            onClick={() => {
-                              navigate(
-                                `/search?category=${subItem.CATEGORY_TITLE}&filter=All&searchInput=none`
-                              );
-                            }}
-                          >
-                            {subItem.CATEGORY_TITLE}
-                            <ArrowForwardIos
-                              size="small"
-                              sx={{ margin: "2px" }}
-                            />
-                          </NavDropdown.Item>
-                        ))}
-                      </div>
-                      <div className="dropdownRightPanel">
-                        <div className="dropdownRightPanelSubCategory">
-                          {selectedSubItems.map((subItem, index) => (
-                            <p
+                            <NavDropdown.Item
                               key={index}
-                              style={{
-                                fontSize: 20,
-                                fontWeight: 400,
-                                cursor: "pointer",
-                                lineHeight: 1.4,
-                                letterSpacing: ".1299px",
-                              }}
-                              onClick={() =>
-                                navigate(
-                                  `/search?category=${subItem.ITEM_TITLE}&filter=All&searchInput=none`
-                                )
+                              className="dropdownitem dropdownitem-selected"
+                              style={{ justifyContent: "space-between" }}
+                              onMouseOver={() =>
+                                handleSubCategoryClick(subItem.SUB_ITEMS)
                               }
-                            >
-                              {subItem.ITEM_TITLE}
-                            </p>
-                          ))}
-                        </div>
-                        <div className="dropdownRightPanelImage">
-                          <div className="dropdownRightPanelImageDiv">
-                            <img
-                              className="dropdownRightPanelImageImg"
-                              src="https://jipl-strapi-aws-s3-images-bucket.s3.amazonaws.com/bannerimage_1_5ec00547a5.png"
-                            />
-                            <p
-                              style={{
-                                marginTop: "1rem",
-                                marginBottom: 0,
-                                fontSize: "12.99px",
-                                lineHeight: 1.4,
-                                letterSpacing: ".1299px",
+                              onClick={() => {
+                                navigate(
+                                  `/search?category=${subItem.CATEGORY_TITLE}&filter=All&searchInput=none`
+                                );
                               }}
                             >
-                              Editor's Picks
-                            </p>
-                            <p
-                              style={{
-                                marginTop: "5px",
-                                marginBottom: 0,
-                                fontWeight: 500,
-                                fontSize: 16,
-                                lineHeight: 1.25,
-                                letterSpacing: ".08px",
-                              }}
-                            >
-                              JKYog Authors
-                            </p>
+                              {subItem.CATEGORY_TITLE}
+                            </NavDropdown.Item>
+                            <div className="megamenu-subItems">
+                              {subItem.SUB_ITEMS.map((sub, index) => (
+                                <Typography
+                                  key={index}
+                                  className="megamenu-subItems-text"
+                                  onClick={() =>
+                                    navigate(
+                                      `/search?category=${sub.ITEM_TITLE}&filter=All&searchInput=none`
+                                    )
+                                  }
+                                >
+                                  {sub.ITEM_TITLE}
+                                </Typography>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      </div>
+                        </>
+                      ))}
                     </div>
                   </NavDropdown>
                 ) : (

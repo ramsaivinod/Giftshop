@@ -158,7 +158,7 @@ const Products = ({ item }) => {
             width="30px"
             height="50px"
             src={item.image?.src}
-            onClick={() => navigate(`/item/${item.id}`)}
+            onClick={() => navigate(`/product-details/${item.id}`)}
             style={{
               opacity: isHovered ? 0.6 : 1,
               cursor: 'pointer',
