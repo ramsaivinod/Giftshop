@@ -1,6 +1,6 @@
 import '../styles/thank.scss';
 import { useSelector } from 'react-redux';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Table from '@mui/material/Table';
 import Box from '@mui/material/Box';
 import TableBody from '@mui/material/TableBody';
@@ -23,6 +23,12 @@ export default function Thank() {
   function createData(name, price, quantity, total) {
     return { name, price, quantity, total };
   }
+
+  // This useEffect hook will run every time the component mounts
+  useEffect(() => {
+    // Using the window.scrollTo method to scroll to the top of the page
+    window.scrollTo(0, 0);
+  }, []); // The empty array means it will only run on mount and unmount
 
   return (
     <>

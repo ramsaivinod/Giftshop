@@ -159,6 +159,13 @@ function ProductDisplay() {
     enqueueSnackbar("Added to Cart!");
   };
 
+  // This useEffect hook will run every time the component mounts
+  useEffect(() => {
+    // Using the window.scrollTo method to scroll to the top of the page
+    window.scrollTo(0, 0);
+  }, []); // The empty array means it will only run on mount and unmount
+
+
   return (
     <Fragment>
       <Box>

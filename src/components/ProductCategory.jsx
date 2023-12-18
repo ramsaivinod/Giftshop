@@ -68,6 +68,12 @@ const ProductCategory = () => {
     setCategory(params?.catName);
   }, [params.catName]);
 
+  // This useEffect hook will run every time the component mounts
+  useEffect(() => {
+    // Using the window.scrollTo method to scroll to the top of the page
+    window.scrollTo(0, 0);
+  }, []); // The empty array means it will only run on mount and unmount
+
   // useEffect to update items and category when category or items change
   useEffect(() => {
     setCategory(category);
