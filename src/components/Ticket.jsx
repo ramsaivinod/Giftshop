@@ -38,28 +38,21 @@ const Ticket = () => {
   // Fetch coupon data from an external API on component mount
   useEffect(() => {
     async function applycoupan() {
-      try {
-        var headers = new Headers();
-        headers.append(
-          'Authorization',
-          'Basic ' + btoa('your_api_key_here'),
-        );
+      var headers = new Headers();
+      headers.append(
+        'Authorization',
+        'Basic ' + btoa('961d0f182b31ae37dc63e644d4178641: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'),
+      );
 
-        const result = await fetch('https://your_api_endpoint_here', {
-          headers: headers,
-        });
+      const result = await fetch('https://qc2n483pw9.execute-api.us-east-1.amazonaws.com/QA', {
+        headers: headers,
+      });
 
-        if (!result.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const itemJson = await result.json();
-        const l = JSON.parse(itemJson.body);
-        setCoupon(l.price_rules);
-      } catch (error) {
-        console.error('There was an error fetching the coupons:', error);
-        // Handle the error appropriately
-      }
+      // if(result){
+      //   const itemJson = await result.json();
+      //   const l = JSON.parse(itemJson?.body);
+      //   setCoupon(l?.price_rules);
+      // }
     }
     applycoupan();
   }, []);
