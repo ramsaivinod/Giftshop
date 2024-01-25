@@ -5,7 +5,14 @@ import { Box, Typography, Button, IconButton } from "@mui/material"; // Import M
 import CancelIcon from "@mui/icons-material/Cancel"; // Import CancelIcon
 import { useNavigate, useLocation, useParams } from "react-router-dom"; // Import useNavigate hook from React Router
 import { encode as btoa } from "base-64"; // Import btoa function for base64 encoding
-import React, { Fragment, useEffect, useState, useMemo, useRef } from "react"; // Import React and its hooks
+import React, {
+  Fragment,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react"; // Import React and its hooks
 import useMediaQuery from "@mui/material/useMediaQuery"; // Import useMediaQuery hook
 
 import "slick-carousel/slick/slick.css"; // Import slick carousel styles
@@ -34,6 +41,8 @@ import NavMenu from "./NavMenu"; // Import NavMenu component
 import Item2 from "./Item2"; // Import Item2 component
 import { PRODUCT_CATEGORY } from "../utils/constants";
 import NoResultFound from "./NoResultFound";
+import axios from "axios";
+import { PostDataApi } from "../api/Api";
 
 //SearchResults  component definition
 const SearchResults = () => {
@@ -61,7 +70,12 @@ const SearchResults = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const allCategories = useSelector((state) => state.cart.itemsCategories);
-  const [categoryCheckboxFilter, setCategoryCheckboxFilter] = useState([]);
+  const [categoryCheckboxFilter, setCategoryCheckboxFilter] = useState([
+    { name: "Audio", selected: false },
+    { name: "E-Books", selected: false },
+    { name: "Music", selected: false },
+    { name: "Gift", selected: false },
+  ]);
   const [languages, setLanguages] = useState([
     { name: "English", selected: false },
     { name: "Hindi", selected: false },
@@ -72,7 +86,10 @@ const SearchResults = () => {
   ]);
   const [sortType, setSortType] = useState(null);
 
-  //   console.log("GLOBAL STATE CATEGORIES", allCategories);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchProducts();
+  }, []);
 
   /**
    *
@@ -83,27 +100,12 @@ const SearchResults = () => {
 
   /**
    *
-   * @useEffect to make a new array of categories used in filtering search results
-   */
-  // useEffect(() => {
-  //   modifyCategoryForCheckbox();
-  // }, [categoryParams, searchInputParams]);
-
-  /**
-   *
    * @useEffect to render page on updation of search params
    */
   useEffect(() => {
-    modifyCategoryForCheckbox();
+    // modifyCategoryForCheckbox();
     getSearchResults();
-  }, [categoryParams, searchInputParams]);
-
-  // This useEffect hook will run every time the component mounts
-  useEffect(() => {
-    // Using the window.scrollTo method to scroll to the top of the page
-    window.scrollTo(0, 0);
-  }, []); // The empty array means it will only run on mount and unmount
-
+  }, [categoryParams, searchInputParams, items]);
 
   /**
    *
@@ -126,14 +128,78 @@ const SearchResults = () => {
   }, [sortType]);
 
   /**
+   * @Api to fetch list of products
+   */
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    // const products = await getAllProducts();
+    const products = await getAllProductsStoreFrontApi();
+    dispatch(setItems(products));
+    setLoading(false);
+  };
+
+  const getAllProductsStoreFrontApi = async () => {
+    const url = "https://sso.jkyog.org/api/v1/customer/get-all-products";
+    try {
+      const response = await axios.post(url);
+      return response.data.response; // Return data
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return []; // Return empty array in case of error
+    }
+  };
+
+  // const getAllProducts = async () => {
+  //   try {
+  //     var headers = new Headers();
+  //     headers.append(
+  //       "Authorization",
+  //       "Basic " +
+  //         btoa(
+  //           "ce9a3ad16708f3eb4795659e809971c4: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"
+  //         )
+  //     );
+  //     const result = await fetch(
+  //       "https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products",
+  //       {
+  //         headers: headers,
+  //       }
+  //     );
+  //     const response = await result.json();
+  //     return response.products;
+  //   } catch (err) {
+  //     console.log(err, "this is error");
+  //   }
+  // };
+
+  /**
    *
    * @function to get search results based on searchparams which includes category and SearchInput params
    */
-  const getSearchResults = () => {
+  // const getSearchResults = () => {
+  //   setLoading(true);
+  //   if (categoryParams !== "none") filterByCategoryParams();
+  //   else filterBySearchInputParams();
+  // };
+  const getSearchResults = useCallback(() => {
     setLoading(true);
-    if (categoryParams !== "none") filterByCategoryParams();
-    else filterBySearchInputParams();
-  };
+    const searchQuery = {
+      category: categoryParams,
+      searchInput: searchInputParams,
+    };
+    PostDataApi("/customer/getSearchResults", searchQuery)
+      .then((response) => {
+        console.log(response.data);
+        setItem(response.data.response);
+      })
+      .catch((error) => {
+        console.error("Error in search result", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [categoryParams, searchInputParams]);
 
   /**
    *
@@ -154,10 +220,10 @@ const SearchResults = () => {
    */
   const filterByCategoryParams = () => {
     // console.log("into search by category");
+    console.log(items);
     const filteredItems = items.filter((item) => {
       return item.tags && item.tags.includes(categoryParams);
     });
-
     setItem(filteredItems.length > 0 ? filteredItems : null);
     setLoading(false);
   };
@@ -167,13 +233,14 @@ const SearchResults = () => {
    * @filter items based on search input params
    */
   const filterBySearchInputParams = () => {
-    // console.log("into search by input");
+    console.log("into search by input");
     const lowerCaseCategory = searchInputParams.toLowerCase();
     const filteredItems = items.filter((item) =>
       item.tags
         .split(",")
         .some((tag) => tag.trim().toLowerCase().includes(lowerCaseCategory))
     );
+    console.log(filteredItems);
     setItem(filteredItems.length > 0 ? filteredItems : null);
     setLoading(false);
   };
@@ -207,25 +274,29 @@ const SearchResults = () => {
    * @applySorting based on value of sorting type i.e asc/desc/null
    */
   const applySorting = () => {
-    // console.log("into sorting");
+    console.log("into sorting", sortType);
     if (sortType === null) {
-      // setFilterItem(
-      //   (filterItem !== null && filterItem.length) > 0 ? [...filterItem] : []
-      // );
       return;
     }
-    let sortedItems =
-      checkForCategoryCheckboxFilter() || checkForCategorylanguage()
-        ? [...filterItem]
-        : [...item];
+    let sortFilterItems = [...filterItem];
+    let sortedItems = [...item];
+    // let sortedItems =
+    //   checkForCategoryCheckboxFilter() || checkForCategorylanguage()
+    //     ? [...filterItem]
+    //     : [...item];
+    sortFilterItems.length > 0 &&
+      sortFilterItems.sort((a, b) => {
+        const priceA = parseFloat(a.variants[0].price);
+        const priceB = parseFloat(b.variants[0].price);
+        return sortType === "asc" ? priceA - priceB : priceB - priceA;
+      });
     sortedItems.sort((a, b) => {
       const priceA = parseFloat(a.variants[0].price);
       const priceB = parseFloat(b.variants[0].price);
       return sortType === "asc" ? priceA - priceB : priceB - priceA;
     });
-    checkForCategoryCheckboxFilter() || checkForCategorylanguage()
-      ? setFilterItem(sortedItems)
-      : setItem(sortedItems);
+    setFilterItem(sortedItems);
+    setItem(sortedItems);
   };
 
   /**
@@ -275,6 +346,7 @@ const SearchResults = () => {
    * @function to update sorting order change i.e. price low to high or high to low
    */
   const handleSortOrderChange = (value) => {
+    // console.log("sorting", value)
     setSortType(value);
   };
 
@@ -284,6 +356,10 @@ const SearchResults = () => {
    */
   const handlePriceFilter = (priceFilter) => {
     // console.log(priceFilter);
+    if (priceFilter.minPrice === 3 && priceFilter.maxPrice === 150) {
+      dispatch(setPriceFilter([3, 150]));
+      return;
+    }
     const selectedFilters = [...categoryCheckboxFilter, ...languages].filter(
       (item) => item.selected
     );
@@ -308,37 +384,33 @@ const SearchResults = () => {
   // Function to clear filters
   const clearFilter = () => {
     dispatch(setPriceFilter([3, 150]));
-    const priceFilter = {
-      minPrice: 3,
-      maxPrice: 150,
-    };
-    handlePriceFilter(priceFilter);
-    handleCategoriesChange("All Products");
-    dispatch(setSortOrder(""));
-  };
-
-  // Function to clear mobile filters
-  const clearMobFilter = () => {
-    dispatch(setPriceFilter([3, 150]));
-    const priceFilter = {
-      minPrice: 3,
-      maxPrice: 150,
-    };
-    handlePriceFilter(priceFilter);
-    handleCategoriesChange("All Products");
-    dispatch(setIsFilterOpen({}));
-    dispatch(setSortOrder(""));
+    setLanguages([
+      { name: "English", selected: false },
+      { name: "Hindi", selected: false },
+      { name: "Telugu", selected: false },
+      { name: "Gujarati", selected: false },
+      { name: "Marathi", selected: false },
+      { name: "Odia", selected: false },
+    ]);
+    // modifyCategoryForCheckbox();
+    setCategoryCheckboxFilter([
+      { name: "Audio", selected: false },
+      { name: "E-Books", selected: false },
+      { name: "Music", selected: false },
+      { name: "Gift", selected: false },
+    ]);
+    handleSortOrderChange(null);
+    setFilterItem([]);
   };
 
   return (
     <>
       {loading ? (
         <Loader />
-      ) : item !== null ? (
+      ) : item && item.length > 0 && item !== null ? (
         <>
           <Fragment>
-            <Box width="100%" m="80px auto">
-              <NavMenu navFromTop={true} />
+            <Box width="100%" pt="2rem">
               <div className="container">
                 {/* Filter Button Display Logic */}
                 {breakPoint2 && value === "All" && (
@@ -373,7 +445,7 @@ const SearchResults = () => {
                 {/* Product Heading Logic */}
                 {filterItem !== null && filterItem.length === 0 && (
                   <p className="allproductheading">
-                    {item !== null && item.length > 0
+                    {item !== null && item.length > 0 && !loading
                       ? `Showing ${item.length} Results for "${
                           categoryParams === "none"
                             ? searchInputParams
@@ -459,9 +531,10 @@ const SearchResults = () => {
                     // rowGap={breakPoint ? "25px" : "40px"}
                     rowGap="25px"
                     columnGap="2%"
+                    paddingLeft="2rem"
                   >
                     {filterItem === null
-                      ? item.length > 0 && <NoResultFound type={"filter"} />
+                      ? item.length > 0 && <NoResultFound />
                       : filterItem.length === 0
                       ? item.map((item) => (
                           <Item2 item={item} key={`${item.title}-${item.id}`} />
@@ -471,27 +544,6 @@ const SearchResults = () => {
                         ))}
                   </Box>
                 </Box>
-
-                {/* desktop filter end */}
-                {/* <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button
-                    sx={{
-                      display: hide && value === "All" ? "" : "none",
-                      fontWeight: "bold",
-                      fontSize: "1rem",
-                      background: "#EF6F1F",
-                    }}
-                    onClick={() => setView(!view)}
-                    variant={"contained"}
-                  >
-                    SHOW {view ? "ALL" : "LESS"}{" "}
-                    {view ? (
-                      <KeyboardDoubleArrowDownIcon />
-                    ) : (
-                      <KeyboardDoubleArrowUpIcon />
-                    )}
-                  </Button>
-                </div> */}
               </div>
             </Box>
 
@@ -500,7 +552,7 @@ const SearchResults = () => {
               display={isFilterOpen ? "block" : "none"}
               // backgroundColor="rgba(0, 0, 0, 0.4)"
               position="fixed"
-              zIndex={99}
+              zIndex={103}
               width="100%"
               height="100%"
               left="0"
@@ -530,25 +582,6 @@ const SearchResults = () => {
                       categoryCheckboxFilter={categoryCheckboxFilter}
                       setCategoryCheckboxFilter={onChangeCategoryCheckboxFilter}
                     />
-                    {/* <Button
-                      onClick={
-                        breakPoint2
-                          ? () => clearMobFilter()
-                          : () => clearFilter()
-                      }
-                      variant="contained"
-                      //color="secondary"
-                      sx={{
-                        marginLeft: "0em",
-                        fontWeight: "bold",
-                        fontSize: "1em",
-                        padding: "1em",
-                        marginBottom: breakPoint2 ? "3em" : "1em",
-                        fontFamily: "Rubik",
-                      }}
-                    >
-                      <strong>{PRODUCT_CATEGORY.CLEAR}</strong>
-                    </Button> */}
                   </div>
                 </Box>
               </Box>
@@ -558,7 +591,11 @@ const SearchResults = () => {
         </>
       ) : (
         <>
-          <NoResultFound type={"search"} />
+          {!loading ? (
+            <NoResultFound />
+          ) : (
+            <p className="allproductheading">Loading Results .....</p>
+          )}
         </>
       )}
     </>

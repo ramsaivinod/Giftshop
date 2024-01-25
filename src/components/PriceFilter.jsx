@@ -1,11 +1,11 @@
-import { Slider } from '@mui/material';
-import '../styles/pricefilter.css';
-import { setPriceFilter } from '../state';
-import { useDispatch, useSelector } from 'react-redux';
-import '../theme.js';
-import '../styles/style.css';
+import { Slider } from "@mui/material";
+import "../styles/pricefilter.css";
+import { setPriceFilter } from "../state";
+import { useDispatch, useSelector } from "react-redux";
+import "../theme.js";
+import "../styles/style.css";
 
-import { PRICE_FILTER } from '../utils/constants';
+import { PRICE_FILTER } from "../utils/constants";
 
 function PriceFilter({ onPriceChange, onClear }) {
   const value = useSelector((state) => state.cart.priceFilter);
@@ -25,14 +25,14 @@ function PriceFilter({ onPriceChange, onClear }) {
   }
   return (
     <>
-      <p className="filterTitle">{PRICE_FILTER.TITLE}</p>
-      <p className="silders">
-        <p className="priceheading">{PRICE_FILTER.HEADER}</p>
-        <p className="slidep">
-          {' '}
+      <div className="filterTitle">{PRICE_FILTER.TITLE}</div>
+      <div className="silders">
+        <div className="priceheading">{PRICE_FILTER.HEADER}</div>
+        <div className="slidep">
+          {" "}
           <Slider
             size="large"
-            getAriaLabel={() => 'Temperature range'}
+            getAriaLabel={() => "Temperature range"}
             defaultValue={3}
             getAriaValueText={valuetext}
             value={value}
@@ -40,10 +40,10 @@ function PriceFilter({ onPriceChange, onClear }) {
             onChange={handleChange}
             min={3}
             max={150}
-            sx={{ color: '#4795d8' }}
-          />{' '}
-        </p>
-      </p>
+            sx={{ color: "#4795d8" }}
+          />{" "}
+        </div>
+      </div>
     </>
   );
 }

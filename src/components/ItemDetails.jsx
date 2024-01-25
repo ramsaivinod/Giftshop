@@ -175,7 +175,6 @@ const ItemDetails = () => {
         <Fragment>
           {updateditem.map((updateditem, index) => (
             <Box width="100%" m="80px auto" key={updateditem.id} className="">
-              <NavMenu navFromTop={true} />
               <div className="container">
                 {" "}
                 <Box display="flex" flexWrap="wrap" columnGap="40px">

@@ -56,6 +56,7 @@ const QuickView = () => {
                   height="auto"
                   style={{ marginTop: '4em' }}
                   src={item.image?.src}
+                  loading="lazy"
                 />
 
                 <Typography
@@ -128,9 +129,9 @@ const QuickView = () => {
                     <b>{QUICKVIEW.ADD_TO_CART}</b>
                   </Button>
                 </Box>
-                <Typography fontSize={breakPoint ? '12px' : '16px'} fontFamily={'Rubik'}>
+                {/* <Typography fontSize={breakPoint ? '12px' : '16px'} fontFamily={'Rubik'}>
                   {QUICKVIEW.TAGS}: <strong> {item.tags}</strong>
-                </Typography>
+                </Typography> */}
               </Box>
             </Box>
           </div>

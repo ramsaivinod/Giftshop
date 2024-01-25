@@ -12,26 +12,57 @@
   .stay-connected form {
     display: flex;
     justify-content: center; /* Center the form items horizontally */
-    gap: 10px; /* Space between input and button */
+    /*gap: 10px;  Space between input and button */
+    padding: 0.5rem 10rem;
+    font-size: 1rem;
+    font-weight: 500;
   }
   
   .email-input {
-    padding: 10px;
-    border: 1px solid #ccc; /* Light grey border */
-    border-radius: 4px; /* Slightly rounded corners */
-    width: 300px; /* Fixed width, adjust as necessary */
+    padding: 1rem;
+    border: 1px solid #ccc;
+    /* border-radius: 4px; */
+    width: 75%;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem
   }
   
   .subscribe-button {
     padding: 10px 20px;
-    background-color: #0066cc; /* Blue background */
+    background-color: #ff6d31; /* Blue background */
     color: white; /* White text */
     border: none;
-    border-radius: 4px; /* Slightly rounded corners */
+    /* border-radius: 4px; Slightly rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
+    width: 25%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
   
   .subscribe-button:hover {
     background-color: #0055a5; /* Slightly darker blue on hover */
   }
   
+  @media(max-width:768px) {
+    .stay-connected form {
+      padding: 0.5rem 2rem;
+    }
+  }
+
+  @media(max-width:600px) {
+    .stay-connected form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem; 
+    }
+    
+    .email-input {
+      width: 100%;
+      border-radius: 1rem;
+    }
+    
+    .subscribe-button {
+      width: 100%;
+      border-radius: 1rem;
+    }
+  }

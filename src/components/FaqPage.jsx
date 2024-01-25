@@ -1,5 +1,3 @@
-import "../styles/Navbar.css";
-import "../App.css";
 import {
   Accordion,
   AccordionDetails,
@@ -8,10 +6,9 @@ import {
   Skeleton,
   Typography,
 } from "@mui/material";
-import { Fragment, useEffect, useState } from "react";
-import Papers from "./Papers";
-import NavMenu from "./NavMenu";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { ExpandMore } from "@mui/icons-material";
+import NoResultFound from "./NoResultFound";
 import { fetchDataFromApi } from "../utils/api";
 
 function FaqPage() {
@@ -19,6 +16,21 @@ function FaqPage() {
   const [faqs, setFaqs] = useState([]);
   const [faqsData, setFaqsData] = useState([]);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    getAllFaqs();
+  }, []);
+
+  useEffect(() => {
+    const filteredFaqs = faqsData.filter((faq) =>
+      faq.attributes.Questions.toLowerCase().includes(search.toLowerCase())
+    );
+    setFaqs(filteredFaqs);
+  }, [search, faqsData]);
 
   const getAllFaqs = async () => {
     setLoading(true);
@@ -38,40 +50,12 @@ function FaqPage() {
     }
   };
 
-  useEffect(() => {
-    getAllFaqs();
-  }, []);
-
-  // This useEffect hook will run every time the component mounts
-  useEffect(() => {
-    // Using the window.scrollTo method to scroll to the top of the page
-    window.scrollTo(0, 0);
-  }, []); // The empty array means it will only run on mount and unmount
-
-
-  // useEffect(() => {
-  //   if (searchField) {
-  //     let templates = faqsData?.filter(item => {
-  //       return item.name.toLowerCase().includes(searchField.toLowerCase())
-  //     });
-
-
-  //     setWorkflow(templates);
-  //   } else {
-  //     setWorkflow(workflowData);
-  //   }
-  // }, [search]);
-
-
-  useEffect(() => {
-    console.log("search",search);
-  }, [search]);
+  const showNoResults = search !== "" && faqs.length === 0;
 
   return (
     <Fragment>
       <Box>
-        <NavMenu navFromTop={false} />
-        <div className="container boxess" style={{ marginTop: "5rem" }}>
+        <div className="container boxess" style={{ marginTop: "0rem" }}>
           <Typography
             style={{
               fontFamily: "Satoshi, sans-serif",
@@ -83,13 +67,14 @@ function FaqPage() {
           >
             Frequently Asked Question
           </Typography>
-          <div className="searchbox-faq">
+          <div style={searchboxFaq}>
             <div className="input-container">
               <input
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search for Questions..."
                 type="text"
                 value={search}
+                style={inputStyle}
               />
             </div>
           </div>
@@ -164,9 +149,32 @@ function FaqPage() {
             ))
           )}
         </div>
+        {showNoResults && <NoResultFound />}
       </Box>
     </Fragment>
   );
 }
 
+/**
+ * @Styles
+ */
+
+const searchboxFaq = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
+  marginBottom: "20px",
+};
+
+const inputStyle = {
+  padding: "10px",
+  margin: "0",
+  fontSize: "1rem",
+  border: "1px solid #ccc",
+  borderRadius: "2rem",
+  width: "100%",
+  boxSizing: "border-box",
+  width: "200px",
+};
 export default FaqPage;

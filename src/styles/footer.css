@@ -1,7 +1,7 @@
 .footerbox {
     width: 81%;
     margin: 66px auto 0px auto;
-    padding: 50px 0;
+    padding: 1px 0 50px;
     font-family: HeuristicaRegular;
 }
 
@@ -25,6 +25,9 @@
 
 .content ul {
     padding-left: 0;
+    gap: 0.625rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .content ul li a {
@@ -33,7 +36,13 @@
 }
 
 .content ul li a p {
-    line-height: 28px;
+    color:  #645743;
+    font-family: 'Satoshi, sans-serif';
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem; /* 150% */
+    /* line-height: 28px; */
     margin-bottom: auto;
 }
 
@@ -46,10 +55,11 @@
 }
 
 .htxt {
-    font-weight: bold;
-    color: #ff6d2f;
-    font-size: 19px !important;
+    font-weight: 700;
+    color: #291900;
+    font-size: 1.25rem !important;
     margin-bottom: 30px !important;
+    letter-spacing: -0.025rem;
 }
 
 input.js-form-type-checkbox {
@@ -110,11 +120,11 @@ input.js-form-type-checkbox {
 }
 
 .programs-center ul li {
-    padding-left: 20px;
+    /* padding-left: 20px; */
     line-height: 28px;
     list-style: none;
     margin-bottom: 0px;
-    background: url(https://www.jkyog.org/themes/custom/jkyog/images/bullet-point.png) 0 12px no-repeat;
+    /* background: url(https://www.jkyog.org/themes/custom/jkyog/images/bullet-point.png) 0 12px no-repeat; */
 }
 
 .donate-login-vol {
@@ -207,4 +217,13 @@ input.js-form-type-checkbox {
         height: 90px;
         font-size: 13px;
     }
+}
+
+.social-view{
+    padding: 0px 1rem;
+    color: #645743;
+    font-family: 'Satoshi, sans-serif';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
 }

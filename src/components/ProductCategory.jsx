@@ -231,7 +231,6 @@ const ProductCategory = () => {
       ) : (
         <Fragment>
           <Box width="100%" m="80px auto" className="">
-            <NavMenu navFromTop={true} />
             <div className="container">
               {value === 'All' ? (
                 <p className="allproductheading">{category}</p>

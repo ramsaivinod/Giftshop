@@ -2,14 +2,13 @@ import { Fragment } from "react";
 import { Box } from "@mui/material";
 import NavMenu from "./NavMenu";
 
-function NoResultFound(props) {
+function NoResultFound() {
   return (
     <Fragment>
-      <Box width="100%" m="80px auto" className="">
-        {props.type == "search" && <NavMenu navFromTop={true} />}
+      <Box width="100%" m="80px auto">
         <div className="container">
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/error-no-search-results_2353c5.png" />
+            <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/error-no-search-results_2353c5.png" loading="lazy"/>
           </div>
           <p
             style={{

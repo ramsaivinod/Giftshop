@@ -1,64 +1,58 @@
-// Importing CSS styles for the App component
 import './App.css';
-
-// Importing necessary libraries
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-
-// Importing necessary components
-import HomePage from './components/HomePage';
-import Footer from './components/Footer';
+import HomePage from './components/app-homepage/Homepage';
 import ItemDetails from './components/ItemDetails';
-import CartMenu from './components/CartMenu';
-import SideBar from './components/SideBar';
 import Checkout from './checkout/Checkout';
 import Confirmation from './checkout/Confirmation';
-import Thank from './components/Thank';
 import Collections from './components/Collections';
-import QuickView from './components/QuickView';
 import Ticket from './components/Ticket';
 import ProductCategory from './components/ProductCategory';
 import SearchResults from './components/searchResults';
+import SearchResult from './components/app-searchResult/SearchResult';
 import FaqPage from './components/FaqPage';
-import ProductDisplay from './components/productDisplay';
+import ProductDisplay from './components/app-product-display/productDisplay';
 import SiteMap from './components/SiteMap';
+import CopyrightTrademarkComponent from './components/CopyrightTrademarkComponent';
+import TermsOfUseComponent from './components/TermsOfUseComponent';
+import CookiePolicy from './components/CookiePolicy';
+import ThanksPage from './components/app-thanks-page/ThanksPage';
+import SharedLayout from './sharedLayout';
 
-// The main App component
 function App() {
   return (
     <div>
       <div className="App">
-        {/* Setting up the router with a base URL */}
         <BrowserRouter basename="/giftshop">
-          {/* Providing a notification system using SnackbarProvider */}
           <SnackbarProvider
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             variant={'success'}
             autoHideDuration={1000}
+            style={{ top: "4rem !important" }}
           />
-          {/* Defining the application routes */}
           <Routes>
-            <Route path="/" element={<HomePage />} /> {/* Home page */}
-            <Route path="item/:itemId" element={<ItemDetails />} /> {/* Item details */}
-            <Route path="category/:catName" element={<ProductCategory />} /> {/* Product categories */}
-            <Route path="collection/:collectionId" element={<Collections />} /> {/* Collections */}
-            <Route path="checkout" element={<Checkout />} /> {/* Checkout */}
-            <Route path="thank" element={<Thank />} /> {/* Thank you page */}
-            <Route path="checkout/success" element={<Confirmation />} /> {/* Checkout success */}
-            <Route path="coupon" element={<Ticket />} /> {/* Coupon page */}
-            <Route path="search" element={<SearchResults />} /> {/* Search results Page */}
-            <Route path="faq" element={<FaqPage />} /> {/* Faq's page */}
-            <Route path="product-details/:itemId" element={<ProductDisplay />} /> {/* Faq's page */}
-            <Route path="sitemap" element={<SiteMap />} /> {/* SiteMap's page */}
+            <Route path="/" element={<SharedLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="item/:itemId" element={<ItemDetails />} />
+              <Route path="category/:catName" element={<ProductCategory />} />
+              <Route path="collection/:collectionId" element={<Collections />} />
+              <Route path="checkout" element={<Checkout />} />
+              <Route path="thank" element={<ThanksPage />} />
+              {/* <Route path="thanks" element={<Thank />} /> Thank you page */}
+              <Route path="checkout/success" element={<Confirmation />} />
+              <Route path="coupon" element={<Ticket />} />
+              {/* <Route path="search1" element={<SearchResult />} /> */}
+              <Route path="search" element={<SearchResults />} />
+              <Route path="faq" element={<FaqPage />} />
+              <Route path="product-details/:itemId" element={<ProductDisplay />} />
+              <Route path="sitemap" element={<SiteMap />} />
+              <Route path="terms-of-use" element={<TermsOfUseComponent />} />
+              <Route path="copyright-and-trademark" element={<CopyrightTrademarkComponent />} />
+              <Route path="cookie-policy" element={<CookiePolicy />} />
+            </Route>
           </Routes>
-          {/* Displaying common components */}
-          <CartMenu /> {/* Shopping cart menu */}
-          <QuickView /> {/* Quick view component */}
-          <SideBar /> {/* Sidebar for navigation */}
         </BrowserRouter>
       </div>
-      {/* Displaying the footer component */}
-      <Footer />
     </div>
   );
 }

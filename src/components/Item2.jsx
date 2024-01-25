@@ -4,8 +4,15 @@ import "../styles/Item2.css";
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {
+  IconButton,
+  Box,
+  Typography,
+  useTheme,
+  Button,
+  Skeleton,
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { enqueueSnackbar } from "notistack";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -38,9 +45,8 @@ const Item2 = ({ item }) => {
 
   const addtocart = () => {
     if (count <= 0) {
-      // Validation: Ensure that the count is greater than 0 before adding to cart.
       console.error("Invalid count: Count must be greater than 0");
-      return; // Do not add to cart if count is invalid
+      return;
     }
 
     dispatch(addToCart({ item: { ...item, count } }));
@@ -70,18 +76,22 @@ const Item2 = ({ item }) => {
           marginBottom: "1px",
         }}
       >
-        <div className="product_list">
-          {item.image && (
-            <img
-              className="product_img"
-              alt={item.name}
-              width="30px"
-              height="50px"
-              src={item.image.src}
-              onClick={() => navigate(`/product-details/${item.id}`)}
-            />
-          )}
-        </div>
+        <Link to={`/product-details/${item.id}`}>
+          <div className="product_list">
+            {item.image && item.image != null ? (
+              <img
+                className="product_img"
+                alt={item.name}
+                width="30px"
+                height="50px"
+                src={item.image.src}
+                loading="lazy"
+              />
+            ) : (
+              <Skeleton variant="rectangular" height="200px" />
+            )}
+          </div>
+        </Link>
 
         <Box
           display={isHovered ? "block" : "none"}
@@ -190,27 +200,68 @@ const Item2 = ({ item }) => {
       </Box>
 
       <Box mt="3px">
-        <Typography
-          id="typo"
-          className="product_title"
-        >
+        <Typography id="typo" className="product_title">
           {title}
         </Typography>
-        <Typography
+        {variants[0].compareAtPriceV2 ? (
+          <Typography
+            textAlign={"left"}
+            fontWeight="bold"
+            fontSize="16px"
+            color={"green"}
+            style={{ marginLeft: "5px" }}
+          >
+            <span style={compareText}>
+              {parseFloat(variants[0].compareAtPriceV2.amount).toFixed(2)}
+            </span>
+            &nbsp;
+            {parseFloat(variants[0].price).toFixed(2)}
+          </Typography>
+        ) : (
+          <Typography
+            textAlign={"left"}
+            fontWeight="bold"
+            fontSize="16px"
+            color={"green"}
+            style={{ marginLeft: "5px" }}
+          >
+            $ {parseFloat(variants[0].price).toFixed(2)}
+          </Typography>
+        )}
+        {/* <Typography
           textAlign={"left"}
           fontWeight="bold"
           fontSize="16px"
           color={"green"}
           style={{ marginLeft: "5px" }}
         >
-          $ {variants[0].price}
-        </Typography>
-        <button className="addtocart" onClick={() => addtocart()}>
-          {PRODUCT.ADD_TO_CART}
+          ${" "}
+          {variants[0].compareAtPriceV2
+            ? parseFloat(variants[0].price).toFixed(2) +
+              " - $ " +
+              parseFloat(variants[0]?.compareAtPriceV2.amount).toFixed(2)
+            : parseFloat(variants[0].price).toFixed(2)}
+        </Typography> */}
+        <button
+          className="addtocart"
+          onClick={() => addtocart()}
+          disabled={!item.variants[0].availableForSale}
+          style={{
+            background: !item.variants[0].availableForSale && "darkgrey",
+          }}
+        >
+          {!item.variants[0].availableForSale
+            ? "OUT OF STOCK"
+            : PRODUCT.ADD_TO_CART}
         </button>
       </Box>
     </Box>
   );
+};
+
+const compareText = {
+  color: "#4d4d4d",
+  textDecoration: "line-through",
 };
 
 export default Item2;

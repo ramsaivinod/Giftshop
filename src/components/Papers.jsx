@@ -9,7 +9,7 @@ const styles = {
     scrollBehavior: 'smooth',
     scrollSnapType: 'x mandatory',
     backgroundColor: '#4d4d4d',
-    '&::-webkit-scrollbar': {
+    '&::WebkitScrollbar': {
       display: 'none',
     },
   },

@@ -42,7 +42,7 @@ $transition500: all 500ms ease-in-out;
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe !important;
+  background-color: ghostwhite !important;
   // background-color: #47df5b;
   margin: 15% auto !important;
   /* 15% from the top and centered */
@@ -55,7 +55,7 @@ $transition500: all 500ms ease-in-out;
   transform: translateY(-100px) !important;
   transition: $transition250;
   border-radius: 40px !important;
-  background: linear-gradient(95deg, rgba(230, 114, 20, 1) 0%, rgba(255, 228, 159, 1) 25%, rgba(233, 222, 192, 1) 81%) !important;
+  // background: linear-gradient(95deg, rgba(230, 114, 20, 1) 0%, rgba(255, 228, 159, 1) 25%, rgba(233, 222, 192, 1) 81%) !important;
   // background: linear-gradient(to right, #abbaab, #ffffff);
   // overflow-y: scroll;
 }

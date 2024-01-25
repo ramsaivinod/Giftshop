@@ -22,8 +22,8 @@ import "../styles/footer.css";
 function Footer() {
   return (
     <Box
-      backgroundColor="#171381"
-      style={{ backgroundImage: `url(${images})` }}
+      backgroundColor="#FFFBF2"
+      // style={{ backgroundImage: `url(${images})` }}
     >
       <Box className="footerbox">
         {/* Commented out Subscribe component */}
@@ -31,20 +31,47 @@ function Footer() {
         <div className="row content" style={{ marginTop: "50px" }}>
           <div className="col-sm-12 col-md-3">
             <div className="donate-login-vol">
-              <img
-                src={appStore}
-                alt="appStore"
-                style={{ height: "4rem" }}
-                title="appStore"
-              />
+              <a
+                href="https://apps.apple.com/in/app/radha-krishna-bhakti-by-jkyog/id6463116386"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={"https://bhagavadgita.io/app_store.svg"}
+                  alt="appStore"
+                  style={{ height: "3rem" }}
+                  title="appStore"
+                  loading="lazy"
+                />
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=org.jkyog.radhakrishnabhakti&hl=en"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={"https://bhagavadgita.io/play_store.svg"}
+                  alt="playStore"
+                  style={{ height: "3rem", marginTop: "1rem" }}
+                  title="playStore"
+                  loading="lazy"
+                />
+              </a>
             </div>
             <div className="donate-login-vol">
-              <img
-                src={krishnaBhakti}
-                style={{ height: "4rem" }}
-                alt="krishnaBhakti"
-                title="krishnaBhakti"
-              />
+              <a
+                href="https://www.jkyog.org/radha-krishna-bhakti-app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={krishnaBhakti}
+                  style={{ height: "4rem" }}
+                  alt="krishnaBhakti"
+                  title="krishnaBhakti"
+                  loading="lazy"
+                />
+              </a>
             </div>
           </div>
           <div className="col-sm-12 col-md-3 programs-center">
@@ -54,9 +81,7 @@ function Footer() {
               <ul style={{ color: "#EF6F1F" }}>
                 <li>
                   <a
-                    href="https://www.jkyog.org/centers"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`/giftshop/search?category=Life Transformation&filter=All&searchInput=none`}
                   >
                     <Typography color="white" textAlign={"left"}>
                       {" "}
@@ -66,9 +91,7 @@ function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.jkyog.org/centers"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`/giftshop/search?category=Yoga & Lifestyle&filter=All&searchInput=none`}
                   >
                     <Typography color="white" textAlign={"left"}>
                       {" "}
@@ -78,21 +101,7 @@ function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.jkyog.org/centers"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Typography color="white" textAlign={"left"}>
-                      {" "}
-                      Best Sellers - tag-driven
-                    </Typography>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.jkyog.org/centers"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`/giftshop/search?category=Signed Editions&filter=All&searchInput=none`}
                   >
                     <Typography color="white" textAlign={"left"}>
                       {" "}
@@ -102,9 +111,7 @@ function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.jkyog.org/centers"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`/giftshop/search?category=Audiobooks&filter=All&searchInput=none`}
                   >
                     <Typography color="white" textAlign={"left"}>
                       {" "}
@@ -114,9 +121,7 @@ function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.jkyog.org/centers"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`/giftshop/search?category=Self-Help&filter=All&searchInput=none`}
                   >
                     <Typography color="white" textAlign={"left"}>
                       {" "}
@@ -183,38 +188,58 @@ function Footer() {
               </ul>
             </Box>
           </div>
-          <div className="col-sm-12 col-md-3" style={{ display:"grid" }}>
+          <div className="col-sm-12 col-md-3" style={{ display: "grid" }}>
             <Box>
               <h2 className="htxt" style={{ fontWeight: "400" }}>
                 Help Desk Contact
               </h2>
               <Typography>
                 <div className="whatsapp">
-                  <a href="tel:+5555555555" style={{ display: 'flex', textDecoration: 'none', color: '#fff', alignItems: 'center', }}>
+                  <a
+                    href="https://jkyog.live/w/giftshop"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: "flex",
+                      textDecoration: "none",
+                      color: "#fff",
+                      alignItems: "center",
+                    }}
+                  >
                     <img
                       src={whatsapp}
                       alt="whatsapp"
                       style={{ height: "1.2rem" }}
                       title="whatsapp"
+                      loading="lazy"
                     />
-                    <span style={{ padding: "0 1rem" }}>+555-555-5555</span>
+                    <span className="social-view">+555-555-5555</span>
                   </a>
                 </div>
                 <div className="mail">
-                  <a href="mailto:info@jkyog.org" style={{ display: 'flex', textDecoration: 'none', color: '#fff', alignItems: 'center', }}>
+                  <a
+                    href="mailto:info@jkyog.org"
+                    style={{
+                      display: "flex",
+                      textDecoration: "none",
+                      color: "#fff",
+                      alignItems: "center",
+                    }}
+                  >
                     <img
                       src={mail}
                       alt="mail"
                       style={{ height: "1.2rem" }}
                       title="mail"
+                      loading="lazy"
                     />
-                    <span style={{ padding: "0 1rem" }}>info@jkyog.org</span>
+                    <span className="social-view">info@jkyog.org</span>
                   </a>
                 </div>
               </Typography>
             </Box>
-            <Box style={{ marginTop:"2rem" }}>
-              <Typography className="htxt">Connect With US</Typography>
+            <Box style={{ marginTop: "2rem" }}>
+              <Typography className="htxt">Follow us</Typography>
               {/* Social media icons and links */}
               <Box display={"flex"}>
                 <Box>
@@ -341,17 +366,17 @@ function Footer() {
             <ul>
               {/* Links to terms and conditions and privacy policy */}
               <li>
-                <a href="/giftshop/terms-use" target="_self">
-                    Terms of Use
+                <a href="/giftshop/terms-of-use" target="_self">
+                  Terms of Use
                 </a>
               </li>
               <li>
-                <a href="/giftshop/copyright-trademark" target="_self">
+                <a href="/giftshop/copyright-and-trademark" target="_self">
                   Copyright & Trademark
                 </a>
               </li>
               <li>
-                <a href="/giftshop/privacy-policy" target="_self">
+                <a href="/giftshop/cookie-policy" target="_self">
                   Cookie Policy
                 </a>
               </li>

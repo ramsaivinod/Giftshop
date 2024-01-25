@@ -12,38 +12,28 @@ import { setSortOrder } from "../state";
 import { CATEGORIES_BUTTON } from "../utils/constants";
 
 import "../styles/style.css";
-import { AddOutlined } from "@mui/icons-material";
+import { AddOutlined, Remove } from "@mui/icons-material";
 import Checkbox from "@mui/material/Checkbox";
 
 function CategoriesButton({
-  onChange,
-  value,
   languages,
   handleLanguageChange,
   categoryCheckboxFilter,
   setCategoryCheckboxFilter,
 }) {
-  const dispatch = useDispatch();
-  const sortOrder = useSelector((state) => state.cart.sortOrder);
-  const breakPoint = useMediaQuery("(max-width:700px)");
-  const [seeMore, setSeeMore] = useState(false);
-  const itemsCategories = useSelector((state) => state.cart.itemsCategories);
+  const [show, setShow] = useState({
+    format: true,
+    language: false,
+  });
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    dispatch(setSortOrder(value));
-    onChange(value);
-  };
-
-  const handleMobChange = (event) => {
-    const value = event.target.value;
-    dispatch(setSortOrder(value));
-    dispatch(setIsFilterOpen({}));
-    onChange(value);
+  const handleShowChange = (type) => {
+    setShow((prevShow) => ({ ...prevShow, [type]: !prevShow[type] }));
   };
 
   return (
     <Fragment>
+      {/* Languages Below----------------------------------------------------------------- */}
+
       <div className="flex justify-between mb-2">
         <p
           className="priceheading mt-4"
@@ -56,69 +46,25 @@ function CategoriesButton({
           {/* {CATEGORIES_BUTTON.CATEGORY} */}
           Format
         </p>
-        <AddOutlined
-          className="mt-4"
-          fontSize="large"
-          sx={{ color: "black", cursor: "pointer" }}
-        />
+        {!show.format ? (
+          <AddOutlined
+            className="mt-4"
+            fontSize="large"
+            sx={{ color: "black", cursor: "pointer" }}
+            onClick={() => handleShowChange("format")}
+          />
+        ) : (
+          <Remove
+            className="mt-4"
+            fontSize="large"
+            sx={{ color: "black", cursor: "pointer" }}
+            onClick={() => handleShowChange("format")}
+          />
+        )}
       </div>
-
-      {/* <FormControl component="fieldset">
-        <RadioGroup
-          aria-label="sortOrder"
-          name="sortOrder"
-          value={sortOrder}
-          onChange={breakPoint ? handleMobChange : handleChange}
-          column
-        >
-          {itemsCategories?.slice(0, !seeMore ? 5 : itemsCategories.length).map((item, index) => (
-            (item !== "English" && item !== "Hindi" && item !== "Telugu" && item !== "Gujarati" && item !== "Marathi" && item !== "Odia") &&
-            <FormControlLabel
-              key={index}
-              value={item}
-              control={
-                <Radio
-                  sx={{
-                    color: "black",
-                    "&.Mui-checked": {
-                      color: "rgb(255, 109, 47)",
-                    },
-                  }}
-                />
-              }
-              label={
-                <Typography
-                  variant="h5"
-                  sx={{
-                    marginRight: "36px",
-                    fontSize: "15px",
-                    fontFamily: "Satoshi, sans-serif",
-                    color: "#645743",
-                  }}
-                >
-                  {item}
-                </Typography>
-              }
-              labelPlacement="end"
-            />
-          ))}
-        </RadioGroup>
-        <p style={{
-          alignSelf: "end",
-          fontFamily: "Satoshi, sans-serif",
-          fontSize: 12,
-          fontWeight: 800,
-          color: " #4795D8",
-          cursor:"pointer"
-        }}
-        onClick={()=>{setSeeMore(!seeMore)}}>SEE {!seeMore ? "MORE" : "LESS"}</p>
-
-      </FormControl> */}
-
-      <FormControl component="fieldset" style={{width:"100%"}}>
-        {categoryCheckboxFilter
-          ?.slice(0, !seeMore ? 5 : categoryCheckboxFilter.length)
-          .map(
+      {show.format && (
+        <FormControl component="fieldset" style={{ width: "100%" }}>
+          {categoryCheckboxFilter.map(
             (item, index) =>
               item.name !== "English" &&
               item.name !== "Hindi" &&
@@ -158,7 +104,7 @@ function CategoriesButton({
                 />
               )
           )}
-        <p
+          {/* <p
           style={{
             alignSelf: "end",
             fontFamily: "Satoshi, sans-serif",
@@ -172,10 +118,9 @@ function CategoriesButton({
           }}
         >
           SEE {!seeMore ? "MORE" : "LESS"}
-        </p>
-      </FormControl>
-
-      {/* Languages Below----------------------------------------------------------------- */}
+        </p> */}
+        </FormControl>
+      )}
       <div className="flex justify-between mb-2">
         <p
           className="priceheading mt-4"
@@ -188,46 +133,58 @@ function CategoriesButton({
           {/* {CATEGORIES_BUTTON.CATEGORY} */}
           Language
         </p>
-        <AddOutlined
-          className="mt-4"
-          fontSize="large"
-          sx={{ color: "black", cursor: "pointer" }}
-        />
-      </div>
-      <FormControl component="fieldset">
-        {languages?.map((item, index) => (
-          <FormControlLabel
-            key={index}
-            control={
-              <Checkbox
-                checked={item.selected}
-                onChange={() => handleLanguageChange(index)}
-                name={item.name}
-                sx={{
-                  color: "black",
-                  "&.Mui-checked": {
-                    color: "rgb(255, 109, 47)",
-                  },
-                }}
-              />
-            }
-            label={
-              <Typography
-                variant="h5"
-                sx={{
-                  marginRight: "36px",
-                  fontSize: "15px",
-                  fontFamily: "Satoshi, sans-serif",
-                  color: "#645743",
-                }}
-              >
-                {item.name}
-              </Typography>
-            }
-            labelPlacement="end"
+        {!show.language ? (
+          <AddOutlined
+            className="mt-4"
+            fontSize="large"
+            sx={{ color: "black", cursor: "pointer" }}
+            onClick={() => handleShowChange("language")}
           />
-        ))}
-      </FormControl>
+        ) : (
+          <Remove
+            className="mt-4"
+            fontSize="large"
+            sx={{ color: "black", cursor: "pointer" }}
+            onClick={() => handleShowChange("language")}
+          />
+        )}
+      </div>
+      {show.language && (
+        <FormControl component="fieldset">
+          {languages?.map((item, index) => (
+            <FormControlLabel
+              key={index}
+              control={
+                <Checkbox
+                  checked={item.selected}
+                  onChange={() => handleLanguageChange(index)}
+                  name={item.name}
+                  sx={{
+                    color: "black",
+                    "&.Mui-checked": {
+                      color: "rgb(255, 109, 47)",
+                    },
+                  }}
+                />
+              }
+              label={
+                <Typography
+                  variant="h5"
+                  sx={{
+                    marginRight: "36px",
+                    fontSize: "15px",
+                    fontFamily: "Satoshi, sans-serif",
+                    color: "#645743",
+                  }}
+                >
+                  {item.name}
+                </Typography>
+              }
+              labelPlacement="end"
+            />
+          ))}
+        </FormControl>
+      )}
     </Fragment>
   );
 }

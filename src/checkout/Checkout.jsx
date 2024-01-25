@@ -8,6 +8,17 @@ import {
   Typography,
   Divider,
   Input,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Badge,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
@@ -21,11 +32,20 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
 import DiscountIcon from "@mui/icons-material/Discount";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
+import "../styles/checkout.css";
 import { setPrice, setCode, setSuccess } from "../state";
 import Shipping from "./Shipping";
 import { shades } from "../theme";
 import NavMenu from "../components/NavMenu";
+import { ExpandMore, Height } from "@mui/icons-material";
+import ProductDisplayCard from "../components/checkout-components/Product-display-card";
+import {
+  CalculationPanel,
+  CheckoutLeftPanelHeader,
+  CheckoutShippingDetails,
+  DiscountPanel,
+} from "../components/checkout-components";
+import { ApiDataGetType } from "../api/Api";
 
 // Define a styled component for flexible box layout
 const FlexBox = styled(Box)`
@@ -38,12 +58,45 @@ const FlexBox = styled(Box)`
 const Checkout = ({ val }) => {
   // Select necessary Redux state variables
   const address = useSelector((state) => state.cart.address);
+  const [checkoutDetails, setCheckoutDetails] = useState({
+    firstName: "",
+    lastName: "",
+    country: "",
+    city: "",
+    address: "",
+    province: "",
+    zip: "",
+    email: "",
+  });
+  const [validateCheckoutDetails, setValidateCheckoutDetails] = useState(false);
+  const [shippingRateDetails, setShippingRateDetails] = useState({
+    countries: [],
+    shippingZoneRate: [],
+  });
+
+  useEffect(() => {
+    Promise.all([getAllCountries(), getShippingBillingRatesByWeight()])
+      .then(([countries, shippingZones]) => {
+        setShippingRateDetails({
+          ...shippingRateDetails,
+          countries: countries,
+          shippingZoneRate: shippingZones,
+        });
+      })
+      .catch((error) => console.error("Error with fetching data:", error));
+  }, []);
+
+  useEffect(() => {
+    setValidateCheckoutDetails(CheckoutDetailsValid());
+  }, [checkoutDetails]);
+
   const price = useSelector((state) => state.cart.price);
   const isNonMobile = useMediaQuery("(min-width:800px)");
   const isNonMobile2 = useMediaQuery("(min-width:1000px)");
   const dispatch = useDispatch();
   const code = useSelector((state) => state.cart.code);
   const [coupan, setCoupan] = useState("");
+  const [totalTax, setTotalTax] = useState(0.0);
   const [activeStep, setActiveStep] = useState(0);
   const cart = useSelector((state) => state.cart.cart);
   const success = useSelector((state) => state.cart.success);
@@ -59,7 +112,7 @@ const Checkout = ({ val }) => {
   const directCoupon = useSelector((state) => state.cart.directCoupon);
   const couponName = useSelector((state) => state.cart.couponName);
   const [isDisablePayment, setIsDisablePayment] = useState(true);
-
+  const breakPoint = useMediaQuery("(max-width:850px)");
   // Calculate the total price of the items in the cart
   let totalPrice = cart.reduce((total, item) => {
     return total + item.count * item.variants[0].price;
@@ -89,23 +142,22 @@ const Checkout = ({ val }) => {
     }
   }, [address, pay]);
 
-
   // This useEffect hook will run every time the component mounts
-  useEffect(() => {
-    // Using the window.scrollTo method to scroll to the top of the page
-    window.scrollTo(0, 0);
-  }, []); // The empty array means it will only run on mount and unmount
+  // useEffect(() => {
+  //   // Using the window.scrollTo method to scroll to the top of the page
+  //   window.scrollTo(0, 0);
+  // }, []); // The empty array means it will only run on mount and unmount
 
   // Check if the address is complete and enable/disable payment button accordingly
-  useEffect(() => {
-    const isActive =
-      address.email &&
-      address.firstName &&
-      address.lastName &&
-      address.phoneNumber &&
-      address.state;
-    setIsDisablePayment(!isActive);
-  }, [address]);
+  // useEffect(() => {
+  //   const isActive =
+  //     address.email &&
+  //     address.firstName &&
+  //     address.lastName &&
+  //     address.phoneNumber &&
+  //     address.state;
+  //   setIsDisablePayment(!isActive);
+  // }, [address]);
 
   // Create an order for PayPal payment
   const createOrder = (data, actions) => {
@@ -166,32 +218,41 @@ const Checkout = ({ val }) => {
     const requestBody = {
       order: {
         line_items: cart.map((item) => ({
+          id: item.variants[0].id,
           title: item.title,
           price: item.variants[0].price,
           quantity: item.count,
-          taxable: "false",
+          taxable: true,
         })),
-        email: data.email,
+        email: checkoutDetails.email,
         shipping_address: {
-          first_name: data.firstName,
-          last_name: data.lastName,
-          address1: data.street1,
-          phone: data.phoneNumber,
-          city: data.city,
-          province: data.state,
-          country: data.country,
-          zip: data.zipCode,
+          first_name: checkoutDetails.firstName,
+          last_name: checkoutDetails.lastName,
+          address1: checkoutDetails.address,
+          phone: "",
+          city: checkoutDetails.city,
+          province: checkoutDetails.province,
+          country: checkoutDetails.country,
+          zip: checkoutDetails.zip,
         },
         billing_address: {
-          first_name: data.firstName,
-          last_name: data.lastName,
-          address1: data.street1,
-          phone: data.phoneNumber,
-          city: data.city,
-          province: data.state,
-          country: data.country,
-          zip: data.zipCode,
+          first_name: checkoutDetails.firstName,
+          last_name: checkoutDetails.lastName,
+          address1: checkoutDetails.address,
+          phone: "",
+          city: checkoutDetails.city,
+          province: checkoutDetails.province,
+          country: checkoutDetails.country,
+          zip: checkoutDetails.zip,
         },
+        total_tax: totalTax,
+        tax_lines: [
+          {
+            price: totalTax,
+            rate: totalTax / 100,
+            title: "Shipping Charge",
+          },
+        ],
       },
     };
     const requestDataFormat = {
@@ -205,7 +266,7 @@ const Checkout = ({ val }) => {
     );
     // console.log(data.firstName, "address");
     // console.log(data.lastName, "search");
-    console.log(response.data, "data");
+    console.log(JSON.parse(response.data.body), "data");
     setPay(false);
     const session = response.data;
     if (session.body) {
@@ -247,390 +308,207 @@ const Checkout = ({ val }) => {
     }
   }
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setCheckoutDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const CheckoutDetailsValid = () => {
+    return Object.values(checkoutDetails).every((value) => value !== "");
+  };
+
+  const getAllCountries = async () => {
+    ApiDataGetType("/customer/get-all-country")
+      .then((response) => {
+        return response.data.countries;
+      })
+      .catch((error) => {
+        console.error("Error fetching Countries:", error);
+        return [];
+      });
+  };
+
+  const getShippingBillingRatesByWeight = async () => {
+    ApiDataGetType("/customer/get-shipping-zone")
+      .then((response) => {
+        return response.data.shipping_zones;
+      })
+      .catch((error) => {
+        console.error("Error fetching shipping_zones:", error);
+        return [];
+      });
+  };
+
+  const updateTotalPriceOnShipmentCharge = (shippingRate) => {
+    const calculateTotalPrice = cart.reduce((total, item) => {
+      return total + item.count * item.variants[0].price;
+    }, 0);
+    const finalPrice = Number(calculateTotalPrice) + Number(shippingRate);
+    totalPrice = finalPrice;
+    setTotalTax(shippingRate);
+  };
+
   // Render the Checkout component
   return (
     <>
-      <div style={{ paddingBottom: "90px" }}>
-        <NavMenu navFromTop={true} />
-      </div>
-      <Box className="container">
-        <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
-          <Step>
-            <StepLabel>Billing</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Payment</StepLabel>
-          </Step>
-        </Stepper>
-        <Box>
-          <Formik
-            onSubmit={handleFormSubmit}
-            initialValues={initialValues}
-            validationSchema={checkoutSchema[activeStep]}
+      {breakPoint && (
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            borderTop: "1px solid lightgrey",
+            background: "#F5F5F5",
+            padding: "1rem 5rem",
+          }}
+        >
+          <Accordion sx={{ boxShadow: "none" }}>
+            <AccordionSummary
+              expandIcon={<ExpandMore />}
+              id="checkout-mobile-display-header"
+              sx={{
+                background: "#F5F5F5",
+                boxShadow: "none",
+              }}
+            >
+              <Typography
+                style={{
+                  fontFamily: "Satoshi, sans-serif",
+                  fontSize: "1rem",
+                  fontWeight: 400,
+                  textAlign: "left",
+                  color: "rgb(185,72,24)",
+                }}
+              >
+                Show order summary
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                }}
+              >
+                <div className="products-section">
+                  {cart.map((product, index) => (
+                    <ProductDisplayCard product={product} key={index} />
+                  ))}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.8rem",
+                  }}
+                >
+                  <DiscountPanel
+                    disabled={isDisablePayment}
+                    setCoupan={setCoupan}
+                  />
+                  <CalculationPanel
+                    totalPrice={totalPrice}
+                    isDisable={!validateCheckoutDetails}
+                    shippingRateDetails={shippingRateDetails}
+                    product={cart}
+                    updateTotalPrice={updateTotalPriceOnShipmentCharge}
+                  />
+                </div>
+              </Box>
+            </AccordionDetails>
+          </Accordion>
+        </section>
+      )}
+
+      <Box p={breakPoint ? "0" : "2rem 0rem"}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <section
+            style={{
+              width: breakPoint ? "100%" : "55%",
+              display: "flex",
+              flexDirection: "column",
+              borderRight: "0.5px solid lightgrey",
+              borderTop: "1px solid lightgrey",
+              padding: breakPoint ? "2rem 5rem" : "1.8rem 1.8rem 1.8rem 15%",
+              gap: "1.5rem",
+            }}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-              setFieldValue,
-            }) => (
-              <form onSubmit={handleSubmit}>
-                {isFirstStep && (
-                  <>
-                    <>
-                      <Box display="flex">
-                        <Box>
-                          <Shipping
-                            values={values}
-                            errors={errors}
-                            touched={touched}
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            setFieldValue={setFieldValue}
-                          />
-                        </Box>
+            <CheckoutLeftPanelHeader
+              price={price}
+              createOrder={createOrder}
+              onApprove={onApprove}
+              onError={onError}
+              isDisable={!validateCheckoutDetails}
+            />
+            <CheckoutShippingDetails
+              price={price}
+              createOrder={createOrder}
+              onApprove={onApprove}
+              onError={onError}
+              checkoutDetails={checkoutDetails}
+              setCheckoutDetails={handleInputChange}
+              isDisable={!validateCheckoutDetails}
+              shippingRateDetails={shippingRateDetails}
+            />
+          </section>
 
-                        <Box
-                          padding="30px"
-                          overflow="auto"
-                          height="100%"
-                          width="70%"
-                        >
-                          {/* HEADER */}
-                          <FlexBox mb="15px">
-                            <Typography variant="h3">
-                              <strong>SHOPPING BAG ({cart.length}) </strong>
-                            </Typography>
-                            <Box display={!isNonMobile ? "none" : ""}>
-                              <Button
-                                onClick={() => navigate(`/`)}
-                                variant="contained"
-                                sx={{ backgroundColor: "#ff6d2f" }}
-                              >
-                                {" "}
-                                <ArrowBackIcon />
-                                <Typography> Continue Shopping</Typography>
-                              </Button>
-                            </Box>
-                          </FlexBox>
-                          <Divider />
-
-                          {/* CART LIST */}
-                          <Box overflow="auto" maxHeight="50em">
-                            {cart.map((item) => (
-                              <Box key={`${item.id}`}>
-                                <FlexBox p="15px 0">
-                                  <Box flex="1 1 40%">
-                                    <img
-                                      alt={item?.name}
-                                      width={!isNonMobile2 ? "60em" : "180em"}
-                                      height={!isNonMobile2 ? "100em" : "250em"}
-                                      src={item.image?.src}
-                                    />
-                                  </Box>
-                                  <Box flex="1 1 60%">
-                                    <FlexBox mb="5px" ml="10px">
-                                      <Typography fontWeight="bold">
-                                        {item.title} x ( {item.count} )
-                                      </Typography>
-                                    </FlexBox>
-                                  </Box>
-                                </FlexBox>
-                                <Divider />
-                              </Box>
-                            ))}
-                          </Box>
-
-                          {/* ACTIONS */}
-                          <Box m="20px 0">
-                            <Divider />
-                            <FlexBox m="20px 0">
-                              <Typography
-                                fontWeight="bold"
-                                sx={{ display: isNonMobile ? "" : "none" }}
-                              >
-                                COUPON CODE
-                              </Typography>
-                              <Box
-                                sx={{
-                                  p: 2,
-                                  border: `1px dashed ${
-                                    cs
-                                      ? "grey"
-                                      : success
-                                      ? isPaypalVisible
-                                        ? "red"
-                                        : "green"
-                                      : "green"
-                                  }`,
-                                  background: "white",
-                                }}
-                              >
-                                {!directCoupon ? (
-                                  <Input
-                                    placeholder="Enter Coupon Code"
-                                    type="text"
-                                    value={coupan}
-                                    onChange={(e) => setCoupan(e.target.value)}
-                                  />
-                                ) : (
-                                  <Input
-                                    placeholder="Enter Coupon Code"
-                                    type="text"
-                                    value={couponName}
-                                  />
-                                )}
-                              </Box>
-
-                              <Button
-                                variant="contained"
-                                onClick={() => {
-                                  applyCoupon();
-                                  handleButtonClick();
-                                }}
-                                sx={{
-                                  display:
-                                    isNonMobile && h && !code ? "" : "none",
-                                }}
-                              >
-                                {" "}
-                                Apply{" "}
-                              </Button>
-                            </FlexBox>
-                            {!isNonMobile && (
-                              <Button
-                                variant="contained"
-                                onClick={() => {
-                                  applyCoupon();
-                                  handleButtonClick();
-                                }}
-                                sx={{ display: h ? "" : "none" }}
-                              >
-                                {" "}
-                                Apply{" "}
-                              </Button>
-                            )}
-                            <Divider />
-                            {code ? (
-                              <>
-                                {" "}
-                                <FlexBox m="20px 0">
-                                  <Typography fontWeight="bold">
-                                    SUBTOTAL
-                                  </Typography>
-                                  <Typography
-                                    fontWeight="bold"
-                                    sx={{ textDecoration: "line-through" }}
-                                  >
-                                    ${totalPrice}
-                                  </Typography>
-                                </FlexBox>
-                                <FlexBox>
-                                  <Typography fontWeight="bold">
-                                    TOTAL
-                                  </Typography>
-                                  <Typography fontWeight="bold">
-                                    ${code ? price : totalPrice}
-                                  </Typography>
-                                </FlexBox>
-                              </>
-                            ) : (
-                              <FlexBox m="20px 0">
-                                <Typography fontWeight="bold">
-                                  SUBTOTAL
-                                </Typography>
-                                <Typography fontWeight="bold">
-                                  ${code ? price : totalPrice}
-                                </Typography>
-                              </FlexBox>
-                            )}
-                            <Divider />
-                            <Divider />
-                          </Box>
-                        </Box>
-                      </Box>
-
-                      <Box>
-                        <Box
-                          sx={{
-                            display:
-                              values.firstName !== "" && values.country !== ""
-                                ? ""
-                                : "none",
-                          }}
-                        >
-                          {type && (
-                            <Typography sx={{ mb: "15px" }} fontSize="18px">
-                              <strong>
-                                Make Payment With{" "}
-                                <b style={{ color: "#ff6d2f" }}>
-                                  {" "}
-                                  Discount Applied
-                                </b>
-                              </strong>
-                            </Typography>
-                          )}
-                          <div>
-                            {!success ? (
-                              <Button
-                                onClick={handleButtonsClick}
-                                variant="contained"
-                                size="large"
-                                sx={{
-                                  padding: "18px 22px",
-                                  background:
-                                    "linear-gradient(95deg, rgba(230,114,20,1) 0%, rgba(232,171,14,1) 66%, rgba(230,114,20,1) 94%)",
-                                  fontWeight: "bolder",
-                                  fontSize: "medium",
-                                }}
-                              >
-                                Proceed to &nbsp;{" "}
-                                <strong> Pay With Discount </strong> &nbsp;
-                                &nbsp; <DiscountIcon />
-                              </Button>
-                            ) : (
-                              <></>
-                            )}
-
-                            <PayPalScriptProvider
-                              options={{
-                                "client-id":
-                                  "AYQ5fCEYi8xgTe5wBLDbv4Ttv5f1UptJSoO2h_VtJYFiw8gduAz_A0KfpkcdWERq6qwORcPKY_7g5jD8",
-                              }}
-                            >
-                              {success ? (
-                                <PayPalButtons
-                                  disabled={isDisablePayment}
-                                  style={{ layout: "vertical", color: "blue" }}
-                                  createOrder={(data, actions) =>
-                                    createOrder(price, actions)
-                                  }
-                                  onApprove={(data, actions) =>
-                                    onApprove(data, actions)
-                                  }
-                                  onError={(error) => onError(error)}
-                                />
-                              ) : (
-                                <> </>
-                              )}
-                            </PayPalScriptProvider>
-                          </div>
-                        </Box>
-                      </Box>
-                    </>
-                  </>
-                )}
-
-                <Box display="flex" justifyContent="center" gap="50px">
-                  {!isFirstStep && (
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      sx={{
-                        display: "flex",
-                        backgroundColor: shades.primary[400],
-                        boxShadow: "none",
-                        color: "white",
-                        borderRadius: 0,
-                        padding: "15px 40px",
-                        width: "20%",
-                      }}
-                      onClick={wrapper}
-                    >
-                      Back
-                    </Button>
-                  )}
-                </Box>
-              </form>
-            )}
-          </Formik>
-        </Box>
+          {!breakPoint && (
+            <section
+              style={{
+                width: "45%",
+                display: "flex",
+                flexDirection: "column",
+                borderTop: "1px solid lightgrey",
+                background: "#F5F5F5",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "1rem 20% 1rem 2rem",
+                  minHeight: "20rem",
+                  gap: "1rem",
+                }}
+              >
+                <div
+                  className="products-section"
+                  style={{
+                    maxHeight: "45vh",
+                    overflow: "scroll",
+                    scrollBehavior: "smooth",
+                  }}
+                >
+                  {cart.map((product, index) => (
+                    <ProductDisplayCard product={product} key={index} />
+                  ))}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.8rem",
+                  }}
+                >
+                  <DiscountPanel coupan={coupan} setCoupan={setCoupan} />
+                  <CalculationPanel
+                    totalPrice={totalPrice}
+                    isDisable={!validateCheckoutDetails}
+                    shippingRateDetails={shippingRateDetails}
+                    product={cart}
+                    updateTotalPrice={updateTotalPriceOnShipmentCharge}
+                  />
+                </div>
+              </Box>
+            </section>
+          )}
+        </div>
       </Box>
     </>
   );
 };
 
-// Define initial form values
-const initialValues = {
-  billingAddress: {
-    email: "",
-    phoneNumber: "",
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  shippingAddress: {
-    isSameAddress: true,
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  email: "",
-  phoneNumber: "",
-};
-
-// Define validation schema for the form
-const checkoutSchema = [
-  yup.object().shape({
-    billingAddress: yup.object().shape({
-      email: yup.string().required("required"),
-      phoneNumber: yup.string().required("required"),
-      firstName: yup.string().required("required"),
-      lastName: yup.string().required("required"),
-      country: yup.string().required("required"),
-      street1: yup.string().required("required"),
-      street2: yup.string(),
-      city: yup.string().required("required"),
-      state: yup.string().required("required"),
-      zipCode: yup.string().required("required"),
-    }),
-    shippingAddress: yup.object().shape({
-      isSameAddress: yup.boolean(),
-      firstName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      lastName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      country: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street1: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street2: yup.string(),
-      city: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      state: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      zipCode: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-    }),
-  }),
-];
-
-// Export the Checkout component
 export default Checkout;

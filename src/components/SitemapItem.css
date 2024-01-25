@@ -5,21 +5,31 @@
 }
 
 .sitemap-title {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 1.6rem;
+  font-family: "Satoshi, sans-serif";
+  color: #21282d;
+  margin-bottom: 0.9rem;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .sitemap-list {
   list-style-type: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  text-align: center;
 }
 
 .sitemap-list-item {
-  margin-bottom: 5px;
-  color: #555;
+  /* margin-bottom: 5px; */
+  color: #347d56;
   cursor: pointer;
   font-size: 16px;
+}
+.sitemap-list-item:hover{
+  text-decoration: underline;
 }
 
 /* Responsive styles */

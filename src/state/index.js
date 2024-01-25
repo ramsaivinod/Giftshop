@@ -19,6 +19,7 @@ const initialState = {
   directCoupon: false,
   couponName: '',
   itemsCategories: [],
+  megaMenu: []
 };
 
 export const cartSlice = createSlice({
@@ -32,7 +33,18 @@ export const cartSlice = createSlice({
       state.reviewd = [action.payload];
     },
     addToCart: (state, action) => {
-      state.cart = [...state.cart, action.payload.item];
+      const item = state.cart.find(
+        (cartItem) =>
+          cartItem.id === action.payload.item.id &&
+          cartItem.variants[0].id === action.payload.item.variants[0].id
+      );
+
+      if (item) {
+        item.count += action.payload.item.count;
+      } else {
+        state.cart.push(action.payload.item);
+      }
+
       state.price = state.cart
         .map((item, sumi = 0) => {
           return (sumi = +item.variants[0].price * item.count);
@@ -112,6 +124,9 @@ export const cartSlice = createSlice({
     setItemsCategories: (state, action) => {
       state.itemsCategories = action.payload;
     },
+    setMegaMenu: (state, action) => {
+      state.megaMenu = action.payload;
+    }
   },
 });
 
@@ -138,6 +153,7 @@ export const {
   setDirectCoupon,
   setCouponName,
   setItemsCategories,
+  setMegaMenu
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

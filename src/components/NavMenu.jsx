@@ -11,7 +11,7 @@ import {
 } from "@mui/icons-material";
 import { SearchOutlined } from "@mui/icons-material";
 import { setIsCartOpen, setIsNavOpen, setIsFilterOpen } from "../state";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { encode as btoa } from "base-64";
 import {
   setItems,
@@ -25,7 +25,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../styles/Navbar.css";
 import "../App.css";
 import styled from "@emotion/styled";
 import "react-dropdown/style.css";
@@ -35,14 +34,21 @@ import "../styles/Item2.css";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import NavbarDropdown from "./NavBarDropdown";
+import "../styles/Navbar.css";
+import Papers from "./Papers";
+import { ApiDataPostType } from "../api/Api";
 
 function NavMenu({ navFromTop }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const params = useParams();
+  const breakPoint = useMediaQuery("(min-width:800px)");
 
   useEffect(() => {
-    setSearchField("")
-  }, [location.search]);
+    setSearchField("");
+  }, [location.search, params]);
+
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const isNavOpen = useSelector((state) => state.cart.isNavOpen);
@@ -76,73 +82,49 @@ function NavMenu({ navFromTop }) {
   const options = ["one", "two", "three"];
   const defaultOption = options[0];
 
+  const fetchProducts = () => {
+    return ApiDataPostType("/customer/get-all-products")
+      .then((response) => response.data.response)
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        throw error; // Rethrow to handle it in the calling function.
+      });
+  };
+
+  function sortProducts(products, asc = true) {
+    return products.slice().sort((a, b) => {
+      const priceDiff = a.variants[0].price - b.variants[0].price;
+      return asc ? priceDiff : -priceDiff;
+    });
+  }
+
   async function getItems() {
     try {
-      var headers = new Headers();
-      headers.append(
-        "Authorization",
-        "Basic " +
-          btoa(
-            "ce9a3ad16708f3eb4795659e809971c4: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"
-          )
-      );
-
-      const result = await fetch(
-        "https://hmstdqv5i7.execute-api.us-east-1.amazonaws.com/jkshopstage/products",
-        {
-          headers: headers,
-        }
-      );
-
-      const resp = await result.json();
-      // console.log("resp",resp)
-      if (resp) {
-        let listCat = [
-          ...new Set(
-            resp?.products
-              ?.filter((item) => item?.tags)
-              .map((item) => {
-                return item?.tags;
-              })
-          ),
-        ];
-
-        const modifiedCategory = GetSortedCategory(listCat);
-        // console.log("initialCategory",listCat)
-        // console.log("modifiedCategory",modifiedCategory);
-        dispatch(setItemsCategories(modifiedCategory));
-
-        // console.log("searchResponse", resp);
-        setItem(resp?.products);
-        dispatch(setItems(resp?.products));
-        // console.log(resp?.products, "res");
-        let arr = resp?.products;
-        let arr2 = resp?.products;
-        arr = arr
-          .slice()
-          .sort((a, b) => a.variants[0].price - b.variants[0].price);
-        arr2 = arr2
-          .slice()
-          .sort((a, b) => b.variants[0].price - a.variants[0].price);
-        setAsc(arr);
-        setDsc(arr2);
+      let products = items;
+      if (items.length === 0) {
+        products = await fetchProducts(); // Handle the promise with await.
+        setItem(products);
+        dispatch(setItems(products));
       }
+      if (itemsCategories.length === 0 && products.length > 0) {
+        const modifiedCategory = GetSortedCategory(products);
+        // console.log("modifiedCategory", modifiedCategory);
+        dispatch(setItemsCategories(modifiedCategory));
+      }
+
+      const sortedAsc = sortProducts(products, true);
+      const sortedDsc = sortProducts(products, false);
+      setAsc(sortedAsc);
+      setDsc(sortedDsc);
     } catch (err) {
-      console.log(err, "this is error");
+      console.error(err, "this is error");
     }
   }
 
-  const GetSortedCategory = (arr) => {
-    // Join all array elements into a single string
-    const concatenatedString = arr.join(", ");
-
-    // Split the string into an array of words using commas and spaces as separators
-    const wordsArray = concatenatedString.split(/\s*,\s*/);
-
-    // Filter out unique words
-    const uniqueWords = [...new Set(wordsArray)];
-
-    return uniqueWords;
+  const GetSortedCategory = (products) => {
+    const tagsArray = products.map(product => product.tags.split(/\s*,\s*/)).flat();
+    const uniqueTags = [...new Set(tagsArray)];
+    return uniqueTags.sort();
   };
 
   useEffect(() => {
@@ -243,10 +225,6 @@ function NavMenu({ navFromTop }) {
     },
   }));
 
-  useEffect(() => {
-    // console.log("categoryList", categoryList);
-  }, [categoryList]);
-
   const SearchClass = show ? "searchActive" : "";
 
   const handleNavMenuClick = (cat) => {
@@ -289,187 +267,202 @@ function NavMenu({ navFromTop }) {
 
   return (
     <>
-      <Navbar
-        expand="lg"
-        className="navbox"
-        style={{ top: navFromTop ? 0 : "", backgroundColor: "#FFFFFF" }}
-      >
-        <div className="navbars container">
-          <IconButton
-            aria-controls="basic-navbar-nav"
-            onClick={() => dispatch(setIsNavOpen({}))}
-            sx={{ color: "#FFFFFF" }}
-            className="menub"
-          >
-            <MenuOutlined />
-          </IconButton>
-          <Navbar.Brand
-            onClick={() => {
-              navigate(`/`);
-            }}
-          >
-            {" "}
-            <img
-              src={Jklog}
-              alt="not found"
-              onClick={() => change()}
-              style={{ width: "6rem", height: "45px" }}
-            />
-          </Navbar.Brand>
+      <div style={{ position: "sticky", top: 0, zIndex: 101 }}>
+        {!breakPoint && (
+          <Box className="offersavailable">
+            <Papers />
+          </Box>
+        )}
 
-          <Box
-            //columnGap="20px",
-            display="flex"
-            justifyContent="end"
-            columnGap="0px"
-            zIndex="2"
-            flex="1"
-          >
-            <div className={`Search ${SearchClass}`}>
-              <div
-                className="inputfield"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  flex: "1",
-                  justifyContent: "flex-end",
-                }}
+        <Navbar
+          expand="lg"
+          className="navbox"
+          style={{ top: navFromTop ? 0 : "", backgroundColor: "#FFFFFF" }}
+        >
+          <div className="navbars container">
+            {!breakPoint && (
+              <IconButton
+                aria-controls="basic-navbar-nav"
+                onClick={() => dispatch(setIsNavOpen({}))}
+                sx={{ color: "#FFFFFF" }}
+                className="menub"
               >
-                <input
-                  placeholder="Search for Products..."
-                  type="text"
-                  value={search}
-                  onChange={handleSearchField}
-                  onKeyDown={(e) => {
-                    handleKeyDownSearch(e);
-                  }}
+                <MenuOutlined />
+              </IconButton>
+            )}
+            <Navbar.Brand
+              onClick={() => {
+                navigate(`/`);
+              }}
+            >
+              {" "}
+              <img
+                src={Jklog}
+                alt="not found"
+                onClick={() => change()}
+                style={{ width: "6rem", height: "45px" }}
+                loading="lazy"
+              />
+            </Navbar.Brand>
+
+            <Box
+              //columnGap="20px",
+              display="flex"
+              justifyContent="end"
+              columnGap="0px"
+              zIndex="2"
+              flex="1"
+            >
+              <div className={`Search ${SearchClass}`}>
+                <div
+                  className="inputfield"
                   style={{
-                    position: "relative",
-                    width: "100%",
-                    borderRadius: !search ? "50px" : "",
+                    display: "flex",
+                    alignItems: "center",
+                    flex: "1",
+                    justifyContent: "flex-end",
                   }}
-                />
-                {search && (
-                  <>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      className="clear-icon"
-                      onClick={() => setSearchField("")}
-                      style={{
-                        cursor: "pointer",
-                        // position: "absolute",
-                        margin: "0px 8px 0px -32px",
-                        fill: "#645743",
-                        border: "1px solid #645743",
-                        borderRadius: "50%",
-                        zIndex: 1,
-                      }}
-                    >
-                      <path d="M0 0h24v24H0z" fill="none" />
-                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
-                    </svg>
-                    <div
-                      style={{
-                        background: "#EF6F1F",
-                        padding: "6.5px 10px",
-                        borderTopRightRadius: "2rem",
-                        borderBottomRightRadius: "2rem",
-                        border: "1px solid #645743",
-                      }}
-                    >
-                      <SearchOutlined
-                        fontSize="large"
-                        sx={{
-                          color: "white",
-                          zIndex: 1,
+                >
+                  <input
+                    placeholder="Search for Products..."
+                    type="text"
+                    value={search}
+                    onChange={handleSearchField}
+                    onKeyDown={(e) => {
+                      handleKeyDownSearch(e);
+                    }}
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      borderRadius: !search ? "50px" : "",
+                    }}
+                  />
+                  {search && (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        className="clear-icon"
+                        onClick={() => setSearchField("")}
+                        style={{
                           cursor: "pointer",
-                          background: "#EF6F1F",
-                          borderRadius: "1rem",
+                          // position: "absolute",
+                          margin: "0px 8px 0px -32px",
+                          fill: "#645743",
+                          border: "1px solid #645743",
+                          borderRadius: "50%",
+                          zIndex: 1,
                         }}
+                      >
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+                      </svg>
+                      <div
+                        style={{
+                          background: "#EF6F1F",
+                          padding: "6.5px 10px",
+                          borderTopRightRadius: "2rem",
+                          borderBottomRightRadius: "2rem",
+                          border: "1px solid #645743",
+                        }}
+                      >
+                        <SearchOutlined
+                          fontSize="large"
+                          sx={{
+                            color: "white",
+                            zIndex: 1,
+                            cursor: "pointer",
+                            background: "#EF6F1F",
+                            borderRadius: "1rem",
+                          }}
+                          onClick={() =>
+                            navigate(
+                              `/search?category=none&filter=All&searchInput=${search}`
+                            )
+                          }
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* <IconButton>
+                <SearchOutlined fontSize="medium" sx={{ color: " #EF6F1F;" }} onClick={handleSearchField} />
+              </IconButton> */}
+                {search && (categoryList.length > 0 || item.length > 0) && (
+                  <div className="searchlist">
+                    {categoryList?.map((cat, index) => (
+                      <div
+                        key={index}
                         onClick={() =>
                           navigate(
-                            `/search?category=none&filter=All&searchInput=${search}`
+                            `/search?category=${cat}&filter=All&searchInput=${search}`
                           )
                         }
-                      />
-                    </div>
-                  </>
+                        className="lst"
+                      >
+                        {cat}
+                      </div>
+                    ))}
+                    {item.map((item, index) => (
+                      <div
+                        key={index}
+                        onClick={() => navigate(`/item/${item.id}`)}
+                        className="lst"
+                      >
+                        {item.title}
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
 
-              {/* <IconButton>
-                <SearchOutlined fontSize="medium" sx={{ color: " #EF6F1F;" }} onClick={handleSearchField} />
-              </IconButton> */}
-              {search && (categoryList.length > 0 || item.length > 0) && (
-                <div className="searchlist">
-                  {categoryList?.map((cat, index) => (
-                    <div
-                      key={index}
-                      onClick={() =>
-                        navigate(
-                          `/search?category=${cat}&filter=All&searchInput=${search}`
-                        )
-                      }
-                      className="lst"
-                    >
-                      {cat}
-                    </div>
-                  ))}
-                  {item.map((item, index) => (
-                    <div
-                      key={index}
-                      onClick={() => navigate(`/item/${item.id}`)}
-                      className="lst"
-                    >
-                      {item.title}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+              <IconButton className="Searchmb" onClick={() => setShow(!show)}>
+                <SearchOutlined fontSize="medium" sx={{ color: "black" }} />
+              </IconButton>
 
-            <IconButton className="Searchmb">
-              <SearchOutlined
-                fontSize="medium"
-                sx={{ color: "black" }}
-                onClick={() => setShow(!show)}
-              />
-            </IconButton>
-
-            <Badge
-              badgeContent={cart.length === 0 ? "0" : cart.length}
-              color="secondary"
-              invisible={cart.length >1000}// any random stuff to not execute this line
-              sx={{
-                "& .MuiBadge-badge": {
-                  right: 9,
-                  top: 5,
-                  padding: "0 4px",
-                  height: "14px",
-                  minWidth: "13px",
-                },
-              }}
-            >
-              <IconButton
-                onClick={() => dispatch(setIsCartOpen({}))}
+              <Badge
+                badgeContent={cart.length === 0 ? "0" : cart.length}
+                color="secondary"
+                invisible={cart.length > 1000} // any random stuff to not execute this line
                 sx={{
-                  color: "black",
-                  "@media (max-width: 992px)": {
-                    "& .MuiSvgIcon-root": {
-                      fontSize: "medium",
-                    },
+                  "& .MuiBadge-badge": {
+                    right: 9,
+                    top: 5,
+                    padding: "0 4px",
+                    height: "14px",
+                    minWidth: "13px",
                   },
                 }}
               >
-                <ShoppingCartOutlined fontSize="large" />
-              </IconButton>
-            </Badge>
+                <IconButton
+                  onClick={() => dispatch(setIsCartOpen({}))}
+                  sx={{
+                    color: "black",
+                    "@media (max-width: 992px)": {
+                      "& .MuiSvgIcon-root": {
+                        fontSize: "medium",
+                      },
+                    },
+                  }}
+                >
+                  <ShoppingCartOutlined fontSize="large" />
+                </IconButton>
+              </Badge>
+            </Box>
+          </div>
+        </Navbar>
+
+        <NavbarDropdown updatingProps={location.search} />
+
+        {breakPoint && (
+          <Box className="offersavailable">
+            <Papers />
           </Box>
-        </div>
-      </Navbar>
+        )}
+      </div>
     </>
   );
 }

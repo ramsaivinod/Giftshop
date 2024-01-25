@@ -92,6 +92,7 @@ const SideBar = () => {
             alt="not found"
             onClick={() => change()}
             style={{ width: "6rem", height: "3rem" }}
+            loading="lazy"
           />
           <IconButton
             onClick={() => dispatch(setIsNavOpen({}))}

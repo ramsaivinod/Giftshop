@@ -1,143 +1,48 @@
-import React, {useEffect} from 'react';
-import SitemapItem from './SitemapItem';
-import './SiteMap.css';
+import React, { useEffect, useState } from "react";
+import SitemapItem from "./SitemapItem";
+import "./SiteMap.css";
 import NavMenu from "./NavMenu";
+import { fetchDataFromApi } from "../utils/api";
 
 const Sitemap = () => {
+  const [sitemapData, setSitemapData] = useState([]);
 
-  const sections = [
-    {
-      "title": "Swami's Books",
-      "items": ["Mind Management", "Life Transformation", "Meditation", "Nutrition & Diet", "Yoga & Lifestyle", "Vedic Scriptures", "Human Excellence"]
-    },
-    {
-      "title": "Maharaj's Books",
-      "items": ["Devotional Songs", "Fundamentals of Sadhana"]
-    },
-    {
-      "title": "For Kids",
-      "items": ["Saints Collection", "Moral Story Collection", "Mythology Stories Collection", "Character Building Series"]
-    },
-    {
-      "title": "Languages",
-      "items": ["English", "Hindi", "Telugu", "Gujarati", "Marathi", "Odia"]
-    },
-    {
-      "title": "eBooks",
-      "items": ["Swami's Books"]
-    },
-    {
-      "title": "Kirtan Books",
-      "items": ["Prayer & Aarti", "Humbleness", "Devotion", "Divine Pastimes", "Guru", "Festivals"]
-    },
-    {
-      "title": "Books",
-      "items": [
-        "Mythology Stories Collection",
-        "Bundles",
-        "Yoga & Meditation",
-        "Shlokas",
-        "Hinduism",
-        "Self-Help"
-      ]
-    },
-    {
-      "title": "Shop by Age",
-      "items": [
-        "Youth (10+)",
-        "7-9 years",
-        "Kids under 6"
-      ]
-    },
-    {
-      "title": "More for kids",
-      "items": [
-        "Audio",
-        "Toys"
-      ]
-    },
-    {
-      "title": "Bhajans & Kirtans",
-      "items": [
-        "Swamiji’s Voice",
-        "Maharajji’s Voice",
-        "JKYog Music"
-      ]
-    },
-    {
-      "title": "Kirtan Books",
-      "items": [
-        "Prayer & Aarti",
-        "Humbleness",
-        "Devotion",
-        "Divine Pasttimes",
-        "Guru",
-        "Festivals"
-      ]
-    },
-    {
-      "title": "Clothes",
-      "items": [
-        "T-Shirts",
-        "Shawls"
-      ]
-    },
-    {
-      "title": "Jewelry",
-      "items": [
-        "Bangles",
-        "Necklaces",
-        "Earrings"
-      ]
-    },
-    {
-      "title": "Toys",
-      "items": [
-        "Dolls",
-        "Stuffed Toys",
-        "Puzzles"
-      ]
-    },
-    {
-      "title": "Decor",
-      "items": [
-        "Art",
-        "Cutouts",
-        "Photos"
-      ]
-    },
-    {
-      "title": "Other",
-      "items": [
-        "Yoga Mats",
-        "Water bottles",
-        "Pens",
-        "Keychains",
-        "Bookmarks"
-      ]
+  const getSiteMap = async () => {
+    try {
+      const response = await fetchDataFromApi("/api/gift-shop-sitemap-page");
+
+      if (response) {
+        setSitemapData(response?.data.attributes.sitemap);
+      }
+    } catch (error) {
+      console.error("Error fetching MegaMenu:", error);
     }
-  ];
+  };
 
-  
+  useEffect(() => {
+    getSiteMap();
+  }, []);
+
   // This useEffect hook will run every time the component mounts
   useEffect(() => {
     // Using the window.scrollTo method to scroll to the top of the page
     window.scrollTo(0, 0);
   }, []); // The empty array means it will only run on mount and unmount
-  
 
   return (
     <div>
-      <NavMenu navFromTop={true} />
       <div className="main-section container">
         <div className="sitemap">
-          {sections.map((section, index) => (
-            <SitemapItem key={index} title={section.title} items={section.items} />
+          {sitemapData?.map((section, index) => (
+            <SitemapItem
+              key={index}
+              title={section.title}
+              items={section.items}
+            />
           ))}
         </div>
       </div>
     </div>
-    
   );
 };
 

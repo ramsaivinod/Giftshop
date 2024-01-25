@@ -12,6 +12,7 @@ import {
   Select,
   MenuItem,
   CircularProgress,
+  useMediaQuery,
 } from "@mui/material";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
@@ -30,7 +31,7 @@ function HelpDesk({ showForm, onFormChange }) {
       },
     },
   });
-
+  const breakPoint = useMediaQuery("(max-width:760px)");
   const [helpDeskForm, setHelpDeskForm] = useState({
     email: "",
     firstName: "",
@@ -134,7 +135,7 @@ function HelpDesk({ showForm, onFormChange }) {
     >
       <DialogTitle
         sx={{
-          fontSize: "2rem",
+          fontSize: breakPoint ? "1.4rem" : "2rem",
           fontFamily: "Satoshi, sans-serif",
           color: "darkslategrey",
           fontWeight: 300,
@@ -161,11 +162,8 @@ function HelpDesk({ showForm, onFormChange }) {
               variant="h4"
               style={{
                 fontFamily: "Satoshi, sans-serif",
-                fontSize: "1.1rem",
+                fontSize: breakPoint ? "0.9rem" : "1.1rem",
                 fontWeight: 600,
-                [theme.breakpoints.down("xs")]: {
-                  fontSize: "0.9rem", // smaller font size on small screens
-                },
               }}
             >
               Name
@@ -200,11 +198,8 @@ function HelpDesk({ showForm, onFormChange }) {
               variant="h4"
               style={{
                 fontFamily: "Satoshi, sans-serif",
-                fontSize: "1.1rem",
+                fontSize: breakPoint ? "0.9rem" : "1.1rem",
                 fontWeight: 600,
-                [theme.breakpoints.down("xs")]: {
-                  fontSize: "0.9rem", // smaller font size on small screens
-                },
               }}
             >
               Email
@@ -225,11 +220,8 @@ function HelpDesk({ showForm, onFormChange }) {
               variant="h4"
               style={{
                 fontFamily: "Satoshi, sans-serif",
-                fontSize: "1.1rem",
+                fontSize: breakPoint ? "0.9rem" : "1.1rem",
                 fontWeight: 600,
-                [theme.breakpoints.down("xs")]: {
-                  fontSize: "0.9rem", // smaller font size on small screens
-                },
               }}
               gutterBottom
             >
@@ -261,11 +253,8 @@ function HelpDesk({ showForm, onFormChange }) {
               variant="h4"
               style={{
                 fontFamily: "Satoshi, sans-serif",
-                fontSize: "1.1rem",
+                fontSize: breakPoint ? "0.9rem" : "1.1rem",
                 fontWeight: 600,
-                [theme.breakpoints.down("xs")]: {
-                  fontSize: "0.9rem", // smaller font size on small screens
-                },
               }}
               gutterBottom
             >
