@@ -3,6 +3,10 @@
   overflow: hidden;
 }
 
+.carousel.carousel-slider {
+  height: 24rem;
+}
+
 .carousel.carousel-slider .control-arrow:hover {
   background: transparent;
 }

@@ -62,7 +62,7 @@
 .banner_img {
   height: 120px;
   width: 120px;
-  border-radius: 50%;
+  border-radius: 1rem;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
