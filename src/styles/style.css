@@ -28,7 +28,7 @@
 }
 
 #basic-nav-dropdown {
-  font-family: "Satoshi", sans-serif;
+  font-family: Satoshi-Medium;
   font-size: 1rem /* 16px */;
   line-height: 1.5rem /* 24px */;
   color: var(--font-clr) !important;
