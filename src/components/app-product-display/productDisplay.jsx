@@ -31,7 +31,7 @@ function ProductDisplay() {
     ApiDataPostType(`/customer/product/${id}`)
       .then((response) => {
         const product = response.data.response;
-        console.log(product);
+        // console.log(product);
         if (product) {
           setProductData({
             data: product,
@@ -68,7 +68,7 @@ function ProductDisplay() {
         loading={loading}
       />
       <ProductDescriptionSection productData={productData} tabView={tabView} loading={loading}/>
-      <ProductItemdetailsSection productData={productData} tabView={tabView}/>
+      <ProductItemdetailsSection productData={productData} tabView={tabView} loading={loading}/>
       <SimilarProductsSection tabView={tabView}/>
     </Box>
   );

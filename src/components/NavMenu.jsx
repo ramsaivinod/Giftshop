@@ -398,7 +398,7 @@ function NavMenu({ navFromTop }) {
                         key={index}
                         onClick={() =>
                           navigate(
-                            `/search?category=${cat}&filter=All&searchInput=${search}`
+                            `/search?category=${cat}&filter=All&searchInput=none`
                           )
                         }
                         className="lst"
@@ -409,7 +409,7 @@ function NavMenu({ navFromTop }) {
                     {item.map((item, index) => (
                       <div
                         key={index}
-                        onClick={() => navigate(`/item/${item.id}`)}
+                        onClick={() => navigate(`/product-details/${item.id}`)}
                         className="lst"
                       >
                         {item.title}

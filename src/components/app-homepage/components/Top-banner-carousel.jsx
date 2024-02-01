@@ -46,7 +46,7 @@ function TopBannerCarousel() {
         >
           {banners.length > 0 ? (
             banners.map((texture, index) => (
-              <Link to={texture?.attributes?.banner_url} key={index}>
+              <Link to={texture?.attributes?.banner_url ?? "javascript:void(0)"} key={index}>
                 <Box key={`carousel-image-${index}`}>
                   <img
                     className="carousel-img"
@@ -80,7 +80,7 @@ const carouselImgStyle = (isMobile) => ({
   width: isMobile ? "" : "100%",
   height: isMobile ? "" : "66.67vh",
   // marginTop: isMobile ? "0-2rem" : "0-2rem",
-  objectFit: isMobile ? "cover" : "fill",
+  objectFit: isMobile ? "cover" : "cover",
   backgroundAttachment: "fixed",
 });
 

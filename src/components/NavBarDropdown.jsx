@@ -7,6 +7,7 @@ import { fetchDataFromApi } from "../utils/api";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setMegaMenu } from "../state";
+import { getData } from "../api/Api";
 
 function NavbarDropdown({ updatingProps }) {
   const navigate = useNavigate();
@@ -23,15 +24,11 @@ function NavbarDropdown({ updatingProps }) {
       if (megaMenu.length > 0) {
         return;
       }
-
-      try {
-        const response = await fetchDataFromApi("/api/web-app-mega-menu");
-        if (response) {
-          dispatch(setMegaMenu(response?.data.attributes.menuItems));
-        }
-      } catch (error) {
-        console.error("Error fetching MegaMenu:", error);
-      }
+      getData("/api/web-app-mega-menu")
+        .then((response) =>
+          dispatch(setMegaMenu(response?.data.attributes.menuItems))
+        )
+        .catch((error) => console.error("Error fetching MegaMenu:", error));
     };
 
     getMegaMenu();
@@ -74,7 +71,10 @@ function NavbarDropdown({ updatingProps }) {
                         >
                           <NavDropdown.Item
                             className="dropdownitem dropdownitem-selected"
-                            style={{ justifyContent: "space-between",fontWeight: 700 }}
+                            style={{
+                              justifyContent: "space-between",
+                              fontWeight: 700,
+                            }}
                             onClick={() => {
                               handleNavigate(subItem.CATEGORY_TITLE);
                             }}

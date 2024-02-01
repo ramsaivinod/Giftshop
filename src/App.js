@@ -17,6 +17,7 @@ import CopyrightTrademarkComponent from './components/CopyrightTrademarkComponen
 import TermsOfUseComponent from './components/TermsOfUseComponent';
 import CookiePolicy from './components/CookiePolicy';
 import ThanksPage from './components/app-thanks-page/ThanksPage';
+import TooManyRequests from './components/error-pages/TooManyRequests';
 import SharedLayout from './sharedLayout';
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
               <Route path="sitemap" element={<SiteMap />} />
               <Route path="terms-of-use" element={<TermsOfUseComponent />} />
               <Route path="copyright-and-trademark" element={<CopyrightTrademarkComponent />} />
-              <Route path="cookie-policy" element={<CookiePolicy />} />
+              <Route path="privacy-policy" element={<CookiePolicy />} />
+              <Route path="too-many-request" element={<TooManyRequests />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -8,8 +8,9 @@ import {
 } from "@mui/material";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { ExpandMore } from "@mui/icons-material";
-import NoResultFound from "./NoResultFound";
+import NoResultFound from "./error-pages/NoResultFound";
 import { fetchDataFromApi } from "../utils/api";
+import { getData } from "../api/Api";
 
 function FaqPage() {
   const [loading, setLoading] = useState(false);
@@ -19,9 +20,6 @@ function FaqPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     getAllFaqs();
   }, []);
 
@@ -32,22 +30,17 @@ function FaqPage() {
     setFaqs(filteredFaqs);
   }, [search, faqsData]);
 
-  const getAllFaqs = async () => {
+  const getAllFaqs = () => {
     setLoading(true);
-    try {
-      const response = await fetchDataFromApi("/api/web-app-faqs");
-      if (response?.data) {
-        console.log(response.data, "faqs");
+    getData("/api/web-app-faqs")
+      .then((response) => {
         setFaqs(response.data);
         setFaqsData(response.data);
-      } else {
-        console.log("No FAQs data received from API");
-      }
-    } catch (error) {
-      console.error("Error fetching FAQs:", error);
-    } finally {
-      setLoading(false);
-    }
+      })
+      .catch((error) => console.error("No FAQs data received from API:", error))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const showNoResults = search !== "" && faqs.length === 0;
@@ -149,7 +142,7 @@ function FaqPage() {
             ))
           )}
         </div>
-        {showNoResults && <NoResultFound />}
+        {/* {showNoResults && <NoResultFound />} */}
       </Box>
     </Fragment>
   );

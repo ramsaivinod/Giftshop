@@ -16,10 +16,14 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import HomeIcon from "@mui/icons-material/Home";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/footer.css";
 
 function Footer() {
+  const navigate = useNavigate();
+  const handleNavigate = (route) => {
+    navigate(`/search?category=${route}&filter=All&searchInput=none`);
+  };
   return (
     <Box
       backgroundColor="#FFFBF2"
@@ -80,54 +84,44 @@ function Footer() {
               {/* List of center links */}
               <ul style={{ color: "#EF6F1F" }}>
                 <li>
-                  <a
-                    href={`/giftshop/search?category=Life Transformation&filter=All&searchInput=none`}
-                  >
+                  <div onClick={() => handleNavigate("Life Transformation")}>
                     <Typography color="white" textAlign={"left"}>
                       {" "}
                       Life Transformation
                     </Typography>
-                  </a>
+                  </div>
                 </li>
                 <li>
-                  <a
-                    href={`/giftshop/search?category=Yoga & Lifestyle&filter=All&searchInput=none`}
-                  >
+                  <div onClick={() => handleNavigate("Yoga & Lifestyle")}>
                     <Typography color="white" textAlign={"left"}>
                       {" "}
                       Yoga & Lifestyle
                     </Typography>
-                  </a>
+                  </div>
                 </li>
                 <li>
-                  <a
-                    href={`/giftshop/search?category=Signed Editions&filter=All&searchInput=none`}
-                  >
+                  <div onClick={() => handleNavigate("Signed Editions")}>
                     <Typography color="white" textAlign={"left"}>
                       {" "}
                       Signed Editions
                     </Typography>
-                  </a>
+                  </div>
                 </li>
                 <li>
-                  <a
-                    href={`/giftshop/search?category=Audiobooks&filter=All&searchInput=none`}
-                  >
+                  <div onClick={() => handleNavigate("Audiobooks")}>
                     <Typography color="white" textAlign={"left"}>
                       {" "}
                       Audiobooks
                     </Typography>
-                  </a>
+                  </div>
                 </li>
                 <li>
-                  <a
-                    href={`/giftshop/search?category=Self-Help&filter=All&searchInput=none`}
-                  >
+                  <div onClick={() => handleNavigate("Self-Help")}>
                     <Typography color="white" textAlign={"left"}>
                       {" "}
                       Self-Help
                     </Typography>
-                  </a>
+                  </div>
                 </li>
               </ul>
             </Box>
@@ -218,7 +212,7 @@ function Footer() {
                 </div>
                 <div className="mail">
                   <a
-                    href="mailto:info@jkyog.org"
+                    href="mailto:giftshop@jkyog.org"
                     style={{
                       display: "flex",
                       textDecoration: "none",
@@ -233,7 +227,7 @@ function Footer() {
                       title="mail"
                       loading="lazy"
                     />
-                    <span className="social-view">info@jkyog.org</span>
+                    <span className="social-view">giftshop@jkyog.org</span>
                   </a>
                 </div>
               </Typography>
@@ -366,24 +360,22 @@ function Footer() {
             <ul>
               {/* Links to terms and conditions and privacy policy */}
               <li>
-                <a href="/giftshop/terms-of-use" target="_self">
+                <div onClick={() => navigate("/terms-of-use")}>
                   Terms of Use
-                </a>
+                </div>
               </li>
-              <li>
-                <a href="/giftshop/copyright-and-trademark" target="_self">
+              {/* <li>
+                <div onClick={() => navigate("/copyright-and-trademark")}>
                   Copyright & Trademark
-                </a>
+                </div>
+              </li> */}
+              <li>
+                <div onClick={() => navigate("/privacy-policy")}>
+                  Privacy Policy
+                </div>
               </li>
               <li>
-                <a href="/giftshop/cookie-policy" target="_self">
-                  Cookie Policy
-                </a>
-              </li>
-              <li>
-                <a href="/giftshop/sitemap" target="_self">
-                  Sitemap
-                </a>
+                <div onClick={() => navigate("/sitemap")}>Sitemap</div>
               </li>
             </ul>
           </div>

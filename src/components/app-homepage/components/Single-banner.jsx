@@ -16,7 +16,7 @@ function SingleBanner() {
   return (
     <Fragment>
       {singleBanner !== null ? (
-        <Link to={singleBanner?.link}>
+        <Link to={singleBanner?.link ?? "javascript:void(0)"}>
           <Box>
             <img
               className="carousel-img"
@@ -43,9 +43,9 @@ function SingleBanner() {
  */
 const singleBannerStyle = (breakPoint) => ({
   width: breakPoint ? "" : "100%",
-  height: breakPoint ? "" : "40vh",
+  height: breakPoint ? "" : "34vh",
   marginTop: breakPoint ? "" : "4.1rem",
-  objectFit: breakPoint ? "cover" : "fill",
+  objectFit: breakPoint ? "cover" : "cover",
   backgroundAttachment: "fixed",
 });
 

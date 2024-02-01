@@ -40,7 +40,7 @@ import Loader from "./Loader"; // Import Loader component
 import NavMenu from "./NavMenu"; // Import NavMenu component
 import Item2 from "./Item2"; // Import Item2 component
 import { PRODUCT_CATEGORY } from "../utils/constants";
-import NoResultFound from "./NoResultFound";
+import NoResultFound from "./error-pages/NoResultFound";
 import axios from "axios";
 import { PostDataApi } from "../api/Api";
 
@@ -53,6 +53,7 @@ const SearchResults = () => {
   const items = useSelector((state) => state.cart.items);
   const value = useSelector((state) => state.cart.value);
   const sortOrder = useSelector((state) => state.cart.sortOrder);
+  const priceFilterData = useSelector((state) => state.cart.priceFilter);
 
   const [item, setItem] = useState([]);
   const [filterItem, setFilterItem] = useState([]);
@@ -135,7 +136,8 @@ const SearchResults = () => {
     setLoading(true);
     // const products = await getAllProducts();
     const products = await getAllProductsStoreFrontApi();
-    dispatch(setItems(products));
+    // dispatch(setItems(products));
+    setItem(products);
     setLoading(false);
   };
 
@@ -278,25 +280,27 @@ const SearchResults = () => {
     if (sortType === null) {
       return;
     }
-    let sortFilterItems = [...filterItem];
-    let sortedItems = [...item];
-    // let sortedItems =
-    //   checkForCategoryCheckboxFilter() || checkForCategorylanguage()
-    //     ? [...filterItem]
-    //     : [...item];
-    sortFilterItems.length > 0 &&
-      sortFilterItems.sort((a, b) => {
+
+    // Combine the categoryCheckboxFilter and languages filters
+    const selectedFilters = [...categoryCheckboxFilter, ...languages].filter(
+      (item) => item.selected
+    );
+
+    // Apply selected filters and then sort the items
+    const filteredAndSortedItems = [...item]
+      .filter((item) => {
+        return (
+          selectedFilters.length === 0 ||
+          selectedFilters.every((el) => item.tags.includes(el.name))
+        );
+      })
+      .sort((a, b) => {
         const priceA = parseFloat(a.variants[0].price);
         const priceB = parseFloat(b.variants[0].price);
         return sortType === "asc" ? priceA - priceB : priceB - priceA;
       });
-    sortedItems.sort((a, b) => {
-      const priceA = parseFloat(a.variants[0].price);
-      const priceB = parseFloat(b.variants[0].price);
-      return sortType === "asc" ? priceA - priceB : priceB - priceA;
-    });
-    setFilterItem(sortedItems);
-    setItem(sortedItems);
+
+    setFilterItem(filteredAndSortedItems);
   };
 
   /**
@@ -403,47 +407,53 @@ const SearchResults = () => {
     setFilterItem([]);
   };
 
+  // const isClearFilterDisabled = () => {
+  //   return (
+  //     checkForCategoryCheckboxFilter() &&
+  //     checkForCategorylanguage() &&
+  //     priceFilterData[0] === 3 &&
+  //     priceFilterData[1] === 150 &&
+  //     sortType === null
+  //   );
+  // };
+
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : item && item.length > 0 && item !== null ? (
-        <>
-          <Fragment>
-            <Box width="100%" pt="2rem">
-              <div className="container">
-                {/* Filter Button Display Logic */}
-                {breakPoint2 && value === "All" && (
-                  <Box
-                    display="flex"
-                    alignContent="flex-end"
-                    sx={{
-                      height: "32px",
-                      borderRadius: "5px",
-                      background: "#ffdd93",
-                      margin: "0 10px 2rem 0",
-                      padding: "10px 5px",
-                      fontSize: "20px",
-                    }}
+      <Fragment>
+        <Box width="100%" pt="2rem">
+          <div className="container">
+            {/* Filter Button Display Logic */}
+            {breakPoint2 && value === "All" && (
+              <Box
+                display="flex"
+                alignContent="flex-end"
+                sx={{
+                  height: "32px",
+                  borderRadius: "5px",
+                  background: "#ffdd93",
+                  margin: "0 10px 2rem 0",
+                  padding: "10px 5px",
+                  fontSize: "20px",
+                }}
+              >
+                <Button onClick={() => dispatch(setIsFilterOpen({}))}>
+                  <TuneIcon
+                    sx={{ cursor: "pointer", width: "40%" }}
+                    fontSize="large"
+                  />
+                  <Typography
+                    variant="h5"
+                    fontWeight="bold"
+                    fontFamily="Satoshi, sans-serif"
                   >
-                    <Button onClick={() => dispatch(setIsFilterOpen({}))}>
-                      <TuneIcon
-                        sx={{ cursor: "pointer", width: "40%" }}
-                        fontSize="large"
-                      />
-                      <Typography
-                        variant="h5"
-                        fontWeight="bold"
-                        fontFamily="Satoshi, sans-serif"
-                      >
-                        {PRODUCT_CATEGORY.TITLE}
-                      </Typography>
-                    </Button>
-                  </Box>
-                )}
+                    {PRODUCT_CATEGORY.TITLE}
+                  </Typography>
+                </Button>
+              </Box>
+            )}
 
-                {/* Product Heading Logic */}
-                {filterItem !== null && filterItem.length === 0 && (
+            {/* Product Heading Logic */}
+            {/* {filterItem !== null && filterItem.length === 0 && (
                   <p className="allproductheading">
                     {item !== null && item.length > 0 && !loading
                       ? `Showing ${item.length} Results for "${
@@ -453,123 +463,52 @@ const SearchResults = () => {
                         }"`
                       : "Loading Results ....."}
                   </p>
-                )}
-                {filterItem !== null && filterItem.length > 0 && (
-                  <p className="allproductheading">
-                    {`Showing ${filterItem.length} Results for Applied Filter`}
-                  </p>
-                )}
-
-                {/* Main Content Area */}
-                <Box display="flex">
-                  <Box
-                    className="filter-sidebar"
-                    sx={{
-                      width: "300px",
-                      border: "1px solid #ccc",
-                      display: breakPoint2 ? "none" : "",
-
-                      height: "fit-content",
-                    }}
-                  >
-                    {/* Filter Components */}
-                    <PriceFilter onPriceChange={handlePriceFilter} />{" "}
-                    <div style={{ margin: "0 20px 20px 20px" }}>
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        <SortRadioButtons
-                          onChange={handleSortOrderChange}
-                          value={sortType}
-                        />
-                        <CategoriesButton
-                          onChange={handleCategoriesChange}
-                          value={category}
-                          languages={languages}
-                          handleLanguageChange={handleLanguageChange}
-                          categoryCheckboxFilter={categoryCheckboxFilter}
-                          setCategoryCheckboxFilter={
-                            onChangeCategoryCheckboxFilter
-                          }
-                        />
-                        <Button
-                          onClick={() => clearFilter()}
-                          variant="contained"
-                          sx={{
-                            marginLeft: "0em",
-                            fontWeight: "bold",
-                            fontSize: "1em",
-                            padding: ".7em",
-                            marginBottom: breakPoint2 ? "3em" : "1em",
-                            fontFamily: "Rubik",
-                            background: "#EF6F1F",
-                            marginTop: "1em",
-                          }}
-                        >
-                          <strong>{PRODUCT_CATEGORY.CLEAR_FILTER}</strong>
-                        </Button>
-                      </div>
-                    </div>
-                  </Box>
-
-                  {/* Product Listing */}
-                  <Box
-                    width={breakPoint2 ? "100%" : "70%"}
-                    // maxHeight={item?.length > 3 ? "auto" : "220px"}
-                    marginTop={breakPoint2 ? "10px" : "0"}
-                    display={
-                      filterItem === null
-                        ? "flex"
-                        : breakPoint3
-                        ? "block"
-                        : "grid"
-                    }
-                    gridTemplateColumns={
-                      breakPoint
-                        ? "repeat(auto-fill, 250px)"
-                        : "repeat(auto-fill, 210px)"
-                    }
-                    justifyContent="space-around"
-                    // rowGap={breakPoint ? "25px" : "40px"}
-                    rowGap="25px"
-                    columnGap="2%"
-                    paddingLeft="2rem"
-                  >
-                    {filterItem === null
-                      ? item.length > 0 && <NoResultFound />
-                      : filterItem.length === 0
-                      ? item.map((item) => (
-                          <Item2 item={item} key={`${item.title}-${item.id}`} />
-                        ))
-                      : filterItem.map((item) => (
-                          <Item2 item={item} key={`${item.title}-${item.id}`} />
-                        ))}
-                  </Box>
-                </Box>
-              </div>
-            </Box>
-
-            {/* mobile filter start */}
-            <Box
-              display={isFilterOpen ? "block" : "none"}
-              // backgroundColor="rgba(0, 0, 0, 0.4)"
-              position="fixed"
-              zIndex={103}
-              width="100%"
-              height="100%"
-              left="0"
-              top="0"
-              overflow="auto"
-              backgroundColor="#fff"
+                )} */}
+            {/* <div
+              style={{ width: "100%" }}
+              className="allproductheading"
             >
-              <Box overflow="auto" height="100%">
-                <IconButton
-                  onClick={() => dispatch(setIsFilterOpen({}))}
-                  style={{ position: "absolute", right: "0", margin: "5px" }}
-                >
-                  <CancelIcon fontSize="large" />
-                </IconButton>
-                <Box className="filter-sidebar" padding="30px" marginTop="10px">
-                  <PriceFilter onPriceChange={handlePriceFilter} />
-                  <div style={{ margin: "0 15px" }}>
+              {loading
+                ? "Loading results ..."
+                : item && item.length > 0
+                ? filterItem !== null && filterItem.length > 0
+                  ? `Showing ${filterItem.length} Results for Applied Filter`
+                  : `Showing ${item.length} Results`
+                : "Sorry, requested item not found at this time!"}
+            </div> */}
+            {item?.length == 0 && (
+              <div
+                style={{ width: "100%", marginTop: "50px" }}
+                className="allproductheading"
+              >
+                {loading
+                  ? `Loading results .....`
+                  : `Sorry, requested item not found at this time!`}
+              </div>
+            )}
+
+            {filterItem !== null && filterItem.length > 0 && (
+              <p className="allproductheading">
+                {`Showing ${filterItem.length} Results for Applied Filter`}
+              </p>
+            )}
+
+            {/* Main Content Area */}
+            <Box display="flex">
+              <Box
+                className="filter-sidebar"
+                sx={{
+                  width: "300px",
+                  border: "1px solid #ccc",
+                  display: breakPoint2 ? "none" : "",
+
+                  height: "fit-content",
+                }}
+              >
+                {/* Filter Components */}
+                <PriceFilter onPriceChange={handlePriceFilter} />{" "}
+                <div style={{ margin: "0 20px 20px 20px" }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                     <SortRadioButtons
                       onChange={handleSortOrderChange}
                       value={sortType}
@@ -582,22 +521,111 @@ const SearchResults = () => {
                       categoryCheckboxFilter={categoryCheckboxFilter}
                       setCategoryCheckboxFilter={onChangeCategoryCheckboxFilter}
                     />
+                    {/* <Button
+                      // disabled={isClearFilterDisabled}
+                      onClick={() => clearFilter()}
+                      variant="contained"
+                      sx={{
+                        marginLeft: "0em",
+                        fontWeight: "bold",
+                        fontSize: "1em",
+                        padding: ".7em",
+                        marginBottom: breakPoint2 ? "3em" : "1em",
+                        fontFamily: "Rubik",
+                        background: "#EF6F1F",
+                        marginTop: "1em",
+                      }}
+                    >
+                      <strong>{PRODUCT_CATEGORY.CLEAR_FILTER}</strong>
+                    </Button> */}
                   </div>
-                </Box>
+                </div>
+              </Box>
+
+              {/* Product Listing */}
+              <Box
+                width={breakPoint2 ? "100%" : "70%"}
+                // maxHeight={item?.length > 3 ? "auto" : "220px"}
+                marginTop={breakPoint2 ? "10px" : "0"}
+                display={
+                  filterItem === null ? "flex" : breakPoint3 ? "block" : "grid"
+                }
+                gridTemplateColumns={
+                  breakPoint
+                    ? "repeat(auto-fill, 250px)"
+                    : "repeat(auto-fill, 210px)"
+                }
+                justifyContent="space-around"
+                // rowGap={breakPoint ? "25px" : "40px"}
+                rowGap="25px"
+                columnGap="2%"
+                paddingLeft="2rem"
+                height="max-content"
+              >
+                {filterItem === null
+                  ? item.length > 0 && (
+                      <div
+                        style={{ width: "100%", marginTop: "50px" }}
+                        className="allproductheading"
+                      >
+                        {loading
+                          ? `Loading results .....`
+                          : `Sorry, filters don't match with any requested products!`}
+                      </div>
+                    )
+                  : filterItem.length === 0
+                  ? item.map((item) => (
+                      <Item2 item={item} key={`${item.title}-${item.id}`} />
+                    ))
+                  : filterItem.map((item) => (
+                      <Item2 item={item} key={`${item.title}-${item.id}`} />
+                    ))}
               </Box>
             </Box>
-            {/*  mobile filter end */}
-          </Fragment>
-        </>
-      ) : (
-        <>
-          {!loading ? (
-            <NoResultFound />
-          ) : (
-            <p className="allproductheading">Loading Results .....</p>
-          )}
-        </>
-      )}
+          </div>
+        </Box>
+
+        {/* mobile filter start */}
+        <Box
+          display={isFilterOpen ? "block" : "none"}
+          // backgroundColor="rgba(0, 0, 0, 0.4)"
+          position="fixed"
+          zIndex={103}
+          width="100%"
+          height="100%"
+          left="0"
+          top="0"
+          overflow="auto"
+          backgroundColor="#fff"
+        >
+          <Box overflow="auto" height="100%">
+            <IconButton
+              onClick={() => dispatch(setIsFilterOpen({}))}
+              style={{ position: "absolute", right: "0", margin: "5px" }}
+            >
+              <CancelIcon fontSize="large" />
+            </IconButton>
+            <Box className="filter-sidebar" padding="30px" marginTop="10px">
+              <PriceFilter onPriceChange={handlePriceFilter} />
+              <div style={{ margin: "0 15px" }}>
+                <SortRadioButtons
+                  onChange={handleSortOrderChange}
+                  value={sortType}
+                />
+                <CategoriesButton
+                  onChange={handleCategoriesChange}
+                  value={category}
+                  languages={languages}
+                  handleLanguageChange={handleLanguageChange}
+                  categoryCheckboxFilter={categoryCheckboxFilter}
+                  setCategoryCheckboxFilter={onChangeCategoryCheckboxFilter}
+                />
+              </div>
+            </Box>
+          </Box>
+        </Box>
+        {/*  mobile filter end */}
+      </Fragment>
     </>
   );
 };

@@ -1,10 +1,12 @@
 import { Box, Skeleton, Typography } from "@mui/material";
 
-function ProductItemdetailsSection({ productData, tabView }) {
-  const renderDetailRow = (key, value, index) => (
+function ProductItemdetailsSection({ productData, tabView, loading }) {
+  const renderDetailRow = (item, index) => (
     <div key={index} style={detailRowStyle}>
-      <Typography style={keyStyle}>{`${key}:`}</Typography>
-      <Typography style={getValueStyle(tabView)}>{value}</Typography>
+      <Typography style={keyStyle}>{item.key}</Typography>
+      <Typography style={getValueStyle(tabView)}>
+        {safelyParseJSON(item.value)}
+      </Typography>
     </div>
   );
 
@@ -20,22 +22,47 @@ function ProductItemdetailsSection({ productData, tabView }) {
       </div>
     ));
 
+  function safelyParseJSON(jsonString) {
+    try {
+      const parsed = JSON.parse(jsonString);
+      if (
+        Array.isArray(parsed) ||
+        (typeof parsed === "object" && parsed !== null)
+      ) {
+        return parsed;
+      }
+      return jsonString;
+    } catch (e) {
+      return jsonString;
+    }
+  }
+
   return (
-    <section style={sectionStyle(tabView)}>
-      <Box>
-        <Typography style={titleStyle}>Item Details</Typography>
-      </Box>
-      <Box>
-        {productData?.data
-          ? Object.entries(productData.itemDetails).map(([key, value], index) =>
-              renderDetailRow(key, value, index)
-            )
-          : renderSkeletons(5)}
-      </Box>
-    </section>
+    <div>
+      {loading ? (
+        <section style={sectionStyle(tabView)}>
+          <Box>
+            <Typography style={titleStyle}>Item Details</Typography>
+          </Box>
+          <Box>{renderSkeletons(5)}</Box>
+        </section>
+      ) : (
+        productData?.data?.metafields?.length > 0 && (
+          <section style={sectionStyle(tabView)}>
+            <Box>
+              <Typography style={titleStyle}>Item Details</Typography>
+            </Box>
+            <Box>
+              {productData.data.metafields.map((item, index) =>
+                renderDetailRow(item, index)
+              )}
+            </Box>
+          </section>
+        )
+      )}
+    </div>
   );
 }
-
 
 /**
  * @Styles
@@ -64,7 +91,7 @@ const detailRowStyle = {
 };
 
 const keyStyle = {
-  fontFamily: "Satoshi, sans-serif",
+  textTransform: "capitalize",
   fontSize: "1rem",
   color: "#878787",
   paddingRight: "8px",
@@ -72,7 +99,6 @@ const keyStyle = {
 };
 
 const valueStyle = {
-  fontFamily: "Satoshi, sans-serif",
   fontSize: "1rem",
   lineHeight: 1.4,
   wordBreak: "break-word",

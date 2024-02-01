@@ -20,6 +20,7 @@ import Jklog from "../assets/logo/jklogo.png";
 
 // Import Redux actions
 import { setIsNavOpen, setValue } from "../state";
+import { getData } from "../api/Api";
 
 // Define the Sidebar component
 const SideBar = () => {
@@ -37,24 +38,19 @@ const SideBar = () => {
   const [subItemVisibility, setSubItemVisibility] = useState({});
 
   useEffect(() => {
-    getMegaMenu();
-  }, []);
-  const getMegaMenu = async () => {
-    try {
-      const response = await fetchDataFromApi("/api/web-app-mega-menu");
-      console.log(response, "MegaMenu-sidebarmenu");
-      if (response) {
+    getData("/api/web-app-mega-menu")
+      .then((response) => {
         setMegaMenu(response?.data.attributes.menuItems);
         setDisplayMenuType({
           ...displayMenuType,
           level: 1,
           data: response?.data.attributes.menuItems,
         });
-      }
-    } catch (error) {
-      console.error("Error fetching MegaMenu:", error);
-    }
-  };
+      })
+      .catch((error) => console.error("Error fetching MegaMenu:", error));
+  }, []);
+
+  
   // Handle tab change in the Sidebar
   const handleChange = (event, newValue) => {
     dispatch(setValue(newValue));

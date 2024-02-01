@@ -1,14 +1,22 @@
 import { Box, Typography, Button, Skeleton, IconButton } from "@mui/material";
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { addToCart, decreaseCount, increaseCount } from "../../../state";
 import { enqueueSnackbar } from "notistack";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Add, Remove } from "@mui/icons-material";
 
 function ProductTopSection({ productData, tabView, setProductData, loading }) {
   const zoomRef = useRef(null);
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart);
   const [count, setCount] = useState(1);
+  const getProductCount = useCallback(
+    (productId) => {
+      const item = cart.find((item) => item.id === productId);
+      return item ? item.count : 0;
+    },
+    [cart]
+  );
   const [uiState, setUiState] = useState({
     zoomed: false,
     cursorPos: { x: 0, y: 0 },
@@ -47,6 +55,7 @@ function ProductTopSection({ productData, tabView, setProductData, loading }) {
     }));
     zoomRef.current.style.backgroundPosition = `${x}% ${y}%`;
   };
+
   const addtocart = () => {
     if (!productData || !productData.data) return;
     dispatch(addToCart({ item: { ...productData.data, count } }));
@@ -64,7 +73,7 @@ function ProductTopSection({ productData, tabView, setProductData, loading }) {
           sx={imageBoxStyle}
         >
           <img
-            style={{ objectFit: "fill", height: "70px" }}
+            style={{ objectFit: "cover", height: "70px", width: "100%" }}
             src={item.src}
             alt={`product-img-${index}`}
             loading="lazy"
@@ -86,8 +95,18 @@ function ProductTopSection({ productData, tabView, setProductData, loading }) {
     }));
   };
 
-  const handleDispatch = (id, type) => {
-
+  const handleDispatch = (productId, type) => {
+    // console.log(type);
+    if (type === "increase" && getProductCount(productId) === 0) {
+      addtocart();
+      return;
+    }
+    if (type === "increase") {
+      dispatch(increaseCount({ id: productId }));
+    }
+    if (type === "decrease" && getProductCount(productId) >= 1) {
+      dispatch(decreaseCount({ id: productId }));
+    }
   };
 
   return (
@@ -123,6 +142,7 @@ function ProductTopSection({ productData, tabView, setProductData, loading }) {
         uiState={uiState}
         loading={loading}
         handleDispatch={handleDispatch}
+        productCount={getProductCount}
       />
     </section>
   );
@@ -135,6 +155,7 @@ function ProductInfoSection({
   uiState,
   loading,
   handleDispatch,
+  productCount,
 }) {
   return (
     <div style={infoSectionStyle(tabView)}>
@@ -211,23 +232,24 @@ function ProductInfoSection({
               ? "Out Of Stock"
               : "Add to Cart"}
           </Button>
-          {/* <Box
-            display="flex"
-            alignItems="center"
+          <Box
+            sx={increaseDecreaseButton(tabView)}
             border="1.5px solid #4d4d4d"
           >
             <IconButton
-              onClick={() => handleDispatch(productData.data.id, "decrease")}
+              onClick={() => handleDispatch(productData?.data?.id, "decrease")}
             >
-              <Remove />
+              <Remove sx={{ fontSize: "1.5rem" }} />
             </IconButton>
-            <Typography>0</Typography>
+            <Typography sx={increaseDecreaseCount}>
+              {productCount(productData?.data?.id)}
+            </Typography>
             <IconButton
-              onClick={() => handleDispatch(productData.data.id, "increase")}
+              onClick={() => handleDispatch(productData?.data?.id, "increase")}
             >
-              <Add />
+              <Add sx={{ fontSize: "1.5rem" }} />
             </IconButton>
-          </Box> */}
+          </Box>
         </Box>
       </Box>
     </div>
@@ -362,5 +384,23 @@ const addToCartButton = (tabView) => ({
   borderRadius: "2rem",
   padding: tabView ? "0.3rem 2.125rem" : "0.3rem 3.125rem",
 });
+
+const increaseDecreaseButton = (tabView) => ({
+  display: "flex",
+  marginTop: "1rem",
+  padding: tabView ? "0 1rem" : "0 1.8rem",
+  maxWidth: "fit-content",
+  borderRadius: "2rem",
+  alignItems: "center",
+  gap: "1rem",
+});
+
+const increaseDecreaseCount = {
+  fontSize: "1.5rem",
+  borderRight: "1px solid",
+  borderLeft: "1px solid",
+  paddingRight: "1rem",
+  paddingLeft: "1rem",
+};
 
 export default ProductTopSection;
