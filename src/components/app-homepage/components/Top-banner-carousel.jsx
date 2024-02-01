@@ -80,7 +80,7 @@ const carouselImgStyle = (isMobile) => ({
   width: isMobile ? "" : "100%",
   height: isMobile ? "" : "66.67vh",
   // marginTop: isMobile ? "0-2rem" : "0-2rem",
-  objectFit: isMobile ? "cover" : "cover",
+  objectFit: isMobile ? "cover" : "fill",
   backgroundAttachment: "fixed",
 });
 
