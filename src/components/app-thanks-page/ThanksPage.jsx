@@ -19,14 +19,24 @@ import axios from "axios";
 const ThanksPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+  
   const orderParam = queryParams.get("order");
   const breakPoint = useMediaQuery("(max-width:850px)");
   const breakPointXs = useMediaQuery("(max-width:600px)");
   const [orderDetails, setOrderDetails] = useState(null);
   const [lineItems, setLineItems] = useState(null);
 
+
+  const searchParams = new URLSearchParams(location.search);
+  const orderId = searchParams.get('order_id');
+
+  console.log("orderId",orderId);
+  
+
   useEffect(() => {
-    getOrderDetail();
+    if(orderId ){
+      getOrderDetail();
+    }
   }, []);
 
   useEffect(() => {
@@ -34,10 +44,11 @@ const ThanksPage = () => {
   }, [orderDetails]);
 
   const getOrderDetail = useCallback(async () => {
-    const url = `https://sso.jkyog.org/api/v1/customer/order/${orderParam}`;
+    const url = `https://sso.jkyog.org/api/v1/customer/order/${orderId}`;
     try {
       const response = await axios.get(url);
-      setOrderDetails(response.data.orderDetails);
+      console.log("response.data.orderDetails",response.data.response)
+      setOrderDetails(response.data.response);
     } catch (error) {
       console.error("Error fetching data:", error);
       return null;
@@ -45,16 +56,20 @@ const ThanksPage = () => {
   }, [orderParam]);
 
   const getLineItemsDetails = async () => {
-    const lineItemsDetails = await Promise.all(
-      orderDetails.line_items.map(async (lineItem) => {
-        const productDetails = await getProductDetailById(lineItem.product_id);
-        return {
-          ...productDetails,
-          count: lineItem.fulfillable_quantity,
-        };
-      })
-    );
-    setLineItems(lineItemsDetails);
+    if(orderDetails?.line_items?.length > 0) {
+      const lineItemsDetails = await Promise.all(
+          orderDetails?.line_items.map(async (lineItem) => {
+            if(lineItem?.product_id){
+              const productDetails = await getProductDetailById(lineItem.product_id);
+              return {
+                ...productDetails,
+                count: lineItem.fulfillable_quantity,
+              };
+            }
+          })
+      );
+      setLineItems(lineItemsDetails);
+    }
   };
 
   const getProductDetailById = async (id) => {
@@ -111,7 +126,7 @@ const ThanksPage = () => {
               >
                 <div className="products-section">
                   {lineItems != null &&
-                    lineItems.map((product, index) => (
+                    lineItems?.map((product, index) => (
                       <ProductDisplayCard product={product} key={index} />
                     ))}
                 </div>
@@ -177,7 +192,7 @@ const ThanksPage = () => {
                   }}
                 >
                   {lineItems != null ? (
-                    lineItems.map((product, index) => (
+                    lineItems?.map((product, index) => (
                       <ProductDisplayCard product={product} key={index} />
                     ))
                   ) : (

@@ -69,7 +69,7 @@ function OrderDetailsSection({ orderDetails, breakPointXs }) {
               title="Shipping method"
               content={
                 orderDetails !== null
-                  ? orderDetails.shipping_lines[0].code
+                  ? orderDetails?.shipping_lines[0]?.code
                   : null
               }
             />

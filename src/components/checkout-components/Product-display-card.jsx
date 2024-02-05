@@ -20,7 +20,7 @@ function ProductDisplayCard({ product, index }) {
           gap: "0.9rem",
         }}
       >
-        <Badge badgeContent={product.count} color="primary">
+        <Badge badgeContent={product?.count} color="primary">
           <div>
             <img
               style={{
@@ -43,7 +43,7 @@ function ProductDisplayCard({ product, index }) {
           flexDirection="column"
           justifyContent="center"
         >
-          {product.title}
+          {product?.title}
         </Typography>
       </div>
       <div
@@ -60,7 +60,7 @@ function ProductDisplayCard({ product, index }) {
           fontFamily="Satoshi, sans-serif"
           fontSize="0.95rem"
         >
-          {"$ " + product.variants[0].price}
+          {"$ " + product?.variants[0]?.price}
         </Typography>
       </div>
     </div>

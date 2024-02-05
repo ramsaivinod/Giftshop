@@ -75,13 +75,14 @@ const Checkout = ({ val }) => {
   });
 
   useEffect(() => {
+
     Promise.all([getAllCountries(), getShippingBillingRatesByWeight()])
       .then(([countries, shippingZones]) => {
-        setShippingRateDetails({
-          ...shippingRateDetails,
-          countries: countries,
-          shippingZoneRate: shippingZones,
-        });
+        // setShippingRateDetails((prevState) => ({
+        //   ...prevState,
+        //   countries: countries,
+        //   shippingZoneRate: shippingZones,
+        // }));
       })
       .catch((error) => console.error("Error with fetching data:", error));
   }, []);
@@ -266,11 +267,13 @@ const Checkout = ({ val }) => {
     );
     // console.log(data.firstName, "address");
     // console.log(data.lastName, "search");
+      
+
     console.log(JSON.parse(response.data.body), "data");
     setPay(false);
     const session = response.data;
     if (session.body) {
-      navigate("/thank");
+      navigate("/thank?order_id=2311");
     }
   };
 
@@ -323,6 +326,10 @@ const Checkout = ({ val }) => {
   const getAllCountries = async () => {
     ApiDataGetType("/customer/get-all-country")
       .then((response) => {
+        setShippingRateDetails((prevState) => ({
+          ...prevState,
+          countries: response.data.countries,
+        }));
         return response.data.countries;
       })
       .catch((error) => {
@@ -334,6 +341,11 @@ const Checkout = ({ val }) => {
   const getShippingBillingRatesByWeight = async () => {
     ApiDataGetType("/customer/get-shipping-zone")
       .then((response) => {
+        console.log("response.data.shipping_zones",response.data.shipping_zones)
+        setShippingRateDetails((prevState) => ({
+          ...prevState,
+          shippingZoneRate: response.data.shipping_zones,
+        }));
         return response.data.shipping_zones;
       })
       .catch((error) => {
@@ -409,13 +421,15 @@ const Checkout = ({ val }) => {
                     disabled={isDisablePayment}
                     setCoupan={setCoupan}
                   />
-                  <CalculationPanel
+
+                  {totalPrice && validateCheckoutDetails && shippingRateDetails &&  <CalculationPanel
                     totalPrice={totalPrice}
                     isDisable={!validateCheckoutDetails}
                     shippingRateDetails={shippingRateDetails}
                     product={cart}
                     updateTotalPrice={updateTotalPriceOnShipmentCharge}
-                  />
+                  /> }
+                 
                 </div>
               </Box>
             </AccordionDetails>
@@ -443,7 +457,7 @@ const Checkout = ({ val }) => {
               onError={onError}
               isDisable={!validateCheckoutDetails}
             />
-            <CheckoutShippingDetails
+            {checkoutDetails && shippingRateDetails &&  <CheckoutShippingDetails
               price={price}
               createOrder={createOrder}
               onApprove={onApprove}
@@ -452,7 +466,8 @@ const Checkout = ({ val }) => {
               setCheckoutDetails={handleInputChange}
               isDisable={!validateCheckoutDetails}
               shippingRateDetails={shippingRateDetails}
-            />
+            /> }
+            
           </section>
 
           {!breakPoint && (

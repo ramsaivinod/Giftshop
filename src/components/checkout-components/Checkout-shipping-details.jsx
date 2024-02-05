@@ -21,7 +21,10 @@ function CheckoutShippingDetails({
   isDisable,
   shippingRateDetails,
 }) {
-  const selectedCountry = shippingRateDetails.countries.find(
+
+  console.log("shippingRateDetails",shippingRateDetails)
+
+  const selectedCountry = shippingRateDetails?.countries?.find(
     (country) => country.code === checkoutDetails.country
   );
   const states = selectedCountry ? selectedCountry.provinces : [];
@@ -105,7 +108,7 @@ function CheckoutShippingDetails({
             variant="outlined"
             sx={{ borderRadius: "0.5rem", borderColor: "lightgray" }}
           >
-            {shippingRateDetails.countries.length > 0 &&
+            {shippingRateDetails?.countries?.length > 0 &&
               shippingRateDetails.countries.map(
                 (country, index) =>
                   country.code !== "*" && (

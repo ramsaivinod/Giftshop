@@ -2,6 +2,9 @@ import { Box, Divider, Skeleton, Typography } from "@mui/material";
 import { useEffect, useMemo } from "react";
 
 function ThanksBillingDisplay({ orderDetails }) {
+
+  console.log("orderDetails",orderDetails);
+
   return (
     <Box sx={panelStyle}>
       <Divider sx={dividerTop} />
@@ -10,7 +13,7 @@ function ThanksBillingDisplay({ orderDetails }) {
         value={
           orderDetails === null
             ? null
-            : "$" + orderDetails.current_subtotal_price
+            : "$" + orderDetails?.current_subtotal_price
         }
       />
       <Row
@@ -19,14 +22,14 @@ function ThanksBillingDisplay({ orderDetails }) {
           orderDetails === null
             ? null
             : "$" +
-              orderDetails.total_shipping_price_set.presentment_money.amount
+              orderDetails?.total_shipping_price_set?.presentment_money.amount
         }
       />
       <Divider sx={dividerBottom} />
       <Row
         title="Total"
         value={
-          orderDetails === null ? null : "$" + orderDetails.current_total_price
+          orderDetails === null ? null : "$" + orderDetails?.current_total_price
         }
         fontWeight={700}
       />

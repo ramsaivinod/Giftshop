@@ -336,159 +336,84 @@ const Ticket = () => {
             flexDirection: breakPoint ? "column" : "row",
           }}
         >
-          <Box sx={style.box}>
-            {loading ? (
-              <CircularProgress
-                size={50}
-                thickness={5}
-                sx={{ color: "#fff" }}
-              />
-            ) : (
-              <>
-                <Typography
-                  variant="h1"
-                  sx={{
-                    // mr: "10px",
-                    color: "whitesmoke",
-                    fontSize: breakPoint ? "1.8rem" : "2.4rem",
-                    fontFamily: "Satoshi, sans-serif !important",
-                  }}
-                >
-                  {" "}
-                  {coupon[1]?.title}
-                </Typography>
-                <Typography
-                  variant="h3"
-                  sx={{
-                    color: "whitesmoke",
-                    fontSize: breakPoint ? "1.2rem" : "1.5rem",
-                    fontFamily: "Satoshi,sans-serif",
-                    fontWeight: 700,
-                    fontSize: "1.1785714285714286rem",
-                    lineHeight: "1.334",
-                    color: "whitesmoke",
-                    paddingTop: "1rem",
-                    letterSpacing: "4px",
-                  }}
-                >
-                  <span
-                    style={{
-                      background: "coral",
-                      padding: "0.4rem",
-                      boxShadow:
-                        "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-                      borderRadius: "1rem",
-                    }}
-                  >
-                    $1
-                  </span>{" "}
-                  Off Any Item Purchased
-                </Typography>
-                {success && (
-                  <Button
-                    variant="h5"
-                    onClick={() => {
-                      handleDiscount(coupon[1]?.title, 1);
-                    }}
+          {coupon.length > 0 && coupon.map((item, index) => {
+              if(index === 0) return;
+
+              return<>
+                 <Box sx={style.box} key={index}>
+                    
+                        <Typography
+                          variant="h1"
+                          sx={{
+                            color: "whitesmoke",
+                            fontSize: breakPoint ? "1.8rem" : "2.4rem",
+                            fontFamily: "Satoshi, sans-serif !important",
+                          }}
+                        >
+                          {" "}
+                          {item?.title}
+                        </Typography>
+                        <Typography
+                          variant="h3"
+                          sx={{
+                            color: "whitesmoke",
+                            fontSize: breakPoint ? "1.2rem" : "1.5rem",
+                            fontFamily: "Satoshi,sans-serif",
+                            fontWeight: 700,
+                            fontSize: "1.1785714285714286rem",
+                            lineHeight: "1.334",
+                            color: "whitesmoke",
+                            paddingTop: "1rem",
+                            letterSpacing: "4px",
+                          }}
+                        >
+                          <span
+                            style={{
+                              background: "coral",
+                              padding: "0.4rem",
+                              boxShadow:
+                                "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+                              borderRadius: "1rem",
+                            }}
+                          >
+                            {-item?.value}%
+                          </span>{" "}
+                          Off Entire Order
+                        </Typography>
+                        {success && (
+                          <Button
+                            variant="h5"
+                            onClick={() => {
+                              handleDiscount(item?.title, 2);
+                            }}
+                            sx={{
+                              color: "whitesmoke",
+                              // textDecoration: "underline",
+                              // m: "30px",
+                              marginTop: "2rem",
+                              fontSize: breakPoint ? "1rem" : "1.5rem",
+                              background: "#515477",
+                              padding: "1rem",
+                              borderRadius: "5rem",
+                            }}
+                          >
+                            {" "}
+                            Shop Now
+                          </Button>
+                        )}
+                  </Box>
+                  <Divider
                     sx={{
-                      color: "whitesmoke",
-                      // textDecoration: "underline",
-                      // m: "30px",
-                      marginTop: "2rem",
-                      fontSize: breakPoint ? "1rem" : "1.5rem",
-                      background: "#515477",
-                      padding: "1rem",
-                      borderRadius: "5rem",
+                      background: "whitesmoke",
+                      width: "1px",
+                      height: "50%",
+                      transform: "translateY(50%)",
+                      borderWidth: "0.2rem",
                     }}
-                  >
-                    {" "}
-                    Shop Now
-                  </Button>
-                )}
+                    flexItem
+                  />
               </>
-            )}
-          </Box>
-          <Divider
-            sx={{
-              background: "whitesmoke",
-              width: "1px",
-              height: "50%",
-              transform: "translateY(50%)",
-              borderWidth: "0.2rem",
-            }}
-            flexItem
-          />
-          <Box sx={style.box}>
-            {loading ? (
-              <CircularProgress
-                size={50}
-                thickness={5}
-                sx={{ color: "#fff" }}
-              />
-            ) : (
-              <>
-                <Typography
-                  variant="h1"
-                  sx={{
-                    color: "whitesmoke",
-                    fontSize: breakPoint ? "1.8rem" : "2.4rem",
-                    fontFamily: "Satoshi, sans-serif !important",
-                  }}
-                >
-                  {" "}
-                  {coupon[3]?.title}
-                </Typography>
-                <Typography
-                  variant="h3"
-                  sx={{
-                    color: "whitesmoke",
-                    fontSize: breakPoint ? "1.2rem" : "1.5rem",
-                    fontFamily: "Satoshi,sans-serif",
-                    fontWeight: 700,
-                    fontSize: "1.1785714285714286rem",
-                    lineHeight: "1.334",
-                    color: "whitesmoke",
-                    paddingTop: "1rem",
-                    letterSpacing: "4px",
-                  }}
-                >
-                  <span
-                    style={{
-                      background: "coral",
-                      padding: "0.4rem",
-                      boxShadow:
-                        "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-                      borderRadius: "1rem",
-                    }}
-                  >
-                    {-coupon[2]?.value}%
-                  </span>{" "}
-                  Off Entire Order
-                </Typography>
-                {success && (
-                  <Button
-                    variant="h5"
-                    onClick={() => {
-                      handleDiscount(coupon[2]?.title, 2);
-                    }}
-                    sx={{
-                      color: "whitesmoke",
-                      // textDecoration: "underline",
-                      // m: "30px",
-                      marginTop: "2rem",
-                      fontSize: breakPoint ? "1rem" : "1.5rem",
-                      background: "#515477",
-                      padding: "1rem",
-                      borderRadius: "5rem",
-                    }}
-                  >
-                    {" "}
-                    Shop Now
-                  </Button>
-                )}
-              </>
-            )}
-          </Box>
+          })}
         </Box>
 
         <div
