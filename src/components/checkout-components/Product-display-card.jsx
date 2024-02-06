@@ -60,7 +60,7 @@ function ProductDisplayCard({ product, index }) {
           fontFamily="Satoshi, sans-serif"
           fontSize="0.95rem"
         >
-          {"$ " + product?.variants[0]?.price}
+          {"$ " + product?.price}
         </Typography>
       </div>
     </div>

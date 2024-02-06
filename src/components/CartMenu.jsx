@@ -213,12 +213,12 @@ const CartMenu = () => {
                     transition: "0.1s ease-in",
                   },
                 }}
-                onClick={handleCheckout}
-                // onClick={() => {
-                //   navigate("/checkout");
-                //   dispatch(setIsCartOpen({}));
-                //   window.scrollTo(0, 0);
-                // }}
+                // onClick={handleCheckout}
+                onClick={() => {
+                  navigate("/checkout");
+                  dispatch(setIsCartOpen({}));
+                  window.scrollTo(0, 0);
+                }}
               >
                 {CART.CHECKOUT}
               </Button>

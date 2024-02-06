@@ -59,13 +59,17 @@ const ThanksPage = () => {
     if(orderDetails?.line_items?.length > 0) {
       const lineItemsDetails = await Promise.all(
           orderDetails?.line_items.map(async (lineItem) => {
+            let productDetails = {};
             if(lineItem?.product_id){
-              const productDetails = await getProductDetailById(lineItem.product_id);
+               productDetails = await getProductDetailById(lineItem.product_id);
+            }
               return {
                 ...productDetails,
-                count: lineItem.fulfillable_quantity,
+                price: lineItem?.price,
+                title: lineItem?.name,
+                count: lineItem?.fulfillable_quantity,
               };
-            }
+            
           })
       );
       setLineItems(lineItemsDetails);
