@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavMenu from "./components/NavMenu";
+import NavMenu from "./components/app-navbar/NavMenu";
 import Footer from "./components/Footer";
 import CartMenu from "./components/CartMenu";
 import QuickView from "./components/QuickView";

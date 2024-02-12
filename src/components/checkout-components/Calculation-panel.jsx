@@ -8,8 +8,8 @@ function CalculationPanel({
   product,
   updateTotalPrice,
 }) {
-  const weightBasedShippingRates = shippingRateDetails ? 
-    shippingRateDetails?.shippingZoneRate[0]?.weight_based_shipping_rates : 0;
+  const weightBasedShippingRates =
+    shippingRateDetails?.shippingZoneRate[0]?.weight_based_shipping_rates;
 
   const totalWeight = useMemo(
     () =>

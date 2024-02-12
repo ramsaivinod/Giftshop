@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { Box } from "@mui/material";
-import NavMenu from "../NavMenu";
 
 function NoResultFound() {
   return (

@@ -22,7 +22,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { addToCart, setValue } from "../state";
 import Loader from "./Loader";
 import MyImage from "./MyImage";
-import NavMenu from "./NavMenu";
+import NavMenu from "./app-navbar/NavMenu";
 import Item2 from "./Item2";
 import { ITEM_DETAILS } from "../utils/constants";
 

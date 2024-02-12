@@ -7,7 +7,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import NavMenu from "../NavMenu";
 import { ExpandMore } from "@mui/icons-material";
 import ProductDisplayCard from "../checkout-components/Product-display-card";
 import ThanksBillingDisplay from "./components/billingDisplay";
@@ -15,26 +14,25 @@ import OrderDetailsSection from "./components/orderDetailsSection";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { ApiDataPostType } from "../../api/Api";
 
 const ThanksPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  
+
   const orderParam = queryParams.get("order");
   const breakPoint = useMediaQuery("(max-width:850px)");
   const breakPointXs = useMediaQuery("(max-width:600px)");
   const [orderDetails, setOrderDetails] = useState(null);
   const [lineItems, setLineItems] = useState(null);
 
-
   const searchParams = new URLSearchParams(location.search);
-  const orderId = searchParams.get('order_id');
+  const orderId = searchParams.get("order");
 
-  console.log("orderId",orderId);
-  
+  // console.log("orderId",orderId);
 
   useEffect(() => {
-    if(orderId ){
+    if (orderId) {
       getOrderDetail();
     }
   }, []);
@@ -47,7 +45,7 @@ const ThanksPage = () => {
     const url = `https://sso.jkyog.org/api/v1/customer/order/${orderId}`;
     try {
       const response = await axios.get(url);
-      console.log("response.data.orderDetails",response.data.response)
+      console.log("response.data.orderDetails", response.data.response);
       setOrderDetails(response.data.response);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -56,34 +54,34 @@ const ThanksPage = () => {
   }, [orderParam]);
 
   const getLineItemsDetails = async () => {
-    if(orderDetails?.line_items?.length > 0) {
+    if (orderDetails?.line_items?.length > 0) {
       const lineItemsDetails = await Promise.all(
-          orderDetails?.line_items.map(async (lineItem) => {
-            let productDetails = {};
-            if(lineItem?.product_id){
-               productDetails = await getProductDetailById(lineItem.product_id);
-            }
-              return {
-                ...productDetails,
-                price: lineItem?.price,
-                title: lineItem?.name,
-                count: lineItem?.fulfillable_quantity,
-              };
-            
-          })
+        orderDetails.line_items.map(async (lineItem) => {
+          let productDetails = {};
+          if (lineItem?.product_id) {
+            productDetails = await getProductDetailById(lineItem.product_id);
+            // console.log(productDetails);
+          }
+          return {
+            ...productDetails,
+            price: lineItem?.price,
+            title: lineItem?.name,
+            count: lineItem?.fulfillable_quantity,
+          };
+        })
       );
+      // console.log(lineItemsDetails);
       setLineItems(lineItemsDetails);
     }
   };
 
   const getProductDetailById = async (id) => {
-    const url = `https://sso.jkyog.org/api/v1/customer/product/${id}`;
     try {
-      const response = await axios.post(url);
-      const product = response.data.response;
-      return product;
+      const response = await ApiDataPostType(`/customer/product/${id}`);
+      return response.data.response;
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching product data:", error);
+      throw error;
     }
   };
 
@@ -193,6 +191,7 @@ const ThanksPage = () => {
                     maxHeight: "45vh",
                     overflow: "scroll",
                     scrollBehavior: "smooth",
+                    scrollbarWidth: "none",
                   }}
                 >
                   {lineItems != null ? (

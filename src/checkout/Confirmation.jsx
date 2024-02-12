@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import NavMenu from "../components/NavMenu";
 import React, { useEffect } from "react";
 
 const Confirmation = () => {

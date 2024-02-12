@@ -25,7 +25,7 @@ import CategoriesButton from './CategoriesButton'; // Import CategoriesButton co
 import PriceFilter from './PriceFilter'; // Import PriceFilter component
 import { setItems, setPriceFilter, setSortOrder, setItemsCategories, setIsFilterOpen } from '../state'; // Import Redux actions
 import Loader from './Loader'; // Import Loader component
-import NavMenu from './NavMenu'; // Import NavMenu component
+// import NavMenu from './NavMenu'; // Import NavMenu component
 import Item2 from './Item2'; // Import Item2 component
 import { PRODUCT_CATEGORY } from '../utils/constants';
 

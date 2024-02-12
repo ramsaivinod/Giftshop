@@ -21,7 +21,6 @@ import {
   setDirectCoupon,
   setCouponName,
 } from "../state";
-import NavMenu from "../components/NavMenu";
 
 import truck from "../assets/logo/truck.png";
 import premium from "../assets/logo/premium.png";
@@ -96,7 +95,7 @@ const Ticket = () => {
     box: {
       height: "auto",
       textAlign: "center",
-      width: breakPoint ? "100%" : "75%",
+      width: "400px",
       padding: "3rem",
       display: "flex",
       flexDirection: "column",
@@ -329,78 +328,82 @@ const Ticket = () => {
           sx={{
             height: "auto",
             width: "100%",
+            display: "flex",
             // background: "#367f8c",
             marginTop: "16px",
             justifyContent: "center",
             borderRadius: "2rem",
             flexDirection: breakPoint ? "column" : "row",
+            flexWrap: "wrap",
+            rowGap:"0.5rem"
           }}
         >
-          {coupon.length > 0 && coupon.map((item, index) => {
-              if(index === 0) return;
+          {coupon.length > 0 &&
+            coupon.map((item, index) => {
+              if (index === 0) return;
 
-              return<>
-                 <Box sx={style.box} key={index}>
-                    
-                        <Typography
-                          variant="h1"
-                          sx={{
-                            color: "whitesmoke",
-                            fontSize: breakPoint ? "1.8rem" : "2.4rem",
-                            fontFamily: "Satoshi, sans-serif !important",
-                          }}
-                        >
-                          {" "}
-                          {item?.title}
-                        </Typography>
-                        <Typography
-                          variant="h3"
-                          sx={{
-                            color: "whitesmoke",
-                            fontSize: breakPoint ? "1.2rem" : "1.5rem",
-                            fontFamily: "Satoshi,sans-serif",
-                            fontWeight: 700,
-                            fontSize: "1.1785714285714286rem",
-                            lineHeight: "1.334",
-                            color: "whitesmoke",
-                            paddingTop: "1rem",
-                            letterSpacing: "4px",
-                          }}
-                        >
-                          <span
-                            style={{
-                              background: "coral",
-                              padding: "0.4rem",
-                              boxShadow:
-                                "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-                              borderRadius: "1rem",
-                            }}
-                          >
-                            {-item?.value}%
-                          </span>{" "}
-                          Off Entire Order
-                        </Typography>
-                        {success && (
-                          <Button
-                            variant="h5"
-                            onClick={() => {
-                              handleDiscount(item?.title, 2);
-                            }}
-                            sx={{
-                              color: "whitesmoke",
-                              // textDecoration: "underline",
-                              // m: "30px",
-                              marginTop: "2rem",
-                              fontSize: breakPoint ? "1rem" : "1.5rem",
-                              background: "#515477",
-                              padding: "1rem",
-                              borderRadius: "5rem",
-                            }}
-                          >
-                            {" "}
-                            Shop Now
-                          </Button>
-                        )}
+              return (
+                <>
+                  <Box sx={style.box} key={index}>
+                    <Typography
+                      variant="h1"
+                      sx={{
+                        color: "whitesmoke",
+                        fontSize: breakPoint ? "1.8rem" : "2.4rem",
+                        fontFamily: "Satoshi, sans-serif !important",
+                      }}
+                    >
+                      {" "}
+                      {item?.title}
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        color: "whitesmoke",
+                        fontSize: breakPoint ? "1.2rem" : "1.5rem",
+                        fontFamily: "Satoshi,sans-serif",
+                        fontWeight: 700,
+                        fontSize: "1.1785714285714286rem",
+                        lineHeight: "1.334",
+                        color: "whitesmoke",
+                        paddingTop: "1rem",
+                        letterSpacing: "4px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          background: "coral",
+                          padding: "0.4rem",
+                          boxShadow:
+                            "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+                          borderRadius: "1rem",
+                        }}
+                      >
+                        {-item?.value}%
+                      </span>{" "}
+                      Off Entire Order
+                    </Typography>
+                    {success && (
+                      <Button
+                        variant="h5"
+                        onClick={() => {
+                          handleDiscount(item?.title, 2);
+                        }}
+                        sx={{
+                          color: "whitesmoke",
+                          // textDecoration: "underline",
+                          // m: "30px",
+                          marginTop: "2rem",
+                          fontSize: breakPoint ? "1rem" : "1.5rem",
+                          background: "#515477",
+                          padding: "1rem",
+                          borderRadius: "5rem",
+                        }}
+                      >
+                        {" "}
+                        Shop Now
+                      </Button>
+                    )}
                   </Box>
                   <Divider
                     sx={{
@@ -412,8 +415,9 @@ const Ticket = () => {
                     }}
                     flexItem
                   />
-              </>
-          })}
+                </>
+              );
+            })}
         </Box>
 
         <div
@@ -432,7 +436,7 @@ const Ticket = () => {
               marginLeft: breakPoint ? "6rem" : "  ",
             }}
           >
-            <img src={truck} alt="" style={style.images} loading="lazy"/>
+            <img src={truck} alt="" style={style.images} loading="lazy" />
             <Typography variant="h3" fontWeight={"bold"} sx={style.imageText}>
               {" "}
               Spend $40 Get FREE Shipping
@@ -446,7 +450,7 @@ const Ticket = () => {
               marginLeft: breakPoint ? "6rem" : "",
             }}
           >
-            <img src={premium} alt="" style={style.images} loading="lazy"/>
+            <img src={premium} alt="" style={style.images} loading="lazy" />
             <Typography variant="h3" fontWeight={"bold"} sx={style.imageText}>
               {" "}
               Lifetime Membership
@@ -460,7 +464,7 @@ const Ticket = () => {
               marginLeft: breakPoint ? "6rem" : "",
             }}
           >
-            <img src={offer} alt="" style={style.images} loading="lazy"/>
+            <img src={offer} alt="" style={style.images} loading="lazy" />
             <Typography variant="h3" fontWeight={"bold"} sx={style.imageText}>
               {" "}
               Get Exclusive Offers

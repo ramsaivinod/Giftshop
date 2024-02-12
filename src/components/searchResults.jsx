@@ -37,7 +37,7 @@ import {
   setIsFilterOpen,
 } from "../state"; // Import Redux actions
 import Loader from "./Loader"; // Import Loader component
-import NavMenu from "./NavMenu"; // Import NavMenu component
+// import NavMenu from "./NavMenu"; // Import NavMenu component
 import Item2 from "./Item2"; // Import Item2 component
 import { PRODUCT_CATEGORY } from "../utils/constants";
 import NoResultFound from "./error-pages/NoResultFound";
@@ -89,7 +89,6 @@ const SearchResults = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchProducts();
   }, []);
 
   /**

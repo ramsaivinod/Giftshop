@@ -6,8 +6,14 @@ function CheckoutLeftPanelHeader({
   createOrder,
   onApprove,
   onError,
-  isDisable
+  isDisable,
 }) {
+  const initialOptions = {
+    clientId:
+      "AYQ5fCEYi8xgTe5wBLDbv4Ttv5f1UptJSoO2h_VtJYFiw8gduAz_A0KfpkcdWERq6qwORcPKY_7g5jD8",
+    currency: "USD",
+    intent: "capture",
+  };
   return (
     <div
       style={{
@@ -25,12 +31,7 @@ function CheckoutLeftPanelHeader({
         Express checkout
       </Typography>
       <div className="payPalButtons">
-        <PayPalScriptProvider
-          options={{
-            "client-id":
-              "AYQ5fCEYi8xgTe5wBLDbv4Ttv5f1UptJSoO2h_VtJYFiw8gduAz_A0KfpkcdWERq6qwORcPKY_7g5jD8",
-          }}
-        >
+        <PayPalScriptProvider options={initialOptions}>
           <PayPalButtons
             disabled={isDisable}
             style={{

@@ -3,7 +3,7 @@ import { useEffect, useMemo } from "react";
 
 function ThanksBillingDisplay({ orderDetails }) {
 
-  console.log("orderDetails",orderDetails);
+  // console.log("orderDetails",orderDetails);
 
   return (
     <Box sx={panelStyle}>

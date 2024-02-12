@@ -135,7 +135,7 @@ const orderDataWrap = (breakPointXs) => {
     flexDirection: "column",
     width: breakPointXs ? "100%" : "50%",
     gap: "1rem",
-    marginTop: breakPointXs ? "1rem" : "",
+    marginTop: breakPointXs ? "1rem" : ""
   };
 };
 
@@ -168,6 +168,7 @@ const detailSectionContent = {
   ...commonTypographyStyle,
   fontWeight: "400",
   letterSpacing: "0.5px",
+  wordWrap: "break-word",
 };
 
 const orderDetailSectionWrap = {

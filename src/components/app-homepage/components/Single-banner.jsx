@@ -43,9 +43,9 @@ function SingleBanner() {
  */
 const singleBannerStyle = (breakPoint) => ({
   width: breakPoint ? "" : "100%",
-  height: breakPoint ? "" : "40vh",
+  height: breakPoint ? "" : "34vh",
   marginTop: breakPoint ? "" : "4.1rem",
-  objectFit: breakPoint ? "cover" : "fill",
+  objectFit: breakPoint ? "cover" : "cover",
   backgroundAttachment: "fixed",
 });
 

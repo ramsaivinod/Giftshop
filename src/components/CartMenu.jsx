@@ -217,7 +217,6 @@ const CartMenu = () => {
                 onClick={() => {
                   navigate("/checkout");
                   dispatch(setIsCartOpen({}));
-                  window.scrollTo(0, 0);
                 }}
               >
                 {CART.CHECKOUT}

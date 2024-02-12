@@ -1,43 +1,21 @@
 // Import necessary modules and components
 import {
   Box,
-  Button,
-  Stepper,
-  Step,
-  StepLabel,
   Typography,
-  Divider,
-  Input,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Badge,
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import { Formik } from "formik";
 import { useEffect, useState } from "react";
-import * as yup from "yup";
 import { encode as btoa } from "base-64";
 import { useNavigate } from "react-router-dom";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
-import DiscountIcon from "@mui/icons-material/Discount";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "../styles/checkout.css";
 import { setPrice, setCode, setSuccess } from "../state";
-import Shipping from "./Shipping";
-import { shades } from "../theme";
-import NavMenu from "../components/NavMenu";
-import { ExpandMore, Height } from "@mui/icons-material";
+import { ExpandMore } from "@mui/icons-material";
 import ProductDisplayCard from "../components/checkout-components/Product-display-card";
 import {
   CalculationPanel,
@@ -75,14 +53,14 @@ const Checkout = ({ val }) => {
   });
 
   useEffect(() => {
-
     Promise.all([getAllCountries(), getShippingBillingRatesByWeight()])
       .then(([countries, shippingZones]) => {
-        // setShippingRateDetails((prevState) => ({
-        //   ...prevState,
-        //   countries: countries,
-        //   shippingZoneRate: shippingZones,
-        // }));
+        // console.log(countries)
+        setShippingRateDetails((prevState) => ({
+          ...prevState,
+          countries: countries,
+          shippingZoneRate: shippingZones,
+        }));
       })
       .catch((error) => console.error("Error with fetching data:", error));
   }, []);
@@ -138,6 +116,7 @@ const Checkout = ({ val }) => {
 
   // Make payment when the 'pay' state is true
   useEffect(() => {
+    console.log(pay,"pay status updated")
     if (pay) {
       makePayment(address);
     }
@@ -202,6 +181,7 @@ const Checkout = ({ val }) => {
 
   // Handle payment approval by PayPal
   const onApprove = (data, actions) => {
+    console.log(actions)
     return actions.order.capture().then(function (details) {
       const { payer } = details;
       setPay(true);
@@ -210,6 +190,7 @@ const Checkout = ({ val }) => {
 
   // Handle payment error by PayPal
   const onError = (data, actions) => {
+    console.log(actions)
     setError("An Error Occurred With Your Payment");
   };
 
@@ -267,13 +248,12 @@ const Checkout = ({ val }) => {
     );
     // console.log(data.firstName, "address");
     // console.log(data.lastName, "search");
-      
-
-    console.log(JSON.parse(response.data.body), "data");
+    const responseData = JSON.parse(response.data.body);
+    console.log(responseData.order, "data");
     setPay(false);
     const session = response.data;
     if (session.body) {
-      navigate("/thank?order_id=2311");
+      navigate("/thank?order="+responseData.order.order_number);
     }
   };
 
@@ -323,13 +303,9 @@ const Checkout = ({ val }) => {
     return Object.values(checkoutDetails).every((value) => value !== "");
   };
 
-  const getAllCountries = async () => {
-    ApiDataGetType("/customer/get-all-country")
+  const getAllCountries = () => {
+    return ApiDataGetType("/customer/get-all-country")
       .then((response) => {
-        setShippingRateDetails((prevState) => ({
-          ...prevState,
-          countries: response.data.countries,
-        }));
         return response.data.countries;
       })
       .catch((error) => {
@@ -338,14 +314,9 @@ const Checkout = ({ val }) => {
       });
   };
 
-  const getShippingBillingRatesByWeight = async () => {
-    ApiDataGetType("/customer/get-shipping-zone")
+  const getShippingBillingRatesByWeight = () => {
+    return ApiDataGetType("/customer/get-shipping-zone")
       .then((response) => {
-        console.log("response.data.shipping_zones",response.data.shipping_zones)
-        setShippingRateDetails((prevState) => ({
-          ...prevState,
-          shippingZoneRate: response.data.shipping_zones,
-        }));
         return response.data.shipping_zones;
       })
       .catch((error) => {
@@ -421,15 +392,13 @@ const Checkout = ({ val }) => {
                     disabled={isDisablePayment}
                     setCoupan={setCoupan}
                   />
-
-                  {totalPrice && validateCheckoutDetails && shippingRateDetails &&  <CalculationPanel
+                  <CalculationPanel
                     totalPrice={totalPrice}
                     isDisable={!validateCheckoutDetails}
                     shippingRateDetails={shippingRateDetails}
                     product={cart}
                     updateTotalPrice={updateTotalPriceOnShipmentCharge}
-                  /> }
-                 
+                  />
                 </div>
               </Box>
             </AccordionDetails>
@@ -457,7 +426,7 @@ const Checkout = ({ val }) => {
               onError={onError}
               isDisable={!validateCheckoutDetails}
             />
-            {checkoutDetails && shippingRateDetails &&  <CheckoutShippingDetails
+            <CheckoutShippingDetails
               price={price}
               createOrder={createOrder}
               onApprove={onApprove}
@@ -466,8 +435,7 @@ const Checkout = ({ val }) => {
               setCheckoutDetails={handleInputChange}
               isDisable={!validateCheckoutDetails}
               shippingRateDetails={shippingRateDetails}
-            /> }
-            
+            />
           </section>
 
           {!breakPoint && (
@@ -495,6 +463,7 @@ const Checkout = ({ val }) => {
                     maxHeight: "45vh",
                     overflow: "scroll",
                     scrollBehavior: "smooth",
+                    scrollbarWidth: "none"
                   }}
                 >
                   {cart.map((product, index) => (

@@ -1,8 +1,6 @@
 import { Box, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import NavMenu from "../NavMenu";
-import axios from "axios";
 import {
   ProductDescriptionSection,
   ProductItemdetailsSection,

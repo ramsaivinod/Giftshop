@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./SiteMap.css";
-import NavMenu from "./NavMenu";
 import { Typography } from "@mui/material";
 
 const CopyrightTrademarkComponent = () => {

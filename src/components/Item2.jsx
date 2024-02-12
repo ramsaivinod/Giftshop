@@ -212,10 +212,10 @@ const Item2 = ({ item }) => {
             style={{ marginLeft: "5px" }}
           >
             <span style={compareText}>
-              {parseFloat(variants[0].compareAtPriceV2.amount).toFixed(2)}
+            $ {parseFloat(variants[0].compareAtPriceV2.amount).toFixed(2)}
             </span>
             &nbsp;
-            {parseFloat(variants[0].price).toFixed(2)}
+            $ {parseFloat(variants[0].price).toFixed(2)}
           </Typography>
         ) : (
           <Typography
