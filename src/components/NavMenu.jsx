@@ -301,7 +301,7 @@ function NavMenu({ navFromTop }) {
                 alt="not found"
                 onClick={() => change()}
                 style={{ width: "6rem", height: "45px" }}
-                loading="lazy"
+                loading="eager"
               />
             </Navbar.Brand>
 

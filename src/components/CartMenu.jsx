@@ -139,7 +139,7 @@ const CartMenu = () => {
                       width="123px"
                       height="164px"
                       src={item.image?.src}
-                      loading="lazy"
+                      loading="eager"
                     />
                   </Box>
                   <Box flex="1 1 60%">

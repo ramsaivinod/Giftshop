@@ -23,7 +23,7 @@ function SingleBanner() {
               src={singleBanner?.imgUrl?.data.attributes.url}
               alt="none"
               style={singleBannerStyle(isMobile)}
-              loading="lazy"
+              loading="eager"
             />
           </Box>
         </Link>

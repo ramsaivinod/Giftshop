@@ -49,7 +49,7 @@ function FeaturedCategories() {
                     src={item?.attributes?.content_image?.data?.attributes?.url}
                     alt="banner-image"
                     className="banner_img"
-                    loading="lazy"
+                    loading="eager"
                   />
                 </div>
 

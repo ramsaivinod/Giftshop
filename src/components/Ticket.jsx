@@ -507,7 +507,7 @@ const Ticket = () => {
               marginLeft: breakPoint ? "6rem" : "  ",
             }}
           >
-            <img src={truck} alt="" style={style.images} loading="lazy"/>
+            <img src={truck} alt="" style={style.images} loading="eager"/>
             <Typography variant="h3" fontWeight={"bold"} sx={style.imageText}>
               {" "}
               Spend $40 Get FREE Shipping
@@ -521,7 +521,7 @@ const Ticket = () => {
               marginLeft: breakPoint ? "6rem" : "",
             }}
           >
-            <img src={premium} alt="" style={style.images} loading="lazy"/>
+            <img src={premium} alt="" style={style.images} loading="eager"/>
             <Typography variant="h3" fontWeight={"bold"} sx={style.imageText}>
               {" "}
               Lifetime Membership
@@ -535,7 +535,7 @@ const Ticket = () => {
               marginLeft: breakPoint ? "6rem" : "",
             }}
           >
-            <img src={offer} alt="" style={style.images} loading="lazy"/>
+            <img src={offer} alt="" style={style.images} loading="eager"/>
             <Typography variant="h3" fontWeight={"bold"} sx={style.imageText}>
               {" "}
               Get Exclusive Offers

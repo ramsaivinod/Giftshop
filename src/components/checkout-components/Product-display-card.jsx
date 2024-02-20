@@ -30,7 +30,7 @@ function ProductDisplayCard({ product, index }) {
                 padding: "0.2rem",
                 border: "1px solid lightgray",
               }}
-              loading="lazy"
+              loading="eager"
               src={product?.image?.src}
             />
           </div>

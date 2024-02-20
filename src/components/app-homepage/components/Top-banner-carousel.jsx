@@ -55,7 +55,7 @@ function TopBannerCarousel() {
                     }
                     alt={`carousel-${index}`}
                     style={carouselImgStyle(isMobile)}
-                    loading="lazy"
+                    loading="eager"
                   />
                 </Box>
               </Link>
