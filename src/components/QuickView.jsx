@@ -56,7 +56,7 @@ const QuickView = () => {
                   height="auto"
                   style={{ marginTop: '4em' }}
                   src={item.image?.src}
-                  loading="lazy"
+                  loading="eager"
                 />
 
                 <Typography

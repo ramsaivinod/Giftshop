@@ -26,7 +26,7 @@ const MyImage = ({ imgs }) => {
       {/* 2nd column  */}
 
       <div className="main-screen">
-        <img src={mainImage.src} alt={mainImage.alt} loading="lazy"/>
+        <img src={mainImage.src} alt={mainImage.alt} loading="eager"/>
       </div>
     </Wrapper>
   );

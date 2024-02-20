@@ -76,7 +76,7 @@ function ProductTopSection({ productData, tabView, setProductData, loading }) {
             style={{ objectFit: "cover", height: "70px", width: "100%" }}
             src={item.src}
             alt={`product-img-${index}`}
-            loading="lazy"
+            loading="eager"
           />
         </Box>
       )) || renderSkeletons(5)

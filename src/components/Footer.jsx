@@ -45,7 +45,7 @@ function Footer() {
                   alt="appStore"
                   style={{ height: "3rem" }}
                   title="appStore"
-                  loading="lazy"
+                  loading="eager"
                 />
               </a>
               <a
@@ -58,7 +58,7 @@ function Footer() {
                   alt="playStore"
                   style={{ height: "3rem", marginTop: "1rem" }}
                   title="playStore"
-                  loading="lazy"
+                  loading="eager"
                 />
               </a>
             </div>
@@ -73,7 +73,7 @@ function Footer() {
                   style={{ height: "4rem" }}
                   alt="krishnaBhakti"
                   title="krishnaBhakti"
-                  loading="lazy"
+                  loading="eager"
                 />
               </a>
             </div>
@@ -205,7 +205,7 @@ function Footer() {
                       alt="whatsapp"
                       style={{ height: "1.2rem" }}
                       title="whatsapp"
-                      loading="lazy"
+                      loading="eager"
                     />
                     <span className="social-view">+555-555-5555</span>
                   </a>
@@ -225,7 +225,7 @@ function Footer() {
                       alt="mail"
                       style={{ height: "1.2rem" }}
                       title="mail"
-                      loading="lazy"
+                      loading="eager"
                     />
                     <span className="social-view">giftshop@jkyog.org</span>
                   </a>

@@ -24,7 +24,7 @@ function AboutJkyogGiftshop() {
         <img
           src={aboutJKYogDetails?.Thumbnail?.data.attributes.url}
           style={imageStyle(isMobile)}
-          loading="lazy"
+          loading="eager"
         />
         <div className="about_jkyog_gift_shop_textBox">
           <p className="about_jkyog_gift_shop_text">

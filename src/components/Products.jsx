@@ -72,7 +72,7 @@ const Products = ({ item }) => {
                       height="79%"
                       style={{ marginTop: '20px' }}
                       src={item.image?.src}
-                      loading="lazy"
+                      loading="eager"
                       //style={{ objectFit: "contain" }}
                     />
                   </Box>
@@ -159,7 +159,7 @@ const Products = ({ item }) => {
             width="30px"
             height="50px"
             src={item.image?.src}
-            loading="lazy"
+            loading="eager"
             onClick={() => navigate(`/product-details/${item.id}`)}
             style={{
               opacity: isHovered ? 0.6 : 1,

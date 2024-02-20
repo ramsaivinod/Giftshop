@@ -45,7 +45,7 @@ export default function Thank() {
       <div className="thankyou-page">
         <div className="_header">
           <div className="logo">
-            <img src={logo} alt="" loading="lazy"/>
+            <img src={logo} alt="" loading="eager"/>
           </div>
           <h1>Thank You!</h1>
         </div>

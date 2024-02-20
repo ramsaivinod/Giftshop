@@ -85,7 +85,7 @@ const Item2 = ({ item }) => {
                 width="30px"
                 height="50px"
                 src={item.image.src}
-                loading="lazy"
+                loading="eager"
               />
             ) : (
               <Skeleton variant="rectangular" height="200px" />
